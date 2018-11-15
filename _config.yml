@@ -6,14 +6,11 @@ pygments:         true
 permalink:        pretty
 
 # Setup
-title:            Lanyon
-tagline:          'A Jekyll theme'
-description:      'A reserved <a href="http://jekyllrb.com" target="_blank">Jekyll</a> theme that places the utmost gravity on content with a hidden drawer. Made by <a href="https://twitter.com/mdo" target="_blank">@mdo</a>.'
-url:              http://lanyon.getpoole.com
+title:            Yu's Tech 블로그
+tagline:          프로그래밍 이야기
+description:      You will never know until you try.'
+url:              http://yujaeseo.github.io
 search: true
-author:
-  name:           'Mark Otto'
-  url:            https://twitter.com/mdo
 
 paginate:         5
 
@@ -21,4 +18,4 @@ paginate:         5
 version:          1.0.0
 
 github:
-  repo:           https://github.com/poole/lanyon
+  repo:           https://github.com/Yujaeseo/Yujaeseo.github.io.git
