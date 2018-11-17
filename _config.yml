@@ -14,7 +14,7 @@ search: true
 author:
   name:           'Jaeseo Yu'
 
-collection :
+collections :
   category:
     output: true
 defaults:
