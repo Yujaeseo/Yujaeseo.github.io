@@ -5,9 +5,7 @@ category : android
 ---
 
 <div class="posts">
-<h1>aef</h1>
   {% for post in paginator.posts %}
-        {% if post.categories contains page.category %}
   <div class="post">
     <h1 class="post-title">
       <a href="{{ post.url }}">
@@ -20,7 +18,6 @@ category : android
 
     {{ post.content }}
   </div>
-        {% endif %}
   {% endfor %}
 </div>
 
