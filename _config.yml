@@ -8,10 +8,23 @@ permalink:        pretty
 # Setup
 title:            Yu's Tech 블로그
 tagline:          프로그래밍 이야기
-description:      You will never know until you try.'
+description:      'You will never know until you try.'
 url:              http://yujaeseo.github.io
 search: true
+author:
+  name:           'Jaeseo Yu'
 
+collection :
+  category:
+    output: true
+defaults:
+  -
+    scope:
+      path: ""
+      type : category
+    values:
+      layout: "category"
+    
 paginate:         5
 
 # Custom vars
