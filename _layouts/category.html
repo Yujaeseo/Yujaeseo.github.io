@@ -2,18 +2,22 @@
 layout: default
 ---
 
-<h1>Simple Category Pages with vanilla Jekyll</h1>
+<div class="posts">
+    {%assign cat = page.category%}
+    {% for post in site.categories.[cat]%}
+        <!--{%if post.categories contains page.category%}
+        --><div class="post">
+            <h1 class="post-title">
+            <a href="{{ post.url }}">
+                {{ post.title}}
+            </a>
+            </h1>
 
-<!--
-{% unless page.content == '' %}
-  <p>{{ page.content }}</p>
-{% endunless %}
--->
+            <span class="post-date">{{ post.date | date_to_string }}</span>
 
-<h2><a href=""></a>345345</h2>
-
-{% for post in site.categories.android %}
-  <h2><a href=""></a>345345</h2>
-  <p>{{post.title}}</p>
-{% endfor %}
+            {{ post.content }}
+        </div>
+        <!--{%endif%}-->
+  {% endfor %}
+</div>
 
