@@ -1,0 +1,86 @@
+---
+layout: post
+title: python 백준 코드순위 확인 프로그램   
+categories : python
+---
+
+--- 
+<br><br>
+## 1. 코드 : 
+<br>
+```
+import requests
+from bs4 import BeautifulSoup
+
+
+
+# 전체 : -1, C : 0 ,C++14 : 88, C++11 : 75, Java : 3, Python 3 : 28 등등
+
+def getList(question_num,lan_code,my_id):
+
+    url = 'https://www.acmicpc.net/problem/status'
+    page = 1
+    
+    while 1:
+        request = requests.get( url+'/'+ str(question_num) + '/' +str(lan_code) + '/' + str(page)) 
+
+        # 페이지가 존재하지 않는 경우    
+        if request.status_code != 200:
+            print ("아이디가 존재하지 않습니다")
+            break
+            
+        print ("현재 페이지 : " + str (page))    
+        
+        soup = BeautifulSoup(request.text,'html.parser')
+        table_structure = soup.select('body > div.wrapper > div.container.content > div.row > div.col-md-10 > div.table-responsive > table > tbody')
+        lines = table_structure[0].find_all('tr')
+
+        # 점수 table의 row에서 자신의 ID를 찾고, 페이지와 순위를 반환
+        for each in lines:
+            elements = each.find_all('td')
+            user = elements[3].find('a').text
+            if user == my_id :
+                print ({'페이지' : page, '순위' : elements[0].text})
+                return 
+                
+        page += 1
+```
+
+```
+getList(10988,28,'yjs08090')
+```
+
+```
+현재 페이지 : 1
+현재 페이지 : 2
+현재 페이지 : 3
+현재 페이지 : 4
+현재 페이지 : 5
+현재 페이지 : 6
+현재 페이지 : 7
+현재 페이지 : 8
+현재 페이지 : 9
+현재 페이지 : 10
+{'페이지': 10, '순위': '195'}
+```
+<br><br>
+
+## 2. 설명
+
+<br>
+온라인 저지 문제에 익숙하지 않았을 때는 단순히 문제를 푸는 것에 의미를 두었다. 어느 정도 문제를 푸는 것에 적응이 된 만큼, 이제 부터는 효율성을 고려한 코드를 작성하기 위해 노력해야 된다고 생각한다.온라인 저지에서 내 코드의 질을 판단하는 방법은 바로 순위를 확인하는 것이다. 실행 시간, 메모리의 효율적인 사용을 고민하며 순위를 높이는 것도 나름의 쾌감이 있다. 이 과정에서 다른 사람의 코드를 보면서 항상 새로운 방법의 풀이가 있음을 알게 된다. 다른 사람의 풀이를 참고하면서 다양하게 생각하는 방법과 어떤 경우에 어떤 라이브러리나 메소드를 쓰면 효과적인지 배울 수 있다.
+
+<br>
+하지만 참여자가 많은 문제와 프로그래밍 언어의 경우에는 코드 순위가 몇번째 인지 알기가 어렵다. 검색 기능이 별도로 존재하지 않기 때문에 수시로 찾아야 하는 번거로움이 있다. 이러한 과정을 자꾸 반복하다 보니 슬슬 시간이 아깝다는 생각을 하게 됐고, 예전에 크롤링 관련 프로젝트를 진행해봤기 때문에 이를 활용해 간단한 프로그램을 만들어 보고자 했다. 
+<br>
+
+웹 서버에 HTTP 요청을 하는 `requests`와 HTML 또는 XML 파일에서 파싱을 통해 정보를 추출하는 데 사용되는 `beautifulsoup`를 활용했다. `getList(question_num,lan_code,my_id)`에서 볼 수 있듯이 getList 함수에 확인하고자 하는 문제 번호, 프로그래밍 언어 코드, 자신의 아이디 이렇게 3가지를 전달해 주면 된다. 코드 주석에는 주로 사용하는 언어 몇개의 코드만을 적어놨다. 자신이 사용하는 언어가 없는 경우, 백준 사이트 '맞은 사람' 탭에서 언어를 바꿔준 후 url에서 언어 코드를 확인하면 된다. 
+<br>
+<br>
+https://www.acmicpc.net/problem/status/10988/3/1를 예로 들면, 맨 뒤는 현재 페이지, 바로 왼쪽 3은 JAVA를 나타낸다. 이처럼 적절한 파라미터를 전달해주면 `getList`함수는 현재 페이지 수와 코드  순위를 반환하게 된다. 
+<br>
+
+
+<br>
+
+
