@@ -1,11 +1,10 @@
-I"
-<hr />
+I"�<hr />
 
 <h2 id="1-mutable-immutable-이란-">1. Mutable, Immutable 이란 ?</h2>
 
 <p><br /></p>
 
-<p>Python의 모든 것은 <strong>Object</strong>이다. 따라서 모든 변수는 생성된 Object의 reference를 담게 된다. 예를들어 <code class="highlighter-rouge">X = 2</code>라는 코드는 정수 2라는 값을 갖는 int class object의 reference를 변수 x에 넣는다는 의미이다.</p>
+<p>Python의 모든 것은 <strong>Object</strong>이다. 따라서 모든 변수는 생성된 Object의 reference를 담게 된다. 예를들어 <code class="language-plaintext highlighter-rouge">X = 2</code>라는 코드는 정수 2라는 값을 갖는 int class object의 reference를 변수 x에 넣는다는 의미이다.</p>
 
 <p><br /></p>
 
@@ -17,11 +16,11 @@
 <h2 id="2-코드를-통한-차이-확인">2. 코드를 통한 차이 확인</h2>
 <p><br /></p>
 
-<p>다음은 Mutable과 Immutable의 차이를 보여주는 Code이다.아래에서 사용된 <code class="highlighter-rouge">id()</code><strong>함수는 객체가 갖는 고유의 값(object가 저장된 메모리 값)을 반환한다.</strong> 파이썬의 모든 object는 value, type, identity(id)를 갖는다. 또한 Id는 객체가 생성될 때 부여되며 절대 변하지 않는 값이다.</p>
+<p>다음은 Mutable과 Immutable의 차이를 보여주는 Code이다.아래에서 사용된 <code class="language-plaintext highlighter-rouge">id()</code><strong>함수는 객체가 갖는 고유의 값(object가 저장된 메모리 값)을 반환한다.</strong> 파이썬의 모든 object는 value, type, identity(id)를 갖는다. 또한 Id는 객체가 생성될 때 부여되며 절대 변하지 않는 값이다.</p>
 
 <p><br /></p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>x = 10
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>x = 10
 print (x)
 print (id(x))
 x += 1
@@ -41,7 +40,7 @@ print (id(x))
 
 <p><br /></p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>y = ['a','b']
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>y = ['a','b']
 print (y)
 print (id(y))
 y.append('c')
@@ -66,7 +65,7 @@ print (id(y))
 <h2 id="3-예외">3. 예외</h2>
 <p><br /></p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>t = ('abc',[1,2,3])
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>t = ('abc',[1,2,3])
 print (t[1])
 t[1].append(4)
 print (t[1])
@@ -79,7 +78,7 @@ print (t[1])
 
 <p>위의 코드를 보면 Tuple 자료형 안 List에 정수 4가 추가된 것을 확인할 수 있다. 하지만 초반에 Tuple은 Immutable 자료형으로, 그 값을 변경할 수 없다고 한 것과 모순되는 결과라고 생각할 수 있다.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>t = ('abc',[1,2,3])
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>t = ('abc',[1,2,3])
 print (t[0])
 t[0] = 'xyz'
 print (t[0])
@@ -91,11 +90,11 @@ TypeError: 'tuple' object does not support item assignment
 
 <p><br /></p>
 
-<p>Tuple에 저장된 String 값의 변경을 시도했을 때 위와 같은 에러가 발생한다. <strong>Tuple은 Immutable하기 때문에 값을 변경할 수 없기 때문이다.</strong> 그러면 List 객체에 <code class="highlighter-rouge">append()</code>를 사용해서 정수 4를 추가한 것은 어떻게 설명할 수 있을까?</p>
+<p>Tuple에 저장된 String 값의 변경을 시도했을 때 위와 같은 에러가 발생한다. <strong>Tuple은 Immutable하기 때문에 값을 변경할 수 없기 때문이다.</strong> 그러면 List 객체에 <code class="language-plaintext highlighter-rouge">append()</code>를 사용해서 정수 4를 추가한 것은 어떻게 설명할 수 있을까?</p>
 
 <p><br /></p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>t = ('ab','cd',[1,2,3])
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>t = ('ab','cd',[1,2,3])
 print(t)
 print(id(t[0]),id(t[1]),id(t[2]),sep=' ')
 

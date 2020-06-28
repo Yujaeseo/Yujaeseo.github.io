@@ -1,4 +1,4 @@
-I")+<hr />
+I"�+<hr />
 
 <p><br /><br /></p>
 
@@ -28,7 +28,7 @@ OpenCL의 architecture를 4가지 개념적 모델로서 구분하여 설명한�
 
 <h2 id="2-1-platform-model">2-1. Platform model</h2>
 <p><br />
- OpenCL에서 사용되는 heterogeneous한 platform들을 high-level한 관점에서 나타낸 것이다. host와 device들로 구성되어 있으며 host는 OpenCL 외부 환경과의 상호작용을 담당한다. 예를 들어 I/O나 프로그램 유저와의 소통 창구 역할을 하는 것이다. 이러한 host는 여러 OpenCL device들과 연결되어 있다. 이러한 device는 compute device로 불리기도 하며, CPU, GPU, DSP등 여러 프로세서를 포함한다. <code class="highlighter-rouge">OpenCL device</code>는 <code class="highlighter-rouge">compute units</code>로 나뉘고 이는 다시 실제 연산이 수행되는 <code class="highlighter-rouge">processing elements(PEs)</code>로 나뉘게 된다.</p>
+ OpenCL에서 사용되는 heterogeneous한 platform들을 high-level한 관점에서 나타낸 것이다. host와 device들로 구성되어 있으며 host는 OpenCL 외부 환경과의 상호작용을 담당한다. 예를 들어 I/O나 프로그램 유저와의 소통 창구 역할을 하는 것이다. 이러한 host는 여러 OpenCL device들과 연결되어 있다. 이러한 device는 compute device로 불리기도 하며, CPU, GPU, DSP등 여러 프로세서를 포함한다. <code class="language-plaintext highlighter-rouge">OpenCL device</code>는 <code class="language-plaintext highlighter-rouge">compute units</code>로 나뉘고 이는 다시 실제 연산이 수행되는 <code class="language-plaintext highlighter-rouge">processing elements(PEs)</code>로 나뉘게 된다.</p>
 
 <p><br />
 <br /></p>
@@ -45,11 +45,11 @@ OpenCL의 architecture를 4가지 개념적 모델로서 구분하여 설명한�
 <p><strong>+커널은 어떻게 실행이 되는가?</strong>
 <br /></p>
 
-<p>Kernel을 실행하기 위해서는 먼저 각 device마다 할당되어 있는 queue에 해당 <em>kernel</em>을 enqueue해야 한다. 이 때 사용하는 OpenCL API는 <code class="highlighter-rouge">enqueueNDRangeKernel()</code>이다. 해당 API를 호출할 때 핵심적인 3가지 arguments는 Kernel object, work-items의 수(global size), work-group당 work-item의 수 (local size)이다. 해당 명령어를 통해 host program이 OpenCL device에 실행되어야 할 kernel을 전달하게 되고 OpenCL runtime은 integer index space를 구성하게 된다. 실행 중인 kernel을 <em>work item</em>이라고 하며 동일한 instruction sequence를 갖는다.이는 index 공간의 좌표를 통해 식별된다. 이러한 좌표는 work-item의 global id이다. work item들이 모여서 <em>work group</em>을 형성하게 된다. work group은 대응되는 각 dimension에 대해 같은 size를 갖고 global size를 균등하게 나누게 된다. work-group내의 work-item은 단일 compute unit의 processing unit들에서 <em>concurrent</em>하게 실행된다. index space는 N-dimension을 갖는 일정 값의 범위에 존재하는데, 이를 <em>NDRange</em>라고 부른다. 그리고 N은 1,2,3 으로 설정될 수 있다. NDRange는 길이 N의 integer array이며 각 element는 각 dimension의 index space의 size를 의미한다.</p>
+<p>Kernel을 실행하기 위해서는 먼저 각 device마다 할당되어 있는 queue에 해당 <em>kernel</em>을 enqueue해야 한다. 이 때 사용하는 OpenCL API는 <code class="language-plaintext highlighter-rouge">enqueueNDRangeKernel()</code>이다. 해당 API를 호출할 때 핵심적인 3가지 arguments는 Kernel object, work-items의 수(global size), work-group당 work-item의 수 (local size)이다. 해당 명령어를 통해 host program이 OpenCL device에 실행되어야 할 kernel을 전달하게 되고 OpenCL runtime은 integer index space를 구성하게 된다. 실행 중인 kernel을 <em>work item</em>이라고 하며 동일한 instruction sequence를 갖는다.이는 index 공간의 좌표를 통해 식별된다. 이러한 좌표는 work-item의 global id이다. work item들이 모여서 <em>work group</em>을 형성하게 된다. work group은 대응되는 각 dimension에 대해 같은 size를 갖고 global size를 균등하게 나누게 된다. work-group내의 work-item은 단일 compute unit의 processing unit들에서 <em>concurrent</em>하게 실행된다. index space는 N-dimension을 갖는 일정 값의 범위에 존재하는데, 이를 <em>NDRange</em>라고 부른다. 그리고 N은 1,2,3 으로 설정될 수 있다. NDRange는 길이 N의 integer array이며 각 element는 각 dimension의 index space의 size를 의미한다.</p>
 
 <p><br />
 <br /></p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Q라는 queue에 K라는 kernel object를 넣는다. 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Q라는 queue에 K라는 kernel object를 넣는다. 
 Q.enqueueNDRangeKernel(K, NullRange, NDRange(1024), NDRange(128));
 </code></pre></div></div>
 <p><br />
@@ -60,7 +60,7 @@ OpenCL C kernel 코드는 single work-item에 대응된다. work-item의 granual
 
 <p>1) work-item마다 1개의 array element를 더하는 예제
 <br /></p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kernel vectorAdd(global int* A, global const int * B)
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kernel vectorAdd(global int* A, global const int * B)
 {
     int gid = get_global_id(0);
     A[gid] += B[gid];
@@ -69,7 +69,7 @@ OpenCL C kernel 코드는 single work-item에 대응된다. work-item의 granual
 <p><br />
 2) work-item마다 16개의 array elements을 더하는 예제
 <br /></p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#define ITER 16
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#define ITER 16
 
 kernel vectorAdd(global int* A, global const int * B)
 {
@@ -83,12 +83,12 @@ kernel vectorAdd(global int* A, global const int * B)
 </code></pre></div></div>
 <p><br /></p>
 
-<p>첫번째 예제는 <code class="highlighter-rouge">enqueueNDRangeKernel()</code>를 호출할 때 1024를 global size로 설정한다. 두 번째 kernel은 각 work-item마다 16개의 elements를 더하기 때문에 64(1024/16)를 global size로 설정한다.</p>
+<p>첫번째 예제는 <code class="language-plaintext highlighter-rouge">enqueueNDRangeKernel()</code>를 호출할 때 1024를 global size로 설정한다. 두 번째 kernel은 각 work-item마다 16개의 elements를 더하기 때문에 64(1024/16)를 global size로 설정한다.</p>
 
 <p><strong>Work-group 실행</strong>
 <br />
 <br /></p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Event ev;
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Event ev;
 Q.enqueueNDRangeKernel(K, NullRange, NDRange(8), NDRange(1), NULL, &amp;ev);
 concurrent();
 ev.wait()
@@ -96,7 +96,7 @@ post();
 </code></pre></div></div>
 <p><br /></p>
 
-<p>2번째 code line이 실행되면, kernel이 command-queue Q에 들어간다. 그리고 해당 command가 return 하고 나서 3번째 줄의 <code class="highlighter-rouge">conccurent()</code>가 실행된다.</p>
+<p>2번째 code line이 실행되면, kernel이 command-queue Q에 들어간다. 그리고 해당 command가 return 하고 나서 3번째 줄의 <code class="language-plaintext highlighter-rouge">conccurent()</code>가 실행된다.</p>
 
 <p>이 때 비동기적으로 OpenCL runtime은 command-queue를 모니터링한다. command-queue에 kernel이 들어오고 모든 dependencies가 만족된 상태이면 요청된 kernel에 맞는 수의 work-groups을 생성한 후 command-queue와 연결된 device의 work-group queue에 넣는다.</p>
 

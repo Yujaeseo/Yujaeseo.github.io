@@ -1,4 +1,4 @@
-I";<hr />
+I"<hr />
 <p><br /><br /></p>
 
 <h2 id="1-문제">1. 문제</h2>
@@ -11,7 +11,7 @@
 
 <h2 id="2-코드-python-3">2. 코드 (Python 3)</h2>
 <p><br /></p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import sys
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import sys
 input=sys.stdin.readline
 dp  = [[1]*31 if i == 0 else [0]*31 for i in range (31)]
 m = 30
@@ -36,20 +36,19 @@ while n != 0:
 문제가 재귀호출을 사용하는 문제로 분류되어 있어, 처음에는 단순 재귀호출을 사용하여 문제를 해결하고자 했다. 먼저 $F(N,M)$ 는 알약 N 조각과 2등분 된 알약 M 조각이 있을 때 만들어지는 서로 다른 문자열의 개수라고 하자. 만약 알약 통에 각각 N,M 개의 알약이 존재한다면, 등분 되지 않은 알약을 꺼내는 경우와 조각 난 알약을 꺼내는 경우로 나눌 수 있다. 따라서 아래와 같은 점화식을 세울 수 있다. 
 <br /></p>
 
-<script type="math/tex; mode=display">F(N,M) = F(N-1,M+1) + F(N,M-1)</script>
+\[F(N,M) = F(N-1,M+1) + F(N,M-1)\]
 
 <p><br />
-처음에는 위 식에 따라 몇가지 조건식을 넣고 recursion 코드를 구현했더니, 중복되는 계산이 많아서 주어진 시간 안에 문제를 풀 수 없을 것 같았다. 따라서 DP를 사용했고 그 중에 <code class="highlighter-rouge">Bottom-up</code> 방식으로 다시 문제를 풀게 되었다.</p>
+처음에는 위 식에 따라 몇가지 조건식을 넣고 recursion 코드를 구현했더니, 중복되는 계산이 많아서 주어진 시간 안에 문제를 풀 수 없을 것 같았다. 따라서 DP를 사용했고 그 중에 <code class="language-plaintext highlighter-rouge">Bottom-up</code> 방식으로 다시 문제를 풀게 되었다.</p>
 
 <p><br /></p>
 
-<script type="math/tex; mode=display">% <![CDATA[
-F(N,M) =
+\[F(N,M) =
 \begin{cases}
-F(N-1,M+1),  & \text{if $N > 0$ and $M = 0 $}\\
-1, & \text{if $N = 0$ and $M > 0$} \\
-F(N-1,M+1) + F(N,M-1), & \text{if $N > 0$ and $M > 0$}
-\end{cases} %]]></script>
+F(N-1,M+1),  &amp; \text{if $N &gt; 0$ and $M = 0 $}\\
+1, &amp; \text{if $N = 0$ and $M &gt; 0$} \\
+F(N-1,M+1) + F(N,M-1), &amp; \text{if $N &gt; 0$ and $M &gt; 0$}
+\end{cases}\]
 
 <p><br /></p>
 
