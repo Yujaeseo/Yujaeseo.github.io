@@ -1,0 +1,148 @@
+I")+<hr />
+
+<p><br /><br /></p>
+
+<h1 id="1opencl">1.OpenCL</h1>
+
+<p><br />
+<strong>OpenCL(Open Computing Language)</strong>은 CPU, GPU, DSP 등 다양한 하드웨어 자원을 활용하여 프로그래밍을 하기 위한 산업 표준 병렬 프레임워크이다. 비영리 컨소시엄인 크로노스 그룹(Khronos Group)이 관리하고 있으며 여러 제조사에서 만들어진 하드웨어로 이루어진 시스템에까지 효과적으로 활용될 수 있다.</p>
+
+<p><br />
+<br /></p>
+
+<h1 id="2opencl-4가지-모델">2.OpenCL 4가지 모델</h1>
+
+<p><br />
+OpenCL의 architecture를 4가지 개념적 모델로서 구분하여 설명한다. 
+<br /></p>
+<blockquote>
+  <ol>
+    <li>Platform model</li>
+    <li>Execution model</li>
+    <li>Memory model</li>
+    <li>Programming model</li>
+  </ol>
+</blockquote>
+
+<p><br /></p>
+
+<h2 id="2-1-platform-model">2-1. Platform model</h2>
+<p><br />
+ OpenCL에서 사용되는 heterogeneous한 platform들을 high-level한 관점에서 나타낸 것이다. host와 device들로 구성되어 있으며 host는 OpenCL 외부 환경과의 상호작용을 담당한다. 예를 들어 I/O나 프로그램 유저와의 소통 창구 역할을 하는 것이다. 이러한 host는 여러 OpenCL device들과 연결되어 있다. 이러한 device는 compute device로 불리기도 하며, CPU, GPU, DSP등 여러 프로세서를 포함한다. <code class="highlighter-rouge">OpenCL device</code>는 <code class="highlighter-rouge">compute units</code>로 나뉘고 이는 다시 실제 연산이 수행되는 <code class="highlighter-rouge">processing elements(PEs)</code>로 나뉘게 된다.</p>
+
+<p><br />
+<br /></p>
+
+<h2 id="2-2-execution-model">2-2. Execution model</h2>
+<p><br />
+<strong>OpenCL execution model은 어떻게 kernel이 실행되는지를 정의한다.</strong> OpenCL application은 host program과 하나 이상의 kernels로 이루어져 있다. kernel들은 OpenCL device에서 실행되며 input memory object를 입력받아 처리를 거친 후 output memory object를 리턴한다.</p>
+
+<p>Host program은 OpenCL device에 kernel을 할당하는 명령어를 실행한다. 그러면 OpenCL 런타임은 integer index space를 만들고 각 kernel의 instance들이 해당 index space위에서 실행된다. 이렇게 실행중인 kernel을 <strong>work-item</strong>이라고 부른다. 그리고 이 work-item들이 모여서 <strong>work-group</strong>을 구성하게 된다. work-item과 work-group은 고유의 id 값을 가지며 각 work-item은 해당 아이템이 속한 work-group 내에서 마찬가지로 id를 가진다.</p>
+
+<p><br />
+<br /></p>
+
+<p><strong>+커널은 어떻게 실행이 되는가?</strong>
+<br /></p>
+
+<p>Kernel을 실행하기 위해서는 먼저 각 device마다 할당되어 있는 queue에 해당 <em>kernel</em>을 enqueue해야 한다. 이 때 사용하는 OpenCL API는 <code class="highlighter-rouge">enqueueNDRangeKernel()</code>이다. 해당 API를 호출할 때 핵심적인 3가지 arguments는 Kernel object, work-items의 수(global size), work-group당 work-item의 수 (local size)이다. 해당 명령어를 통해 host program이 OpenCL device에 실행되어야 할 kernel을 전달하게 되고 OpenCL runtime은 integer index space를 구성하게 된다. 실행 중인 kernel을 <em>work item</em>이라고 하며 동일한 instruction sequence를 갖는다.이는 index 공간의 좌표를 통해 식별된다. 이러한 좌표는 work-item의 global id이다. work item들이 모여서 <em>work group</em>을 형성하게 된다. work group은 대응되는 각 dimension에 대해 같은 size를 갖고 global size를 균등하게 나누게 된다. work-group내의 work-item은 단일 compute unit의 processing unit들에서 <em>concurrent</em>하게 실행된다. index space는 N-dimension을 갖는 일정 값의 범위에 존재하는데, 이를 <em>NDRange</em>라고 부른다. 그리고 N은 1,2,3 으로 설정될 수 있다. NDRange는 길이 N의 integer array이며 각 element는 각 dimension의 index space의 size를 의미한다.</p>
+
+<p><br />
+<br /></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Q라는 queue에 K라는 kernel object를 넣는다. 
+Q.enqueueNDRangeKernel(K, NullRange, NDRange(1024), NDRange(128));
+</code></pre></div></div>
+<p><br />
+<br />
+위의 코드는 1024개의 work-item을 생성하고 각 work-group에 128개의 work-item을 할당한다. 따라서 1024/128 = 8개의 work-group이 생성되게 된다.
+<br />
+OpenCL C kernel 코드는 single work-item에 대응된다. work-item의 granuality는 프로그래머가 필요에 따라 설정하게 된다. 아래는 1024개의 elements를 담은 두 array의 합을 구하는 kernel 코드이다.</p>
+
+<p>1) work-item마다 1개의 array element를 더하는 예제
+<br /></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kernel vectorAdd(global int* A, global const int * B)
+{
+    int gid = get_global_id(0);
+    A[gid] += B[gid];
+}
+</code></pre></div></div>
+<p><br />
+2) work-item마다 16개의 array elements을 더하는 예제
+<br /></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#define ITER 16
+
+kernel vectorAdd(global int* A, global const int * B)
+{
+    int gid = get_global_id(0) * ITER;
+    int i;
+    for (i = 0; i &lt; ITER; ++i)
+    {
+        A[gid + i] += B[gid+ i];
+    }
+}
+</code></pre></div></div>
+<p><br /></p>
+
+<p>첫번째 예제는 <code class="highlighter-rouge">enqueueNDRangeKernel()</code>를 호출할 때 1024를 global size로 설정한다. 두 번째 kernel은 각 work-item마다 16개의 elements를 더하기 때문에 64(1024/16)를 global size로 설정한다.</p>
+
+<p><strong>Work-group 실행</strong>
+<br />
+<br /></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Event ev;
+Q.enqueueNDRangeKernel(K, NullRange, NDRange(8), NDRange(1), NULL, &amp;ev);
+concurrent();
+ev.wait()
+post();
+</code></pre></div></div>
+<p><br /></p>
+
+<p>2번째 code line이 실행되면, kernel이 command-queue Q에 들어간다. 그리고 해당 command가 return 하고 나서 3번째 줄의 <code class="highlighter-rouge">conccurent()</code>가 실행된다.</p>
+
+<p>이 때 비동기적으로 OpenCL runtime은 command-queue를 모니터링한다. command-queue에 kernel이 들어오고 모든 dependencies가 만족된 상태이면 요청된 kernel에 맞는 수의 work-groups을 생성한 후 command-queue와 연결된 device의 work-group queue에 넣는다.</p>
+
+<p>각 device의 core(compute unit)는 device에 할당된 <em>work-group queue</em>에서 work-group을 뽑는다. 그리고 뽑은 work-group을 각 compute unit에서 실행시키며, queue에 있는 모든 work-group을 전부 뽑을 때 까지 이 과정을 반복한다.</p>
+
+<p>host CPU는 concurrent()를 실행하고 다른 프로세서(ex. DSP)의 cores는 concurrently work-group들을 실행하게 된다. 만약 host가 concurrent 함수를 먼저 끝냈다고 할 때, 4번째 command가 실행되게 된다. 이 때 kernel submission과 관련된 ev가 CL_COMPLETE가 될 때까지 host는 wait을 하게 된다. 이후 OpenCL runtime은 kernel K에 대한 모든 work-group들이 완료되면 ev의 status를 CL_COMPLETE로 변환하게 되고 host가 5번째 command인 post()를 실행하게 된다.</p>
+
+<p><strong>Work-group 내의 Work-item 실행</strong>
+<br />
+<br /></p>
+
+<p>앞에서 말했듯이 kernel function은 single work-item에 대응된다. 해당 work-item들이 실행되는 device의 hardware architecture에 따라 work-item의 수행에 대한 OpenCL 구현이 다르다. 어떠한 architecture에서는 work-item이 concurrently하게 실행되고 어떤 architecture에서는 sequentially하게 수행된다.</p>
+
+<p><strong>Context</strong></p>
+
+<p><br />
+<br /></p>
+
+<p><em>Context</em>는 kernel이 정의되고 실행되는 환경을 정의한다. host는 kernel을 정의하고 이에 맞는 context를 생성한다. Context는 아래의 4가지 요소의 측면에서 정의된다.</p>
+
+<ul>
+  <li>Devices</li>
+  <li>Kernels</li>
+  <li>Program objects</li>
+  <li>Memory objects</li>
+</ul>
+
+<p><em>Context</em>는 host가 OpenCL API를 이용하여 생성하고 조작한다. host는 cpu 내의 특정 core에서 작동하게 된다. host는 heterogeneous platform 내에서 어떤 하드웨어 자원이 사용 가능한지 파악한다. 그리고 host는 실행해야 할 kernel과 문제에 맞게 하드웨어 자원의 조합을 결정한다. 이후 host는 선택된 devices를 context내에 정의하게 된다.</p>
+
+<p>또한 하나 이상의 <em>Program objects</em>이 context에 포함된다. Program object는 kernel을 구현한 source code와 executables을 담고 있다. 이러한 program object는 runtime에 생성된다. runtime에 object가 생성되는 이유는 OpenCL 개발자들은 end user가 어떠한 하드웨어 자원 위에서 프로그램을 실행할지 모르기 때문이다. 따라서 context에 devices가 정의되면, host는 이에 맞게 source code를 컴파일하는 방법을 정하게 되고 kernel를 위한 코드를 생성하게 된다.</p>
+
+<p>마지막으로 kernel 코드를 실행하는데 필요한 메모리 자원이 필요하다. 하지만 devices들은 저마다 서로 다른 memory architecture를 가지고 있으며 이러한 문제에 대처하기 위해서 OpenCL은 <em>Memory objects</em> 라는 개념을 정의하고 사용한다. 이 objects는 host에서 정의되며 devices 간, host와 device 사이에서 필요에 의해 전달되며 사용된다. memory objects의 개념으로 OpenCL은 더 많고 다양한 platform을 지원할 수 있게 된다.</p>
+
+<p><strong>Memory Model</strong></p>
+
+<p><br />
+<br /></p>
+
+<p><em>OpenCL은 *buffer objects</em>와 <em>image object</em>라는 2가지 타입의 memory object를 정의한다. 이는 kernel이 사용할 수 있는 contiguous한 메모리 블록이다. Image object는 OpenCL의 built-in support로서 다양한 format의 image data를 처리하는 과정에서 데이터 표현과 접근을 더 쉽고 간단하게 해준다. OpenCL model은 메모리 영역을 5가지로 구분한다.</p>
+
+<ul>
+  <li>Host memory : Host에게만 보이는 메모리 영역이다.</li>
+  <li>Global memory : 모든 work-group의 모든 work-item들이 read/write 접근을 할 수 있는 메모리 영역이다.</li>
+  <li>Constant memory : Global memory 영역에 속해있는 영역으로서 kernel 실행 동안 constant하게 유지된다. host가 constant memory를 할당하고 초기화하며 work-item은 해당 영역의 objects에 read-only access만 가능하다.</li>
+  <li>Local memory : 이 메모리 영역은 work-group에 속한다. 따라서 이 영역의 variable들은 특정 work-group의 work-item들 간에 공유가 된다.</li>
+  <li>Private memory : 이 메모리 영역은 특정 work-item을 위하여 할당되며 다른 work-item은 해당 영역을 볼 수 없다.</li>
+</ul>
+
+:ET

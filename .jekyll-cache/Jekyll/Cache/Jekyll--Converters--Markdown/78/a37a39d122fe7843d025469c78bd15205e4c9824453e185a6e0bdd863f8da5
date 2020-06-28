@@ -1,0 +1,55 @@
+I"A
+<hr />
+<p><br /><br /></p>
+
+<h2 id="1-코드">1. 코드</h2>
+<p><br />
+python3 :</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>from collections import Counter
+
+def main ():
+
+    inpStr = input().upper()    
+    c = Counter(inpStr)
+    
+    if len(inpStr) == 1:
+        print(inpStr)
+        return 
+    
+    # O(n logk)
+    res = c.most_common(2)
+    
+    if res[0][1] == res[1][1]  : 
+        print ('?')
+    else : 
+        print (res[0][0])
+    
+    return
+
+main()
+</code></pre></div></div>
+<p><br /><br /></p>
+
+<h2 id="2-풀이">2. 풀이</h2>
+<p><br />
+Collections 패키지의 <code class="highlighter-rouge">most_common()</code> 메소드를 사용하여 풀이하였다. <code class="highlighter-rouge">Counter()</code>를 이용해 문자열의 알파벳과 빈도에 관한 정보를 담은 dictionary 자료형을 만든다. <code class="highlighter-rouge">most_common()</code> 메소드에 파라미터로 2를 주면 가장 빈도가 높은 두 개의 알파벳과 그에 대응하는 빈도수 정보를 담은 tuple list가 주어진다. 1,2위 단어의 발생 빈도가 같은 경우 가장 많이 사용된 알파벳이 여러개 존재하는 경우이므로 ‘?’를 출력한다. 그렇지 않은 경우 가장 빈도수가 높은 알파벳 대문자를 출력한다. 주의할 점은 문자열이 알파벳 하나로 이루어졌을 경우인데, 이 경우 허용된 인덱스 값을 벗어나므로 별도로 처리해야된다. 
+<br /><br /></p>
+
+<h2 id="3-시간복잡도">3. 시간복잡도</h2>
+<p><br /> 
+-&gt; <code class="highlighter-rouge">most_common(k)</code>의 시간 복잡도가 O(n logk)이다.
+<br /><br /></p>
+
+<h2 id="4-참고자료">4. 참고자료</h2>
+<p><br />
+1) <code class="highlighter-rouge">most_common()</code> 시간복잡도
+<a href="https://stackoverflow.com/questions/29240807/python-collections-counter-most-common-complexity">https://stackoverflow.com/questions/29240807/python-collections-counter-most-common-complexity</a></p>
+
+<p>2) 위의 자료를 이해하기 위해선 <code class="highlighter-rouge">heapq</code>자료형의 구현 에 대해 알아야 한다.
+<a href="https://hg.python.org/cpython/file/2.7/Lib/heapq.py#l203">https://hg.python.org/cpython/file/2.7/Lib/heapq.py#l203</a></p>
+
+<p>3) <code class="highlighter-rouge">heapq.nlargest()</code>와 관련된 자료이다.
+<a href="https://stackoverflow.com/questions/38806202/whats-the-time-complexity-of-functions-in-heapq-library">https://stackoverflow.com/questions/38806202/whats-the-time-complexity-of-functions-in-heapq-library</a>
+<br /><br /></p>
+:ET
