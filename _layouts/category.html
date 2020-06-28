@@ -3,8 +3,8 @@ layout: default
 ---
 
 <div class="posts">
-    {%assign cat = page.category%}
-    {% for post in site.categories.[cat]%}
+    {%assign cat = paginator.category%}
+    {% for post in paginator.categories.[cat]%}
         <!--{%if post.categories contains page.category%}
         --><div class="post">
             <h1 class="post-title">
