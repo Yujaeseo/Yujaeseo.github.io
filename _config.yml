@@ -28,7 +28,7 @@ defaults:
       layout: "category"
     
 paginate: 2
-paginate_path: "https://yujaeseo.github.io/page:num/"
+paginate_path: "/page:num/"
 # Custom vars
 version:          1.0.0
 
