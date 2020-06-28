@@ -31,15 +31,6 @@ defaults:
     
 paginate: 2
 paginate_path: "/page:num/"
-
-pagination:
-    enabled: true
-    per_page: 2
-    limit: 0
-    sort_field: "date"
-    sort_reverse: true
-...
-
 # Custom vars
 version:          1.0.0
 

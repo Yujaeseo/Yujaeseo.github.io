@@ -2,7 +2,6 @@
 layout: category
 title: python  
 category : python
-permalink: /python/
 pagination: 
   enabled: true
   category: python
