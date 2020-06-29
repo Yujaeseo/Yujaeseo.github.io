@@ -2,8 +2,11 @@
 #markdown:         redcarpet
 markdown: kramdown
 pygments:         true
+# gems:
+#   - jekyll-paginate-v2
+
 gems:
-  - jekyll-paginate-v2
+  - jekyll-paginate
 
 # Permalinks
 permalink:        pretty
@@ -40,7 +43,7 @@ defaults:
 #   sort_reverse: true
 
 paginate: 2
-paginate_path: /page:num
+paginate_path: /page/:num
 
 # Custom vars
 version:          1.0.0
