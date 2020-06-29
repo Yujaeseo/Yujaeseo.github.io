@@ -1,0 +1,8 @@
+I"<hr />
+<p><br /><br /></p>
+<h2 id="1-코드-">1. 코드 :</h2>
+<p><br />
+```
+import requests
+from bs4 import BeautifulSoup</p>
+:ET

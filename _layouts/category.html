@@ -1,9 +1,12 @@
 ---
 layout: default
+pagination: 
+  enabled: true
+  category: sports
 ---
 
 <div class="posts">
-    {%assign cat = page.category%}
+    {%assign cat = paginator.category%}
     {% for post in site.categories.[cat]%}
         <!--{%if post.categories contains page.category%}
         --><div class="post">

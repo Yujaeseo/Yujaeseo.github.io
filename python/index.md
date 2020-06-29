@@ -1,12 +1,8 @@
 ---
-layout: category
-title: python  
-category : python
+layout: default
+title: Python
 pagination: 
   enabled: true
   category: python
-#   permalink: /:num/
-  per_pages: 2
-#   sort_field: 'title'
-#   sort_reverse: false
+  per_page: 2
 ---
