@@ -5,8 +5,6 @@ pygments:         true
 # gems:
 #   - jekyll-paginate-v2
 
-gems:
-  - jekyll-paginate
 
 # Permalinks
 permalink:        pretty
@@ -42,6 +40,8 @@ defaults:
 #   sort_field: 'date'
 #   sort_reverse: true
 
+# gems:
+#   - jekyll-paginate
 paginate: 2
 paginate_path: /page/:num
 
