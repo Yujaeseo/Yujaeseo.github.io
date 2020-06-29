@@ -28,15 +28,19 @@ defaults:
       type : category
     values:
       layout: "category"
-    
-pagination:
-  enabled: true
-  per_page: 2
-  permalink: '/page/:num/'
-  # title_suffix: ' - page :num'
-  # limit: 0
-  sort_field: 'date'
-  sort_reverse: true
+ 
+#paginate-v2
+# pagination:
+#   enabled: true
+#   per_page: 2
+#   permalink: '/page/:num/'
+#   # title_suffix: ' - page :num'
+#   # limit: 0
+#   sort_field: 'date'
+#   sort_reverse: true
+
+paginate: 2
+paginate_path: /page:num
 
 # Custom vars
 version:          1.0.0
