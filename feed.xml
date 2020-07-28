@@ -1,23 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
-
- <title>Yu's Tech 블로그</title>
- <link href="http://localhost:4000/atom.xml" rel="self"/>
- <link href="http://localhost:4000/"/>
- <updated>2020-07-28T14:41:27+09:00</updated>
- <id>http://localhost:4000</id>
- <author>
-   <name>Jaeseo Yu</name>
-   <email></email>
- </author>
-
- 
- <entry>
-   <title>parellel programming</title>
-   <link href="http://localhost:4000/opencl/2019/10/08/Parellel-programming/"/>
-   <updated>2019-10-08T00:00:00+09:00</updated>
-   <id>http://localhost:4000/opencl/2019/10/08/ Parellel programming</id>
-   <content type="html">&lt;hr /&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-07-28T14:41:27+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Yu’s Tech 블로그</title><subtitle>You will never know until you try.</subtitle><author><name>Jaeseo Yu</name></author><entry><title type="html">parellel programming</title><link href="http://localhost:4000/opencl/2019/10/08/Parellel-programming/" rel="alternate" type="text/html" title="parellel programming" /><published>2019-10-08T00:00:00+09:00</published><updated>2019-10-08T00:00:00+09:00</updated><id>http://localhost:4000/opencl/2019/10/08/%20Parellel%20programming</id><content type="html" xml:base="http://localhost:4000/opencl/2019/10/08/Parellel-programming/">&lt;hr /&gt;
 
 &lt;p&gt;What are 3 traditional ways HW designers make computers run faster?&lt;/p&gt;
 
@@ -51,16 +32,7 @@
 
 &lt;p&gt;coalesce global memory accesses&lt;/p&gt;
 
-&lt;p&gt;GPU most efficient when threads read or write contiguous  memory locations&lt;/p&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>OpenCL과 4가지 모델</title>
-   <link href="http://localhost:4000/opencl/2019/08/30/OpenCL%EC%9D%B4%EB%9E%80/"/>
-   <updated>2019-08-30T00:00:00+09:00</updated>
-   <id>http://localhost:4000/opencl/2019/08/30/ OpenCL이란</id>
-   <content type="html">&lt;hr /&gt;
+&lt;p&gt;GPU most efficient when threads read or write contiguous  memory locations&lt;/p&gt;</content><author><name>Jaeseo Yu</name></author><category term="OpenCL" /><summary type="html"></summary></entry><entry><title type="html">OpenCL과 4가지 모델</title><link href="http://localhost:4000/opencl/2019/08/30/OpenCL%EC%9D%B4%EB%9E%80/" rel="alternate" type="text/html" title="OpenCL과 4가지 모델" /><published>2019-08-30T00:00:00+09:00</published><updated>2019-08-30T00:00:00+09:00</updated><id>http://localhost:4000/opencl/2019/08/30/%20OpenCL%EC%9D%B4%EB%9E%80</id><content type="html" xml:base="http://localhost:4000/opencl/2019/08/30/OpenCL%EC%9D%B4%EB%9E%80/">&lt;hr /&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 
@@ -205,17 +177,7 @@ post();
   &lt;li&gt;Constant memory : Global memory 영역에 속해있는 영역으로서 kernel 실행 동안 constant하게 유지된다. host가 constant memory를 할당하고 초기화하며 work-item은 해당 영역의 objects에 read-only access만 가능하다.&lt;/li&gt;
   &lt;li&gt;Local memory : 이 메모리 영역은 work-group에 속한다. 따라서 이 영역의 variable들은 특정 work-group의 work-item들 간에 공유가 된다.&lt;/li&gt;
   &lt;li&gt;Private memory : 이 메모리 영역은 특정 work-item을 위하여 할당되며 다른 work-item은 해당 영역을 볼 수 없다.&lt;/li&gt;
-&lt;/ul&gt;
-
-</content>
- </entry>
- 
- <entry>
-   <title>MongoDB replset으로 변환</title>
-   <link href="http://localhost:4000/mongodb/2019/02/21/MongoDB-replset%EC%9C%BC%EB%A1%9C-%EB%B3%80%ED%99%98/"/>
-   <updated>2019-02-21T00:00:00+09:00</updated>
-   <id>http://localhost:4000/mongodb/2019/02/21/MongoDB replset으로 변환</id>
-   <content type="html">&lt;hr /&gt;
+&lt;/ul&gt;</content><author><name>Jaeseo Yu</name></author><category term="OpenCL" /><summary type="html"></summary></entry><entry><title type="html">MongoDB replset으로 변환</title><link href="http://localhost:4000/mongodb/2019/02/21/MongoDB-replset%EC%9C%BC%EB%A1%9C-%EB%B3%80%ED%99%98/" rel="alternate" type="text/html" title="MongoDB replset으로 변환" /><published>2019-02-21T00:00:00+09:00</published><updated>2019-02-21T00:00:00+09:00</updated><id>http://localhost:4000/mongodb/2019/02/21/MongoDB%20replset%EC%9C%BC%EB%A1%9C%20%EB%B3%80%ED%99%98</id><content type="html" xml:base="http://localhost:4000/mongodb/2019/02/21/MongoDB-replset%EC%9C%BC%EB%A1%9C-%EB%B3%80%ED%99%98/">&lt;hr /&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;h2 id=&quot;1-도입-&quot;&gt;1. 도입 :&lt;/h2&gt;
@@ -322,17 +284,7 @@ net start MongoDB
 &lt;p&gt;프로젝트에서 노드를 사용하기 때문에 덧붙이자면, ReplSet DB와 node.js를 연결하고자 하는 경우 아래와 같이 URL에 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;?replicaSet=rs0(이름)&lt;/code&gt;을 더해주면 된다.&lt;/p&gt;
 
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;new Mongo(&quot;mongodb://localhost:27017/demo?replicaSet=rs0&quot;);
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-</content>
- </entry>
- 
- <entry>
-   <title>react 시작</title>
-   <link href="http://localhost:4000/react/2019/01/08/react-intro/"/>
-   <updated>2019-01-08T00:00:00+09:00</updated>
-   <id>http://localhost:4000/react/2019/01/08/react intro</id>
-   <content type="html">&lt;hr /&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Jaeseo Yu</name></author><category term="mongodb" /><summary type="html"></summary></entry><entry><title type="html">react 시작</title><link href="http://localhost:4000/react/2019/01/08/react-intro/" rel="alternate" type="text/html" title="react 시작" /><published>2019-01-08T00:00:00+09:00</published><updated>2019-01-08T00:00:00+09:00</updated><id>http://localhost:4000/react/2019/01/08/react%20intro</id><content type="html" xml:base="http://localhost:4000/react/2019/01/08/react-intro/">&lt;hr /&gt;
 
 &lt;ol&gt;
   &lt;li&gt;React의 장점 :&lt;/li&gt;
@@ -362,16 +314,7 @@ React는 Virtual Dom을 활용하여 여러 방법 중 비용을 최소화하는
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;p&gt;위의 5가지 외에도 많은 장점이 존재할 것이고, 또한 언급하진 않았지만 단점 또한 있을 것이다. 왜 react를 사람들이 많이 사용하는지가 궁금해서 인터넷을 통해 장점을 간단히 살펴봤다. 머리로 아는 것도 중요하지만, 무엇보다 직접 다양한 언어나 프레임워크 혹은 라이브러리를 사용해보고 부딪혀보면서 서로의 장단점을 비교할 수 있는 안목을 키우는 것이 좋을 것 같다는 생각이든다.&lt;/p&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>python 백준 코드순위 확인 프로그램</title>
-   <link href="http://localhost:4000/python/2018/11/29/baekjoonCrawling/"/>
-   <updated>2018-11-29T00:00:00+09:00</updated>
-   <id>http://localhost:4000/python/2018/11/29/baekjoonCrawling</id>
-   <content type="html">&lt;hr /&gt;
+&lt;p&gt;위의 5가지 외에도 많은 장점이 존재할 것이고, 또한 언급하진 않았지만 단점 또한 있을 것이다. 왜 react를 사람들이 많이 사용하는지가 궁금해서 인터넷을 통해 장점을 간단히 살펴봤다. 머리로 아는 것도 중요하지만, 무엇보다 직접 다양한 언어나 프레임워크 혹은 라이브러리를 사용해보고 부딪혀보면서 서로의 장단점을 비교할 수 있는 안목을 키우는 것이 좋을 것 같다는 생각이든다.&lt;/p&gt;</content><author><name>Jaeseo Yu</name></author><category term="react" /><summary type="html"></summary></entry><entry><title type="html">python 백준 코드순위 확인 프로그램</title><link href="http://localhost:4000/python/2018/11/29/baekjoonCrawling/" rel="alternate" type="text/html" title="python 백준 코드순위 확인 프로그램" /><published>2018-11-29T00:00:00+09:00</published><updated>2018-11-29T00:00:00+09:00</updated><id>http://localhost:4000/python/2018/11/29/baekjoonCrawling</id><content type="html" xml:base="http://localhost:4000/python/2018/11/29/baekjoonCrawling/">&lt;hr /&gt;
 &lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;h2 id=&quot;1-코드-&quot;&gt;1. 코드 :&lt;/h2&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
@@ -441,17 +384,7 @@ def getList(question_num,lan_code,my_id):
 &lt;p&gt;웹 서버에 HTTP 요청을 하는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;requests&lt;/code&gt;와 HTML 또는 XML 파일에서 파싱을 통해 정보를 추출하는 데 사용되는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;beautifulsoup&lt;/code&gt;를 활용했다. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;getList(question_num,lan_code,my_id)&lt;/code&gt;에서 볼 수 있듯이 getList 함수에 확인하고자 하는 문제 번호, 프로그래밍 언어 코드, 자신의 아이디 이렇게 3가지를 전달해 주면 된다. 코드 주석에는 필자 기준 주로 사용하는 언어 몇 가지 언어에 대한 코드만을 적어놨다. 자신이 사용하는 언어가 없는 경우, 백준 사이트 ‘맞은 사람’ 탭에서 언어를 바꿔준 후 url에서 언어 코드를 확인하면 된다. https://www.acmicpc.net/problem/status/10988/3/1를 예로 들면, 맨 뒤는 현재 페이지, 바로 왼쪽 3은 JAVA를 나타낸다. 위에서 언급한 3가지 파라미터를 전달해주면 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;getList&lt;/code&gt;함수는 현재 페이지 수와 코드 순위를 반환하게 된다. 
 &lt;br /&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-</content>
- </entry>
- 
- <entry>
-   <title>백준(4811) 알약</title>
-   <link href="http://localhost:4000/algorithm/2018/11/28/%EB%B0%B1%EC%A4%804811/"/>
-   <updated>2018-11-28T00:00:00+09:00</updated>
-   <id>http://localhost:4000/algorithm/2018/11/28/백준4811</id>
-   <content type="html">&lt;hr /&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;</content><author><name>Jaeseo Yu</name></author><category term="python" /><summary type="html">1. 코드 : ``` import requests from bs4 import BeautifulSoup</summary></entry><entry><title type="html">백준(4811) 알약</title><link href="http://localhost:4000/algorithm/2018/11/28/%EB%B0%B1%EC%A4%804811/" rel="alternate" type="text/html" title="백준(4811) 알약" /><published>2018-11-28T00:00:00+09:00</published><updated>2018-11-28T00:00:00+09:00</updated><id>http://localhost:4000/algorithm/2018/11/28/%EB%B0%B1%EC%A4%804811</id><content type="html" xml:base="http://localhost:4000/algorithm/2018/11/28/%EB%B0%B1%EC%A4%804811/">&lt;hr /&gt;
 &lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;1-문제&quot;&gt;1. 문제&lt;/h2&gt;
@@ -512,17 +445,7 @@ F(N-1,M+1) + F(N,M-1), &amp;amp; \text{if $N &amp;gt; 0$ and $M &amp;gt; 0$}
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;테스트케이스 수와 상관 없이 2차원 배열을 생성해야 하기 때문에 시간복잡도는 $O(N^2)$이다.
-&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-</content>
- </entry>
- 
- <entry>
-   <title>Python call by reference, call by value에 대해</title>
-   <link href="http://localhost:4000/python/2018/11/23/python2/"/>
-   <updated>2018-11-23T00:00:00+09:00</updated>
-   <id>http://localhost:4000/python/2018/11/23/python2</id>
-   <content type="html">&lt;hr /&gt;
+&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;</content><author><name>Jaeseo Yu</name></author><category term="algorithm" /><summary type="html"></summary></entry><entry><title type="html">Python call by reference, call by value에 대해</title><link href="http://localhost:4000/python/2018/11/23/python2/" rel="alternate" type="text/html" title="Python call by reference, call by value에 대해" /><published>2018-11-23T00:00:00+09:00</published><updated>2018-11-23T00:00:00+09:00</updated><id>http://localhost:4000/python/2018/11/23/python2</id><content type="html" xml:base="http://localhost:4000/python/2018/11/23/python2/">&lt;hr /&gt;
 
 &lt;h2 id=&quot;1call-by-reference-call-by-value란&quot;&gt;1.Call by reference, Call by value란&lt;/h2&gt;
 
@@ -671,17 +594,7 @@ print (a)
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;이번에는 a 변수의 reference를 변경하는 경우 입니다. parameter a는 call by value이기 때문에, 즉 reference의 복사값이기 때문에 함수 밖 객체에 어떤 영향도 주지 않습니다. 함수 안 변수 a는 새로운 list의 reference를 담고 있는 것이며, 이 경우 함수 밖 변수 a를 변경할 수 없게 됩니다. 
-&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-</content>
- </entry>
- 
- <entry>
-   <title>Python Mutable, Immutable 비교</title>
-   <link href="http://localhost:4000/python/2018/11/22/Python1/"/>
-   <updated>2018-11-22T00:00:00+09:00</updated>
-   <id>http://localhost:4000/python/2018/11/22/Python1</id>
-   <content type="html">&lt;hr /&gt;
+&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;</content><author><name>Jaeseo Yu</name></author><category term="python" /><summary type="html"></summary></entry><entry><title type="html">Python Mutable, Immutable 비교</title><link href="http://localhost:4000/python/2018/11/22/Python1/" rel="alternate" type="text/html" title="Python Mutable, Immutable 비교" /><published>2018-11-22T00:00:00+09:00</published><updated>2018-11-22T00:00:00+09:00</updated><id>http://localhost:4000/python/2018/11/22/Python1</id><content type="html" xml:base="http://localhost:4000/python/2018/11/22/Python1/">&lt;hr /&gt;
 
 &lt;h2 id=&quot;1-mutable-immutable-이란-&quot;&gt;1. Mutable, Immutable 이란 ?&lt;/h2&gt;
 
@@ -797,16 +710,7 @@ print(id(t[0]),id(t[1]),id(t[2]),sep=' ')
 &lt;p&gt;&lt;strong&gt;Tuple을 Immutable하다고 할 때 우리는 객체(tuple)에 binding된 객체(string 등)가 같은지를 판단해야 한다.&lt;/strong&gt; 위의 코드에서 확인할 수 있듯 Tuple 객체 안에 있는 list 값을 변경했지만(100 추가) List object의 id값은 유지되고 있음을 알 수 있다. &lt;strong&gt;즉 Mutable object인 list는 이전과 동일한 객체이며, 단지 객체의 value만 바뀐 것이다.&lt;/strong&gt; Tuple은 함수 실행 전과 동일한 객체(id)를 저장하고 있기 때문에 Immutable하다고 할 수 있는 것이다.&lt;/p&gt;
 
 &lt;p&gt;&lt;br /&gt;
-&lt;br /&gt;&lt;/p&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>백준(1157) 단어공부</title>
-   <link href="http://localhost:4000/algorithm/2018/11/18/%EB%B0%B1%EC%A4%801157/"/>
-   <updated>2018-11-18T00:00:00+09:00</updated>
-   <id>http://localhost:4000/algorithm/2018/11/18/백준1157</id>
-   <content type="html">&lt;hr /&gt;
+&lt;br /&gt;&lt;/p&gt;</content><author><name>Jaeseo Yu</name></author><category term="python" /><summary type="html"></summary></entry><entry><title type="html">백준(1157) 단어공부</title><link href="http://localhost:4000/algorithm/2018/11/18/%EB%B0%B1%EC%A4%801157/" rel="alternate" type="text/html" title="백준(1157) 단어공부" /><published>2018-11-18T00:00:00+09:00</published><updated>2018-11-18T00:00:00+09:00</updated><id>http://localhost:4000/algorithm/2018/11/18/%EB%B0%B1%EC%A4%801157</id><content type="html" xml:base="http://localhost:4000/algorithm/2018/11/18/%EB%B0%B1%EC%A4%801157/">&lt;hr /&gt;
 &lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;1-코드&quot;&gt;1. 코드&lt;/h2&gt;
@@ -858,9 +762,4 @@ Collections 패키지의 &lt;code class=&quot;language-plaintext highlighter-rou
 
 &lt;p&gt;3) &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;heapq.nlargest()&lt;/code&gt;와 관련된 자료이다.
 &lt;a href=&quot;https://stackoverflow.com/questions/38806202/whats-the-time-complexity-of-functions-in-heapq-library&quot;&gt;https://stackoverflow.com/questions/38806202/whats-the-time-complexity-of-functions-in-heapq-library&lt;/a&gt;
-&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-</content>
- </entry>
- 
-
-</feed>
+&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;</content><author><name>Jaeseo Yu</name></author><category term="algorithm" /><summary type="html"></summary></entry></feed>

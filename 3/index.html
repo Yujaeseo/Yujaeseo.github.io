@@ -11,7 +11,7 @@
 
   <title>
     
-      python 백준 코드순위 확인 프로그램 &middot; Yu's Tech 블로그
+      Home - page 3 &middot; Yu's Tech 블로그
     
   </title>
 
@@ -186,11 +186,17 @@
       </div>
 
       <div class="container content">
-        <div class="post">
+        <div class="posts">
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/python/2018/11/29/baekjoonCrawling/">
+        python 백준 코드순위 확인 프로그램
+      </a>
+    </h1>
 
-  <h1 class="post-title">python 백준 코드순위 확인 프로그램</h1>
-  <span class="post-date">29 Nov 2018</span>
-  <hr />
+    <span class="post-date">29 Nov 2018</span>
+    <div class="content"> <hr />
 <p><br /><br /></p>
 <h2 id="1-코드-">1. 코드 :</h2>
 <p><br /></p>
@@ -262,43 +268,97 @@ def getList(question_num,lan_code,my_id):
 
 <p><br /></p>
 
+ </div>
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/algorithm/2018/11/28/%EB%B0%B1%EC%A4%804811/">
+        백준(4811) 알약
+      </a>
+    </h1>
 
+    <span class="post-date">28 Nov 2018</span>
+    <div class="content"> <hr />
+<p><br /><br /></p>
+
+<h2 id="1-문제">1. 문제</h2>
+<p><br />
+<a href="https://www.acmicpc.net/problem/4811">백준 알약 문제(4811)</a></p>
+
+<p>문제를 요약하자면 먼저 병에는 N개의 알약이 존재한다. 하루에 반알씩 약을 복용해야 한다. 한 알 전체를 꺼낼 경우 반으로 쪼갠 후 나머지 조각을 병에 다시 넣고, 반 조각을 꺼낼 경우 그 약을 먹는다. 이때 한 조각을 꺼낼 경우 W, 반 조각을 꺼낼 경우 H를 종이에 기록한다. 2N일이 지났을 때 가능한 서로 다른 문자열의 개수를 구해야 한다.</p>
+
+<p><br /><br /></p>
+
+<h2 id="2-코드-python-3">2. 코드 (Python 3)</h2>
+<p><br /></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import sys
+input=sys.stdin.readline
+dp  = [[1]*31 if i == 0 else [0]*31 for i in range (31)]
+m = 30
+
+for i in range (1,31):
+  for j in range(m):
+    if j == 0:
+      dp[i][0] = dp[i-1][1]
+    else:
+      dp[i][j] = dp[i-1][j+1] + dp[i][j-1] 
+  m-=1
+
+n = int (input ())
+while n != 0:  
+  print (dp[n][0])
+  n = int (input())
+</code></pre></div></div>
+<p><br /><br /></p>
+
+<h2 id="3-풀이">3. 풀이</h2>
+<p><br />
+문제가 재귀호출을 사용하는 문제로 분류되어 있어, 처음에는 단순 재귀호출을 사용하여 문제를 해결하고자 했다. 먼저 $F(N,M)$ 는 알약 N 조각과 2등분 된 알약 M 조각이 있을 때 만들어지는 서로 다른 문자열의 개수라고 하자. 만약 알약 통에 각각 N,M 개의 알약이 존재한다면, 등분 되지 않은 알약을 꺼내는 경우와 조각 난 알약을 꺼내는 경우로 나눌 수 있다. 따라서 아래와 같은 점화식을 세울 수 있다. 
+<br /></p>
+
+\[F(N,M) = F(N-1,M+1) + F(N,M-1)\]
+
+<p><br />
+처음에는 위 식에 따라 몇가지 조건식을 넣고 recursion 코드를 구현했더니, 중복되는 계산이 많아서 주어진 시간 안에 문제를 풀 수 없을 것 같았다. 따라서 DP를 사용했고 그 중에 <code class="language-plaintext highlighter-rouge">Bottom-up</code> 방식으로 다시 문제를 풀게 되었다.</p>
+
+<p><br /></p>
+
+\[F(N,M) =
+\begin{cases}
+F(N-1,M+1),  &amp; \text{if $N &gt; 0$ and $M = 0 $}\\
+1, &amp; \text{if $N = 0$ and $M &gt; 0$} \\
+F(N-1,M+1) + F(N,M-1), &amp; \text{if $N &gt; 0$ and $M &gt; 0$}
+\end{cases}\]
+
+<p><br /></p>
+
+<p>위 식에 따라 2 X 2 배열을 생성하였고, 입력으로 N(30 이하 정수)이 주어질 때 마다 배열에서 해당 답인 DP[N][0] (나눠지지 않은 알약 N) 찾아서 출력하였다.<br />
+<br /></p>
+
+<h2 id="4-시간복잡도">4. 시간복잡도</h2>
+<p><br /></p>
+
+<p>테스트케이스 수와 상관 없이 2차원 배열을 생성해야 하기 때문에 시간복잡도는 $O(N^2)$이다.
+<br /><br /></p>
+
+ </div>
+  </div>
+  
 </div>
 
-<div class="related">
-  <h2>Related Posts</h2>
-  <ul class="related-posts">
+<div class="pagination">
+  
     
-      <li>
-        <h3>
-          <a href="/opencl/2019/10/08/Parellel-programming/">
-            parellel programming
-            <small>08 Oct 2019</small>
-          </a>
-        </h3>
-      </li>
+      <a class="pagination-item newer" href="/page/2">Older</a>
     
-      <li>
-        <h3>
-          <a href="/opencl/2019/08/30/OpenCL%EC%9D%B4%EB%9E%80/">
-            OpenCL과 4가지 모델
-            <small>30 Aug 2019</small>
-          </a>
-        </h3>
-      </li>
-    
-      <li>
-        <h3>
-          <a href="/mongodb/2019/02/21/MongoDB-replset%EC%9C%BC%EB%A1%9C-%EB%B3%80%ED%99%98/">
-            MongoDB replset으로 변환
-            <small>21 Feb 2019</small>
-          </a>
-        </h3>
-      </li>
-    
-  </ul>
-</div>
+  
 
+  
+    <a class="pagination-item older" href="/page/4">Newer</a>
+  
+
+</div>
       </div>
     </div>
 

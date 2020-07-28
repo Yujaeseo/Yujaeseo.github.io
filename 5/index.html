@@ -11,7 +11,7 @@
 
   <title>
     
-      react &middot; Yu's Tech 블로그
+      Home - page 5 &middot; Yu's Tech 블로그
     
   </title>
 
@@ -140,7 +140,7 @@
     
       
         
-          <a class="sidebar-nav-item active" href="/category/react/index.html">react</a>
+          <a class="sidebar-nav-item" href="/category/react/index.html">react</a>
         
       
     
@@ -150,7 +150,7 @@
     
       <a class="sidebar-nav-item" href="/category/python/index.html">python</a>
     
-      <a class="sidebar-nav-item active" href="/category/react/index.html">react</a>
+      <a class="sidebar-nav-item" href="/category/react/index.html">react</a>
     
       <a class="sidebar-nav-item" href="/category/mongodb/index.html">mongodb</a>
     
@@ -187,65 +187,85 @@
 
       <div class="container content">
         <div class="posts">
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/algorithm/2018/11/18/%EB%B0%B1%EC%A4%801157/">
+        백준(1157) 단어공부
+      </a>
+    </h1>
+
+    <span class="post-date">18 Nov 2018</span>
+    <div class="content"> <hr />
+<p><br /><br /></p>
+
+<h2 id="1-코드">1. 코드</h2>
+<p><br />
+python3 :</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>from collections import Counter
+
+def main ():
+
+    inpStr = input().upper()    
+    c = Counter(inpStr)
     
+    if len(inpStr) == 1:
+        print(inpStr)
+        return 
     
-      <div class="post">
-            <h1 class="post-title">
-            <a href="/react/2019/01/08/react-intro/">
-                react 시작
-            </a>
-            </h1>
+    # O(n logk)
+    res = c.most_common(2)
+    
+    if res[0][1] == res[1][1]  : 
+        print ('?')
+    else : 
+        print (res[0][0])
+    
+    return
 
-            <span class="post-date">08 Jan 2019</span>
+main()
+</code></pre></div></div>
+<p><br /><br /></p>
 
-            <hr />
+<h2 id="2-풀이">2. 풀이</h2>
+<p><br />
+Collections 패키지의 <code class="language-plaintext highlighter-rouge">most_common()</code> 메소드를 사용하여 풀이하였다. <code class="language-plaintext highlighter-rouge">Counter()</code>를 이용해 문자열의 알파벳과 빈도에 관한 정보를 담은 dictionary 자료형을 만든다. <code class="language-plaintext highlighter-rouge">most_common()</code> 메소드에 파라미터로 2를 주면 가장 빈도가 높은 두 개의 알파벳과 그에 대응하는 빈도수 정보를 담은 tuple list가 주어진다. 1,2위 단어의 발생 빈도가 같은 경우 가장 많이 사용된 알파벳이 여러개 존재하는 경우이므로 ‘?’를 출력한다. 그렇지 않은 경우 가장 빈도수가 높은 알파벳 대문자를 출력한다. 주의할 점은 문자열이 알파벳 하나로 이루어졌을 경우인데, 이 경우 허용된 인덱스 값을 벗어나므로 별도로 처리해야된다. 
+<br /><br /></p>
 
-<ol>
-  <li>React의 장점 :</li>
-</ol>
+<h2 id="3-시간복잡도">3. 시간복잡도</h2>
+<p><br /> 
+-&gt; <code class="language-plaintext highlighter-rouge">most_common(k)</code>의 시간 복잡도가 O(n logk)이다.
+<br /><br /></p>
 
-<p>1) 모든 것이 자바스크립트 기반이다.
- react는 프레임워크가 아니라 UI 라이브러리이다. 따라서 Angular와 같이 특정 프레임워크에 종속되는 언어를 배울 필요가 없다. react는 모든 것이 자바스크립트 기반이기 때문에 여러 프로젝트를 진행할수록 자바스크립트 프로그래머로서 한층 더 뛰어난 역량을 개발할 수 있게 된다. 무엇보다 웹 페이지를 제작하는데 있어 좀 더 빠르고 쉽게 접근할 수 있다.</p>
+<h2 id="4-참고자료">4. 참고자료</h2>
+<p><br />
+1) <code class="language-plaintext highlighter-rouge">most_common()</code> 시간복잡도
+<a href="https://stackoverflow.com/questions/29240807/python-collections-counter-most-common-complexity">https://stackoverflow.com/questions/29240807/python-collections-counter-most-common-complexity</a></p>
 
-<p><br /></p>
+<p>2) 위의 자료를 이해하기 위해선 <code class="language-plaintext highlighter-rouge">heapq</code>자료형의 구현 에 대해 알아야 한다.
+<a href="https://hg.python.org/cpython/file/2.7/Lib/heapq.py#l203">https://hg.python.org/cpython/file/2.7/Lib/heapq.py#l203</a></p>
 
-<p>2) Composition 구조 
- 웹 페이지를 구성하는 각 부분을 독립적으로 개발할 수 있으며 이를 component라고 한다. 이미 만든 특정 기능 혹은 뷰를 중복해서 구현해야 할 때 기존 component를 그대로 가져다 사용하면 되기 때문에 코드 재사용이 용이해진다. 또한 각 독립적인 부분을 합쳐 큰 단위의 컴포넌트를 쉽게 만들 수 있고 각 부분이 독립적이기 때문에 코드를 관리하는 측면에서도 큰 장점이 있다.</p>
+<p>3) <code class="language-plaintext highlighter-rouge">heapq.nlargest()</code>와 관련된 자료이다.
+<a href="https://stackoverflow.com/questions/38806202/whats-the-time-complexity-of-functions-in-heapq-library">https://stackoverflow.com/questions/38806202/whats-the-time-complexity-of-functions-in-heapq-library</a>
+<br /><br /></p>
+ </div>
+  </div>
+  
+</div>
 
-<p><br /></p>
+<div class="pagination">
+  
+    
+      <a class="pagination-item newer" href="/page/4">Older</a>
+    
+  
 
-<p>3) Virtual DOM 활용
- React는 virtual Dom을 활용하여 DOM을 다루는 데 발생하는 비용을 줄인다. Dom은 복잡한 트리구조의 형태를 갖고 있기 때문에, 광범위한 Dom구조의 조작은 큰 성능 저하를 야기하고, 결국 해당 서비스는 좋지 못한 사용자 경험을 제공하게 된다.
-React는 Virtual Dom을 활용하여 여러 방법 중 비용을 최소화하는 방법을 찾아내고 이를 실제 Dom에 반영하게 된다. 이는 성능의 개선과 함께 매끄러운 사용자 경험을 제공하는데 기여하게 된다.</p>
-
-<p><br /></p>
-
-<p>4) 커뮤니티가 방대하다</p>
-
-<p><br /></p>
-
-<p>5) react는 view이기 때문에 다른 언어(python 등)와 함께 사용할 수 있다.</p>
-
-<p><br /></p>
-
-<p>위의 5가지 외에도 많은 장점이 존재할 것이고, 또한 언급하진 않았지만 단점 또한 있을 것이다. 왜 react를 사람들이 많이 사용하는지가 궁금해서 인터넷을 통해 장점을 간단히 살펴봤다. 머리로 아는 것도 중요하지만, 무엇보다 직접 다양한 언어나 프레임워크 혹은 라이브러리를 사용해보고 부딪혀보면서 서로의 장단점을 비교할 수 있는 안목을 키우는 것이 좋을 것 같다는 생각이든다.</p>
-
-        </div>
+  
+    <span class="pagination-item older">Newer</span>
   
 
 </div>
-<div class="pagination">
-    
-      <span class="pagination-item newer">Older</span>
-    
-  
-    
-      <span class="pagination-item older">Newer</span>
-    
-  
-  </div>
-
-
       </div>
     </div>
 
