@@ -4,7 +4,7 @@
  <title>Yu's Tech 블로그</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2021-03-21T20:12:10+09:00</updated>
+ <updated>2021-03-22T00:12:06+09:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Jaeseo Yu</name>
@@ -372,6 +372,7 @@ React는 Virtual Dom을 활용하여 여러 방법 중 비용을 최소화하는
    <updated>2018-11-29T00:00:00+09:00</updated>
    <id>http://localhost:4000/python/2018/11/29/baekjoonCrawling</id>
    <content type="html">&lt;hr /&gt;
+
 &lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;h2 id=&quot;1-코드-&quot;&gt;1. 코드 :&lt;/h2&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
@@ -452,6 +453,7 @@ def getList(question_num,lan_code,my_id):
    <updated>2018-11-28T00:00:00+09:00</updated>
    <id>http://localhost:4000/algorithm/2018/11/28/백준4811</id>
    <content type="html">&lt;hr /&gt;
+
 &lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;1-문제&quot;&gt;1. 문제&lt;/h2&gt;
@@ -807,6 +809,7 @@ print(id(t[0]),id(t[1]),id(t[2]),sep=' ')
    <updated>2018-11-18T00:00:00+09:00</updated>
    <id>http://localhost:4000/algorithm/2018/11/18/백준1157</id>
    <content type="html">&lt;hr /&gt;
+
 &lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;1-코드&quot;&gt;1. 코드&lt;/h2&gt;

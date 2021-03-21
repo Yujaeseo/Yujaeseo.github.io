@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2021-03-21T20:12:10+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Yu’s Tech 블로그</title><subtitle>You will never know until you try.</subtitle><author><name>Jaeseo Yu</name></author><entry><title type="html">parellel programming</title><link href="http://localhost:4000/opencl/2019/10/08/Parellel-programming/" rel="alternate" type="text/html" title="parellel programming" /><published>2019-10-08T00:00:00+09:00</published><updated>2019-10-08T00:00:00+09:00</updated><id>http://localhost:4000/opencl/2019/10/08/%20Parellel%20programming</id><content type="html" xml:base="http://localhost:4000/opencl/2019/10/08/Parellel-programming/">&lt;hr /&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2021-03-22T00:12:06+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Yu’s Tech 블로그</title><subtitle>You will never know until you try.</subtitle><author><name>Jaeseo Yu</name></author><entry><title type="html">parellel programming</title><link href="http://localhost:4000/opencl/2019/10/08/Parellel-programming/" rel="alternate" type="text/html" title="parellel programming" /><published>2019-10-08T00:00:00+09:00</published><updated>2019-10-08T00:00:00+09:00</updated><id>http://localhost:4000/opencl/2019/10/08/%20Parellel%20programming</id><content type="html" xml:base="http://localhost:4000/opencl/2019/10/08/Parellel-programming/">&lt;hr /&gt;
 
 &lt;p&gt;What are 3 traditional ways HW designers make computers run faster?&lt;/p&gt;
 
@@ -315,6 +315,7 @@ React는 Virtual Dom을 활용하여 여러 방법 중 비용을 최소화하는
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;위의 5가지 외에도 많은 장점이 존재할 것이고, 또한 언급하진 않았지만 단점 또한 있을 것이다. 왜 react를 사람들이 많이 사용하는지가 궁금해서 인터넷을 통해 장점을 간단히 살펴봤다. 머리로 아는 것도 중요하지만, 무엇보다 직접 다양한 언어나 프레임워크 혹은 라이브러리를 사용해보고 부딪혀보면서 서로의 장단점을 비교할 수 있는 안목을 키우는 것이 좋을 것 같다는 생각이든다.&lt;/p&gt;</content><author><name>Jaeseo Yu</name></author><category term="react" /><summary type="html"></summary></entry><entry><title type="html">python 백준 코드순위 확인 프로그램</title><link href="http://localhost:4000/python/2018/11/29/baekjoonCrawling/" rel="alternate" type="text/html" title="python 백준 코드순위 확인 프로그램" /><published>2018-11-29T00:00:00+09:00</published><updated>2018-11-29T00:00:00+09:00</updated><id>http://localhost:4000/python/2018/11/29/baekjoonCrawling</id><content type="html" xml:base="http://localhost:4000/python/2018/11/29/baekjoonCrawling/">&lt;hr /&gt;
+
 &lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;h2 id=&quot;1-코드-&quot;&gt;1. 코드 :&lt;/h2&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
@@ -384,7 +385,8 @@ def getList(question_num,lan_code,my_id):
 &lt;p&gt;웹 서버에 HTTP 요청을 하는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;requests&lt;/code&gt;와 HTML 또는 XML 파일에서 파싱을 통해 정보를 추출하는 데 사용되는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;beautifulsoup&lt;/code&gt;를 활용했다. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;getList(question_num,lan_code,my_id)&lt;/code&gt;에서 볼 수 있듯이 getList 함수에 확인하고자 하는 문제 번호, 프로그래밍 언어 코드, 자신의 아이디 이렇게 3가지를 전달해 주면 된다. 코드 주석에는 필자 기준 주로 사용하는 언어 몇 가지 언어에 대한 코드만을 적어놨다. 자신이 사용하는 언어가 없는 경우, 백준 사이트 ‘맞은 사람’ 탭에서 언어를 바꿔준 후 url에서 언어 코드를 확인하면 된다. https://www.acmicpc.net/problem/status/10988/3/1를 예로 들면, 맨 뒤는 현재 페이지, 바로 왼쪽 3은 JAVA를 나타낸다. 위에서 언급한 3가지 파라미터를 전달해주면 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;getList&lt;/code&gt;함수는 현재 페이지 수와 코드 순위를 반환하게 된다. 
 &lt;br /&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;</content><author><name>Jaeseo Yu</name></author><category term="python" /><summary type="html">1. 코드 : ``` import requests from bs4 import BeautifulSoup</summary></entry><entry><title type="html">백준(4811) 알약</title><link href="http://localhost:4000/algorithm/2018/11/28/%EB%B0%B1%EC%A4%804811/" rel="alternate" type="text/html" title="백준(4811) 알약" /><published>2018-11-28T00:00:00+09:00</published><updated>2018-11-28T00:00:00+09:00</updated><id>http://localhost:4000/algorithm/2018/11/28/%EB%B0%B1%EC%A4%804811</id><content type="html" xml:base="http://localhost:4000/algorithm/2018/11/28/%EB%B0%B1%EC%A4%804811/">&lt;hr /&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;</content><author><name>Jaeseo Yu</name></author><category term="python" /><summary type="html"></summary></entry><entry><title type="html">백준(4811) 알약</title><link href="http://localhost:4000/algorithm/2018/11/28/%EB%B0%B1%EC%A4%804811/" rel="alternate" type="text/html" title="백준(4811) 알약" /><published>2018-11-28T00:00:00+09:00</published><updated>2018-11-28T00:00:00+09:00</updated><id>http://localhost:4000/algorithm/2018/11/28/%EB%B0%B1%EC%A4%804811</id><content type="html" xml:base="http://localhost:4000/algorithm/2018/11/28/%EB%B0%B1%EC%A4%804811/">&lt;hr /&gt;
+
 &lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;1-문제&quot;&gt;1. 문제&lt;/h2&gt;
@@ -711,6 +713,7 @@ print(id(t[0]),id(t[1]),id(t[2]),sep=' ')
 
 &lt;p&gt;&lt;br /&gt;
 &lt;br /&gt;&lt;/p&gt;</content><author><name>Jaeseo Yu</name></author><category term="python" /><summary type="html"></summary></entry><entry><title type="html">백준(1157) 단어공부</title><link href="http://localhost:4000/algorithm/2018/11/18/%EB%B0%B1%EC%A4%801157/" rel="alternate" type="text/html" title="백준(1157) 단어공부" /><published>2018-11-18T00:00:00+09:00</published><updated>2018-11-18T00:00:00+09:00</updated><id>http://localhost:4000/algorithm/2018/11/18/%EB%B0%B1%EC%A4%801157</id><content type="html" xml:base="http://localhost:4000/algorithm/2018/11/18/%EB%B0%B1%EC%A4%801157/">&lt;hr /&gt;
+
 &lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;1-코드&quot;&gt;1. 코드&lt;/h2&gt;
