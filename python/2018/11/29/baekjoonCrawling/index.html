@@ -11,15 +11,32 @@
 
   <title>
     
-      python 백준 코드순위 확인 프로그램 &middot; Yu's Tech 블로그
+      Python 백준 코드순위 확인 프로그램 &middot; Yu's Tech 블로그
     
   </title>
 
+  <!-- BOOTSTRAP -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+  <!-- CODE BLOCK FONT -->
+  <link href="http://cdn.jsdelivr.net/gh/joungkyun/font-d2coding/d2coding.css" rel="stylesheet" type="text/css">
+
+  <!-- SCROLLSPY-->
+  <script src="https://unpkg.com/scrollnav@3.0.2/dist/scrollnav.min.umd.js"></script>
+  <link rel="stylesheet" href="/assets/css/style.css">
+
+  
   <!-- CSS -->
   <link rel="stylesheet" href="/public/css/poole.css">
   <link rel="stylesheet" href="/public/css/syntax.css">
   <link rel="stylesheet" href="/public/css/lanyon.css">
   <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700|PT+Sans:400">
+
+    <!-- syntax.css -->
+  <link rel="stylesheet" href="/assets/css/syntax.css">
 
   <!-- font -->
   <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -71,7 +88,7 @@
   </div>
 
   <nav class="sidebar-nav">
-    <a class="sidebar-nav-item" href="/">Home</a>
+    <a class="sidebar-nav-item" href="/">Home <small class="text-info">8</small></a>
 
     
 
@@ -92,6 +109,20 @@
       
     
       
+    
+      
+        
+          <a class="sidebar-nav-item" href="/category/Algorithm/index.html">Algorithm</a>
+        
+      
+    
+      
+        
+          <a class="sidebar-nav-item" href="/category/Mongodb/index.html">Mongodb</a>
+        
+      
+    
+      
         
           <a class="sidebar-nav-item" href="/category/OpenCL/index.html">OpenCL</a>
         
@@ -99,43 +130,36 @@
     
       
         
-          <a class="sidebar-nav-item" href="/category/algorithm/index.html">algorithm</a>
+          <a class="sidebar-nav-item" href="/category/Python/index.html">Python</a>
         
       
     
       
         
-      
-    
-      
-        
-          <a class="sidebar-nav-item" href="/category/mongodb/index.html">mongodb</a>
+          <a class="sidebar-nav-item" href="/category/Spark/index.html">Spark</a>
         
       
     
       
-        
-          <a class="sidebar-nav-item" href="/category/python/index.html">python</a>
-        
-      
-    
-      
-        
-          <a class="sidebar-nav-item" href="/category/react/index.html">react</a>
         
       
     
  -->
     
-      <a class="sidebar-nav-item" href="/category/algorithm/index.html">algorithm</a>
+      <a class = "sidebar-nav-item " href="/category/Algorithm/index.html">Algorithm <small class="text-info">2</small></a>  
+    <!--<a class="sidebar-nav-item" href="/category/Algorithm/index.html">Algorithm</a>  <small class="text-muted">2</small>-->
     
-      <a class="sidebar-nav-item" href="/category/python/index.html">python</a>
+      <a class = "sidebar-nav-item " href="/category/Python/index.html">Python <small class="text-info">3</small></a>  
+    <!--<a class="sidebar-nav-item" href="/category/Python/index.html">Python</a>  <small class="text-muted">3</small>-->
     
-      <a class="sidebar-nav-item" href="/category/react/index.html">react</a>
+      <a class = "sidebar-nav-item " href="/category/Mongodb/index.html">Mongodb <small class="text-info">1</small></a>  
+    <!--<a class="sidebar-nav-item" href="/category/Mongodb/index.html">Mongodb</a>  <small class="text-muted">1</small>-->
     
-      <a class="sidebar-nav-item" href="/category/mongodb/index.html">mongodb</a>
+      <a class = "sidebar-nav-item " href="/category/OpenCL/index.html">OpenCL <small class="text-info">1</small></a>  
+    <!--<a class="sidebar-nav-item" href="/category/OpenCL/index.html">OpenCL</a>  <small class="text-muted">1</small>-->
     
-      <a class="sidebar-nav-item" href="/category/OpenCL/index.html">OpenCL</a>
+      <a class = "sidebar-nav-item " href="/category/Spark/index.html">Spark <small class="text-info">1</small></a>  
+    <!--<a class="sidebar-nav-item" href="/category/Spark/index.html">Spark</a>  <small class="text-muted">1</small>-->
     
     
 <!--
@@ -169,68 +193,82 @@
       <div class="container content">
         <div class="post">
 
-  <h1 class="post-title">python 백준 코드순위 확인 프로그램</h1>
+  <h1 class="post-title">Python 백준 코드순위 확인 프로그램</h1>
   <span class="post-date">29 Nov 2018</span>
-  <hr />
-
-<p><br /><br /></p>
-<h2 id="1-코드-">1. 코드 :</h2>
-<p><br /></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import requests
-from bs4 import BeautifulSoup
-
-
-
-# 전체 : -1, C : 0 ,C++14 : 88, C++11 : 75, Java : 3, Python 3 : 28 등등
-
-def getList(question_num,lan_code,my_id):
-
-    url = 'https://www.acmicpc.net/problem/status'
-    page = 1
+  
     
-    while 1:
-        request = requests.get( url+'/'+ str(question_num) + '/' +str(lan_code) + '/' + str(page)) 
+      
+        <span class="badge badge-dark">Programming language</span>
+      
+    
+      
+        <span class="badge badge-dark">Python</span>
+      
+    
+  
+  <article id="main-content" class="main-content">
+    <hr />
 
-        # 페이지가 존재하지 않는 경우    
-        if request.status_code != 200:
-            print ("아이디가 존재하지 않습니다")
-            break
+<p><br /><br /></p>
+
+<h2 id="코드">코드</h2>
+
+<p><br /></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+
+
+
+<span class="c1"># 전체 : -1, C : 0 ,C++14 : 88, C++11 : 75, Java : 3, Python 3 : 28 등등
+</span><span class="k">def</span> <span class="nf">getList</span><span class="p">(</span><span class="n">question_num</span><span class="p">,</span><span class="n">lan_code</span><span class="p">,</span><span class="n">my_id</span><span class="p">):</span>
+
+    <span class="n">url</span> <span class="o">=</span> <span class="s">'https://www.acmicpc.net/problem/status'</span>
+    <span class="n">page</span> <span class="o">=</span> <span class="mi">1</span>
+    
+    <span class="k">while</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span> <span class="n">url</span><span class="o">+</span><span class="s">'/'</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">question_num</span><span class="p">)</span> <span class="o">+</span> <span class="s">'/'</span> <span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">lan_code</span><span class="p">)</span> <span class="o">+</span> <span class="s">'/'</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">page</span><span class="p">))</span> 
+
+        <span class="c1"># 페이지가 존재하지 않는 경우    
+</span>        <span class="k">if</span> <span class="n">request</span><span class="p">.</span><span class="n">status_code</span> <span class="o">!=</span> <span class="mi">200</span><span class="p">:</span>
+            <span class="k">print</span> <span class="p">(</span><span class="s">"아이디가 존재하지 않습니다"</span><span class="p">)</span>
+            <span class="k">break</span>
             
-        print ("현재 페이지 : " + str (page))    
+        <span class="k">print</span> <span class="p">(</span><span class="s">"현재 페이지 : "</span> <span class="o">+</span> <span class="nb">str</span> <span class="p">(</span><span class="n">page</span><span class="p">))</span>    
         
-        soup = BeautifulSoup(request.text,'html.parser')
-        table_structure = soup.select('body &gt; div.wrapper &gt; div.container.content &gt; div.row &gt; div.col-md-10 &gt; div.table-responsive &gt; table &gt; tbody')
-        lines = table_structure[0].find_all('tr')
+        <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">request</span><span class="p">.</span><span class="n">text</span><span class="p">,</span><span class="s">'html.parser'</span><span class="p">)</span>
+        <span class="n">table_structure</span> <span class="o">=</span> <span class="n">soup</span><span class="p">.</span><span class="n">select</span><span class="p">(</span><span class="s">'body &gt; div.wrapper &gt; div.container.content &gt; div.row &gt; div.col-md-10 &gt; div.table-responsive &gt; table &gt; tbody'</span><span class="p">)</span>
+        <span class="n">lines</span> <span class="o">=</span> <span class="n">table_structure</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">find_all</span><span class="p">(</span><span class="s">'tr'</span><span class="p">)</span>
 
-        # 점수 table의 row에서 자신의 ID를 찾고, 페이지와 순위를 반환
-        for each in lines:
-            elements = each.find_all('td')
-            user = elements[3].find('a').text
-            if user == my_id :
-                print ({'페이지' : page, '순위' : elements[0].text})
-                return 
+        <span class="c1"># 점수 table의 row에서 자신의 ID를 찾고, 페이지와 순위를 반환
+</span>        <span class="k">for</span> <span class="n">each</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
+            <span class="n">elements</span> <span class="o">=</span> <span class="n">each</span><span class="p">.</span><span class="n">find_all</span><span class="p">(</span><span class="s">'td'</span><span class="p">)</span>
+            <span class="n">user</span> <span class="o">=</span> <span class="n">elements</span><span class="p">[</span><span class="mi">3</span><span class="p">].</span><span class="n">find</span><span class="p">(</span><span class="s">'a'</span><span class="p">).</span><span class="n">text</span>
+            <span class="k">if</span> <span class="n">user</span> <span class="o">==</span> <span class="n">my_id</span> <span class="p">:</span>
+                <span class="k">print</span> <span class="p">({</span><span class="s">'페이지'</span> <span class="p">:</span> <span class="n">page</span><span class="p">,</span> <span class="s">'순위'</span> <span class="p">:</span> <span class="n">elements</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">text</span><span class="p">})</span>
+                <span class="k">return</span> 
                 
-        page += 1
+        <span class="n">page</span> <span class="o">+=</span> <span class="mi">1</span>
 </code></pre></div></div>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>getList(10988,28,'yjs08090')
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">getList</span><span class="p">(</span><span class="mi">10988</span><span class="p">,</span><span class="mi">28</span><span class="p">,</span><span class="s">'yjs08090'</span><span class="p">)</span>
 </code></pre></div></div>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>현재 페이지 : 1
-현재 페이지 : 2
-현재 페이지 : 3
-현재 페이지 : 4
-현재 페이지 : 5
-현재 페이지 : 6
-현재 페이지 : 7
-현재 페이지 : 8
-현재 페이지 : 9
-현재 페이지 : 10
-{'페이지': 10, '순위': '195'}
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">현재</span> <span class="n">페이지</span> <span class="p">:</span> <span class="mi">1</span>
+<span class="n">현재</span> <span class="n">페이지</span> <span class="p">:</span> <span class="mi">2</span>
+<span class="n">현재</span> <span class="n">페이지</span> <span class="p">:</span> <span class="mi">3</span>
+<span class="n">현재</span> <span class="n">페이지</span> <span class="p">:</span> <span class="mi">4</span>
+<span class="n">현재</span> <span class="n">페이지</span> <span class="p">:</span> <span class="mi">5</span>
+<span class="n">현재</span> <span class="n">페이지</span> <span class="p">:</span> <span class="mi">6</span>
+<span class="n">현재</span> <span class="n">페이지</span> <span class="p">:</span> <span class="mi">7</span>
+<span class="n">현재</span> <span class="n">페이지</span> <span class="p">:</span> <span class="mi">8</span>
+<span class="n">현재</span> <span class="n">페이지</span> <span class="p">:</span> <span class="mi">9</span>
+<span class="n">현재</span> <span class="n">페이지</span> <span class="p">:</span> <span class="mi">10</span>
+<span class="p">{</span><span class="s">'페이지'</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s">'순위'</span><span class="p">:</span> <span class="s">'195'</span><span class="p">}</span>
 </code></pre></div></div>
 <p><br /><br /></p>
 
-<h2 id="2-설명">2. 설명</h2>
+<h2 id="설명">설명</h2>
 
 <p><br />
 온라인 저지 문제에 익숙하지 않았을 때는 단순히 문제를 푸는 것에 의미를 두었다. 어느 정도 문제를 푸는 것에 적응이 된 만큼, 이제 부터는 효율성을 고려한 코드를 작성하기 위해 노력해야 된다고 생각한다.온라인 저지에서 내 코드의 질을 판단하는 방법은 바로 순위를 확인하는 것이다. 실행 시간, 메모리의 효율적인 사용을 고민하며 순위를 높이는 것도 나름의 쾌감이 있다. 이 과정에서 다른 사람의 코드를 보면서 항상 새로운 방법의 풀이가 있음을 알게 된다. 다른 사람의 풀이를 참고하면서 다양하게 생각하는 방법과 어떤 경우에 어떤 라이브러리나 메소드를 쓰면 효과적인지 배울 수 있다.</p>
@@ -245,11 +283,22 @@ def getList(question_num,lan_code,my_id):
 <p><br /></p>
 
 
+  </article>
+
 </div>
 
 <div class="related">
   <h2>Related Posts</h2>
   <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/algorithm/2018/11/28/%EB%B0%B1%EC%A4%804811/">
+            백준(4811) 알약
+            <small>28 Nov 2018</small>
+          </a>
+        </h3>
+      </li>
     
       <li>
         <h3>
@@ -265,15 +314,6 @@ def getList(question_num,lan_code,my_id):
           <a href="/python/2018/11/22/Python1/">
             Python Mutable, Immutable 비교
             <small>22 Nov 2018</small>
-          </a>
-        </h3>
-      </li>
-    
-      <li>
-        <h3>
-          <a href="/opencl/2019/08/30/OpenCL%EC%9D%B4%EB%9E%80/">
-            OpenCL과 4가지 모델
-            <small>30 Aug 2019</small>
           </a>
         </h3>
       </li>
@@ -299,7 +339,25 @@ def getList(question_num,lan_code,my_id):
       s.setAttribute('data-timestamp', +new Date());
       (d.head || d.body).appendChild(s);
       })();
-  </script>
+
+
+    const content = document.querySelector(".main-content");
+    scrollnav.init(content,{
+      debug: false,
+      easingStyle: 'easeOutQuint',
+      sections: ($('.post-content > h1').length>0) ? 'h1' : 'h2',
+      subSections: ($('.post-content > h1').length>0) ? 'h2' : 'h3',
+    });
+
+    var sideNav = function(){
+      var mainRect = document.getElementById('main-content').getBoundingClientRect();
+      $('nav.scroll-nav').css('left', mainRect.right + 50 + 'px');
+    }
+
+    sideNav();
+    window.addEventListener("resize", sideNav);
+
+</script>
   <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 
 

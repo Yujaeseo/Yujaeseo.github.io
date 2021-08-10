@@ -15,11 +15,28 @@
     
   </title>
 
+  <!-- BOOTSTRAP -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+  <!-- CODE BLOCK FONT -->
+  <link href="http://cdn.jsdelivr.net/gh/joungkyun/font-d2coding/d2coding.css" rel="stylesheet" type="text/css">
+
+  <!-- SCROLLSPY-->
+  <script src="https://unpkg.com/scrollnav@3.0.2/dist/scrollnav.min.umd.js"></script>
+  <link rel="stylesheet" href="/assets/css/style.css">
+
+  
   <!-- CSS -->
   <link rel="stylesheet" href="/public/css/poole.css">
   <link rel="stylesheet" href="/public/css/syntax.css">
   <link rel="stylesheet" href="/public/css/lanyon.css">
   <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700|PT+Sans:400">
+
+    <!-- syntax.css -->
+  <link rel="stylesheet" href="/assets/css/syntax.css">
 
   <!-- font -->
   <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -71,7 +88,7 @@
   </div>
 
   <nav class="sidebar-nav">
-    <a class="sidebar-nav-item" href="/">Home</a>
+    <a class="sidebar-nav-item" href="/">Home <small class="text-info">8</small></a>
 
     
 
@@ -92,6 +109,20 @@
       
     
       
+    
+      
+        
+          <a class="sidebar-nav-item" href="/category/Algorithm/index.html">Algorithm</a>
+        
+      
+    
+      
+        
+          <a class="sidebar-nav-item" href="/category/Mongodb/index.html">Mongodb</a>
+        
+      
+    
+      
         
           <a class="sidebar-nav-item" href="/category/OpenCL/index.html">OpenCL</a>
         
@@ -99,43 +130,36 @@
     
       
         
-          <a class="sidebar-nav-item" href="/category/algorithm/index.html">algorithm</a>
+          <a class="sidebar-nav-item" href="/category/Python/index.html">Python</a>
         
       
     
       
         
-      
-    
-      
-        
-          <a class="sidebar-nav-item" href="/category/mongodb/index.html">mongodb</a>
+          <a class="sidebar-nav-item" href="/category/Spark/index.html">Spark</a>
         
       
     
       
-        
-          <a class="sidebar-nav-item" href="/category/python/index.html">python</a>
-        
-      
-    
-      
-        
-          <a class="sidebar-nav-item" href="/category/react/index.html">react</a>
         
       
     
  -->
     
-      <a class="sidebar-nav-item" href="/category/algorithm/index.html">algorithm</a>
+      <a class = "sidebar-nav-item " href="/category/Algorithm/index.html">Algorithm <small class="text-info">2</small></a>  
+    <!--<a class="sidebar-nav-item" href="/category/Algorithm/index.html">Algorithm</a>  <small class="text-muted">2</small>-->
     
-      <a class="sidebar-nav-item" href="/category/python/index.html">python</a>
+      <a class = "sidebar-nav-item " href="/category/Python/index.html">Python <small class="text-info">3</small></a>  
+    <!--<a class="sidebar-nav-item" href="/category/Python/index.html">Python</a>  <small class="text-muted">3</small>-->
     
-      <a class="sidebar-nav-item" href="/category/react/index.html">react</a>
+      <a class = "sidebar-nav-item " href="/category/Mongodb/index.html">Mongodb <small class="text-info">1</small></a>  
+    <!--<a class="sidebar-nav-item" href="/category/Mongodb/index.html">Mongodb</a>  <small class="text-muted">1</small>-->
     
-      <a class="sidebar-nav-item" href="/category/mongodb/index.html">mongodb</a>
+      <a class = "sidebar-nav-item " href="/category/OpenCL/index.html">OpenCL <small class="text-info">1</small></a>  
+    <!--<a class="sidebar-nav-item" href="/category/OpenCL/index.html">OpenCL</a>  <small class="text-muted">1</small>-->
     
-      <a class="sidebar-nav-item" href="/category/OpenCL/index.html">OpenCL</a>
+      <a class = "sidebar-nav-item " href="/category/Spark/index.html">Spark <small class="text-info">1</small></a>  
+    <!--<a class="sidebar-nav-item" href="/category/Spark/index.html">Spark</a>  <small class="text-muted">1</small>-->
     
     
 <!--
@@ -171,9 +195,21 @@
 
   <h1 class="post-title">Python Mutable, Immutable 비교</h1>
   <span class="post-date">22 Nov 2018</span>
-  <hr />
+  
+    
+      
+        <span class="badge badge-dark">Programming language</span>
+      
+    
+      
+        <span class="badge badge-dark">Python</span>
+      
+    
+  
+  <article id="main-content" class="main-content">
+    <hr />
 
-<h2 id="1-mutable-immutable-이란-">1. Mutable, Immutable 이란 ?</h2>
+<h2 id="mutable-immutable-이란-">Mutable, Immutable 이란 ?</h2>
 
 <p><br /></p>
 
@@ -186,46 +222,47 @@
 <p><br />
 <br /></p>
 
-<h2 id="2-코드를-통한-차이-확인">2. 코드를 통한 차이 확인</h2>
+<h2 id="코드를-통한-차이-확인">코드를 통한 차이 확인</h2>
 <p><br /></p>
 
 <p>다음은 Mutable과 Immutable의 차이를 보여주는 Code이다.아래에서 사용된 <code class="language-plaintext highlighter-rouge">id()</code><strong>함수는 객체가 갖는 고유의 값(object가 저장된 메모리 값)을 반환한다.</strong> 파이썬의 모든 object는 value, type, identity(id)를 갖는다. 또한 Id는 객체가 생성될 때 부여되며 절대 변하지 않는 값이다.</p>
 
 <p><br /></p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>x = 10
-print (x)
-print (id(x))
-x += 1
-print (x)
-print (id(x))
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="k">print</span> <span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="k">print</span> <span class="p">(</span><span class="nb">id</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="n">x</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="k">print</span> <span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="k">print</span> <span class="p">(</span><span class="nb">id</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
 
 
--&gt; 
-10
-140242833553440
-11
-140242833553472
+<span class="o">-&gt;</span> 
+<span class="mi">10</span>
+<span class="mi">140242833553440</span>
+<span class="mi">11</span>
+<span class="mi">140242833553472</span>
 </code></pre></div></div>
+
 <p><br /></p>
 
 <p>위에서 출력 값에서 x의 id 값이 변경된 것을 확인할 수 있다. int는 immutable 이기 때문에 값을 바꿀 수 없으므로 11이라는 값을 담은 새로운 int 형 object가 만들어 진다. 그리고 이 obejct의 reference가 x에 대입된 것이다.</p>
 
 <p><br /></p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>y = ['a','b']
-print (y)
-print (id(y))
-y.append('c')
-print (y)
-print (id(y))
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="s">'a'</span><span class="p">,</span><span class="s">'b'</span><span class="p">]</span>
+<span class="k">print</span> <span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="k">print</span> <span class="p">(</span><span class="nb">id</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
+<span class="n">y</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s">'c'</span><span class="p">)</span>
+<span class="k">print</span> <span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="k">print</span> <span class="p">(</span><span class="nb">id</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
 
 
--&gt;
-['a', 'b']
-140242795187592
-['a', 'b', 'c']
-140242795187592
+<span class="o">-&gt;</span>
+<span class="p">[</span><span class="s">'a'</span><span class="p">,</span> <span class="s">'b'</span><span class="p">]</span>
+<span class="mi">140242795187592</span>
+<span class="p">[</span><span class="s">'a'</span><span class="p">,</span> <span class="s">'b'</span><span class="p">,</span> <span class="s">'c'</span><span class="p">]</span>
+<span class="mi">140242795187592</span>
 </code></pre></div></div>
 
 <p><br /></p>
@@ -235,30 +272,30 @@ print (id(y))
 <p><br />
 <br /></p>
 
-<h2 id="3-예외">3. 예외</h2>
+<h2 id="예외">예외</h2>
 <p><br /></p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>t = ('abc',[1,2,3])
-print (t[1])
-t[1].append(4)
-print (t[1])
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="s">'abc'</span><span class="p">,[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+<span class="k">print</span> <span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">append</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="k">print</span> <span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 
--&gt; 
-[1, 2, 3]
-[1, 2, 3, 4]
+<span class="o">-&gt;</span> 
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
 </code></pre></div></div>
 <p><br /></p>
 
 <p>위의 코드를 보면 Tuple 자료형 안 List에 정수 4가 추가된 것을 확인할 수 있다. 하지만 초반에 Tuple은 Immutable 자료형으로, 그 값을 변경할 수 없다고 한 것과 모순되는 결과라고 생각할 수 있다.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>t = ('abc',[1,2,3])
-print (t[0])
-t[0] = 'xyz'
-print (t[0])
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="s">'abc'</span><span class="p">,[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+<span class="k">print</span> <span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s">'xyz'</span>
+<span class="k">print</span> <span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 
--&gt; 
-TypeError: 'tuple' object does not support item assignment
-
+<span class="o">-&gt;</span> 
+<span class="nb">TypeError</span><span class="p">:</span> <span class="s">'tuple'</span> <span class="nb">object</span> <span class="n">does</span> <span class="ow">not</span> <span class="n">support</span> <span class="n">item</span> <span class="n">assignment</span>
 </code></pre></div></div>
 
 <p><br /></p>
@@ -267,19 +304,19 @@ TypeError: 'tuple' object does not support item assignment
 
 <p><br /></p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>t = ('ab','cd',[1,2,3])
-print(t)
-print(id(t[0]),id(t[1]),id(t[2]),sep=' ')
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="s">'ab'</span><span class="p">,</span><span class="s">'cd'</span><span class="p">,[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">id</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span><span class="nb">id</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span><span class="nb">id</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span><span class="n">sep</span><span class="o">=</span><span class="s">' '</span><span class="p">)</span>
 
-t[2].append(100)
-print(t)
-print(id(t[0]),id(t[1]),id(t[2]),sep=' ')
+<span class="n">t</span><span class="p">[</span><span class="mi">2</span><span class="p">].</span><span class="n">append</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">id</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span><span class="nb">id</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span><span class="nb">id</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span><span class="n">sep</span><span class="o">=</span><span class="s">' '</span><span class="p">)</span>
 
--&gt;
-('ab', 'cd', [1, 2, 3])
-139797887251320 139797887251880 139797883936392
-('ab', 'cd', [1, 2, 3, 100])
-139797887251320 139797887251880 139797883936392
+<span class="o">-&gt;</span>
+<span class="p">(</span><span class="s">'ab'</span><span class="p">,</span> <span class="s">'cd'</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="mi">139797887251320</span> <span class="mi">139797887251880</span> <span class="mi">139797883936392</span>
+<span class="p">(</span><span class="s">'ab'</span><span class="p">,</span> <span class="s">'cd'</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">100</span><span class="p">])</span>
+<span class="mi">139797887251320</span> <span class="mi">139797887251880</span> <span class="mi">139797883936392</span>
 </code></pre></div></div>
 
 <p><br /></p>
@@ -288,6 +325,8 @@ print(id(t[0]),id(t[1]),id(t[2]),sep=' ')
 
 <p><br />
 <br /></p>
+
+  </article>
 
 </div>
 
@@ -316,7 +355,7 @@ print(id(t[0]),id(t[1]),id(t[2]),sep=' ')
       <li>
         <h3>
           <a href="/python/2018/11/29/baekjoonCrawling/">
-            python 백준 코드순위 확인 프로그램
+            Python 백준 코드순위 확인 프로그램
             <small>29 Nov 2018</small>
           </a>
         </h3>
@@ -343,7 +382,25 @@ print(id(t[0]),id(t[1]),id(t[2]),sep=' ')
       s.setAttribute('data-timestamp', +new Date());
       (d.head || d.body).appendChild(s);
       })();
-  </script>
+
+
+    const content = document.querySelector(".main-content");
+    scrollnav.init(content,{
+      debug: false,
+      easingStyle: 'easeOutQuint',
+      sections: ($('.post-content > h1').length>0) ? 'h1' : 'h2',
+      subSections: ($('.post-content > h1').length>0) ? 'h2' : 'h3',
+    });
+
+    var sideNav = function(){
+      var mainRect = document.getElementById('main-content').getBoundingClientRect();
+      $('nav.scroll-nav').css('left', mainRect.right + 50 + 'px');
+    }
+
+    sideNav();
+    window.addEventListener("resize", sideNav);
+
+</script>
   <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 
 

@@ -1,0 +1,27 @@
+.scroll-nav { background-color: #f8f9fa; border: 1px solid #a2a9b1; padding: 15px 10px; position: fixed; top: 40vh; max-width: 400px; min-width: 300px; }
+
+@media screen and (max-width: 1200px) { .scroll-nav { display: none; } }
+
+.scroll-nav__list { margin: 0; padding-left: 1.4em; list-style-type: upper-roman; }
+
+.scroll-nav__item { margin-bottom: 5px; }
+
+.scroll-nav__item > a { text-decoration: none; }
+
+.scroll-nav__item--active > a { padding: 5px; font-weight: bold; position: relative; background: #f1ea80; text-decoration: none; transition-duration: 0.7s; }
+
+.scroll-nav__item--active > a:hover { color: rgba(168, 168, 168, 0.8); text-decoration: none; }
+
+.scroll-nav__link { color: #000000; text-decoration: none; }
+
+.scroll-nav__link:hover, .scroll-nav__link:active, .scroll-nav__link:visited, .scroll-nav__link:focus { text-decoration: none; }
+
+.scroll-nav__link:hover { text-decoration: none; }
+
+.scroll-nav__sub-link { color: #000000; text-decoration: none; }
+
+.scroll-nav__sub-link:hover, .scroll-nav__sub-link:active, .scroll-nav__sub-link:visited, .scroll-nav__sub-link:focus { text-decoration: none; }
+
+.scroll-nav__sub-link:hover { text-decoration: none; }
+
+/*# sourceMappingURL=style.css.map */

@@ -11,15 +11,32 @@
 
   <title>
     
-      python &middot; Yu's Tech 블로그
+      Python &middot; Yu's Tech 블로그
     
   </title>
 
+  <!-- BOOTSTRAP -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+  <!-- CODE BLOCK FONT -->
+  <link href="http://cdn.jsdelivr.net/gh/joungkyun/font-d2coding/d2coding.css" rel="stylesheet" type="text/css">
+
+  <!-- SCROLLSPY-->
+  <script src="https://unpkg.com/scrollnav@3.0.2/dist/scrollnav.min.umd.js"></script>
+  <link rel="stylesheet" href="/assets/css/style.css">
+
+  
   <!-- CSS -->
   <link rel="stylesheet" href="/public/css/poole.css">
   <link rel="stylesheet" href="/public/css/syntax.css">
   <link rel="stylesheet" href="/public/css/lanyon.css">
   <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700|PT+Sans:400">
+
+    <!-- syntax.css -->
+  <link rel="stylesheet" href="/assets/css/syntax.css">
 
   <!-- font -->
   <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -71,7 +88,7 @@
   </div>
 
   <nav class="sidebar-nav">
-    <a class="sidebar-nav-item" href="/">Home</a>
+    <a class="sidebar-nav-item" href="/">Home <small class="text-info">8</small></a>
 
     
 
@@ -92,6 +109,20 @@
       
     
       
+    
+      
+        
+          <a class="sidebar-nav-item" href="/category/Algorithm/index.html">Algorithm</a>
+        
+      
+    
+      
+        
+          <a class="sidebar-nav-item" href="/category/Mongodb/index.html">Mongodb</a>
+        
+      
+    
+      
         
           <a class="sidebar-nav-item" href="/category/OpenCL/index.html">OpenCL</a>
         
@@ -99,7 +130,13 @@
     
       
         
-          <a class="sidebar-nav-item" href="/category/algorithm/index.html">algorithm</a>
+          <a class="sidebar-nav-item active" href="/category/Python/index.html">Python</a>
+        
+      
+    
+      
+        
+          <a class="sidebar-nav-item" href="/category/Spark/index.html">Spark</a>
         
       
     
@@ -107,35 +144,24 @@
         
       
     
-      
-        
-          <a class="sidebar-nav-item" href="/category/mongodb/index.html">mongodb</a>
-        
-      
-    
-      
-        
-          <a class="sidebar-nav-item active" href="/category/python/index.html">python</a>
-        
-      
-    
-      
-        
-          <a class="sidebar-nav-item" href="/category/react/index.html">react</a>
-        
       
     
  -->
     
-      <a class="sidebar-nav-item" href="/category/algorithm/index.html">algorithm</a>
+      <a class = "sidebar-nav-item " href="/category/Algorithm/index.html">Algorithm <small class="text-info">2</small></a>  
+    <!--<a class="sidebar-nav-item" href="/category/Algorithm/index.html">Algorithm</a>  <small class="text-muted">2</small>-->
     
-      <a class="sidebar-nav-item active" href="/category/python/index.html">python</a>
+      <a class = "sidebar-nav-item  active" href="/category/Python/index.html">Python <small class="text-info">3</small></a>  
+    <!--<a class="sidebar-nav-item" href="/category/Python/index.html">Python</a>  <small class="text-muted">3</small>-->
     
-      <a class="sidebar-nav-item" href="/category/react/index.html">react</a>
+      <a class = "sidebar-nav-item " href="/category/Mongodb/index.html">Mongodb <small class="text-info">1</small></a>  
+    <!--<a class="sidebar-nav-item" href="/category/Mongodb/index.html">Mongodb</a>  <small class="text-muted">1</small>-->
     
-      <a class="sidebar-nav-item" href="/category/mongodb/index.html">mongodb</a>
+      <a class = "sidebar-nav-item " href="/category/OpenCL/index.html">OpenCL <small class="text-info">1</small></a>  
+    <!--<a class="sidebar-nav-item" href="/category/OpenCL/index.html">OpenCL</a>  <small class="text-muted">1</small>-->
     
-      <a class="sidebar-nav-item" href="/category/OpenCL/index.html">OpenCL</a>
+      <a class = "sidebar-nav-item " href="/category/Spark/index.html">Spark <small class="text-info">1</small></a>  
+    <!--<a class="sidebar-nav-item" href="/category/Spark/index.html">Spark</a>  <small class="text-muted">1</small>-->
     
     
 <!--
@@ -173,72 +199,84 @@
       <div class="post">
             <h1 class="post-title">
             <a href="/python/2018/11/29/baekjoonCrawling/">
-                python 백준 코드순위 확인 프로그램
+                Python 백준 코드순위 확인 프로그램
             </a>
             </h1>
 
             <span class="post-date">29 Nov 2018</span>
-
+            
+            
+              
+                <span class="badge badge-dark">Programming language</span>
+              
+            
+              
+                <span class="badge badge-dark">Python</span>
+              
+            
+            
             <hr />
 
 <p><br /><br /></p>
-<h2 id="1-코드-">1. 코드 :</h2>
+
+<h2 id="코드">코드</h2>
+
 <p><br /></p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import requests
-from bs4 import BeautifulSoup
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
 
 
 
-# 전체 : -1, C : 0 ,C++14 : 88, C++11 : 75, Java : 3, Python 3 : 28 등등
+<span class="c1"># 전체 : -1, C : 0 ,C++14 : 88, C++11 : 75, Java : 3, Python 3 : 28 등등
+</span><span class="k">def</span> <span class="nf">getList</span><span class="p">(</span><span class="n">question_num</span><span class="p">,</span><span class="n">lan_code</span><span class="p">,</span><span class="n">my_id</span><span class="p">):</span>
 
-def getList(question_num,lan_code,my_id):
-
-    url = 'https://www.acmicpc.net/problem/status'
-    page = 1
+    <span class="n">url</span> <span class="o">=</span> <span class="s">'https://www.acmicpc.net/problem/status'</span>
+    <span class="n">page</span> <span class="o">=</span> <span class="mi">1</span>
     
-    while 1:
-        request = requests.get( url+'/'+ str(question_num) + '/' +str(lan_code) + '/' + str(page)) 
+    <span class="k">while</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span> <span class="n">url</span><span class="o">+</span><span class="s">'/'</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">question_num</span><span class="p">)</span> <span class="o">+</span> <span class="s">'/'</span> <span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">lan_code</span><span class="p">)</span> <span class="o">+</span> <span class="s">'/'</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">page</span><span class="p">))</span> 
 
-        # 페이지가 존재하지 않는 경우    
-        if request.status_code != 200:
-            print ("아이디가 존재하지 않습니다")
-            break
+        <span class="c1"># 페이지가 존재하지 않는 경우    
+</span>        <span class="k">if</span> <span class="n">request</span><span class="p">.</span><span class="n">status_code</span> <span class="o">!=</span> <span class="mi">200</span><span class="p">:</span>
+            <span class="k">print</span> <span class="p">(</span><span class="s">"아이디가 존재하지 않습니다"</span><span class="p">)</span>
+            <span class="k">break</span>
             
-        print ("현재 페이지 : " + str (page))    
+        <span class="k">print</span> <span class="p">(</span><span class="s">"현재 페이지 : "</span> <span class="o">+</span> <span class="nb">str</span> <span class="p">(</span><span class="n">page</span><span class="p">))</span>    
         
-        soup = BeautifulSoup(request.text,'html.parser')
-        table_structure = soup.select('body &gt; div.wrapper &gt; div.container.content &gt; div.row &gt; div.col-md-10 &gt; div.table-responsive &gt; table &gt; tbody')
-        lines = table_structure[0].find_all('tr')
+        <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">request</span><span class="p">.</span><span class="n">text</span><span class="p">,</span><span class="s">'html.parser'</span><span class="p">)</span>
+        <span class="n">table_structure</span> <span class="o">=</span> <span class="n">soup</span><span class="p">.</span><span class="n">select</span><span class="p">(</span><span class="s">'body &gt; div.wrapper &gt; div.container.content &gt; div.row &gt; div.col-md-10 &gt; div.table-responsive &gt; table &gt; tbody'</span><span class="p">)</span>
+        <span class="n">lines</span> <span class="o">=</span> <span class="n">table_structure</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">find_all</span><span class="p">(</span><span class="s">'tr'</span><span class="p">)</span>
 
-        # 점수 table의 row에서 자신의 ID를 찾고, 페이지와 순위를 반환
-        for each in lines:
-            elements = each.find_all('td')
-            user = elements[3].find('a').text
-            if user == my_id :
-                print ({'페이지' : page, '순위' : elements[0].text})
-                return 
+        <span class="c1"># 점수 table의 row에서 자신의 ID를 찾고, 페이지와 순위를 반환
+</span>        <span class="k">for</span> <span class="n">each</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
+            <span class="n">elements</span> <span class="o">=</span> <span class="n">each</span><span class="p">.</span><span class="n">find_all</span><span class="p">(</span><span class="s">'td'</span><span class="p">)</span>
+            <span class="n">user</span> <span class="o">=</span> <span class="n">elements</span><span class="p">[</span><span class="mi">3</span><span class="p">].</span><span class="n">find</span><span class="p">(</span><span class="s">'a'</span><span class="p">).</span><span class="n">text</span>
+            <span class="k">if</span> <span class="n">user</span> <span class="o">==</span> <span class="n">my_id</span> <span class="p">:</span>
+                <span class="k">print</span> <span class="p">({</span><span class="s">'페이지'</span> <span class="p">:</span> <span class="n">page</span><span class="p">,</span> <span class="s">'순위'</span> <span class="p">:</span> <span class="n">elements</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">text</span><span class="p">})</span>
+                <span class="k">return</span> 
                 
-        page += 1
+        <span class="n">page</span> <span class="o">+=</span> <span class="mi">1</span>
 </code></pre></div></div>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>getList(10988,28,'yjs08090')
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">getList</span><span class="p">(</span><span class="mi">10988</span><span class="p">,</span><span class="mi">28</span><span class="p">,</span><span class="s">'yjs08090'</span><span class="p">)</span>
 </code></pre></div></div>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>현재 페이지 : 1
-현재 페이지 : 2
-현재 페이지 : 3
-현재 페이지 : 4
-현재 페이지 : 5
-현재 페이지 : 6
-현재 페이지 : 7
-현재 페이지 : 8
-현재 페이지 : 9
-현재 페이지 : 10
-{'페이지': 10, '순위': '195'}
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">현재</span> <span class="n">페이지</span> <span class="p">:</span> <span class="mi">1</span>
+<span class="n">현재</span> <span class="n">페이지</span> <span class="p">:</span> <span class="mi">2</span>
+<span class="n">현재</span> <span class="n">페이지</span> <span class="p">:</span> <span class="mi">3</span>
+<span class="n">현재</span> <span class="n">페이지</span> <span class="p">:</span> <span class="mi">4</span>
+<span class="n">현재</span> <span class="n">페이지</span> <span class="p">:</span> <span class="mi">5</span>
+<span class="n">현재</span> <span class="n">페이지</span> <span class="p">:</span> <span class="mi">6</span>
+<span class="n">현재</span> <span class="n">페이지</span> <span class="p">:</span> <span class="mi">7</span>
+<span class="n">현재</span> <span class="n">페이지</span> <span class="p">:</span> <span class="mi">8</span>
+<span class="n">현재</span> <span class="n">페이지</span> <span class="p">:</span> <span class="mi">9</span>
+<span class="n">현재</span> <span class="n">페이지</span> <span class="p">:</span> <span class="mi">10</span>
+<span class="p">{</span><span class="s">'페이지'</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s">'순위'</span><span class="p">:</span> <span class="s">'195'</span><span class="p">}</span>
 </code></pre></div></div>
 <p><br /><br /></p>
 
-<h2 id="2-설명">2. 설명</h2>
+<h2 id="설명">설명</h2>
 
 <p><br />
 온라인 저지 문제에 익숙하지 않았을 때는 단순히 문제를 푸는 것에 의미를 두었다. 어느 정도 문제를 푸는 것에 적응이 된 만큼, 이제 부터는 효율성을 고려한 코드를 작성하기 위해 노력해야 된다고 생각한다.온라인 저지에서 내 코드의 질을 판단하는 방법은 바로 순위를 확인하는 것이다. 실행 시간, 메모리의 효율적인 사용을 고민하며 순위를 높이는 것도 나름의 쾌감이 있다. 이 과정에서 다른 사람의 코드를 보면서 항상 새로운 방법의 풀이가 있음을 알게 된다. 다른 사람의 풀이를 참고하면서 다양하게 생각하는 방법과 어떤 경우에 어떤 라이브러리나 메소드를 쓰면 효과적인지 배울 수 있다.</p>
@@ -263,32 +301,42 @@ def getList(question_num,lan_code,my_id):
             </h1>
 
             <span class="post-date">23 Nov 2018</span>
-
+            
+            
+              
+                <span class="badge badge-dark">Programming language</span>
+              
+            
+              
+                <span class="badge badge-dark">Python</span>
+              
+            
+            
             <hr />
 
-<h2 id="1call-by-reference-call-by-value란">1.Call by reference, Call by value란</h2>
+<h2 id="call-by-reference-call-by-value란"><strong>Call by reference, Call by value란</strong></h2>
+<p><br />
+함수의 호출 방법에는 크게 <strong>Call by reference</strong>와 <strong>Call by value</strong> 두 가지의 방식이 있습니다. Python의 경우를 살펴보기 전에 먼저 두가지 함수호출 방법 개념에 대해 간단히 살펴보겠습니다.  pointer의 개념을 처음 배울 때 주로 사용하는 c언어로 코드를 작성했습니다.</p>
 
-<p>함수의 호출 방법에는 크게 <strong>Call by reference</strong>와 <strong>Call by value</strong> 두 가지의 방식이 있습니다. Python의 경우를 살펴보기 전에 먼저 두가지 함수호출 방법 개념에 대해 간단히 살펴보겠습니다.  pointer의 개념을 처음 배울 때 주로 사용하는 c언어로 코드를 작성했습니다.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">void</span> <span class="n">fun</span> <span class="p">(</span><span class="nb">int</span> <span class="n">a</span><span class="p">){</span>
+  <span class="n">a</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">a</span><span class="p">);</span>
+<span class="p">}</span>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>void fun (int a){
-  a = 0;
-  printf("%d\n",a);
-}
+<span class="nb">int</span> <span class="n">main</span> <span class="p">()</span> <span class="p">{</span>
 
-int main () {
+  <span class="nb">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+  <span class="n">printf</span> <span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">a</span><span class="p">);</span>
+  <span class="n">fun</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">a</span><span class="p">);</span>
 
-  int a = 10;
-  printf ("%d\n",a);
-  fun(a);
-  printf("%d\n",a);
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
 
-  return 0;
-}
-
--&gt;
-10
-0
-10
+<span class="o">-&gt;</span>
+<span class="mi">10</span>
+<span class="mi">0</span>
+<span class="mi">10</span>
 </code></pre></div></div>
 <p><br /></p>
 
@@ -296,23 +344,23 @@ int main () {
 
 <p><br /></p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>void fun (int *a){
-  *a = 0;
-}
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">void</span> <span class="n">fun</span> <span class="p">(</span><span class="nb">int</span> <span class="o">*</span><span class="n">a</span><span class="p">){</span>
+  <span class="o">*</span><span class="n">a</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
 
-int main () {
+<span class="nb">int</span> <span class="n">main</span> <span class="p">()</span> <span class="p">{</span>
   
-  int a = 10;
-  printf ("%d\n",a);
-  fun(&amp;a);
-  printf("%d\n",a);
+  <span class="nb">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+  <span class="n">printf</span> <span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">a</span><span class="p">);</span>
+  <span class="n">fun</span><span class="p">(</span><span class="o">&amp;</span><span class="n">a</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">a</span><span class="p">);</span>
 
-  return 0;
-}
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
 
--&gt;
-10
-0
+<span class="o">-&gt;</span>
+<span class="mi">10</span>
+<span class="mi">0</span>
 </code></pre></div></div>
 
 <p><br /></p>
@@ -321,7 +369,7 @@ int main () {
 
 <p><br /><br /></p>
 
-<h2 id="2-python에서의-함수-호출">2. Python에서의 함수 호출</h2>
+<h2 id="python에서의-함수-호출"><strong>Python에서의 함수 호출</strong></h2>
 <p><br />
 먼저 이해하기 위해 가장 중요한 2가지 사실에 대해 정리해보자면,
 <br /><br /></p>
@@ -333,81 +381,83 @@ int main () {
 
 <p>위의 사실에 따라 함수에 Mutable과 Immutable 자료형 중 어느 것을 넘겨주는지를 구분할 수 있어야 합니다. 먼저 Mutable object를 넘겨주는 경우에 대해서 살펴보겠습니다.</p>
 
-<h3 id="--immutable">- Immutable</h3>
+<h3 id="immutable"><strong>Immutable</strong></h3>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def fun (a):
-  print (id (a))
+<p><br /></p>
 
-a = 12
-print (id (a))
-fun(a)
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">fun</span> <span class="p">(</span><span class="n">a</span><span class="p">):</span>
+  <span class="k">print</span> <span class="p">(</span><span class="nb">id</span> <span class="p">(</span><span class="n">a</span><span class="p">))</span>
 
--&gt;
-139845275445344
-139845275445344
+<span class="n">a</span> <span class="o">=</span> <span class="mi">12</span>
+<span class="k">print</span> <span class="p">(</span><span class="nb">id</span> <span class="p">(</span><span class="n">a</span><span class="p">))</span>
+<span class="n">fun</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+
+<span class="o">-&gt;</span>
+<span class="mi">139845275445344</span>
+<span class="mi">139845275445344</span>
 </code></pre></div></div>
 <p><br />
 위 코드를 통해 함수 안의 변수 a와 함수 안의 a는 동일한 obejct를 가리키고 있다는 것을 확인할 수 있습니다.</p>
 
 <p><br /></p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def fun (a):
-  a = 14
-  print (id(a))
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">fun</span> <span class="p">(</span><span class="n">a</span><span class="p">):</span>
+  <span class="n">a</span> <span class="o">=</span> <span class="mi">14</span>
+  <span class="k">print</span> <span class="p">(</span><span class="nb">id</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
 
-a = 12
-print (id (a))
-fun(a)
+<span class="n">a</span> <span class="o">=</span> <span class="mi">12</span>
+<span class="k">print</span> <span class="p">(</span><span class="nb">id</span> <span class="p">(</span><span class="n">a</span><span class="p">))</span>
+<span class="n">fun</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 
--&gt;
-140341591808096
-140341591808160
+<span class="o">-&gt;</span>
+<span class="mi">140341591808096</span>
+<span class="mi">140341591808160</span>
 </code></pre></div></div>
 
 <p><br />
 함수 안에서 parameter에 14라는 값을 할당했습니다. int는 Immutable 타입이기 때문에 a에 새롭게 생성된 객체 (14)의 reference값이 저장되었습니다. 그래서 함수 안에서 함수 밖에 있는 a Object의 값을 바꿀 수 없습니다. 다음은 Mutable의 경우에 대한 코드입니다.
 <br /><br /></p>
-<h3 id="-mutable">-Mutable</h3>
 
-<h3 id="데이터-추가">데이터 추가</h3>
+<h3 id="mutable"><strong>Mutable</strong></h3>
+
 <p><br /></p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def fun (a):
-  a.append('d')
-  print (a)
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">fun</span> <span class="p">(</span><span class="n">a</span><span class="p">):</span>
+  <span class="n">a</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s">'d'</span><span class="p">)</span>
+  <span class="k">print</span> <span class="p">(</span><span class="n">a</span><span class="p">)</span>
 
-a = ['a','b','c']
-print (a)
-fun(a)
-print (a)
+<span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="s">'a'</span><span class="p">,</span><span class="s">'b'</span><span class="p">,</span><span class="s">'c'</span><span class="p">]</span>
+<span class="k">print</span> <span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="n">fun</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="k">print</span> <span class="p">(</span><span class="n">a</span><span class="p">)</span>
 
--&gt;
-['a', 'b', 'c']
-['a', 'b', 'c', 'd']
-['a', 'b', 'c', 'd']
+<span class="o">-&gt;</span>
+<span class="p">[</span><span class="s">'a'</span><span class="p">,</span> <span class="s">'b'</span><span class="p">,</span> <span class="s">'c'</span><span class="p">]</span>
+<span class="p">[</span><span class="s">'a'</span><span class="p">,</span> <span class="s">'b'</span><span class="p">,</span> <span class="s">'c'</span><span class="p">,</span> <span class="s">'d'</span><span class="p">]</span>
+<span class="p">[</span><span class="s">'a'</span><span class="p">,</span> <span class="s">'b'</span><span class="p">,</span> <span class="s">'c'</span><span class="p">,</span> <span class="s">'d'</span><span class="p">]</span>
 </code></pre></div></div>
 
 <p><br />
 위의 코드에서 볼 수 있듯, 함수를 통해 함수 밖 a 변수 List에 새로운 요소를 추가했습니다. 이는 a 객체의 복사된 값이 전달된 것이 아니라, reference가 전달되었기 때문에 가능한 일입니다. 즉 Mutable의 경우는 함수 안에서 함수 밖 객체에 접근하여 값을 변경할 수 있습니다.<br />
 <br /><br /></p>
 
-<h3 id="reference변경">reference변경</h3>
+<h3 id="reference-변경"><strong>Reference 변경</strong></h3>
 
 <p><br /></p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def fun (a):
-  a = ['a','b','c','d']
-  print (a)
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">fun</span> <span class="p">(</span><span class="n">a</span><span class="p">):</span>
+  <span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="s">'a'</span><span class="p">,</span><span class="s">'b'</span><span class="p">,</span><span class="s">'c'</span><span class="p">,</span><span class="s">'d'</span><span class="p">]</span>
+  <span class="k">print</span> <span class="p">(</span><span class="n">a</span><span class="p">)</span>
 
-a = ['a','b','c']
-print (a)
-fun(a)
-print (a)
+<span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="s">'a'</span><span class="p">,</span><span class="s">'b'</span><span class="p">,</span><span class="s">'c'</span><span class="p">]</span>
+<span class="k">print</span> <span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="n">fun</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="k">print</span> <span class="p">(</span><span class="n">a</span><span class="p">)</span>
 
--&gt;
-['a', 'b', 'c']
-['a', 'b', 'c', 'd']
-['a', 'b', 'c']
+<span class="o">-&gt;</span>
+<span class="p">[</span><span class="s">'a'</span><span class="p">,</span> <span class="s">'b'</span><span class="p">,</span> <span class="s">'c'</span><span class="p">]</span>
+<span class="p">[</span><span class="s">'a'</span><span class="p">,</span> <span class="s">'b'</span><span class="p">,</span> <span class="s">'c'</span><span class="p">,</span> <span class="s">'d'</span><span class="p">]</span>
+<span class="p">[</span><span class="s">'a'</span><span class="p">,</span> <span class="s">'b'</span><span class="p">,</span> <span class="s">'c'</span><span class="p">]</span>
 </code></pre></div></div>
 
 <p><br /></p>
@@ -426,10 +476,20 @@ print (a)
             </h1>
 
             <span class="post-date">22 Nov 2018</span>
-
+            
+            
+              
+                <span class="badge badge-dark">Programming language</span>
+              
+            
+              
+                <span class="badge badge-dark">Python</span>
+              
+            
+            
             <hr />
 
-<h2 id="1-mutable-immutable-이란-">1. Mutable, Immutable 이란 ?</h2>
+<h2 id="mutable-immutable-이란-">Mutable, Immutable 이란 ?</h2>
 
 <p><br /></p>
 
@@ -442,46 +502,47 @@ print (a)
 <p><br />
 <br /></p>
 
-<h2 id="2-코드를-통한-차이-확인">2. 코드를 통한 차이 확인</h2>
+<h2 id="코드를-통한-차이-확인">코드를 통한 차이 확인</h2>
 <p><br /></p>
 
 <p>다음은 Mutable과 Immutable의 차이를 보여주는 Code이다.아래에서 사용된 <code class="language-plaintext highlighter-rouge">id()</code><strong>함수는 객체가 갖는 고유의 값(object가 저장된 메모리 값)을 반환한다.</strong> 파이썬의 모든 object는 value, type, identity(id)를 갖는다. 또한 Id는 객체가 생성될 때 부여되며 절대 변하지 않는 값이다.</p>
 
 <p><br /></p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>x = 10
-print (x)
-print (id(x))
-x += 1
-print (x)
-print (id(x))
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="k">print</span> <span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="k">print</span> <span class="p">(</span><span class="nb">id</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="n">x</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="k">print</span> <span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="k">print</span> <span class="p">(</span><span class="nb">id</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
 
 
--&gt; 
-10
-140242833553440
-11
-140242833553472
+<span class="o">-&gt;</span> 
+<span class="mi">10</span>
+<span class="mi">140242833553440</span>
+<span class="mi">11</span>
+<span class="mi">140242833553472</span>
 </code></pre></div></div>
+
 <p><br /></p>
 
 <p>위에서 출력 값에서 x의 id 값이 변경된 것을 확인할 수 있다. int는 immutable 이기 때문에 값을 바꿀 수 없으므로 11이라는 값을 담은 새로운 int 형 object가 만들어 진다. 그리고 이 obejct의 reference가 x에 대입된 것이다.</p>
 
 <p><br /></p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>y = ['a','b']
-print (y)
-print (id(y))
-y.append('c')
-print (y)
-print (id(y))
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="s">'a'</span><span class="p">,</span><span class="s">'b'</span><span class="p">]</span>
+<span class="k">print</span> <span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="k">print</span> <span class="p">(</span><span class="nb">id</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
+<span class="n">y</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s">'c'</span><span class="p">)</span>
+<span class="k">print</span> <span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="k">print</span> <span class="p">(</span><span class="nb">id</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
 
 
--&gt;
-['a', 'b']
-140242795187592
-['a', 'b', 'c']
-140242795187592
+<span class="o">-&gt;</span>
+<span class="p">[</span><span class="s">'a'</span><span class="p">,</span> <span class="s">'b'</span><span class="p">]</span>
+<span class="mi">140242795187592</span>
+<span class="p">[</span><span class="s">'a'</span><span class="p">,</span> <span class="s">'b'</span><span class="p">,</span> <span class="s">'c'</span><span class="p">]</span>
+<span class="mi">140242795187592</span>
 </code></pre></div></div>
 
 <p><br /></p>
@@ -491,30 +552,30 @@ print (id(y))
 <p><br />
 <br /></p>
 
-<h2 id="3-예외">3. 예외</h2>
+<h2 id="예외">예외</h2>
 <p><br /></p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>t = ('abc',[1,2,3])
-print (t[1])
-t[1].append(4)
-print (t[1])
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="s">'abc'</span><span class="p">,[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+<span class="k">print</span> <span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">append</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="k">print</span> <span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 
--&gt; 
-[1, 2, 3]
-[1, 2, 3, 4]
+<span class="o">-&gt;</span> 
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
 </code></pre></div></div>
 <p><br /></p>
 
 <p>위의 코드를 보면 Tuple 자료형 안 List에 정수 4가 추가된 것을 확인할 수 있다. 하지만 초반에 Tuple은 Immutable 자료형으로, 그 값을 변경할 수 없다고 한 것과 모순되는 결과라고 생각할 수 있다.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>t = ('abc',[1,2,3])
-print (t[0])
-t[0] = 'xyz'
-print (t[0])
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="s">'abc'</span><span class="p">,[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+<span class="k">print</span> <span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s">'xyz'</span>
+<span class="k">print</span> <span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 
--&gt; 
-TypeError: 'tuple' object does not support item assignment
-
+<span class="o">-&gt;</span> 
+<span class="nb">TypeError</span><span class="p">:</span> <span class="s">'tuple'</span> <span class="nb">object</span> <span class="n">does</span> <span class="ow">not</span> <span class="n">support</span> <span class="n">item</span> <span class="n">assignment</span>
 </code></pre></div></div>
 
 <p><br /></p>
@@ -523,19 +584,19 @@ TypeError: 'tuple' object does not support item assignment
 
 <p><br /></p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>t = ('ab','cd',[1,2,3])
-print(t)
-print(id(t[0]),id(t[1]),id(t[2]),sep=' ')
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="s">'ab'</span><span class="p">,</span><span class="s">'cd'</span><span class="p">,[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">id</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span><span class="nb">id</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span><span class="nb">id</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span><span class="n">sep</span><span class="o">=</span><span class="s">' '</span><span class="p">)</span>
 
-t[2].append(100)
-print(t)
-print(id(t[0]),id(t[1]),id(t[2]),sep=' ')
+<span class="n">t</span><span class="p">[</span><span class="mi">2</span><span class="p">].</span><span class="n">append</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">id</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span><span class="nb">id</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span><span class="nb">id</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span><span class="n">sep</span><span class="o">=</span><span class="s">' '</span><span class="p">)</span>
 
--&gt;
-('ab', 'cd', [1, 2, 3])
-139797887251320 139797887251880 139797883936392
-('ab', 'cd', [1, 2, 3, 100])
-139797887251320 139797887251880 139797883936392
+<span class="o">-&gt;</span>
+<span class="p">(</span><span class="s">'ab'</span><span class="p">,</span> <span class="s">'cd'</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="mi">139797887251320</span> <span class="mi">139797887251880</span> <span class="mi">139797883936392</span>
+<span class="p">(</span><span class="s">'ab'</span><span class="p">,</span> <span class="s">'cd'</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">100</span><span class="p">])</span>
+<span class="mi">139797887251320</span> <span class="mi">139797887251880</span> <span class="mi">139797883936392</span>
 </code></pre></div></div>
 
 <p><br /></p>

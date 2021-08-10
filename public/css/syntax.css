@@ -4,12 +4,12 @@
 .err { color: #AA0000; background-color: #FFAAAA } /* Error */
 .k { color: #006699; } /* Keyword */
 .o { color: #555555 } /* Operator */
-.cm { color: #0099FF; font-style: italic } /* Comment.Multiline */
+.cm { color: #0099FF;} /* Comment.Multiline */
 .cp { color: #009999 } /* Comment.Preproc */
 .c1 { color: #999; } /* Comment.Single */
 .cs { color: #999; } /* Comment.Special */
 .gd { background-color: #FFCCCC; border: 1px solid #CC0000 } /* Generic.Deleted */
-.ge { font-style: italic } /* Generic.Emph */
+.ge {  } /* Generic.Emph */
 .gr { color: #FF0000 } /* Generic.Error */
 .gh { color: #003300; } /* Generic.Heading */
 .gi { background-color: #CCFFCC; border: 1px solid #00CC00 } /* Generic.Inserted */
@@ -47,7 +47,7 @@
 .mo { color: #000000 } /* Literal.Number.Oct */
 .sb { color: #CC3300 } /* Literal.String.Backtick */
 .sc { color: #CC3300 } /* Literal.String.Char */
-.sd { color: #CC3300; font-style: italic } /* Literal.String.Doc */
+.sd { color: #CC3300;} /* Literal.String.Doc */
 .s2 { color: #CC3300 } /* Literal.String.Double */
 .se { color: #CC3300; } /* Literal.String.Escape */
 .sh { color: #CC3300 } /* Literal.String.Heredoc */

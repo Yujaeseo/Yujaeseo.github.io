@@ -15,11 +15,28 @@
     
   </title>
 
+  <!-- BOOTSTRAP -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+  <!-- CODE BLOCK FONT -->
+  <link href="http://cdn.jsdelivr.net/gh/joungkyun/font-d2coding/d2coding.css" rel="stylesheet" type="text/css">
+
+  <!-- SCROLLSPY-->
+  <script src="https://unpkg.com/scrollnav@3.0.2/dist/scrollnav.min.umd.js"></script>
+  <link rel="stylesheet" href="/assets/css/style.css">
+
+  
   <!-- CSS -->
   <link rel="stylesheet" href="/public/css/poole.css">
   <link rel="stylesheet" href="/public/css/syntax.css">
   <link rel="stylesheet" href="/public/css/lanyon.css">
   <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700|PT+Sans:400">
+
+    <!-- syntax.css -->
+  <link rel="stylesheet" href="/assets/css/syntax.css">
 
   <!-- font -->
   <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -71,7 +88,7 @@
   </div>
 
   <nav class="sidebar-nav">
-    <a class="sidebar-nav-item" href="/">Home</a>
+    <a class="sidebar-nav-item" href="/">Home <small class="text-info">8</small></a>
 
     
 
@@ -92,6 +109,20 @@
       
     
       
+    
+      
+        
+          <a class="sidebar-nav-item" href="/category/Algorithm/index.html">Algorithm</a>
+        
+      
+    
+      
+        
+          <a class="sidebar-nav-item" href="/category/Mongodb/index.html">Mongodb</a>
+        
+      
+    
+      
         
           <a class="sidebar-nav-item" href="/category/OpenCL/index.html">OpenCL</a>
         
@@ -99,43 +130,36 @@
     
       
         
-          <a class="sidebar-nav-item" href="/category/algorithm/index.html">algorithm</a>
+          <a class="sidebar-nav-item" href="/category/Python/index.html">Python</a>
         
       
     
       
         
-      
-    
-      
-        
-          <a class="sidebar-nav-item" href="/category/mongodb/index.html">mongodb</a>
+          <a class="sidebar-nav-item" href="/category/Spark/index.html">Spark</a>
         
       
     
       
-        
-          <a class="sidebar-nav-item" href="/category/python/index.html">python</a>
-        
-      
-    
-      
-        
-          <a class="sidebar-nav-item" href="/category/react/index.html">react</a>
         
       
     
  -->
     
-      <a class="sidebar-nav-item" href="/category/algorithm/index.html">algorithm</a>
+      <a class = "sidebar-nav-item " href="/category/Algorithm/index.html">Algorithm <small class="text-info">2</small></a>  
+    <!--<a class="sidebar-nav-item" href="/category/Algorithm/index.html">Algorithm</a>  <small class="text-muted">2</small>-->
     
-      <a class="sidebar-nav-item" href="/category/python/index.html">python</a>
+      <a class = "sidebar-nav-item " href="/category/Python/index.html">Python <small class="text-info">3</small></a>  
+    <!--<a class="sidebar-nav-item" href="/category/Python/index.html">Python</a>  <small class="text-muted">3</small>-->
     
-      <a class="sidebar-nav-item" href="/category/react/index.html">react</a>
+      <a class = "sidebar-nav-item " href="/category/Mongodb/index.html">Mongodb <small class="text-info">1</small></a>  
+    <!--<a class="sidebar-nav-item" href="/category/Mongodb/index.html">Mongodb</a>  <small class="text-muted">1</small>-->
     
-      <a class="sidebar-nav-item" href="/category/mongodb/index.html">mongodb</a>
+      <a class = "sidebar-nav-item " href="/category/OpenCL/index.html">OpenCL <small class="text-info">1</small></a>  
+    <!--<a class="sidebar-nav-item" href="/category/OpenCL/index.html">OpenCL</a>  <small class="text-muted">1</small>-->
     
-      <a class="sidebar-nav-item" href="/category/OpenCL/index.html">OpenCL</a>
+      <a class = "sidebar-nav-item " href="/category/Spark/index.html">Spark <small class="text-info">1</small></a>  
+    <!--<a class="sidebar-nav-item" href="/category/Spark/index.html">Spark</a>  <small class="text-muted">1</small>-->
     
     
 <!--
@@ -171,10 +195,19 @@
 
   <h1 class="post-title">MongoDB replset으로 변환</h1>
   <span class="post-date">21 Feb 2019</span>
-  <hr />
+  
+    
+      
+        <span class="badge badge-dark">Database</span>
+      
+    
+  
+  <article id="main-content" class="main-content">
+    <hr />
 
 <p><br /><br /></p>
-<h2 id="1-도입-">1. 도입 :</h2>
+
+<h2 id="도입-">도입 :</h2>
 <p><br /></p>
 
 <p>MongoDB 3.6 version 이후 도입된 <strong>Change Stream</strong> 기능은 DB의 변경 사항을 real time으로 관찰할 수 있게 해준다. 즉 프로그램은 Change Stream을 통해서
@@ -186,7 +219,7 @@ DB의 변화를 감지하고 그에 따른 Response를 할 수 있다. 단일 Co
 
 <p><br /><br /></p>
 
-<h2 id="2-instance-replica-set으로-변경생성하기">2. Instance Replica Set으로 변경/생성하기</h2>
+<h2 id="instance-replica-set으로-변경생성하기">Instance Replica Set으로 변경/생성하기</h2>
 
 <p><br /></p>
 
@@ -214,7 +247,7 @@ db.shutdownServer()
 
 <p><br /><br /></p>
 
-<h2 id="3-service로-변경한-instance-실행하기">3. Service로 변경한 Instance 실행하기</h2>
+<h2 id="service로-변경한-instance-실행하기">Service로 변경한 Instance 실행하기</h2>
 
 <p><br /></p>
 
@@ -269,7 +302,7 @@ net start MongoDB
 
 <p><br /><br /></p>
 
-<h2 id="4-추가내용">4. 추가내용</h2>
+<h2 id="추가내용">추가내용</h2>
 
 <p><br /></p>
 
@@ -280,6 +313,8 @@ net start MongoDB
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>new Mongo("mongodb://localhost:27017/demo?replicaSet=rs0");
 </code></pre></div></div>
 
+
+  </article>
 
 </div>
 
@@ -307,9 +342,9 @@ net start MongoDB
     
       <li>
         <h3>
-          <a href="/python/2018/11/29/baekjoonCrawling/">
-            python 백준 코드순위 확인 프로그램
-            <small>29 Nov 2018</small>
+          <a href="/algorithm/2018/11/28/%EB%B0%B1%EC%A4%804811/">
+            백준(4811) 알약
+            <small>28 Nov 2018</small>
           </a>
         </h3>
       </li>
@@ -335,7 +370,25 @@ net start MongoDB
       s.setAttribute('data-timestamp', +new Date());
       (d.head || d.body).appendChild(s);
       })();
-  </script>
+
+
+    const content = document.querySelector(".main-content");
+    scrollnav.init(content,{
+      debug: false,
+      easingStyle: 'easeOutQuint',
+      sections: ($('.post-content > h1').length>0) ? 'h1' : 'h2',
+      subSections: ($('.post-content > h1').length>0) ? 'h2' : 'h3',
+    });
+
+    var sideNav = function(){
+      var mainRect = document.getElementById('main-content').getBoundingClientRect();
+      $('nav.scroll-nav').css('left', mainRect.right + 50 + 'px');
+    }
+
+    sideNav();
+    window.addEventListener("resize", sideNav);
+
+</script>
   <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 
 
