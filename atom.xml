@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
  <title>Yu's Tech 블로그</title>
- <link href="http://localhost:4000/atom.xml" rel="self"/>
- <link href="http://localhost:4000/"/>
- <updated>2021-08-13T16:46:15+09:00</updated>
- <id>http://localhost:4000</id>
+ <link href="http://yujaeseo.github.io/atom.xml" rel="self"/>
+ <link href="http://yujaeseo.github.io/"/>
+ <updated>2021-08-13T16:53:49+09:00</updated>
+ <id>http://yujaeseo.github.io</id>
  <author>
    <name>Jaeseo Yu</name>
    <email></email>
@@ -14,9 +14,9 @@
  
  <entry>
    <title>CNN (Convolutional Neural Networks)에 대한 기본적인 내용 정리</title>
-   <link href="http://localhost:4000/deep%20learning/2021/08/13/About-CNN/"/>
+   <link href="http://yujaeseo.github.io/deep%20learning/2021/08/13/About-CNN/"/>
    <updated>2021-08-13T00:00:00+09:00</updated>
-   <id>http://localhost:4000/deep%20learning/2021/08/13/About CNN</id>
+   <id>http://yujaeseo.github.io/deep%20learning/2021/08/13/About CNN</id>
    <content type="html">&lt;hr /&gt;
 
 &lt;h2 id=&quot;cnn-convolutional-neural-networks-이란&quot;&gt;&lt;strong&gt;CNN (Convolutional Neural Networks) 이란?&lt;/strong&gt;&lt;/h2&gt;
@@ -112,9 +112,9 @@
  
  <entry>
    <title>Introduction to Spark</title>
-   <link href="http://localhost:4000/spark/2021/03/22/Introduction-to-spark/"/>
+   <link href="http://yujaeseo.github.io/spark/2021/03/22/Introduction-to-spark/"/>
    <updated>2021-03-22T00:00:00+09:00</updated>
-   <id>http://localhost:4000/spark/2021/03/22/Introduction to spark</id>
+   <id>http://yujaeseo.github.io/spark/2021/03/22/Introduction to spark</id>
    <content type="html">&lt;hr /&gt;
 
 &lt;h2 id=&quot;apache-spark란&quot;&gt;Apache Spark란&lt;/h2&gt;
@@ -139,9 +139,9 @@
  
  <entry>
    <title>OpenCL과 4가지 모델</title>
-   <link href="http://localhost:4000/opencl/2019/08/30/OpenCL%EC%9D%B4%EB%9E%80/"/>
+   <link href="http://yujaeseo.github.io/opencl/2019/08/30/OpenCL%EC%9D%B4%EB%9E%80/"/>
    <updated>2019-08-30T00:00:00+09:00</updated>
-   <id>http://localhost:4000/opencl/2019/08/30/ OpenCL이란</id>
+   <id>http://yujaeseo.github.io/opencl/2019/08/30/ OpenCL이란</id>
    <content type="html">&lt;hr /&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
@@ -294,9 +294,9 @@ post();
  
  <entry>
    <title>MongoDB replset으로 변환</title>
-   <link href="http://localhost:4000/mongodb/2019/02/21/MongoDB-replset%EC%9C%BC%EB%A1%9C-%EB%B3%80%ED%99%98/"/>
+   <link href="http://yujaeseo.github.io/mongodb/2019/02/21/MongoDB-replset%EC%9C%BC%EB%A1%9C-%EB%B3%80%ED%99%98/"/>
    <updated>2019-02-21T00:00:00+09:00</updated>
-   <id>http://localhost:4000/mongodb/2019/02/21/MongoDB replset으로 변환</id>
+   <id>http://yujaeseo.github.io/mongodb/2019/02/21/MongoDB replset으로 변환</id>
    <content type="html">&lt;hr /&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
@@ -412,9 +412,9 @@ net start MongoDB
  
  <entry>
    <title>Python 백준 코드순위 확인 프로그램</title>
-   <link href="http://localhost:4000/python/2018/11/29/baekjoonCrawling/"/>
+   <link href="http://yujaeseo.github.io/python/2018/11/29/baekjoonCrawling/"/>
    <updated>2018-11-29T00:00:00+09:00</updated>
-   <id>http://localhost:4000/python/2018/11/29/baekjoonCrawling</id>
+   <id>http://yujaeseo.github.io/python/2018/11/29/baekjoonCrawling</id>
    <content type="html">&lt;hr /&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
@@ -495,9 +495,9 @@ net start MongoDB
  
  <entry>
    <title>백준(4811) 알약</title>
-   <link href="http://localhost:4000/algorithm/2018/11/28/%EB%B0%B1%EC%A4%804811/"/>
+   <link href="http://yujaeseo.github.io/algorithm/2018/11/28/%EB%B0%B1%EC%A4%804811/"/>
    <updated>2018-11-28T00:00:00+09:00</updated>
-   <id>http://localhost:4000/algorithm/2018/11/28/백준4811</id>
+   <id>http://yujaeseo.github.io/algorithm/2018/11/28/백준4811</id>
    <content type="html">&lt;hr /&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
@@ -569,9 +569,9 @@ F(N-1,M+1) + F(N,M-1), &amp;amp; \text{if $N &amp;gt; 0$ and $M &amp;gt; 0$}
  
  <entry>
    <title>Python call by reference, call by value에 대해</title>
-   <link href="http://localhost:4000/python/2018/11/23/python2/"/>
+   <link href="http://yujaeseo.github.io/python/2018/11/23/python2/"/>
    <updated>2018-11-23T00:00:00+09:00</updated>
-   <id>http://localhost:4000/python/2018/11/23/python2</id>
+   <id>http://yujaeseo.github.io/python/2018/11/23/python2</id>
    <content type="html">&lt;hr /&gt;
 
 &lt;h2 id=&quot;call-by-reference-call-by-value란&quot;&gt;&lt;strong&gt;Call by reference, Call by value란&lt;/strong&gt;&lt;/h2&gt;
@@ -730,9 +730,9 @@ F(N-1,M+1) + F(N,M-1), &amp;amp; \text{if $N &amp;gt; 0$ and $M &amp;gt; 0$}
  
  <entry>
    <title>Python Mutable, Immutable 비교</title>
-   <link href="http://localhost:4000/python/2018/11/22/Python1/"/>
+   <link href="http://yujaeseo.github.io/python/2018/11/22/Python1/"/>
    <updated>2018-11-22T00:00:00+09:00</updated>
-   <id>http://localhost:4000/python/2018/11/22/Python1</id>
+   <id>http://yujaeseo.github.io/python/2018/11/22/Python1</id>
    <content type="html">&lt;hr /&gt;
 
 &lt;h2 id=&quot;mutable-immutable-이란-&quot;&gt;Mutable, Immutable 이란 ?&lt;/h2&gt;
@@ -856,9 +856,9 @@ F(N-1,M+1) + F(N,M-1), &amp;amp; \text{if $N &amp;gt; 0$ and $M &amp;gt; 0$}
  
  <entry>
    <title>백준(1157) 단어공부</title>
-   <link href="http://localhost:4000/algorithm/2018/11/18/%EB%B0%B1%EC%A4%801157/"/>
+   <link href="http://yujaeseo.github.io/algorithm/2018/11/18/%EB%B0%B1%EC%A4%801157/"/>
    <updated>2018-11-18T00:00:00+09:00</updated>
-   <id>http://localhost:4000/algorithm/2018/11/18/백준1157</id>
+   <id>http://yujaeseo.github.io/algorithm/2018/11/18/백준1157</id>
    <content type="html">&lt;hr /&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
