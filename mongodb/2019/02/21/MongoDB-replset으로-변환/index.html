@@ -88,7 +88,7 @@
   </div>
 
   <nav class="sidebar-nav">
-    <a class="sidebar-nav-item" href="/">Home <small class="text-info">8</small></a>
+    <a class="sidebar-nav-item" href="/">Home <small class="text-info">9</small></a>
 
     
 
@@ -113,6 +113,12 @@
       
         
           <a class="sidebar-nav-item" href="/category/Algorithm/index.html">Algorithm</a>
+        
+      
+    
+      
+        
+          <a class="sidebar-nav-item" href="/category/Deep%20learning/index.html">Deep learning</a>
         
       
     
@@ -160,6 +166,9 @@
     
       <a class = "sidebar-nav-item " href="/category/Spark/index.html">Spark <small class="text-info">1</small></a>  
     <!--<a class="sidebar-nav-item" href="/category/Spark/index.html">Spark</a>  <small class="text-muted">1</small>-->
+    
+      <a class = "sidebar-nav-item " href="/category/Deep learning/index.html">Deep learning <small class="text-info">1</small></a>  
+    <!--<a class="sidebar-nav-item" href="/category/Deep learning/index.html">Deep learning</a>  <small class="text-muted">1</small>-->
     
     
 <!--
@@ -342,9 +351,9 @@ net start MongoDB
     
       <li>
         <h3>
-          <a href="/algorithm/2018/11/28/%EB%B0%B1%EC%A4%804811/">
-            백준(4811) 알약
-            <small>28 Nov 2018</small>
+          <a href="/deep%20learning/2021/08/13/About-CNN/">
+            CNN (Convolutional Neural Networks)에 대한 기본적인 내용 정리
+            <small>13 Aug 2021</small>
           </a>
         </h3>
       </li>
@@ -373,11 +382,12 @@ net start MongoDB
 
 
     const content = document.querySelector(".main-content");
+
     scrollnav.init(content,{
       debug: false,
       easingStyle: 'easeOutQuint',
       sections: ($('.post-content > h1').length>0) ? 'h1' : 'h2',
-      subSections: ($('.post-content > h1').length>0) ? 'h2' : 'h3',
+      subSections: ($('.post-content > h1').length>0) ? 'h2' : 'h3'
     });
 
     var sideNav = function(){

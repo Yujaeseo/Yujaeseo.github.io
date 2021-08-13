@@ -88,7 +88,7 @@
   </div>
 
   <nav class="sidebar-nav">
-    <a class="sidebar-nav-item" href="/">Home <small class="text-info">8</small></a>
+    <a class="sidebar-nav-item" href="/">Home <small class="text-info">9</small></a>
 
     
 
@@ -113,6 +113,12 @@
       
         
           <a class="sidebar-nav-item" href="/category/Algorithm/index.html">Algorithm</a>
+        
+      
+    
+      
+        
+          <a class="sidebar-nav-item" href="/category/Deep%20learning/index.html">Deep learning</a>
         
       
     
@@ -160,6 +166,9 @@
     
       <a class = "sidebar-nav-item " href="/category/Spark/index.html">Spark <small class="text-info">1</small></a>  
     <!--<a class="sidebar-nav-item" href="/category/Spark/index.html">Spark</a>  <small class="text-muted">1</small>-->
+    
+      <a class = "sidebar-nav-item " href="/category/Deep learning/index.html">Deep learning <small class="text-info">1</small></a>  
+    <!--<a class="sidebar-nav-item" href="/category/Deep learning/index.html">Deep learning</a>  <small class="text-muted">1</small>-->
     
     
 <!--
@@ -365,6 +374,15 @@ post();
     
       <li>
         <h3>
+          <a href="/deep%20learning/2021/08/13/About-CNN/">
+            CNN (Convolutional Neural Networks)에 대한 기본적인 내용 정리
+            <small>13 Aug 2021</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
           <a href="/python/2018/11/23/python2/">
             Python call by reference, call by value에 대해
             <small>23 Nov 2018</small>
@@ -377,15 +395,6 @@ post();
           <a href="/python/2018/11/22/Python1/">
             Python Mutable, Immutable 비교
             <small>22 Nov 2018</small>
-          </a>
-        </h3>
-      </li>
-    
-      <li>
-        <h3>
-          <a href="/mongodb/2019/02/21/MongoDB-replset%EC%9C%BC%EB%A1%9C-%EB%B3%80%ED%99%98/">
-            MongoDB replset으로 변환
-            <small>21 Feb 2019</small>
           </a>
         </h3>
       </li>
@@ -414,11 +423,12 @@ post();
 
 
     const content = document.querySelector(".main-content");
+
     scrollnav.init(content,{
       debug: false,
       easingStyle: 'easeOutQuint',
       sections: ($('.post-content > h1').length>0) ? 'h1' : 'h2',
-      subSections: ($('.post-content > h1').length>0) ? 'h2' : 'h3',
+      subSections: ($('.post-content > h1').length>0) ? 'h2' : 'h3'
     });
 
     var sideNav = function(){

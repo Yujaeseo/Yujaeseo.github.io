@@ -549,3 +549,15 @@ a.pagination-item:hover {
 .theme-base-0f .related-posts li a:hover {
   color: #8f5536;
 }
+
+/*Center align img*/
+.align-center{
+  display: block;
+  margin: auto;
+}
+
+img + em{
+  text-align: center;
+  display: block;
+  font-size: .8rem;
+}
