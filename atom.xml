@@ -4,7 +4,7 @@
  <title>Yu's Tech 블로그</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2021-09-17T01:38:22+09:00</updated>
+ <updated>2021-09-17T01:41:39+09:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Jaeseo Yu</name>
@@ -41,28 +41,28 @@
 &lt;h3 id=&quot;lower-bound&quot;&gt;&lt;strong&gt;Lower bound&lt;/strong&gt;&lt;/h3&gt;
 &lt;p&gt;Lower bound는 특정 값(key)보다 크거나 같은 값의 첫번째 위치를 나타낸다. lower bound 값을 찾기 위해서 binary search와 같이 탐색 공간을 반복적으로 절반씩 줄여 나간다. 이때 주의해야 할 것은 탐색 공간을 줄일 때 right와 left의 값을 어떻게 설정하는 지이다. key 값보다 mid 위치의 값이 크거나 같은 경우 lower bound는 mid의 왼편에 존재하게 되는데, 이때 mid가 lower bound가 될 수 있기 때문에, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;right = mid&lt;/code&gt;로 설정해준다. 반면에 key 값이 mid 위치의 값 보다 큰 경우, mid가 lower bound가 될 가능성이 없기 때문에 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;left = mid + 1&lt;/code&gt;으로 설정한다. 이러한 과정을 lower &amp;lt; right 조건이 만족하는 경우에 한해 반복하고, loop가 끝나면 left 값을 반환하게 된다.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/img/Baekjoon-10816/Lower-bound1.png&quot; alt=&quot;image&quot; width=&quot;85%&quot; height=&quot;70%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/img/Baekjoon-10816/Lower-bound1.PNG&quot; alt=&quot;image&quot; width=&quot;85%&quot; height=&quot;70%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/img/Baekjoon-10816/Lower-bound2.png&quot; alt=&quot;image&quot; width=&quot;85%&quot; height=&quot;70%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/img/Baekjoon-10816/Lower-bound2.PNG&quot; alt=&quot;image&quot; width=&quot;85%&quot; height=&quot;70%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/img/Baekjoon-10816/Lower-bound3.png&quot; alt=&quot;image&quot; width=&quot;85%&quot; height=&quot;70%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/img/Baekjoon-10816/Lower-bound3.PNG&quot; alt=&quot;image&quot; width=&quot;85%&quot; height=&quot;70%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/img/Baekjoon-10816/Lower-bound4.png&quot; alt=&quot;image&quot; width=&quot;85%&quot; height=&quot;70%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/img/Baekjoon-10816/Lower-bound4.PNG&quot; alt=&quot;image&quot; width=&quot;85%&quot; height=&quot;70%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/img/Baekjoon-10816/Lower-bound5.png&quot; alt=&quot;image&quot; width=&quot;85%&quot; height=&quot;70%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/img/Baekjoon-10816/Lower-bound5.PNG&quot; alt=&quot;image&quot; width=&quot;85%&quot; height=&quot;70%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;upper-bound&quot;&gt;&lt;strong&gt;Upper bound&lt;/strong&gt;&lt;/h3&gt;
 &lt;p&gt;Upper bound는 특정 값(key)보다 큰 값이 처음으로 나오는 위치를 나타낸다. 만약 key 값이 mid 위치의 값보다 작은 경우 mid가 upper bound가 될 수 있으므로, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;right = mid&lt;/code&gt;로 설정한다. 반면에 key 값이 mid 위치 값보다 크거나 같은 경우, mid가 upper bound가 될 수 없기 때문에 left를 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mid + 1&lt;/code&gt;으로 설정한다.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/img/Baekjoon-10816/Upper-bound1.png&quot; alt=&quot;image&quot; width=&quot;85%&quot; height=&quot;70%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/img/Baekjoon-10816/Upper-bound1.PNG&quot; alt=&quot;image&quot; width=&quot;85%&quot; height=&quot;70%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/img/Baekjoon-10816/Upper-bound2.png&quot; alt=&quot;image&quot; width=&quot;85%&quot; height=&quot;70%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/img/Baekjoon-10816/Upper-bound2.PNG&quot; alt=&quot;image&quot; width=&quot;85%&quot; height=&quot;70%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/img/Baekjoon-10816/Upper-bound3.png&quot; alt=&quot;image&quot; width=&quot;85%&quot; height=&quot;70%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/img/Baekjoon-10816/Upper-bound3.PNG&quot; alt=&quot;image&quot; width=&quot;85%&quot; height=&quot;70%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/img/Baekjoon-10816/Upper-bound4.png&quot; alt=&quot;image&quot; width=&quot;85%&quot; height=&quot;70%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/img/Baekjoon-10816/Upper-bound4.PNG&quot; alt=&quot;image&quot; width=&quot;85%&quot; height=&quot;70%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
