@@ -11,7 +11,7 @@
 
   <title>
     
-      Algorithm &middot; Yu's Tech 블로그
+      백준(10816) - 숫자 카드2 &middot; Yu's Tech 블로그
     
   </title>
 
@@ -112,7 +112,7 @@
     
       
         
-          <a class="sidebar-nav-item active" href="/category/Algorithm/index.html">Algorithm</a>
+          <a class="sidebar-nav-item" href="/category/Algorithm/index.html">Algorithm</a>
         
       
     
@@ -150,8 +150,6 @@
         
       
     
-      
-    
  -->
     
       <a class = "sidebar-nav-item " href="/category/Python/index.html">Python <small class="text-info">3</small></a>  
@@ -163,8 +161,8 @@
       <a class = "sidebar-nav-item " href="/category/Spark/index.html">Spark <small class="text-info">1</small></a>  
     <!--<a class="sidebar-nav-item" href="/category/Spark/index.html">Spark</a>  <small class="text-muted">1</small>-->
     
-      <a class = "sidebar-nav-item  active" href="/category/Algorithm/index.html">Algorithm <small class="text-info">3</small></a>  
-    <!--<a class="sidebar-nav-item" href="/category/Algorithm/index.html">Algorithm</a>  <small class="text-muted">3</small>-->
+      <a class = "sidebar-nav-item " href="/category/Algorithm/index.html">Algorithm <small class="text-info">3</small></a>  
+    <!--<a class="sidebar-nav-item active" href="/category/Algorithm/index.html">Algorithm</a>  <small class="text-muted">3</small>-->
     
       <a class = "sidebar-nav-item " href="/category/Deep learning/index.html">Deep learning <small class="text-info">1</small></a>  
     <!--<a class="sidebar-nav-item" href="/category/Deep learning/index.html">Deep learning</a>  <small class="text-muted">1</small>-->
@@ -202,33 +200,27 @@
       </div>
 
       <div class="container content">
-        <div class="posts">
-    
-    
-      <div class="post">
-            <h1 class="post-title">
-            <a href="/algorithm/2021/09/16/Baekjoon10816/">
-                백준(10816) - 숫자 카드2
-            </a>
-            </h1>
+        <div class="post">
 
-            <span class="post-date">16 Sep 2021</span>
-            
-            
-              
-                <span class="badge badge-dark">Algorithm</span>
-              
-            
-              
-                <span class="badge badge-dark">C++</span>
-              
-            
-              
-                <span class="badge badge-dark">Online judge</span>
-              
-            
-            
-            <hr />
+  <h1 class="post-title">백준(10816) - 숫자 카드2</h1>
+  <span class="post-date">16 Sep 2021</span>
+  
+    
+      
+        <span class="badge badge-dark">Algorithm</span>
+      
+    
+      
+        <span class="badge badge-dark">C++</span>
+      
+    
+      
+        <span class="badge badge-dark">Online judge</span>
+      
+    
+  
+  <article id="main-content" class="main-content">
+    <hr />
 
 <p><br /><br /></p>
 
@@ -349,192 +341,83 @@
 
 <p><br /><br /></p>
 
-        </div>
-  
-      <div class="post">
-            <h1 class="post-title">
-            <a href="/algorithm/2021/07/28/%EB%B0%B1%EC%A4%804811/">
-                백준(4811) 알약
-            </a>
-            </h1>
-
-            <span class="post-date">28 Jul 2021</span>
-            
-            
-              
-                <span class="badge badge-dark">Algorithm</span>
-              
-            
-              
-                <span class="badge badge-dark">Python</span>
-              
-            
-              
-                <span class="badge badge-dark">Online judge</span>
-              
-            
-            
-            <hr />
-
-<p><br /><br /></p>
-
-<h2 id="문제"><strong>문제</strong></h2>
-<p><br />
-<a href="https://www.acmicpc.net/problem/4811">백준 알약 문제(4811)</a></p>
-
-<p>문제를 요약하자면 먼저 병에는 N개의 알약이 존재한다. 하루에 반알씩 약을 복용해야 한다. 한 알 전체를 꺼낼 경우 반으로 쪼갠 후 나머지 조각을 병에 다시 넣고, 반 조각을 꺼낼 경우 그 약을 먹는다. 이때 한 조각을 꺼낼 경우 W, 반 조각을 꺼낼 경우 H를 종이에 기록한다. 2N일이 지났을 때 가능한 서로 다른 문자열의 개수를 구해야 한다.</p>
-
-<p><br /><br /></p>
-
-<h2 id="코드-python-3"><strong>코드 (Python 3)</strong></h2>
-<p><br /></p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">sys</span>
-<span class="nb">input</span><span class="o">=</span><span class="n">sys</span><span class="p">.</span><span class="n">stdin</span><span class="p">.</span><span class="n">readline</span>
-<span class="n">dp</span>  <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="mi">31</span> <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="mi">31</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">31</span><span class="p">)]</span>
-<span class="n">m</span> <span class="o">=</span> <span class="mi">30</span>
-
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">31</span><span class="p">):</span>
-  <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-      <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
-    <span class="k">else</span><span class="p">:</span>
-      <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> 
-  <span class="n">m</span><span class="o">-=</span><span class="mi">1</span>
-
-<span class="n">n</span> <span class="o">=</span> <span class="nb">int</span> <span class="p">(</span><span class="nb">input</span> <span class="p">())</span>
-<span class="k">while</span> <span class="n">n</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>  
-  <span class="k">print</span> <span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">n</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
-  <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span> <span class="p">(</span><span class="nb">input</span><span class="p">())</span>
-</code></pre></div></div>
-
-<p><br /><br /></p>
-
-<h2 id="풀이"><strong>풀이</strong></h2>
-<p><br />
-문제가 재귀호출을 사용하는 문제로 분류되어 있어, 처음에는 단순 재귀호출을 사용하여 문제를 해결하고자 했다. 먼저 $F(N,M)$ 는 알약 N 조각과 2등분 된 알약 M 조각이 있을 때 만들어지는 서로 다른 문자열의 개수라고 하자. 만약 알약 통에 각각 N,M 개의 알약이 존재한다면, 등분 되지 않은 알약을 꺼내는 경우와 조각 난 알약을 꺼내는 경우로 나눌 수 있다. 따라서 아래와 같은 점화식을 세울 수 있다. 
-<br /></p>
-
-\[F(N,M) = F(N-1,M+1) + F(N,M-1)\]
-
-<p><br />
-처음에는 위 식에 따라 몇가지 조건식을 넣고 recursion 코드를 구현했더니, 중복되는 계산이 많아서 주어진 시간 안에 문제를 풀 수 없을 것 같았다. 따라서 DP를 사용했고 그 중에 <code class="language-plaintext highlighter-rouge">Bottom-up</code> 방식으로 다시 문제를 풀게 되었다.</p>
-
-<p><br /></p>
-
-\[F(N,M) =
-\begin{cases}
-F(N-1,M+1),  &amp; \text{if $N &gt; 0$ and $M = 0 $}\\
-1, &amp; \text{if $N = 0$ and $M &gt; 0$} \\
-F(N-1,M+1) + F(N,M-1), &amp; \text{if $N &gt; 0$ and $M &gt; 0$}
-\end{cases}\]
-
-<p><br /></p>
-
-<p>위 식에 따라 2 X 2 배열을 생성하였고, 입력으로 N(30 이하 정수)이 주어질 때 마다 배열에서 해당 답인 DP[N][0] (나눠지지 않은 알약 N) 찾아서 출력하였다.<br />
-<br /></p>
-
-<h2 id="시간복잡도"><strong>시간복잡도</strong></h2>
-<p><br /></p>
-
-<p>테스트케이스 수와 상관 없이 2차원 배열을 생성해야 하기 때문에 시간복잡도는 $O(N^2)$이다.
-<br /><br /></p>
-
-
-        </div>
-  
-      <div class="post">
-            <h1 class="post-title">
-            <a href="/algorithm/2021/07/18/%EB%B0%B1%EC%A4%801157/">
-                백준(1157) 단어공부
-            </a>
-            </h1>
-
-            <span class="post-date">18 Jul 2021</span>
-            
-            
-              
-                <span class="badge badge-dark">Algorithm</span>
-              
-            
-              
-                <span class="badge badge-dark">Python</span>
-              
-            
-              
-                <span class="badge badge-dark">Online judge</span>
-              
-            
-            
-            <hr />
-
-<p><br /><br /></p>
-
-<h2 id="코드"><strong>코드</strong></h2>
-<p><br />
-python3 :</p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
-
-<span class="k">def</span> <span class="nf">main</span> <span class="p">():</span>
-
-    <span class="n">inpStr</span> <span class="o">=</span> <span class="nb">input</span><span class="p">().</span><span class="n">upper</span><span class="p">()</span>    
-    <span class="n">c</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">inpStr</span><span class="p">)</span>
-    
-    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">inpStr</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="n">inpStr</span><span class="p">)</span>
-        <span class="k">return</span> 
-    
-    <span class="c1"># O(n logk)
-</span>    <span class="n">res</span> <span class="o">=</span> <span class="n">c</span><span class="p">.</span><span class="n">most_common</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-    
-    <span class="k">if</span> <span class="n">res</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">res</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>  <span class="p">:</span> 
-        <span class="k">print</span> <span class="p">(</span><span class="s">'?'</span><span class="p">)</span>
-    <span class="k">else</span> <span class="p">:</span> 
-        <span class="k">print</span> <span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
-    
-    <span class="k">return</span>
-
-<span class="n">main</span><span class="p">()</span>
-</code></pre></div></div>
-<p><br /><br /></p>
-
-<h2 id="풀이"><strong>풀이</strong></h2>
-<p><br />
-Collections 패키지의 <code class="language-plaintext highlighter-rouge">most_common()</code> 메소드를 사용하여 풀이하였다. <code class="language-plaintext highlighter-rouge">Counter()</code>를 이용해 문자열의 알파벳과 빈도에 관한 정보를 담은 dictionary 자료형을 만든다. <code class="language-plaintext highlighter-rouge">most_common()</code> 메소드에 파라미터로 2를 주면 가장 빈도가 높은 두 개의 알파벳과 그에 대응하는 빈도수 정보를 담은 tuple list가 주어진다. 1,2위 단어의 발생 빈도가 같은 경우 가장 많이 사용된 알파벳이 여러개 존재하는 경우이므로 ‘?’를 출력한다. 그렇지 않은 경우 가장 빈도수가 높은 알파벳 대문자를 출력한다. 주의할 점은 문자열이 알파벳 하나로 이루어졌을 경우인데, 이 경우 허용된 인덱스 값을 벗어나므로 별도로 처리해야된다. 
-<br /><br /></p>
-
-<h2 id="시간복잡도"><strong>시간복잡도</strong></h2>
-<p><br /> 
--&gt; <code class="language-plaintext highlighter-rouge">most_common(k)</code>의 시간 복잡도가 O(n logk)이다.
-<br /><br /></p>
-
-<h2 id="참고자료"><strong>참고자료</strong></h2>
-<p><br />
-1) <code class="language-plaintext highlighter-rouge">most_common()</code> 시간복잡도
-<a href="https://stackoverflow.com/questions/29240807/python-collections-counter-most-common-complexity">https://stackoverflow.com/questions/29240807/python-collections-counter-most-common-complexity</a></p>
-
-<p>2) 위의 자료를 이해하기 위해선 <code class="language-plaintext highlighter-rouge">heapq</code>자료형의 구현 에 대해 알아야 한다.
-<a href="https://hg.python.org/cpython/file/2.7/Lib/heapq.py#l203">https://hg.python.org/cpython/file/2.7/Lib/heapq.py#l203</a></p>
-
-<p>3) <code class="language-plaintext highlighter-rouge">heapq.nlargest()</code>와 관련된 자료이다.
-<a href="https://stackoverflow.com/questions/38806202/whats-the-time-complexity-of-functions-in-heapq-library">https://stackoverflow.com/questions/38806202/whats-the-time-complexity-of-functions-in-heapq-library</a>
-<br /><br /></p>
-
-        </div>
-  
+  </article>
 
 </div>
-<div class="pagination">
+
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
     
-      <span class="pagination-item newer">New</span>
+      <li>
+        <h3>
+          <a href="/deep%20learning/2021/08/13/About-CNN/">
+            CNN (Convolutional Neural Networks)에 대한 기본적인 내용 정리
+            <small>13 Aug 2021</small>
+          </a>
+        </h3>
+      </li>
     
-  
+      <li>
+        <h3>
+          <a href="/algorithm/2021/07/28/%EB%B0%B1%EC%A4%804811/">
+            백준(4811) 알약
+            <small>28 Jul 2021</small>
+          </a>
+        </h3>
+      </li>
     
-      <span class="pagination-item older">Old</span>
+      <li>
+        <h3>
+          <a href="/python/2021/01/23/python2/">
+            Python call by reference, call by value에 대해
+            <small>23 Jan 2021</small>
+          </a>
+        </h3>
+      </li>
     
-  
-  </div>
+  </ul>
+</div>
+
+
+  <div id="disqus_thread"></div>
+  <script>
+      /**
+      *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+      *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+      /*
+      var disqus_config = function () {
+      this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+      this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+      };
+      */
+      (function() { // DON'T EDIT BELOW THIS LINE
+      var d = document, s = d.createElement('script');
+      s.src = 'https://yujaeseo-github-io.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+      })();
+
+
+    const content = document.querySelector(".main-content");
+
+    scrollnav.init(content,{
+      debug: false,
+      easingStyle: 'easeOutQuint',
+      sections: ($('.post-content > h1').length>0) ? 'h1' : 'h2',
+      subSections: ($('.post-content > h1').length>0) ? 'h2' : 'h3'
+    });
+
+    var sideNav = function(){
+      var mainRect = document.getElementById('main-content').getBoundingClientRect();
+      $('nav.scroll-nav').css('left', mainRect.right + 50 + 'px');
+    }
+
+    sideNav();
+    window.addEventListener("resize", sideNav);
+
+</script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 
 
       </div>

@@ -11,7 +11,7 @@
 
   <title>
     
-      OpenCL &middot; Yu's Tech 블로그
+      OpenCL과 4가지 모델 &middot; Yu's Tech 블로그
     
   </title>
 
@@ -130,7 +130,7 @@
     
       
         
-          <a class="sidebar-nav-item active" href="/category/OpenCL/index.html">OpenCL</a>
+          <a class="sidebar-nav-item" href="/category/OpenCL/index.html">OpenCL</a>
         
       
     
@@ -150,8 +150,6 @@
         
       
     
-      
-    
  -->
     
       <a class = "sidebar-nav-item " href="/category/Python/index.html">Python <small class="text-info">3</small></a>  
@@ -169,7 +167,7 @@
       <a class = "sidebar-nav-item " href="/category/Deep learning/index.html">Deep learning <small class="text-info">1</small></a>  
     <!--<a class="sidebar-nav-item" href="/category/Deep learning/index.html">Deep learning</a>  <small class="text-muted">1</small>-->
     
-      <a class = "sidebar-nav-item  active" href="/category/OpenCL/index.html">OpenCL <small class="text-info">1</small></a>  
+      <a class = "sidebar-nav-item " href="/category/OpenCL/index.html">OpenCL <small class="text-info">1</small></a>  
     <!--<a class="sidebar-nav-item" href="/category/OpenCL/index.html">OpenCL</a>  <small class="text-muted">1</small>-->
     
     
@@ -202,29 +200,23 @@
       </div>
 
       <div class="container content">
-        <div class="posts">
-    
-    
-      <div class="post">
-            <h1 class="post-title">
-            <a href="/opencl/2021/08/30/OpenCL%EC%9D%B4%EB%9E%80/">
-                OpenCL과 4가지 모델
-            </a>
-            </h1>
+        <div class="post">
 
-            <span class="post-date">30 Aug 2021</span>
-            
-            
-              
-                <span class="badge badge-dark">Parallel programming</span>
-              
-            
-              
-                <span class="badge badge-dark">OpenCL</span>
-              
-            
-            
-            <hr />
+  <h1 class="post-title">OpenCL과 4가지 모델</h1>
+  <span class="post-date">30 Aug 2021</span>
+  
+    
+      
+        <span class="badge badge-dark">Parallel programming</span>
+      
+    
+      
+        <span class="badge badge-dark">OpenCL</span>
+      
+    
+  
+  <article id="main-content" class="main-content">
+    <hr />
 
 <p><br /><br /></p>
 
@@ -372,20 +364,83 @@ post();
 </ul>
 
 
-        </div>
-  
+  </article>
 
 </div>
-<div class="pagination">
+
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
     
-      <span class="pagination-item newer">New</span>
+      <li>
+        <h3>
+          <a href="/deep%20learning/2021/08/13/About-CNN/">
+            CNN (Convolutional Neural Networks)에 대한 기본적인 내용 정리
+            <small>13 Aug 2021</small>
+          </a>
+        </h3>
+      </li>
     
-  
+      <li>
+        <h3>
+          <a href="/python/2021/01/23/python2/">
+            Python call by reference, call by value에 대해
+            <small>23 Jan 2021</small>
+          </a>
+        </h3>
+      </li>
     
-      <span class="pagination-item older">Old</span>
+      <li>
+        <h3>
+          <a href="/python/2021/01/22/Python1/">
+            Python Mutable, Immutable 비교
+            <small>22 Jan 2021</small>
+          </a>
+        </h3>
+      </li>
     
-  
-  </div>
+  </ul>
+</div>
+
+
+  <div id="disqus_thread"></div>
+  <script>
+      /**
+      *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+      *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+      /*
+      var disqus_config = function () {
+      this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+      this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+      };
+      */
+      (function() { // DON'T EDIT BELOW THIS LINE
+      var d = document, s = d.createElement('script');
+      s.src = 'https://yujaeseo-github-io.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+      })();
+
+
+    const content = document.querySelector(".main-content");
+
+    scrollnav.init(content,{
+      debug: false,
+      easingStyle: 'easeOutQuint',
+      sections: ($('.post-content > h1').length>0) ? 'h1' : 'h2',
+      subSections: ($('.post-content > h1').length>0) ? 'h2' : 'h3'
+    });
+
+    var sideNav = function(){
+      var mainRect = document.getElementById('main-content').getBoundingClientRect();
+      $('nav.scroll-nav').css('left', mainRect.right + 50 + 'px');
+    }
+
+    sideNav();
+    window.addEventListener("resize", sideNav);
+
+</script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 
 
       </div>
