@@ -88,7 +88,7 @@
   </div>
 
   <nav class="sidebar-nav">
-    <a class="sidebar-nav-item" href="/">Home <small class="text-info">11</small></a>
+    <a class="sidebar-nav-item" href="/">Home <small class="text-info">13</small></a>
 
     
 
@@ -119,6 +119,12 @@
       
         
           <a class="sidebar-nav-item active" href="/category/Deep%20learning/index.html">Deep learning</a>
+        
+      
+    
+      
+        
+          <a class="sidebar-nav-item" href="/category/Lecture/index.html">Lecture</a>
         
       
     
@@ -176,11 +182,17 @@
       <a class = "sidebar-nav-item " href="/category/Algorithm/index.html">Algorithm <small class="text-info">4</small></a>  
     <!--<a class="sidebar-nav-item" href="/category/Algorithm/index.html">Algorithm</a>  <small class="text-muted">4</small>-->
     
-      <a class = "sidebar-nav-item  active" href="/category/Deep learning/index.html">Deep learning <small class="text-info">1</small></a>  
-    <!--<a class="sidebar-nav-item" href="/category/Deep learning/index.html">Deep learning</a>  <small class="text-muted">1</small>-->
+      <a class = "sidebar-nav-item  active" href="/category/Deep learning/index.html">Deep learning <small class="text-info">2</small></a>  
+    <!--<a class="sidebar-nav-item" href="/category/Deep learning/index.html">Deep learning</a>  <small class="text-muted">2</small>-->
     
       <a class = "sidebar-nav-item " href="/category/OpenCL/index.html">OpenCL <small class="text-info">1</small></a>  
     <!--<a class="sidebar-nav-item" href="/category/OpenCL/index.html">OpenCL</a>  <small class="text-muted">1</small>-->
+    
+      <a class = "sidebar-nav-item " href="/category/Operating system/index.html">Operating system <small class="text-info">1</small></a>  
+    <!--<a class="sidebar-nav-item" href="/category/Operating system/index.html">Operating system</a>  <small class="text-muted">1</small>-->
+    
+      <a class = "sidebar-nav-item " href="/category/Lecture/index.html">Lecture <small class="text-info">1</small></a>  
+    <!--<a class="sidebar-nav-item" href="/category/Lecture/index.html">Lecture</a>  <small class="text-muted">1</small>-->
     
     
 <!--
@@ -192,7 +204,7 @@
 <!--
   <div class="sidebar-item">
     <p>
-      &copy; 2021. All rights reserved.
+      &copy; 2022. All rights reserved.
     </p>
   </div>
 -->
@@ -215,6 +227,118 @@
         <div class="posts">
     
     
+      <div class="post">
+            <h1 class="post-title">
+            <a href="/operating%20system/deep%20learning/2021/09/19/Multiprocess&multithread/">
+                Multithreading vs. Multiprocessing
+            </a>
+            </h1>
+
+            <span class="post-date">19 Sep 2021</span>
+            
+            
+              
+                <span class="badge badge-dark">Operating system</span>
+              
+            
+              
+                <span class="badge badge-dark">Parallel programming</span>
+              
+            
+            
+            <hr />
+
+<p><br /><br /></p>
+
+<h2 id="process"><strong>Process</strong></h2>
+
+<p><strong>프로세스는 실행중인 프로그램이다.</strong> 즉 프로그램 자체는 프로세스가 아니라, 프로그램이 메모리에 올라가서 실행중일 때 프로세스가 되는 것이다. 프로세스는 크게 5가지 영역(text, stack, data, heap, program counter)로 나눌 수 있다.</p>
+
+<ul>
+  <li>Text : Program code</li>
+  <li>Stack : Temporary data (function parameter, return addresses, local variables, etc)</li>
+  <li>Data : Static &amp; global variables</li>
+  <li>Heap : Dynamic allocation</li>
+  <li>Program counter &amp; registers : Current activity</li>
+</ul>
+
+<p><br />
+<img src="https://www.tutorialspoint.com/operating_system/images/process_components.jpg" alt="image" width="45%" height="45%" class="align-center" />
+<em>Figure 1. Process in memory (<a href="https://www.tutorialspoint.com/operating_system/os_processes.htm">source</a>)</em></p>
+
+<p><br /><br /></p>
+
+<h2 id="thread"><strong>Thread</strong></h2>
+
+<p><strong>Thread는 프로세스 내에서 실행되는 단위를 말한다.</strong> 일반적으로 한 프로세스는 하나의 스레드를 가지고 있지만, 프로그램 환경에 따라 둘 이상의 thread를 동시에 실행시킬 수 있다. 각 Thread는 program counter, register set, stack space를 별도로 지니고 있다. 반면, 각 thread는 프로세스 내 code, data, heap, file과 같은 operating system 자원을 공유하게 된다.</p>
+
+<p><br />
+<img src="https://www.tutorialspoint.com/operating_system/images/thread_processes.jpg" alt="image" width="90%" height="90%" class="align-center" />
+<em>Figure 2. Single thread vs Multithreads (<a href="https://www.tutorialspoint.com/operating_system/os_multi_threading.htm">source</a>)</em></p>
+
+<p><br /><br /></p>
+
+<h2 id="multithreading-multiprocessing-비교"><strong>Multithreading, multiprocessing 비교</strong></h2>
+<h3 id="multithreading--장점"><strong>Multithreading : 장점</strong></h3>
+<ul>
+  <li>Thread 간 Resource sharing이 가능하다.
+    <ul>
+      <li>동일 프로세스 내 thread 간 데이터를 공유할 수 있다. 만약 subset으로 나누기 어려운 대량의 데이터를 다뤄야 할 경우, 데이터를 복사하거나 shared memory 방식을 사용해서 프로세스 간 데이터를 전송 또는 공유해야 한다. 하지만 데이터 복사는 복사 시 추가 시간과 메모리를 소요하게 되며, shared memory의 경우에는 개발 시 고려해야 될 요소들이 많다.</li>
+    </ul>
+  </li>
+  <li>소요되는 자원이 더 적다.
+    <ul>
+      <li>Thread를 하나 생성하는 것 보다 process를 생성할 때 소요되는 시간과 자원이 훨씬 더 많이 들어간다.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="multithreading--단점"><strong>Multithreading : 단점</strong></h3>
+<ul>
+  <li>안정성이 떨어진다.
+    <ul>
+      <li>만약 여러 thread 들 중 단 하나의 thread라도 문제가 발생할 경우, application이 crash된다.</li>
+    </ul>
+  </li>
+  <li>디버깅 하기 어렵다.
+    <ul>
+      <li>Multithread 환경에서 디버거를 통해 버그의 원인을 발견하기 어렵다. 따라서 문제가 되는 thread를 발견하기 위해 보통 log를 찾아보며 추적하게 됨으로, 디버깅에 소요되는 시간이 많이 들어가게 된다.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="multiprocessing--장점"><strong>Multiprocessing : 장점</strong></h3>
+<ul>
+  <li>안정성이 높다.
+    <ul>
+      <li>여러 프로세스 실행 중 하나의 프로세스에 문제가 발생할 경우, 해당 프로세스만 종료시키면 된다.</li>
+    </ul>
+  </li>
+  <li>확장성이 크다.
+    <ul>
+      <li>프로세스는 다른 머신에 할당해서 실행할 수가 있다. 반면에 thread는 단일 프로세스 내에 존재해야 하므로 확장성이 떨어질 수밖에 없다.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="multiprocessing--단점"><strong>Multiprocessing : 단점</strong></h3>
+<ul>
+  <li>프로세스 간 커뮤니케션이 복잡하다.
+    <ul>
+      <li>프로세스 간 데이터를 공유할 때는 별도의 technique (shared memory 또는 inter process communication)을 사용해야 하기 때문이다.</li>
+    </ul>
+  </li>
+  <li>메모리 소요가 크다.
+    <ul>
+      <li>프로세스 간에는 별도의 독립된 메모리 영역을 갖는다.</li>
+    </ul>
+  </li>
+</ul>
+
+<p><br /><br /></p>
+
+        </div>
+  
       <div class="post">
             <h1 class="post-title">
             <a href="/deep%20learning/2021/08/13/About-CNN/">

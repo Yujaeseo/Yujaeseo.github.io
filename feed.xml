@@ -1,4 +1,244 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2021-09-18T23:41:36+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Yu’s Tech 블로그</title><subtitle>You will never know until you try.</subtitle><author><name>Jaeseo Yu</name></author><entry><title type="html">프로그래머스 - 기둥과 보 설치</title><link href="http://localhost:4000/algorithm/2021/09/18/programmers%EA%B8%B0%EB%91%A5%EA%B3%BC%EB%B3%B4%EC%84%A4%EC%B9%98/" rel="alternate" type="text/html" title="프로그래머스 - 기둥과 보 설치" /><published>2021-09-18T00:00:00+09:00</published><updated>2021-09-18T00:00:00+09:00</updated><id>http://localhost:4000/algorithm/2021/09/18/programmers%EA%B8%B0%EB%91%A5%EA%B3%BC%EB%B3%B4%EC%84%A4%EC%B9%98</id><content type="html" xml:base="http://localhost:4000/algorithm/2021/09/18/programmers%EA%B8%B0%EB%91%A5%EA%B3%BC%EB%B3%B4%EC%84%A4%EC%B9%98/">&lt;hr /&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-07-28T22:56:48+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Yu’s Tech 블로그</title><subtitle>You will never know until you try.</subtitle><author><name>Jaeseo Yu</name></author><entry><title type="html">Deploying Machine Learning Models in Production_Introduction to Model Serving</title><link href="http://localhost:4000/lecture/2022/07/28/Deploying-Machine-Learning-Models-in-Production-Introduction-to-Model-Serving/" rel="alternate" type="text/html" title="Deploying Machine Learning Models in Production_Introduction to Model Serving" /><published>2022-07-28T00:00:00+09:00</published><updated>2022-07-28T00:00:00+09:00</updated><id>http://localhost:4000/lecture/2022/07/28/%5BDeploying%20Machine%20Learning%20Models%20in%20Production%5D%20Introduction%20to%20Model%20Serving</id><content type="html" xml:base="http://localhost:4000/lecture/2022/07/28/Deploying-Machine-Learning-Models-in-Production-Introduction-to-Model-Serving/">&lt;hr /&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;what-exactly-is-serving-a-model&quot;&gt;&lt;strong&gt;What exactly is Serving a Model?&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction%20to%20Model%20Serving/what%20exactly%20is%20Serving%20a%20Model.png&quot; alt=&quot;image&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;전체 ML 프로젝트에서 model training은 우리가 아는 굉장히 일부분이다.&lt;/li&gt;
+  &lt;li&gt;그중 model serving은 학습시킨 model을 end user가 사용할 수 있도록 하는 것이며,&lt;/li&gt;
+  &lt;li&gt;이를 위해서는 end user가 interaction할 수 있는 app 또는 서비스가 필요하다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;model-serving-patterns&quot;&gt;&lt;strong&gt;Model Serving patterns&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction%20to%20Model%20Serving/Model%20Serving%20patterns.png&quot; alt=&quot;image&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Inference는 모델에 입력 값을 넣고 예측을 하는 과정이며,&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;크게 세가지 (model, interpreter, input data)가 필요하다.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;ml-workflows&quot;&gt;&lt;strong&gt;ML workflows&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction%20to%20Model%20Serving/ML%20workflows.png&quot; alt=&quot;image&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;ML workflow는 크게 &lt;strong&gt;model training&lt;/strong&gt;, &lt;strong&gt;model prediction&lt;/strong&gt; 두 가지로 나뉜다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;이때, model training은 &lt;strong&gt;offline learning(batch learning, static learning)&lt;/strong&gt;과 &lt;strong&gt;online learning(dynamic learning)&lt;/strong&gt;으로 나눌 수 있다.&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;&lt;strong&gt;Offline learning&lt;/strong&gt;
+        &lt;ul&gt;
+          &lt;li&gt;Offline learning은 일정 기간 동안 이미 수집된 데이터를 바탕으로 특정 시기에 모델 학습을 시키는 것이다.&lt;/li&gt;
+          &lt;li&gt;즉 기존 data와 새로 들어온 data를 함께 학습시키게 되며 대량의 데이터를 한번에 처리하기 때문에 학습시 많은 시간과 자원이 소요된다.&lt;/li&gt;
+          &lt;li&gt;모델을 배포하면 재학습시까지 모델은 고정된 상태가 되며, 오랜 시간이 지나면 새로운 pattern에 대응하지 못하며 &lt;strong&gt;model decay&lt;/strong&gt;가 발생한다.&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;Online learning&lt;/strong&gt;
+        &lt;ul&gt;
+          &lt;li&gt;Online learning 은 실시간으로 스트림 데이터가 들어올 때 마다 주기적으로 모델을 학습시키는 것이다.&lt;/li&gt;
+          &lt;li&gt;주로 sensor, stock 데이터와 같은 time-series data을 토대로 학습을 할때 많이 활용한다.
+&lt;br /&gt;&lt;br /&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Model prediction도 &lt;strong&gt;Batch prediction, Realtime prediction&lt;/strong&gt; 두 타입이 존재한다.&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;&lt;strong&gt;Batch prediction&lt;/strong&gt;
+        &lt;ul&gt;
+          &lt;li&gt;Batch prediction은 과거에 모인 다량의 데이터를 기반으로 예측을 하는것이다.&lt;/li&gt;
+          &lt;li&gt;즉 한번의 예측에서 많은 수의 인스턴스를 처리하게 된다.&lt;/li&gt;
+          &lt;li&gt;데이터가 time dependent하지 않고, realtime으로 예측을 하는 것이 중요하지 않은 상황에 적절하다.&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;Realtime prediction&lt;/strong&gt;
+        &lt;ul&gt;
+          &lt;li&gt;Real time prediction은 inference 요청이 온 시점에 들어온 데이터를 기반으로 실시간으로 prediction을 하는 것이다.&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;important-metrics&quot;&gt;&lt;strong&gt;Important metrics&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction%20to%20Model%20Serving/Important%20metrics.png&quot; alt=&quot;image&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Online inference에서 중요하게 살펴보는 metric으로는 latency, throughput, cost가 있다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;lantency&quot;&gt;&lt;strong&gt;Lantency&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction%20to%20Model%20Serving/Lantency.png&quot; alt=&quot;image&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Latency는 user의 요청과 이에대한 application의 응답까지의 시간을 의미한다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;throughput&quot;&gt;&lt;strong&gt;Throughput&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction%20to%20Model%20Serving/Throughput.png&quot; alt=&quot;image&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Throughput은 단위 시간동안 처리한 요청의 수를 의미한다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;cost&quot;&gt;&lt;strong&gt;Cost&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction%20to%20Model%20Serving/Cost.png&quot; alt=&quot;image&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Serving infrastructure는 반드시 cost를 수반하게 된다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;minimizing-latency-maximizing-throughput&quot;&gt;&lt;strong&gt;Minimizing Latency, Maximizing Throughput&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction%20to%20Model%20Serving/Minimizing%20Latency,%20Maximizing%20Throughput.png&quot; alt=&quot;image&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;많은 기업들은 latency를 최소화하며, throughput을 최대화하길 원한다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;예를들어 항공사 추천 서비스가 있다고 할때, 유저의 요청에 빠르게 응답할 수 있어야하며, 공휴일과 같이 유저가 몰리는 시간에는 많은 요청을 빠르게 처리할 수 있어야 한다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;이러한 요건을 충족시키기 위해서는 infrastructure를 확장해야 하는데, 이때 큰 비용이 발생한다.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;balance-cost-latency-and-throughput&quot;&gt;&lt;strong&gt;Balance Cost, Latency and Throughput&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction%20to%20Model%20Serving/Balance%20Cost,%20Latency%20and%20Throughput.png&quot; alt=&quot;image&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Infrastructure 확장에 많은 비용을 투자하지 않고 이러한 비용을 낮추기 위한 방법이 있다.
+    &lt;ul&gt;
+      &lt;li&gt;GPU 자원 공유&lt;/li&gt;
+      &lt;li&gt;Multi model serving&lt;/li&gt;
+      &lt;li&gt;Model optimization&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Jaeseo Yu</name></author><category term="Lecture" /><category term="mlops" /><category term="deep learning" /><category term="machine learning" /><summary type="html">Model serving이란 무엇이며, 중요하게 고려해야할 metric에 대해 알아본다.</summary></entry><entry><title type="html">Multithreading vs. Multiprocessing</title><link href="http://localhost:4000/operating%20system/deep%20learning/2021/09/19/Multiprocess&multithread/" rel="alternate" type="text/html" title="Multithreading vs. Multiprocessing" /><published>2021-09-19T00:00:00+09:00</published><updated>2021-09-19T00:00:00+09:00</updated><id>http://localhost:4000/operating%20system/deep%20learning/2021/09/19/%20Multiprocess&amp;multithread</id><content type="html" xml:base="http://localhost:4000/operating%20system/deep%20learning/2021/09/19/Multiprocess&amp;multithread/">&lt;hr /&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;process&quot;&gt;&lt;strong&gt;Process&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;프로세스는 실행중인 프로그램이다.&lt;/strong&gt; 즉 프로그램 자체는 프로세스가 아니라, 프로그램이 메모리에 올라가서 실행중일 때 프로세스가 되는 것이다. 프로세스는 크게 5가지 영역(text, stack, data, heap, program counter)로 나눌 수 있다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Text : Program code&lt;/li&gt;
+  &lt;li&gt;Stack : Temporary data (function parameter, return addresses, local variables, etc)&lt;/li&gt;
+  &lt;li&gt;Data : Static &amp;amp; global variables&lt;/li&gt;
+  &lt;li&gt;Heap : Dynamic allocation&lt;/li&gt;
+  &lt;li&gt;Program counter &amp;amp; registers : Current activity&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;
+&lt;img src=&quot;https://www.tutorialspoint.com/operating_system/images/process_components.jpg&quot; alt=&quot;image&quot; width=&quot;45%&quot; height=&quot;45%&quot; class=&quot;align-center&quot; /&gt;
+&lt;em&gt;Figure 1. Process in memory (&lt;a href=&quot;https://www.tutorialspoint.com/operating_system/os_processes.htm&quot;&gt;source&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;thread&quot;&gt;&lt;strong&gt;Thread&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;Thread는 프로세스 내에서 실행되는 단위를 말한다.&lt;/strong&gt; 일반적으로 한 프로세스는 하나의 스레드를 가지고 있지만, 프로그램 환경에 따라 둘 이상의 thread를 동시에 실행시킬 수 있다. 각 Thread는 program counter, register set, stack space를 별도로 지니고 있다. 반면, 각 thread는 프로세스 내 code, data, heap, file과 같은 operating system 자원을 공유하게 된다.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;
+&lt;img src=&quot;https://www.tutorialspoint.com/operating_system/images/thread_processes.jpg&quot; alt=&quot;image&quot; width=&quot;90%&quot; height=&quot;90%&quot; class=&quot;align-center&quot; /&gt;
+&lt;em&gt;Figure 2. Single thread vs Multithreads (&lt;a href=&quot;https://www.tutorialspoint.com/operating_system/os_multi_threading.htm&quot;&gt;source&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;multithreading-multiprocessing-비교&quot;&gt;&lt;strong&gt;Multithreading, multiprocessing 비교&lt;/strong&gt;&lt;/h2&gt;
+&lt;h3 id=&quot;multithreading--장점&quot;&gt;&lt;strong&gt;Multithreading : 장점&lt;/strong&gt;&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Thread 간 Resource sharing이 가능하다.
+    &lt;ul&gt;
+      &lt;li&gt;동일 프로세스 내 thread 간 데이터를 공유할 수 있다. 만약 subset으로 나누기 어려운 대량의 데이터를 다뤄야 할 경우, 데이터를 복사하거나 shared memory 방식을 사용해서 프로세스 간 데이터를 전송 또는 공유해야 한다. 하지만 데이터 복사는 복사 시 추가 시간과 메모리를 소요하게 되며, shared memory의 경우에는 개발 시 고려해야 될 요소들이 많다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;소요되는 자원이 더 적다.
+    &lt;ul&gt;
+      &lt;li&gt;Thread를 하나 생성하는 것 보다 process를 생성할 때 소요되는 시간과 자원이 훨씬 더 많이 들어간다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;multithreading--단점&quot;&gt;&lt;strong&gt;Multithreading : 단점&lt;/strong&gt;&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;안정성이 떨어진다.
+    &lt;ul&gt;
+      &lt;li&gt;만약 여러 thread 들 중 단 하나의 thread라도 문제가 발생할 경우, application이 crash된다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;디버깅 하기 어렵다.
+    &lt;ul&gt;
+      &lt;li&gt;Multithread 환경에서 디버거를 통해 버그의 원인을 발견하기 어렵다. 따라서 문제가 되는 thread를 발견하기 위해 보통 log를 찾아보며 추적하게 됨으로, 디버깅에 소요되는 시간이 많이 들어가게 된다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;multiprocessing--장점&quot;&gt;&lt;strong&gt;Multiprocessing : 장점&lt;/strong&gt;&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;안정성이 높다.
+    &lt;ul&gt;
+      &lt;li&gt;여러 프로세스 실행 중 하나의 프로세스에 문제가 발생할 경우, 해당 프로세스만 종료시키면 된다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;확장성이 크다.
+    &lt;ul&gt;
+      &lt;li&gt;프로세스는 다른 머신에 할당해서 실행할 수가 있다. 반면에 thread는 단일 프로세스 내에 존재해야 하므로 확장성이 떨어질 수밖에 없다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;multiprocessing--단점&quot;&gt;&lt;strong&gt;Multiprocessing : 단점&lt;/strong&gt;&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;프로세스 간 커뮤니케션이 복잡하다.
+    &lt;ul&gt;
+      &lt;li&gt;프로세스 간 데이터를 공유할 때는 별도의 technique (shared memory 또는 inter process communication)을 사용해야 하기 때문이다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;메모리 소요가 크다.
+    &lt;ul&gt;
+      &lt;li&gt;프로세스 간에는 별도의 독립된 메모리 영역을 갖는다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;</content><author><name>Jaeseo Yu</name></author><category term="Deep learning" /><category term="operating system" /><category term="parallel programming" /><summary type="html">Multithreading과 multiprocessing 장단점에 대한 간략한 정리</summary></entry><entry><title type="html">프로그래머스 - 기둥과 보 설치</title><link href="http://localhost:4000/algorithm/2021/09/18/programmers%EA%B8%B0%EB%91%A5%EA%B3%BC%EB%B3%B4%EC%84%A4%EC%B9%98/" rel="alternate" type="text/html" title="프로그래머스 - 기둥과 보 설치" /><published>2021-09-18T00:00:00+09:00</published><updated>2021-09-18T00:00:00+09:00</updated><id>http://localhost:4000/algorithm/2021/09/18/programmers%EA%B8%B0%EB%91%A5%EA%B3%BC%EB%B3%B4%EC%84%A4%EC%B9%98</id><content type="html" xml:base="http://localhost:4000/algorithm/2021/09/18/programmers%EA%B8%B0%EB%91%A5%EA%B3%BC%EB%B3%B4%EC%84%A4%EC%B9%98/">&lt;hr /&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 
@@ -755,228 +995,4 @@ net start MongoDB
 &lt;p&gt;프로젝트에서 노드를 사용하기 때문에 덧붙이자면, ReplSet DB와 node.js를 연결하고자 하는 경우 아래와 같이 URL에 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;?replicaSet=rs0(이름)&lt;/code&gt;을 더해주면 된다.&lt;/p&gt;
 
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;new Mongo(&quot;mongodb://localhost:27017/demo?replicaSet=rs0&quot;);
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Jaeseo Yu</name></author><category term="Mongodb" /><category term="database" /><summary type="html">Change Stream을 적용하려면 MongoDB를 Replica Set으로 변경해야 한다. 따라서 이번 글에서는 DB를 Replica Set으로 변경하는 방법에 대해 다룬다.</summary></entry><entry><title type="html">Python 백준 코드순위 확인 프로그램</title><link href="http://localhost:4000/python/2021/01/29/baekjoonCrawling/" rel="alternate" type="text/html" title="Python 백준 코드순위 확인 프로그램" /><published>2021-01-29T00:00:00+09:00</published><updated>2021-01-29T00:00:00+09:00</updated><id>http://localhost:4000/python/2021/01/29/baekjoonCrawling</id><content type="html" xml:base="http://localhost:4000/python/2021/01/29/baekjoonCrawling/">&lt;hr /&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;코드&quot;&gt;코드&lt;/h2&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;requests&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;bs4&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;BeautifulSoup&lt;/span&gt;
-
-
-
-&lt;span class=&quot;c1&quot;&gt;# 전체 : -1, C : 0 ,C++14 : 88, C++11 : 75, Java : 3, Python 3 : 28 등등
-&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getList&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;question_num&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lan_code&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;my_id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-
-    &lt;span class=&quot;n&quot;&gt;url&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'https://www.acmicpc.net/problem/status'&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;page&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
-    
-    &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;request&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;requests&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'/'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;question_num&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'/'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lan_code&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'/'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;page&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; 
-
-        &lt;span class=&quot;c1&quot;&gt;# 페이지가 존재하지 않는 경우    
-&lt;/span&gt;        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;status_code&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;아이디가 존재하지 않습니다&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;break&lt;/span&gt;
-            
-        &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;현재 페이지 : &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;page&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;    
-        
-        &lt;span class=&quot;n&quot;&gt;soup&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;BeautifulSoup&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'html.parser'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;table_structure&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;soup&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;select&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'body &amp;gt; div.wrapper &amp;gt; div.container.content &amp;gt; div.row &amp;gt; div.col-md-10 &amp;gt; div.table-responsive &amp;gt; table &amp;gt; tbody'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;lines&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;table_structure&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;find_all&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'tr'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-        &lt;span class=&quot;c1&quot;&gt;# 점수 table의 row에서 자신의 ID를 찾고, 페이지와 순위를 반환
-&lt;/span&gt;        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;each&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;lines&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;elements&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;each&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;find_all&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'td'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;user&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;elements&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;find&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'a'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;text&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;user&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;my_id&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-                &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'페이지'&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;page&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'순위'&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;elements&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-                &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; 
-                
-        &lt;span class=&quot;n&quot;&gt;page&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;getList&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10988&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;28&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'yjs08090'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;현재&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;페이지&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;현재&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;페이지&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;현재&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;페이지&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;현재&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;페이지&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;현재&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;페이지&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;현재&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;페이지&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;현재&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;페이지&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;현재&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;페이지&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;현재&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;페이지&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;9&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;현재&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;페이지&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'페이지'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'순위'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'195'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;설명&quot;&gt;설명&lt;/h2&gt;
-
-&lt;p&gt;&lt;br /&gt;
-온라인 저지 문제에 익숙하지 않았을 때는 단순히 문제를 푸는 것에 의미를 두었다. 어느 정도 문제를 푸는 것에 적응이 된 만큼, 이제 부터는 효율성을 고려한 코드를 작성하기 위해 노력해야 된다고 생각한다.온라인 저지에서 내 코드의 질을 판단하는 방법은 바로 순위를 확인하는 것이다. 실행 시간, 메모리의 효율적인 사용을 고민하며 순위를 높이는 것도 나름의 쾌감이 있다. 이 과정에서 다른 사람의 코드를 보면서 항상 새로운 방법의 풀이가 있음을 알게 된다. 다른 사람의 풀이를 참고하면서 다양하게 생각하는 방법과 어떤 경우에 어떤 라이브러리나 메소드를 쓰면 효과적인지 배울 수 있다.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;
-하지만 참여자가 많은 문제와 프로그래밍 언어의 경우에는 코드 순위가 몇번째 인지 알기가 어렵다. 검색 기능이 별도로 존재하지 않기 때문에 수시로 찾아야 하는 번거로움이 있다. 이러한 과정을 자꾸 반복하다 보니 슬슬 시간이 아깝다는 생각을 하게 됐고, 예전에 크롤링 관련 프로젝트를 진행해봤기 때문에 이를 활용해 간단한 프로그램을 만들어 보고자 했다. 특정 백준 문제에서 자신이 제출한 코드의 순위를 반환해주는 아주 간단한 프로그램이다.
-&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;웹 서버에 HTTP 요청을 하는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;requests&lt;/code&gt;와 HTML 또는 XML 파일에서 파싱을 통해 정보를 추출하는 데 사용되는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;beautifulsoup&lt;/code&gt;를 활용했다. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;getList(question_num,lan_code,my_id)&lt;/code&gt;에서 볼 수 있듯이 getList 함수에 확인하고자 하는 문제 번호, 프로그래밍 언어 코드, 자신의 아이디 이렇게 3가지를 전달해 주면 된다. 코드 주석에는 필자 기준 주로 사용하는 언어 몇 가지 언어에 대한 코드만을 적어놨다. 자신이 사용하는 언어가 없는 경우, 백준 사이트 ‘맞은 사람’ 탭에서 언어를 바꿔준 후 url에서 언어 코드를 확인하면 된다. https://www.acmicpc.net/problem/status/10988/3/1를 예로 들면, 맨 뒤는 현재 페이지, 바로 왼쪽 3은 JAVA를 나타낸다. 위에서 언급한 3가지 파라미터를 전달해주면 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;getList&lt;/code&gt;함수는 현재 페이지 수와 코드 순위를 반환하게 된다. 
-&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;</content><author><name>Jaeseo Yu</name></author><category term="Python" /><category term="programming language" /><category term="python" /><summary type="html">BeatifulSoup을 이용한 백준 문제 풀이 등수 확인 프로그램</summary></entry><entry><title type="html">Python call by reference, call by value에 대해</title><link href="http://localhost:4000/python/2021/01/23/python2/" rel="alternate" type="text/html" title="Python call by reference, call by value에 대해" /><published>2021-01-23T00:00:00+09:00</published><updated>2021-01-23T00:00:00+09:00</updated><id>http://localhost:4000/python/2021/01/23/python2</id><content type="html" xml:base="http://localhost:4000/python/2021/01/23/python2/">&lt;hr /&gt;
-
-&lt;h2 id=&quot;call-by-reference-call-by-value란&quot;&gt;&lt;strong&gt;Call by reference, Call by value란&lt;/strong&gt;&lt;/h2&gt;
-&lt;p&gt;&lt;br /&gt;
-함수의 호출 방법에는 크게 &lt;strong&gt;Call by reference&lt;/strong&gt;와 &lt;strong&gt;Call by value&lt;/strong&gt; 두 가지의 방식이 있습니다. Python의 경우를 살펴보기 전에 먼저 두가지 함수호출 방법 개념에 대해 간단히 살펴보겠습니다.  pointer의 개념을 처음 배울 때 주로 사용하는 c언어로 코드를 작성했습니다.&lt;/p&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;printf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;%d&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;main&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-
-  &lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;printf&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;%d&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;fun&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;printf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;%d&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-  &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;
-&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
-&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;main 함수에서 선언한 정수 a를 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;fun()&lt;/code&gt; 함수에 argument로 제공하였습니다. 하지만 출력 값을 확인해 보면 함수 내 변수 a와 함수 밖에 선언된 a의 값이 각각 0과 10으로 서로 다르다는 것을 확인할 수 있습니다. 이러한 차이는 Call by value방식의 특성에서 기인한 것인데, &lt;strong&gt;Call by value 는 함수를 호출할 때 argument의 복사된 값을 넘겨주는 것입니다.&lt;/strong&gt; 즉 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;fun()&lt;/code&gt;함수 안의 a는 함수 밖의 a와 다른 메모리 공간을 점유하며, 단지 동일한 값만을 갖고 있습니다. 따라서 함수 안에서 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;a = 0&lt;/code&gt;을 실행 했을 때 함수 안에있는 별도의 변수 a에 0이라는 값이 대입됩니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
-  &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;main&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  
-  &lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;printf&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;%d&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;fun&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;printf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;%d&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-  &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;
-&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;위의 예제는 Call by reference의 예시 코드입니다. 결론적으로,&lt;strong&gt;Call by reference는 함수를 호출할 때 argument의 location 즉 메모리 주소를 함수에 제공하는 것입니다.&lt;/strong&gt; 따라서 parameter로 해당 값이 저장된 메모리 공간에 접근하여 직접 값을 참조하거나 변경할 수 있습니다. 위에서 main함수의 정수 a값이 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;fun()&lt;/code&gt; 실행 전후로 변경된 것을 통해 이러한 점을 쉽게 확인할 수 있습니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;python에서의-함수-호출&quot;&gt;&lt;strong&gt;Python에서의 함수 호출&lt;/strong&gt;&lt;/h2&gt;
-&lt;p&gt;&lt;br /&gt;
-먼저 이해하기 위해 가장 중요한 2가지 사실에 대해 정리해보자면,
-&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;Python 함수의 parameter는 object의 reference 복사값이다.(Call by value)) 
-&lt;br /&gt;&lt;br /&gt;&lt;/li&gt;
-  &lt;li&gt;Python의 자료형은 Mutable, Immutable 두가지로 나뉜다. (두 속성에 대해서는 &lt;a href=&quot;https://yujaeseo.github.io/python/2018/11/22/Python1/&quot;&gt;이전 포스트&lt;/a&gt;를 참조하시면 됩니다.)&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;위의 사실에 따라 함수에 Mutable과 Immutable 자료형 중 어느 것을 넘겨주는지를 구분할 수 있어야 합니다. 먼저 Mutable object를 넘겨주는 경우에 대해서 살펴보겠습니다.&lt;/p&gt;
-
-&lt;h3 id=&quot;immutable&quot;&gt;&lt;strong&gt;Immutable&lt;/strong&gt;&lt;/h3&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;id&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;12&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;id&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;fun&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;mi&quot;&gt;139845275445344&lt;/span&gt;
-&lt;span class=&quot;mi&quot;&gt;139845275445344&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;&lt;br /&gt;
-위 코드를 통해 함수 안의 변수 a와 함수 안의 a는 동일한 obejct를 가리키고 있다는 것을 확인할 수 있습니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;14&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;12&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;id&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;fun&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;mi&quot;&gt;140341591808096&lt;/span&gt;
-&lt;span class=&quot;mi&quot;&gt;140341591808160&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;br /&gt;
-함수 안에서 parameter에 14라는 값을 할당했습니다. int는 Immutable 타입이기 때문에 a에 새롭게 생성된 객체 (14)의 reference값이 저장되었습니다. 그래서 함수 안에서 함수 밖에 있는 a Object의 값을 바꿀 수 없습니다. 다음은 Mutable의 경우에 대한 코드입니다.
-&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;mutable&quot;&gt;&lt;strong&gt;Mutable&lt;/strong&gt;&lt;/h3&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'d'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'a'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'b'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'c'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;fun&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'a'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'b'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'c'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'a'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'b'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'c'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'d'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'a'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'b'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'c'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'d'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;br /&gt;
-위의 코드에서 볼 수 있듯, 함수를 통해 함수 밖 a 변수 List에 새로운 요소를 추가했습니다. 이는 a 객체의 복사된 값이 전달된 것이 아니라, reference가 전달되었기 때문에 가능한 일입니다. 즉 Mutable의 경우는 함수 안에서 함수 밖 객체에 접근하여 값을 변경할 수 있습니다.&lt;br /&gt;
-&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;reference-변경&quot;&gt;&lt;strong&gt;Reference 변경&lt;/strong&gt;&lt;/h3&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'a'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'b'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'c'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'d'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'a'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'b'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'c'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;fun&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'a'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'b'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'c'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'a'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'b'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'c'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'d'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'a'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'b'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'c'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;이번에는 a 변수의 reference를 변경하는 경우 입니다. parameter a는 call by value이기 때문에, 즉 reference의 복사값이기 때문에 함수 밖 객체에 어떤 영향도 주지 않습니다. 함수 안 변수 a는 새로운 list의 reference를 담고 있는 것이며, 이 경우 함수 밖 변수 a를 변경할 수 없게 됩니다. 
-&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;</content><author><name>Jaeseo Yu</name></author><category term="Python" /><category term="programming language" /><category term="python" /><summary type="html">Python에서의 call by value, call by reference에 대해 알아본다.</summary></entry></feed>
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Jaeseo Yu</name></author><category term="Mongodb" /><category term="database" /><summary type="html">Change Stream을 적용하려면 MongoDB를 Replica Set으로 변경해야 한다. 따라서 이번 글에서는 DB를 Replica Set으로 변경하는 방법에 대해 다룬다.</summary></entry></feed>

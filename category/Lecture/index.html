@@ -11,7 +11,7 @@
 
   <title>
     
-      404: Page not found &middot; Yu's Tech 블로그
+      Lecture &middot; Yu's Tech 블로그
     
   </title>
 
@@ -124,7 +124,7 @@
     
       
         
-          <a class="sidebar-nav-item" href="/category/Lecture/index.html">Lecture</a>
+          <a class="sidebar-nav-item active" href="/category/Lecture/index.html">Lecture</a>
         
       
     
@@ -166,6 +166,8 @@
         
       
     
+      
+    
  -->
     
       <a class = "sidebar-nav-item " href="/category/Python/index.html">Python <small class="text-info">3</small></a>  
@@ -189,7 +191,7 @@
       <a class = "sidebar-nav-item " href="/category/Operating system/index.html">Operating system <small class="text-info">1</small></a>  
     <!--<a class="sidebar-nav-item" href="/category/Operating system/index.html">Operating system</a>  <small class="text-muted">1</small>-->
     
-      <a class = "sidebar-nav-item " href="/category/Lecture/index.html">Lecture <small class="text-info">1</small></a>  
+      <a class = "sidebar-nav-item  active" href="/category/Lecture/index.html">Lecture <small class="text-info">1</small></a>  
     <!--<a class="sidebar-nav-item" href="/category/Lecture/index.html">Lecture</a>  <small class="text-muted">1</small>-->
     
     
@@ -222,10 +224,200 @@
       </div>
 
       <div class="container content">
-        <div class="page">
-  <h1 class="page-title">404: Page not found</h1>
-  <p class="lead">Sorry, we've misplaced that URL or it's pointing to something that doesn't exist. <a href="/">Head back home</a> to try finding it again.</p>
+        <div class="posts">
+    
+    
+      <div class="post">
+            <h1 class="post-title">
+            <a href="/lecture/2022/07/28/Deploying-Machine-Learning-Models-in-Production-Introduction-to-Model-Serving/">
+                Deploying Machine Learning Models in Production_Introduction to Model Serving
+            </a>
+            </h1>
+
+            <span class="post-date">28 Jul 2022</span>
+            
+            
+              
+                <span class="badge badge-dark">MLops</span>
+              
+            
+              
+                <span class="badge badge-dark">Deep learning</span>
+              
+            
+              
+                <span class="badge badge-dark">Machine learning</span>
+              
+            
+            
+            <hr />
+
+<p><br /><br /></p>
+
+<h2 id="what-exactly-is-serving-a-model"><strong>What exactly is Serving a Model?</strong></h2>
+
+<p><img src="/assets/img/Lecture/Introduction%20to%20Model%20Serving/what%20exactly%20is%20Serving%20a%20Model.png" alt="image" width="100%" height="100%" class="align-center" /></p>
+
+<ul>
+  <li>전체 ML 프로젝트에서 model training은 우리가 아는 굉장히 일부분이다.</li>
+  <li>그중 model serving은 학습시킨 model을 end user가 사용할 수 있도록 하는 것이며,</li>
+  <li>이를 위해서는 end user가 interaction할 수 있는 app 또는 서비스가 필요하다.</li>
+</ul>
+
+<p><br /><br /></p>
+
+<h2 id="model-serving-patterns"><strong>Model Serving patterns</strong></h2>
+
+<p><img src="/assets/img/Lecture/Introduction%20to%20Model%20Serving/Model%20Serving%20patterns.png" alt="image" width="100%" height="100%" class="align-center" /></p>
+
+<ul>
+  <li>
+    <p>Inference는 모델에 입력 값을 넣고 예측을 하는 과정이며,</p>
+  </li>
+  <li>
+    <p>크게 세가지 (model, interpreter, input data)가 필요하다.</p>
+  </li>
+</ul>
+
+<p><br /><br /></p>
+
+<h2 id="ml-workflows"><strong>ML workflows</strong></h2>
+
+<p><img src="/assets/img/Lecture/Introduction%20to%20Model%20Serving/ML%20workflows.png" alt="image" width="100%" height="100%" class="align-center" /></p>
+
+<ul>
+  <li>
+    <p>ML workflow는 크게 <strong>model training</strong>, <strong>model prediction</strong> 두 가지로 나뉜다.</p>
+  </li>
+  <li>
+    <p>이때, model training은 <strong>offline learning(batch learning, static learning)</strong>과 <strong>online learning(dynamic learning)</strong>으로 나눌 수 있다.</p>
+
+    <ul>
+      <li><strong>Offline learning</strong>
+        <ul>
+          <li>Offline learning은 일정 기간 동안 이미 수집된 데이터를 바탕으로 특정 시기에 모델 학습을 시키는 것이다.</li>
+          <li>즉 기존 data와 새로 들어온 data를 함께 학습시키게 되며 대량의 데이터를 한번에 처리하기 때문에 학습시 많은 시간과 자원이 소요된다.</li>
+          <li>모델을 배포하면 재학습시까지 모델은 고정된 상태가 되며, 오랜 시간이 지나면 새로운 pattern에 대응하지 못하며 <strong>model decay</strong>가 발생한다.</li>
+        </ul>
+      </li>
+      <li><strong>Online learning</strong>
+        <ul>
+          <li>Online learning 은 실시간으로 스트림 데이터가 들어올 때 마다 주기적으로 모델을 학습시키는 것이다.</li>
+          <li>주로 sensor, stock 데이터와 같은 time-series data을 토대로 학습을 할때 많이 활용한다.
+<br /><br /></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Model prediction도 <strong>Batch prediction, Realtime prediction</strong> 두 타입이 존재한다.</p>
+
+    <ul>
+      <li><strong>Batch prediction</strong>
+        <ul>
+          <li>Batch prediction은 과거에 모인 다량의 데이터를 기반으로 예측을 하는것이다.</li>
+          <li>즉 한번의 예측에서 많은 수의 인스턴스를 처리하게 된다.</li>
+          <li>데이터가 time dependent하지 않고, realtime으로 예측을 하는 것이 중요하지 않은 상황에 적절하다.</li>
+        </ul>
+      </li>
+      <li><strong>Realtime prediction</strong>
+        <ul>
+          <li>Real time prediction은 inference 요청이 온 시점에 들어온 데이터를 기반으로 실시간으로 prediction을 하는 것이다.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p><br /><br /></p>
+
+<h2 id="important-metrics"><strong>Important metrics</strong></h2>
+
+<p><img src="/assets/img/Lecture/Introduction%20to%20Model%20Serving/Important%20metrics.png" alt="image" width="100%" height="100%" class="align-center" /></p>
+
+<ul>
+  <li>Online inference에서 중요하게 살펴보는 metric으로는 latency, throughput, cost가 있다.</li>
+</ul>
+
+<p><br /><br /></p>
+
+<h2 id="lantency"><strong>Lantency</strong></h2>
+
+<p><img src="/assets/img/Lecture/Introduction%20to%20Model%20Serving/Lantency.png" alt="image" width="100%" height="100%" class="align-center" /></p>
+
+<ul>
+  <li>Latency는 user의 요청과 이에대한 application의 응답까지의 시간을 의미한다.</li>
+</ul>
+
+<p><br /><br /></p>
+
+<h2 id="throughput"><strong>Throughput</strong></h2>
+
+<p><img src="/assets/img/Lecture/Introduction%20to%20Model%20Serving/Throughput.png" alt="image" width="100%" height="100%" class="align-center" /></p>
+
+<ul>
+  <li>Throughput은 단위 시간동안 처리한 요청의 수를 의미한다.</li>
+</ul>
+
+<p><br /><br /></p>
+
+<h2 id="cost"><strong>Cost</strong></h2>
+
+<p><img src="/assets/img/Lecture/Introduction%20to%20Model%20Serving/Cost.png" alt="image" width="100%" height="100%" class="align-center" /></p>
+
+<ul>
+  <li>Serving infrastructure는 반드시 cost를 수반하게 된다.</li>
+</ul>
+
+<p><br /><br /></p>
+
+<h2 id="minimizing-latency-maximizing-throughput"><strong>Minimizing Latency, Maximizing Throughput</strong></h2>
+
+<p><img src="/assets/img/Lecture/Introduction%20to%20Model%20Serving/Minimizing%20Latency,%20Maximizing%20Throughput.png" alt="image" width="100%" height="100%" class="align-center" /></p>
+
+<ul>
+  <li>
+    <p>많은 기업들은 latency를 최소화하며, throughput을 최대화하길 원한다.</p>
+  </li>
+  <li>
+    <p>예를들어 항공사 추천 서비스가 있다고 할때, 유저의 요청에 빠르게 응답할 수 있어야하며, 공휴일과 같이 유저가 몰리는 시간에는 많은 요청을 빠르게 처리할 수 있어야 한다.</p>
+  </li>
+  <li>
+    <p>이러한 요건을 충족시키기 위해서는 infrastructure를 확장해야 하는데, 이때 큰 비용이 발생한다.</p>
+  </li>
+</ul>
+
+<p><br /><br /></p>
+
+<h2 id="balance-cost-latency-and-throughput"><strong>Balance Cost, Latency and Throughput</strong></h2>
+
+<p><img src="/assets/img/Lecture/Introduction%20to%20Model%20Serving/Balance%20Cost,%20Latency%20and%20Throughput.png" alt="image" width="100%" height="100%" class="align-center" /></p>
+
+<ul>
+  <li>Infrastructure 확장에 많은 비용을 투자하지 않고 이러한 비용을 낮추기 위한 방법이 있다.
+    <ul>
+      <li>GPU 자원 공유</li>
+      <li>Multi model serving</li>
+      <li>Model optimization</li>
+    </ul>
+  </li>
+</ul>
+
+        </div>
+  
+
 </div>
+<div class="pagination">
+    
+      <span class="pagination-item newer">New</span>
+    
+  
+    
+      <span class="pagination-item older">Old</span>
+    
+  
+  </div>
+
 
       </div>
     </div>

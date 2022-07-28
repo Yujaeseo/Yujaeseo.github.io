@@ -4,13 +4,271 @@
  <title>Yu's Tech 블로그</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2021-09-18T23:41:36+09:00</updated>
+ <updated>2022-07-28T22:56:48+09:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Jaeseo Yu</name>
    <email></email>
  </author>
 
+ 
+ <entry>
+   <title>Deploying Machine Learning Models in Production_Introduction to Model Serving</title>
+   <link href="http://localhost:4000/lecture/2022/07/28/Deploying-Machine-Learning-Models-in-Production-Introduction-to-Model-Serving/"/>
+   <updated>2022-07-28T00:00:00+09:00</updated>
+   <id>http://localhost:4000/lecture/2022/07/28/[Deploying Machine Learning Models in Production] Introduction to Model Serving</id>
+   <content type="html">&lt;hr /&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;what-exactly-is-serving-a-model&quot;&gt;&lt;strong&gt;What exactly is Serving a Model?&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction%20to%20Model%20Serving/what%20exactly%20is%20Serving%20a%20Model.png&quot; alt=&quot;image&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;전체 ML 프로젝트에서 model training은 우리가 아는 굉장히 일부분이다.&lt;/li&gt;
+  &lt;li&gt;그중 model serving은 학습시킨 model을 end user가 사용할 수 있도록 하는 것이며,&lt;/li&gt;
+  &lt;li&gt;이를 위해서는 end user가 interaction할 수 있는 app 또는 서비스가 필요하다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;model-serving-patterns&quot;&gt;&lt;strong&gt;Model Serving patterns&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction%20to%20Model%20Serving/Model%20Serving%20patterns.png&quot; alt=&quot;image&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Inference는 모델에 입력 값을 넣고 예측을 하는 과정이며,&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;크게 세가지 (model, interpreter, input data)가 필요하다.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;ml-workflows&quot;&gt;&lt;strong&gt;ML workflows&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction%20to%20Model%20Serving/ML%20workflows.png&quot; alt=&quot;image&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;ML workflow는 크게 &lt;strong&gt;model training&lt;/strong&gt;, &lt;strong&gt;model prediction&lt;/strong&gt; 두 가지로 나뉜다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;이때, model training은 &lt;strong&gt;offline learning(batch learning, static learning)&lt;/strong&gt;과 &lt;strong&gt;online learning(dynamic learning)&lt;/strong&gt;으로 나눌 수 있다.&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;&lt;strong&gt;Offline learning&lt;/strong&gt;
+        &lt;ul&gt;
+          &lt;li&gt;Offline learning은 일정 기간 동안 이미 수집된 데이터를 바탕으로 특정 시기에 모델 학습을 시키는 것이다.&lt;/li&gt;
+          &lt;li&gt;즉 기존 data와 새로 들어온 data를 함께 학습시키게 되며 대량의 데이터를 한번에 처리하기 때문에 학습시 많은 시간과 자원이 소요된다.&lt;/li&gt;
+          &lt;li&gt;모델을 배포하면 재학습시까지 모델은 고정된 상태가 되며, 오랜 시간이 지나면 새로운 pattern에 대응하지 못하며 &lt;strong&gt;model decay&lt;/strong&gt;가 발생한다.&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;Online learning&lt;/strong&gt;
+        &lt;ul&gt;
+          &lt;li&gt;Online learning 은 실시간으로 스트림 데이터가 들어올 때 마다 주기적으로 모델을 학습시키는 것이다.&lt;/li&gt;
+          &lt;li&gt;주로 sensor, stock 데이터와 같은 time-series data을 토대로 학습을 할때 많이 활용한다.
+&lt;br /&gt;&lt;br /&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Model prediction도 &lt;strong&gt;Batch prediction, Realtime prediction&lt;/strong&gt; 두 타입이 존재한다.&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;&lt;strong&gt;Batch prediction&lt;/strong&gt;
+        &lt;ul&gt;
+          &lt;li&gt;Batch prediction은 과거에 모인 다량의 데이터를 기반으로 예측을 하는것이다.&lt;/li&gt;
+          &lt;li&gt;즉 한번의 예측에서 많은 수의 인스턴스를 처리하게 된다.&lt;/li&gt;
+          &lt;li&gt;데이터가 time dependent하지 않고, realtime으로 예측을 하는 것이 중요하지 않은 상황에 적절하다.&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;Realtime prediction&lt;/strong&gt;
+        &lt;ul&gt;
+          &lt;li&gt;Real time prediction은 inference 요청이 온 시점에 들어온 데이터를 기반으로 실시간으로 prediction을 하는 것이다.&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;important-metrics&quot;&gt;&lt;strong&gt;Important metrics&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction%20to%20Model%20Serving/Important%20metrics.png&quot; alt=&quot;image&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Online inference에서 중요하게 살펴보는 metric으로는 latency, throughput, cost가 있다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;lantency&quot;&gt;&lt;strong&gt;Lantency&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction%20to%20Model%20Serving/Lantency.png&quot; alt=&quot;image&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Latency는 user의 요청과 이에대한 application의 응답까지의 시간을 의미한다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;throughput&quot;&gt;&lt;strong&gt;Throughput&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction%20to%20Model%20Serving/Throughput.png&quot; alt=&quot;image&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Throughput은 단위 시간동안 처리한 요청의 수를 의미한다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;cost&quot;&gt;&lt;strong&gt;Cost&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction%20to%20Model%20Serving/Cost.png&quot; alt=&quot;image&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Serving infrastructure는 반드시 cost를 수반하게 된다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;minimizing-latency-maximizing-throughput&quot;&gt;&lt;strong&gt;Minimizing Latency, Maximizing Throughput&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction%20to%20Model%20Serving/Minimizing%20Latency,%20Maximizing%20Throughput.png&quot; alt=&quot;image&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;많은 기업들은 latency를 최소화하며, throughput을 최대화하길 원한다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;예를들어 항공사 추천 서비스가 있다고 할때, 유저의 요청에 빠르게 응답할 수 있어야하며, 공휴일과 같이 유저가 몰리는 시간에는 많은 요청을 빠르게 처리할 수 있어야 한다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;이러한 요건을 충족시키기 위해서는 infrastructure를 확장해야 하는데, 이때 큰 비용이 발생한다.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;balance-cost-latency-and-throughput&quot;&gt;&lt;strong&gt;Balance Cost, Latency and Throughput&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction%20to%20Model%20Serving/Balance%20Cost,%20Latency%20and%20Throughput.png&quot; alt=&quot;image&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Infrastructure 확장에 많은 비용을 투자하지 않고 이러한 비용을 낮추기 위한 방법이 있다.
+    &lt;ul&gt;
+      &lt;li&gt;GPU 자원 공유&lt;/li&gt;
+      &lt;li&gt;Multi model serving&lt;/li&gt;
+      &lt;li&gt;Model optimization&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Multithreading vs. Multiprocessing</title>
+   <link href="http://localhost:4000/operating%20system/deep%20learning/2021/09/19/Multiprocess&multithread/"/>
+   <updated>2021-09-19T00:00:00+09:00</updated>
+   <id>http://localhost:4000/operating%20system/deep%20learning/2021/09/19/ Multiprocess&multithread</id>
+   <content type="html">&lt;hr /&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;process&quot;&gt;&lt;strong&gt;Process&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;프로세스는 실행중인 프로그램이다.&lt;/strong&gt; 즉 프로그램 자체는 프로세스가 아니라, 프로그램이 메모리에 올라가서 실행중일 때 프로세스가 되는 것이다. 프로세스는 크게 5가지 영역(text, stack, data, heap, program counter)로 나눌 수 있다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Text : Program code&lt;/li&gt;
+  &lt;li&gt;Stack : Temporary data (function parameter, return addresses, local variables, etc)&lt;/li&gt;
+  &lt;li&gt;Data : Static &amp;amp; global variables&lt;/li&gt;
+  &lt;li&gt;Heap : Dynamic allocation&lt;/li&gt;
+  &lt;li&gt;Program counter &amp;amp; registers : Current activity&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;
+&lt;img src=&quot;https://www.tutorialspoint.com/operating_system/images/process_components.jpg&quot; alt=&quot;image&quot; width=&quot;45%&quot; height=&quot;45%&quot; class=&quot;align-center&quot; /&gt;
+&lt;em&gt;Figure 1. Process in memory (&lt;a href=&quot;https://www.tutorialspoint.com/operating_system/os_processes.htm&quot;&gt;source&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;thread&quot;&gt;&lt;strong&gt;Thread&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;Thread는 프로세스 내에서 실행되는 단위를 말한다.&lt;/strong&gt; 일반적으로 한 프로세스는 하나의 스레드를 가지고 있지만, 프로그램 환경에 따라 둘 이상의 thread를 동시에 실행시킬 수 있다. 각 Thread는 program counter, register set, stack space를 별도로 지니고 있다. 반면, 각 thread는 프로세스 내 code, data, heap, file과 같은 operating system 자원을 공유하게 된다.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;
+&lt;img src=&quot;https://www.tutorialspoint.com/operating_system/images/thread_processes.jpg&quot; alt=&quot;image&quot; width=&quot;90%&quot; height=&quot;90%&quot; class=&quot;align-center&quot; /&gt;
+&lt;em&gt;Figure 2. Single thread vs Multithreads (&lt;a href=&quot;https://www.tutorialspoint.com/operating_system/os_multi_threading.htm&quot;&gt;source&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;multithreading-multiprocessing-비교&quot;&gt;&lt;strong&gt;Multithreading, multiprocessing 비교&lt;/strong&gt;&lt;/h2&gt;
+&lt;h3 id=&quot;multithreading--장점&quot;&gt;&lt;strong&gt;Multithreading : 장점&lt;/strong&gt;&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Thread 간 Resource sharing이 가능하다.
+    &lt;ul&gt;
+      &lt;li&gt;동일 프로세스 내 thread 간 데이터를 공유할 수 있다. 만약 subset으로 나누기 어려운 대량의 데이터를 다뤄야 할 경우, 데이터를 복사하거나 shared memory 방식을 사용해서 프로세스 간 데이터를 전송 또는 공유해야 한다. 하지만 데이터 복사는 복사 시 추가 시간과 메모리를 소요하게 되며, shared memory의 경우에는 개발 시 고려해야 될 요소들이 많다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;소요되는 자원이 더 적다.
+    &lt;ul&gt;
+      &lt;li&gt;Thread를 하나 생성하는 것 보다 process를 생성할 때 소요되는 시간과 자원이 훨씬 더 많이 들어간다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;multithreading--단점&quot;&gt;&lt;strong&gt;Multithreading : 단점&lt;/strong&gt;&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;안정성이 떨어진다.
+    &lt;ul&gt;
+      &lt;li&gt;만약 여러 thread 들 중 단 하나의 thread라도 문제가 발생할 경우, application이 crash된다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;디버깅 하기 어렵다.
+    &lt;ul&gt;
+      &lt;li&gt;Multithread 환경에서 디버거를 통해 버그의 원인을 발견하기 어렵다. 따라서 문제가 되는 thread를 발견하기 위해 보통 log를 찾아보며 추적하게 됨으로, 디버깅에 소요되는 시간이 많이 들어가게 된다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;multiprocessing--장점&quot;&gt;&lt;strong&gt;Multiprocessing : 장점&lt;/strong&gt;&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;안정성이 높다.
+    &lt;ul&gt;
+      &lt;li&gt;여러 프로세스 실행 중 하나의 프로세스에 문제가 발생할 경우, 해당 프로세스만 종료시키면 된다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;확장성이 크다.
+    &lt;ul&gt;
+      &lt;li&gt;프로세스는 다른 머신에 할당해서 실행할 수가 있다. 반면에 thread는 단일 프로세스 내에 존재해야 하므로 확장성이 떨어질 수밖에 없다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;multiprocessing--단점&quot;&gt;&lt;strong&gt;Multiprocessing : 단점&lt;/strong&gt;&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;프로세스 간 커뮤니케션이 복잡하다.
+    &lt;ul&gt;
+      &lt;li&gt;프로세스 간 데이터를 공유할 때는 별도의 technique (shared memory 또는 inter process communication)을 사용해야 하기 때문이다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;메모리 소요가 크다.
+    &lt;ul&gt;
+      &lt;li&gt;프로세스 간에는 별도의 독립된 메모리 영역을 갖는다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>프로그래머스 - 기둥과 보 설치</title>
