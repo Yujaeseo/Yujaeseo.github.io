@@ -1,4 +1,116 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-07-28T22:56:48+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Yu’s Tech 블로그</title><subtitle>You will never know until you try.</subtitle><author><name>Jaeseo Yu</name></author><entry><title type="html">Deploying Machine Learning Models in Production_Introduction to Model Serving</title><link href="http://localhost:4000/lecture/2022/07/28/Deploying-Machine-Learning-Models-in-Production-Introduction-to-Model-Serving/" rel="alternate" type="text/html" title="Deploying Machine Learning Models in Production_Introduction to Model Serving" /><published>2022-07-28T00:00:00+09:00</published><updated>2022-07-28T00:00:00+09:00</updated><id>http://localhost:4000/lecture/2022/07/28/%5BDeploying%20Machine%20Learning%20Models%20in%20Production%5D%20Introduction%20to%20Model%20Serving</id><content type="html" xml:base="http://localhost:4000/lecture/2022/07/28/Deploying-Machine-Learning-Models-in-Production-Introduction-to-Model-Serving/">&lt;hr /&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-07-29T23:50:40+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Yu’s Tech 블로그</title><subtitle>You will never know until you try.</subtitle><author><name>Jaeseo Yu</name></author><entry><title type="html">Deploying Machine Learning Models in Production_Introduction to Model Serving Infrastructure</title><link href="http://localhost:4000/lecture/2022/07/29/Deploying-Machine-Learning-Models-in-Production-Introduction-to-Model-Serving-Infrastructure/" rel="alternate" type="text/html" title="Deploying Machine Learning Models in Production_Introduction to Model Serving Infrastructure" /><published>2022-07-29T00:00:00+09:00</published><updated>2022-07-29T00:00:00+09:00</updated><id>http://localhost:4000/lecture/2022/07/29/%5BDeploying%20Machine%20Learning%20Models%20in%20Production%5D%20Introduction%20to%20Model%20Serving%20Infrastructure</id><content type="html" xml:base="http://localhost:4000/lecture/2022/07/29/Deploying-Machine-Learning-Models-in-Production-Introduction-to-Model-Serving-Infrastructure/">&lt;hr /&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;optimizing-models-for-serving&quot;&gt;&lt;strong&gt;Optimizing Models for Serving&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220729225850339.png&quot; alt=&quot;image-20220729225850339&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;최근 모델의 정확도를 높이기 위해 model에 feature 수를 늘리는 등 모델 자체의 complexity가 커지고 있다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;정확도는 높아지지만 이로인해 prediction latency도 커지고 있다.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;as-model-complexity-increases-cost-increases&quot;&gt;&lt;strong&gt;As Model Complexity Increases Cost Increases&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220729225858482.png&quot; alt=&quot;image-20220729225858482&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;모델 complexity의 증가는 비용을 초래한다.&lt;/li&gt;
+  &lt;li&gt;GPU, TPU와 같은 하드웨어와 model registry, maintenance에 있어서의 비용이 포함된다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;balancing-cost-and-complexity&quot;&gt;&lt;strong&gt;Balancing Cost and Complexity&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220729225907449.png&quot; alt=&quot;image-20220729225907449&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;모델의 정확도와 prediction 속도 간에는 trade-off 관계가 존재하며, 이 사이의 균형을 맞추는 것이 중요하다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;optimizing-and-satisficing-metrics&quot;&gt;&lt;strong&gt;Optimizing and Satisficing Metrics&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220729225915162.png&quot; alt=&quot;image-20220729225915162&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;모델의 정확도를 측정하는 metric으로 accuracy, precision, recall이 있다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;반면, 연산상의 제약 조건과 관련된 metric으로는 latency, model size, GPU load가 있다.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;optimizing-and-satisficing-metrics-1&quot;&gt;&lt;strong&gt;Optimizing and Satisficing Metrics&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220729225927745.png&quot; alt=&quot;image-20220729225927745&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Metric을 만족하는 방법은 우선 특정한 serving infrastructure에서 model의 complexity를 증가시키는 것이다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Latency와 같은 연산 상의 제약조건 metric에 걸리는 순간까지 정확도를 높인다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;그리고 결과를 평가하고 난 후에 정확도를 높이던지, infra를 증축하던지, 모델의 complexity를 줄이던지와 같은 방법을 쓴다.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;use-of-accelerators-in-serving-infrastructure&quot;&gt;&lt;strong&gt;Use of Accelerators in Serving Infrastructure&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220729225935034.png&quot; alt=&quot;image-20220729225935034&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Accelerator를 통해 infrastructure를 최적화할 수 있다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;GPU의 경우는 training 가속화에 강점을 보이며,&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;TPU는 large batch size, complex model inference에 강점이 있다.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;maintaining-input-feature-lookup&quot;&gt;&lt;strong&gt;Maintaining Input Feature Lookup&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220729225942225.png&quot; alt=&quot;image-20220729225942225&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Prediction을 수행할 때에는 많은 feature들이 필요할 수 있다.&lt;/li&gt;
+  &lt;li&gt;예를들어 음식 배달 시간을 예측한다고 할때, 주문 수, 현재 교통 상황, 처리되지 않은 주문 수와 같은 많은 정보들이 필요하다.&lt;/li&gt;
+  &lt;li&gt;Prediction latency를 줄이기 위해서는 사용되는 대량의 정보를 data store에서 빠르게 읽을 수 있어야 한다.&lt;/li&gt;
+  &lt;li&gt;이때 cache를 사용하면 필요한 정보를 빠르게 읽어 latency를 낮출 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;nosql-databases-caching-and-feature-lookup&quot;&gt;&lt;strong&gt;NoSQL Databases: Caching and Feature Lookup&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220729225950122.png&quot; alt=&quot;image-20220729225950122&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;NoSQL은 caching과 feature look up을 구현하기에 좋으며, 위와 같이 다양한 옵션들이 존재한다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;</content><author><name>Jaeseo Yu</name></author><category term="Lecture" /><category term="mlops" /><category term="deep learning" /><category term="machine learning" /><summary type="html">Model serving 인프라에서 고려해야할 점들에 대한 내용을 알아본다.</summary></entry><entry><title type="html">Deploying Machine Learning Models in Production_Introduction to Model Serving</title><link href="http://localhost:4000/lecture/2022/07/28/Deploying-Machine-Learning-Models-in-Production-Introduction-to-Model-Serving/" rel="alternate" type="text/html" title="Deploying Machine Learning Models in Production_Introduction to Model Serving" /><published>2022-07-28T00:00:00+09:00</published><updated>2022-07-28T00:00:00+09:00</updated><id>http://localhost:4000/lecture/2022/07/28/%5BDeploying%20Machine%20Learning%20Models%20in%20Production%5D%20Introduction%20to%20Model%20Serving</id><content type="html" xml:base="http://localhost:4000/lecture/2022/07/28/Deploying-Machine-Learning-Models-in-Production-Introduction-to-Model-Serving/">&lt;hr /&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 
@@ -887,112 +999,4 @@ Collections 패키지의 &lt;code class=&quot;language-plaintext highlighter-rou
   &lt;p&gt;Spark는 driver process와 다수의 executor 프로세스로 구성된다. Driver process는 클러스터 노드 중 하나에서 실행되며 main() 함수를 실행한다. 특정 작업을 병렬적으로 수행하기 위해 driver process는 다수의 executor에게 작업을 할당하고 executor는 할당받은 작업을 수행하게 된다. 사용자는 클러스터의 각 노드에 할당할 executor의 수를 지정할 수 있다. Spark가 연산에 사용할 클러스터는 Spark standalone 클러스터 매니저, Hadoop YARN, Mesos 같은 클러스터 매니저에서 관리한다. 사용자는 이 클러스터 매니저에 application을 제출하게 되고, 클러스터 매니저는 application 실행에 필요한 자원을 할당하여 사용자가 작업을 처리할 수 있도록 한다.&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;</content><author><name>Jaeseo Yu</name></author><category term="Spark" /><category term="distributed programming" /><category term="spark" /><summary type="html">Apache spark에 대한 기본적인 지식을 다룬다.</summary></entry><entry><title type="html">MongoDB replset으로 변환</title><link href="http://localhost:4000/mongodb/2021/02/21/MongoDB-replset%EC%9C%BC%EB%A1%9C-%EB%B3%80%ED%99%98/" rel="alternate" type="text/html" title="MongoDB replset으로 변환" /><published>2021-02-21T00:00:00+09:00</published><updated>2021-02-21T00:00:00+09:00</updated><id>http://localhost:4000/mongodb/2021/02/21/MongoDB%20replset%EC%9C%BC%EB%A1%9C%20%EB%B3%80%ED%99%98</id><content type="html" xml:base="http://localhost:4000/mongodb/2021/02/21/MongoDB-replset%EC%9C%BC%EB%A1%9C-%EB%B3%80%ED%99%98/">&lt;hr /&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;도입-&quot;&gt;도입 :&lt;/h2&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;MongoDB 3.6 version 이후 도입된 &lt;strong&gt;Change Stream&lt;/strong&gt; 기능은 DB의 변경 사항을 real time으로 관찰할 수 있게 해준다. 즉 프로그램은 Change Stream을 통해서
-DB의 변화를 감지하고 그에 따른 Response를 할 수 있다. 단일 Collection부터 Database뿐만 아니라 배포한 모든 것들에 대해서 해당 기능을 적용할 수 있다. 또한 특정 변경 사항에 filter를 적용해 특정 변동에 한정해서 대응할 수 있다.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;
- 하지만 Change Stream을 적용하려면 MongoDB를 Replica Set으로 변경해야 한다. 따라서 이번 글에서는 DB를 &lt;strong&gt;Replica Set&lt;/strong&gt;으로 변경하는 방법에 대해 다루려고
- 한다.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;instance-replica-set으로-변경생성하기&quot;&gt;Instance Replica Set으로 변경/생성하기&lt;/h2&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;1) 실행 중인 Stand alone Instance를 shutdown(프로세스 종료)한다&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;use admin  // admin database에 대하여 shutdown 명령어를 실행해야 한다는 점에 유의해야 한다
-db.shutdownServer()
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;2) &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--Replica Set&lt;/code&gt; 옵션을 추가하여 인스턴스를 다시 실행한다.&lt;/p&gt;
-
-&lt;p&gt;아래의 명령어를 실행해서 Stand alone instance를 Replica Set의 멤버로 다시 실행한다. 
-이 때 dbpath를 파라미터로 전달해주어야 한다. 기존 Stand alone Instance의 경로를 적거나, 새로 인스턴스 파일을 만들 경우 storage로 사용할 새로운 파일의 경로를 적는다. 주의해야 할 점은 별도의 파일 설정을 해주지 않았다면, 현재 인스턴스의 default path는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;'data/db'&lt;/code&gt;라는 점이다. 따라서 현재 인스턴스를 Replica Set으로 변경하고 싶은 경우 path에 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;'C:\data\db'&lt;/code&gt; 명시하면 된다.&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mongod --port 27017 --dbpath /srv/mongodb/db0 --replSet rs0 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;3) Replica Set을 초기화한다.&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;rs.initiate()
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;service로-변경한-instance-실행하기&quot;&gt;Service로 변경한 Instance 실행하기&lt;/h2&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;Replica Set으로 인스턴스를 변경한 후 프로젝트를 실행하면서 곤혹스러웠던 점은 컴퓨터를 재부팅할 경우 기존 Instance를(내 경우에는 default path의 Instance) Stand alone으로 재실행 한다는 것이었다.&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mongod --dbpath /srv/mongodb/db0 --replSet rs0 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;위와 같이 매번 path를 지정해주면서 ReplSet으로 실행시킬 수 있다. 하지만 프로젝트 과정에서 별도의 설정없이 mongodb를 사용했다면 이러한 과정은 매우 불편할 것이다.
-따라서 부팅시 원하는 Instance를 실행하기 위해서 &lt;strong&gt;Window Service&lt;/strong&gt;를 변경하는 과정이 필요하다. 아래의 과정은 &lt;strong&gt;관리자 권한&lt;/strong&gt;으로 cmd를 실행한 후 따라하면 된다.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;1) MongoDB 서비스 종료하기&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;net stop MongoDB
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;2) &lt;strong&gt;mongod.cfg&lt;/strong&gt; 파일에서 path 수정 (새로 Replica Set 디렉토리를 설정한 경우에만)&lt;/p&gt;
-
-&lt;p&gt;mongod.cfg 파일은 MongoDB 폴더의 하위 폴더인 bin 파일에 존재한다. 주의해야 할 점은 mongoDB를 실행할 때 자동으로 config파일의 설정 사항을 반영하지 않는다는 점이다. config 파일의 내용이 아니라 default로 설정되어 있는 설정에 따라 동작하기 때문이다. 따라서 아래의 과정을 통해 mongod.cfg파일의 path를 변경했다 할지라도 다음 번 실행시에 어떠한 변화도 일어나지 않는다. 실행 시 별도의 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--config&lt;/code&gt; 옵션을 통해 사용할 config 파일의 경로를 명시해야 한다.&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# Where and how to store data.
-storage:
-  dbPath: C:\data\db1 //이 부분을 원하는 path로 변경한다. 
-  journal:
-    enabled: true
-
-# where to write logging data.
-systemLog:
-  destination: file
-  logAppend: true
-  path:  C:\Program Files\MongoDB\Server\4.0\log\mongod.log // log파일의 경로도 별도로 설정해 줄 수 있다.
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;3) 기존 mongoDB 서비스를 제거한다.&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mongod --remove
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;4) 새로운 Service를 정의한 후 실행한다.&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--config&lt;/code&gt;와 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--replSet&lt;/code&gt; 옵션을 통해 config에 지정된 path의 Instance를 rs0이라는 ReplSet으로 실행하는 서비스를 설치할 수 있다.&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mongod --config &quot;C:\etc\mongod.cfg&quot; --replSet rs0 --install --serviceName &quot;MongoDB&quot;
-net start MongoDB
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;추가내용&quot;&gt;추가내용&lt;/h2&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;위의 과정을 모두 마치면 부팅시 변경 사항을 토대로 새로운 Instance를 실행하게 된다. 기존의 자료를 생성한 디렉토리로 옮기고자 하는 경우 기존 디렉토리에 있는 파일들을 옮겨 넣으면 된다.&lt;/p&gt;
-
-&lt;p&gt;프로젝트에서 노드를 사용하기 때문에 덧붙이자면, ReplSet DB와 node.js를 연결하고자 하는 경우 아래와 같이 URL에 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;?replicaSet=rs0(이름)&lt;/code&gt;을 더해주면 된다.&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;new Mongo(&quot;mongodb://localhost:27017/demo?replicaSet=rs0&quot;);
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Jaeseo Yu</name></author><category term="Mongodb" /><category term="database" /><summary type="html">Change Stream을 적용하려면 MongoDB를 Replica Set으로 변경해야 한다. 따라서 이번 글에서는 DB를 Replica Set으로 변경하는 방법에 대해 다룬다.</summary></entry></feed>
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;</content><author><name>Jaeseo Yu</name></author><category term="Spark" /><category term="distributed programming" /><category term="spark" /><summary type="html">Apache spark에 대한 기본적인 지식을 다룬다.</summary></entry></feed>
