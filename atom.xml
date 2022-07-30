@@ -4,13 +4,201 @@
  <title>Yu's Tech 블로그</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2022-07-30T00:00:27+09:00</updated>
+ <updated>2022-07-30T11:37:06+09:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Jaeseo Yu</name>
    <email></email>
  </author>
 
+ 
+ <entry>
+   <title>Deploying Machine Learning Models in Production_Deployment Options</title>
+   <link href="http://localhost:4000/lecture/2022/07/30/Deploying-Machine-Learning-Models-in-Production-Deployment-Options/"/>
+   <updated>2022-07-30T00:00:00+09:00</updated>
+   <id>http://localhost:4000/lecture/2022/07/30/[Deploying Machine Learning Models in Production] Deployment Options</id>
+   <content type="html">&lt;h2 id=&quot;model-deployments&quot;&gt;&lt;strong&gt;Model Deployments&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220730095805422.png&quot; alt=&quot;image-20220730095805422&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;모델 배포는 데이터센터와 같이 대규모의 인프라 공간에 모델을 중앙집중형 서버에 배포하는 것과 각 사용자의 local device에 배포하는 두가지가 있다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;running-in-huge-data-centers&quot;&gt;&lt;strong&gt;Running in Huge Data Centers&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220730095619218.png&quot; alt=&quot;image-20220730095619218&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;데이터센터를 운영하면 cost를 줄이기 위한 노력을 수행한다.
+    &lt;ul&gt;
+      &lt;li&gt;Google과 같은 큰 기업들은 지속적으로 데이터센터의 resource utilization, application의 cost를 줄이려고 한다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;constrained-environment-mobile-phone&quot;&gt;&lt;strong&gt;Constrained Environment: Mobile Phone&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220730095627775.png&quot; alt=&quot;image-20220730095627775&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;거대한 데이터센터 뿐만 아니라 핸드폰과 같은 제한된 모바일 환경에서도 모델을 serving하기도 한다.&lt;/li&gt;
+  &lt;li&gt;모바일핸드폰의 GPU에는 데이터센터에서 사용되는 GPU보다 크기가 훨씬 작고 메모리 용량은 일반적으로 4GB가 넘지 않는다.&lt;/li&gt;
+  &lt;li&gt;이러한 GPU를 우리가 배포한 application이 점유하는 것이 아니라 실행되고 있는 여러 application이 점유하게 된다.&lt;/li&gt;
+  &lt;li&gt;또한 GPU를 이용하여 연산을 가속화하면 배터리가 빨리 닳게 되고 열이 발생해 application에 대한 인식이 좋지 않아질 것이다.&lt;/li&gt;
+  &lt;li&gt;마지막으로, application의 용량이 커지면 다운로드 받기 꺼려질 것이다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;restrictions-in-a-constrained-environment&quot;&gt;&lt;strong&gt;Restrictions in a Constrained Environment&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220730095635328.png&quot; alt=&quot;image-20220730095635328&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;낮은 메모리 용량, 프로세싱 파워, 배터리 용량과 같은 제한된 요건을 갖기 때문에 edge device에 큰 모델을 배포할 수 없다.&lt;/li&gt;
+  &lt;li&gt;이러한 이유로 보통 서버에 모델을 배포하고 REST API를 통해 서비스를 하지만, latency가 매우 중요할 때는  적합하지 않다.
+    &lt;ul&gt;
+      &lt;li&gt;자율주행자동차는 실시간으로 그때그때 판단을 해야 하는데, 서버와 통신을 하게 되면 network 지연과 같은 문제로 큰 문제가 초래될 수 있다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;prediction-latency-is-almost-always-important&quot;&gt;&lt;strong&gt;Prediction Latency is Almost Always Important&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220730095647690.png&quot; alt=&quot;image-20220730095647690&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;항상 latency 를 줄여 application의 response time을 줄여 user experience를 향상시켜라.
+    &lt;ul&gt;
+      &lt;li&gt;예외적인 경우는 prediction의 정확도가 훨씬 중요한 task를 수행할 때이다.&lt;/li&gt;
+      &lt;li&gt;예시는 질병 분석이 있다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;이때 model complexity, size와 같은 trade-off 관계에 있는 요소들도 고려해야 하며, 발생하는 cost도 고려해야 한다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;choose-best-model-for-the-task&quot;&gt;&lt;strong&gt;Choose Best Model for the Task&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220730095656008.png&quot; alt=&quot;image-20220730095656008&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;언급한 constraints를 기준으로 최적의 모델을 선택해야한다.
+    &lt;ul&gt;
+      &lt;li&gt;Mobilenet은 모바일 환경을 위해 개발된 모델이다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;other-strategies&quot;&gt;&lt;strong&gt;Other Strategies&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220730095702751.png&quot; alt=&quot;image-20220730095702751&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;프로파일링을 통해 병목지점을 파악하고,&lt;/li&gt;
+  &lt;li&gt;특정 operation이 많은 시간을 차지한다는 것을 발견한다면, 해당 부분은 최적화해야 한다.&lt;/li&gt;
+  &lt;li&gt;모델 자체를 최적화하여 더 빠르고 energy efficient한 모델을 만들수도 있며 특히 mobile 환경에서 중요하다.&lt;/li&gt;
+  &lt;li&gt;사용하는 thread의 수를 늘리는 방법도 있다.
+    &lt;ul&gt;
+      &lt;li&gt;하지만 thread 수를 늘린다고 해서 무조건 성능이 좋아지는 것은 아니다.&lt;/li&gt;
+      &lt;li&gt;무엇을 concurrent하게 실행하고 있는지 등에 따라 성능 차이가 발생한다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;web-applications-for-users&quot;&gt;&lt;strong&gt;Web Applications for Users&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220730095709919.png&quot; alt=&quot;image-20220730095709919&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;모델에서 서비스를 받는 유저는 request를 web application을 통해한다.&lt;/li&gt;
+  &lt;li&gt;Model은 API 서비스 형태로 존재하고, 이러한 과정을 돕는 다양한 web framework들이 존재한다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;serving-systems-for-easy-deployment&quot;&gt;&lt;strong&gt;Serving systems for easy deployment&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220730095716511.png&quot; alt=&quot;image-20220730095716511&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;모델 서빙 시스템은 다양한 방식으로 모델 배포를 관리한다.
+    &lt;ul&gt;
+      &lt;li&gt;서버에 모델을 배포하여 서비스를 제공할 수 있으며,&lt;/li&gt;
+      &lt;li&gt;Custom website가 필요하지 않고,&lt;/li&gt;
+      &lt;li&gt;몇줄 안되는 코드로 배포가 가능하고,&lt;/li&gt;
+      &lt;li&gt;Model update와 rollback을 편리하게 수행할 수 있다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;clipper&quot;&gt;&lt;strong&gt;Clipper&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220730095723575.png&quot; alt=&quot;image-20220730095723575&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Clipper는 UC berkely에서 만든 model serving 시스템이다.
+    &lt;ul&gt;
+      &lt;li&gt;다양한 모델 배포를 지원하며, restful API로 기존 application과 쉽게 통합할 수 있으며, 도커로 컨테이너화하여 자원 관리를 지원하며, latency setting을 할 수 있다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;tensorflow-serving&quot;&gt;&lt;strong&gt;TensorFlow Serving&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220730095732320.png&quot; alt=&quot;image-20220730095732320&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Tensorflow serving은 구글에서 만든 오픈소스이다.
+    &lt;ul&gt;
+      &lt;li&gt;텐서플로우 모델을 쉽게 배포할 수 있으며,&lt;/li&gt;
+      &lt;li&gt;다른 타입의 모델도 배포할 수 있으며,&lt;/li&gt;
+      &lt;li&gt;REST와 gRPC 프로토콜을 제공하며,&lt;/li&gt;
+      &lt;li&gt;모델의 version management가 가능하다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;advantages-of-serving-with-a-managed-service&quot;&gt;&lt;strong&gt;Advantages of Serving with a Managed Service&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220730095739374.png&quot; alt=&quot;image-20220730095739374&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Google cloud와 같은 managed service를 사용하면 더 편할 수 있다.
+    &lt;ul&gt;
+      &lt;li&gt;낮은 latency의 endpoint를 제공하고 대량의 batch를 처리할 수 있으며,&lt;/li&gt;
+      &lt;li&gt;별도 환경 또는 클라우드에서 학습한 모델을 배포할 수 있으며,&lt;/li&gt;
+      &lt;li&gt;traffic에 기반하여 자동으로 scaling을 수행하고&lt;/li&gt;
+      &lt;li&gt;GPU/TPU와 같은 연산 가속기도 지원한다.
+        &lt;ul&gt;
+          &lt;li&gt;Google 외에도 MS, Amazon과 같은 기업들이 비슷한 서비스를 제공한다.&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Deploying Machine Learning Models in Production_Introduction to Model Serving Infrastructure</title>

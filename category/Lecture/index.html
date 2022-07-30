@@ -88,7 +88,7 @@
   </div>
 
   <nav class="sidebar-nav">
-    <a class="sidebar-nav-item" href="/">Home <small class="text-info">14</small></a>
+    <a class="sidebar-nav-item" href="/">Home <small class="text-info">15</small></a>
 
     
 
@@ -191,8 +191,8 @@
       <a class = "sidebar-nav-item " href="/category/Operating system/index.html">Operating system <small class="text-info">1</small></a>  
     <!--<a class="sidebar-nav-item" href="/category/Operating system/index.html">Operating system</a>  <small class="text-muted">1</small>-->
     
-      <a class = "sidebar-nav-item  active" href="/category/Lecture/index.html">Lecture <small class="text-info">2</small></a>  
-    <!--<a class="sidebar-nav-item" href="/category/Lecture/index.html">Lecture</a>  <small class="text-muted">2</small>-->
+      <a class = "sidebar-nav-item  active" href="/category/Lecture/index.html">Lecture <small class="text-info">3</small></a>  
+    <!--<a class="sidebar-nav-item" href="/category/Lecture/index.html">Lecture</a>  <small class="text-muted">3</small>-->
     
     
 <!--
@@ -227,6 +227,212 @@
         <div class="posts">
     
     
+      <div class="post">
+            <h1 class="post-title">
+            <a href="/lecture/2022/07/30/Deploying-Machine-Learning-Models-in-Production-Deployment-Options/">
+                Deploying Machine Learning Models in Production_Deployment Options
+            </a>
+            </h1>
+
+            <span class="post-date">30 Jul 2022</span>
+            
+            
+              
+                <span class="badge badge-dark">MLops</span>
+              
+            
+              
+                <span class="badge badge-dark">Deep learning</span>
+              
+            
+              
+                <span class="badge badge-dark">Machine learning</span>
+              
+            
+            
+            <h2 id="model-deployments"><strong>Model Deployments</strong></h2>
+
+<p><img src="/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220730095805422.png" alt="image-20220730095805422" width="100%" height="100%" class="align-center" /></p>
+
+<ul>
+  <li>모델 배포는 데이터센터와 같이 대규모의 인프라 공간에 모델을 중앙집중형 서버에 배포하는 것과 각 사용자의 local device에 배포하는 두가지가 있다.</li>
+</ul>
+
+<p><br /><br /></p>
+
+<h2 id="running-in-huge-data-centers"><strong>Running in Huge Data Centers</strong></h2>
+
+<p><img src="/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220730095619218.png" alt="image-20220730095619218" width="100%" height="100%" class="align-center" /></p>
+
+<ul>
+  <li>데이터센터를 운영하면 cost를 줄이기 위한 노력을 수행한다.
+    <ul>
+      <li>Google과 같은 큰 기업들은 지속적으로 데이터센터의 resource utilization, application의 cost를 줄이려고 한다.</li>
+    </ul>
+  </li>
+</ul>
+
+<p><br /><br /></p>
+
+<h2 id="constrained-environment-mobile-phone"><strong>Constrained Environment: Mobile Phone</strong></h2>
+
+<p><img src="/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220730095627775.png" alt="image-20220730095627775" width="100%" height="100%" class="align-center" /></p>
+
+<ul>
+  <li>거대한 데이터센터 뿐만 아니라 핸드폰과 같은 제한된 모바일 환경에서도 모델을 serving하기도 한다.</li>
+  <li>모바일핸드폰의 GPU에는 데이터센터에서 사용되는 GPU보다 크기가 훨씬 작고 메모리 용량은 일반적으로 4GB가 넘지 않는다.</li>
+  <li>이러한 GPU를 우리가 배포한 application이 점유하는 것이 아니라 실행되고 있는 여러 application이 점유하게 된다.</li>
+  <li>또한 GPU를 이용하여 연산을 가속화하면 배터리가 빨리 닳게 되고 열이 발생해 application에 대한 인식이 좋지 않아질 것이다.</li>
+  <li>마지막으로, application의 용량이 커지면 다운로드 받기 꺼려질 것이다.</li>
+</ul>
+
+<p><br /><br /></p>
+
+<h2 id="restrictions-in-a-constrained-environment"><strong>Restrictions in a Constrained Environment</strong></h2>
+
+<p><img src="/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220730095635328.png" alt="image-20220730095635328" width="100%" height="100%" class="align-center" /></p>
+
+<ul>
+  <li>낮은 메모리 용량, 프로세싱 파워, 배터리 용량과 같은 제한된 요건을 갖기 때문에 edge device에 큰 모델을 배포할 수 없다.</li>
+  <li>이러한 이유로 보통 서버에 모델을 배포하고 REST API를 통해 서비스를 하지만, latency가 매우 중요할 때는  적합하지 않다.
+    <ul>
+      <li>자율주행자동차는 실시간으로 그때그때 판단을 해야 하는데, 서버와 통신을 하게 되면 network 지연과 같은 문제로 큰 문제가 초래될 수 있다.</li>
+    </ul>
+  </li>
+</ul>
+
+<p><br /><br /></p>
+
+<h2 id="prediction-latency-is-almost-always-important"><strong>Prediction Latency is Almost Always Important</strong></h2>
+
+<p><img src="/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220730095647690.png" alt="image-20220730095647690" width="100%" height="100%" class="align-center" /></p>
+
+<ul>
+  <li>항상 latency 를 줄여 application의 response time을 줄여 user experience를 향상시켜라.
+    <ul>
+      <li>예외적인 경우는 prediction의 정확도가 훨씬 중요한 task를 수행할 때이다.</li>
+      <li>예시는 질병 분석이 있다.</li>
+    </ul>
+  </li>
+  <li>이때 model complexity, size와 같은 trade-off 관계에 있는 요소들도 고려해야 하며, 발생하는 cost도 고려해야 한다.</li>
+</ul>
+
+<p><br /><br /></p>
+
+<h2 id="choose-best-model-for-the-task"><strong>Choose Best Model for the Task</strong></h2>
+
+<p><img src="/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220730095656008.png" alt="image-20220730095656008" width="100%" height="100%" class="align-center" /></p>
+
+<ul>
+  <li>언급한 constraints를 기준으로 최적의 모델을 선택해야한다.
+    <ul>
+      <li>Mobilenet은 모바일 환경을 위해 개발된 모델이다.</li>
+    </ul>
+  </li>
+</ul>
+
+<p><br /><br /></p>
+
+<h2 id="other-strategies"><strong>Other Strategies</strong></h2>
+
+<p><img src="/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220730095702751.png" alt="image-20220730095702751" width="100%" height="100%" class="align-center" /></p>
+
+<ul>
+  <li>프로파일링을 통해 병목지점을 파악하고,</li>
+  <li>특정 operation이 많은 시간을 차지한다는 것을 발견한다면, 해당 부분은 최적화해야 한다.</li>
+  <li>모델 자체를 최적화하여 더 빠르고 energy efficient한 모델을 만들수도 있며 특히 mobile 환경에서 중요하다.</li>
+  <li>사용하는 thread의 수를 늘리는 방법도 있다.
+    <ul>
+      <li>하지만 thread 수를 늘린다고 해서 무조건 성능이 좋아지는 것은 아니다.</li>
+      <li>무엇을 concurrent하게 실행하고 있는지 등에 따라 성능 차이가 발생한다.</li>
+    </ul>
+  </li>
+</ul>
+
+<p><br /><br /></p>
+
+<h2 id="web-applications-for-users"><strong>Web Applications for Users</strong></h2>
+
+<p><img src="/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220730095709919.png" alt="image-20220730095709919" width="100%" height="100%" class="align-center" /></p>
+
+<ul>
+  <li>모델에서 서비스를 받는 유저는 request를 web application을 통해한다.</li>
+  <li>Model은 API 서비스 형태로 존재하고, 이러한 과정을 돕는 다양한 web framework들이 존재한다.</li>
+</ul>
+
+<p><br /><br /></p>
+
+<h2 id="serving-systems-for-easy-deployment"><strong>Serving systems for easy deployment</strong></h2>
+
+<p><img src="/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220730095716511.png" alt="image-20220730095716511" width="100%" height="100%" class="align-center" /></p>
+
+<ul>
+  <li>모델 서빙 시스템은 다양한 방식으로 모델 배포를 관리한다.
+    <ul>
+      <li>서버에 모델을 배포하여 서비스를 제공할 수 있으며,</li>
+      <li>Custom website가 필요하지 않고,</li>
+      <li>몇줄 안되는 코드로 배포가 가능하고,</li>
+      <li>Model update와 rollback을 편리하게 수행할 수 있다.</li>
+    </ul>
+  </li>
+</ul>
+
+<p><br /><br /></p>
+
+<h2 id="clipper"><strong>Clipper</strong></h2>
+
+<p><img src="/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220730095723575.png" alt="image-20220730095723575" width="100%" height="100%" class="align-center" /></p>
+
+<ul>
+  <li>Clipper는 UC berkely에서 만든 model serving 시스템이다.
+    <ul>
+      <li>다양한 모델 배포를 지원하며, restful API로 기존 application과 쉽게 통합할 수 있으며, 도커로 컨테이너화하여 자원 관리를 지원하며, latency setting을 할 수 있다.</li>
+    </ul>
+  </li>
+</ul>
+
+<p><br /><br /></p>
+
+<h2 id="tensorflow-serving"><strong>TensorFlow Serving</strong></h2>
+
+<p><img src="/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220730095732320.png" alt="image-20220730095732320" width="100%" height="100%" class="align-center" /></p>
+
+<ul>
+  <li>Tensorflow serving은 구글에서 만든 오픈소스이다.
+    <ul>
+      <li>텐서플로우 모델을 쉽게 배포할 수 있으며,</li>
+      <li>다른 타입의 모델도 배포할 수 있으며,</li>
+      <li>REST와 gRPC 프로토콜을 제공하며,</li>
+      <li>모델의 version management가 가능하다.</li>
+    </ul>
+  </li>
+</ul>
+
+<p><br /><br /></p>
+
+<h2 id="advantages-of-serving-with-a-managed-service"><strong>Advantages of Serving with a Managed Service</strong></h2>
+
+<p><img src="/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220730095739374.png" alt="image-20220730095739374" width="100%" height="100%" class="align-center" /></p>
+
+<ul>
+  <li>Google cloud와 같은 managed service를 사용하면 더 편할 수 있다.
+    <ul>
+      <li>낮은 latency의 endpoint를 제공하고 대량의 batch를 처리할 수 있으며,</li>
+      <li>별도 환경 또는 클라우드에서 학습한 모델을 배포할 수 있으며,</li>
+      <li>traffic에 기반하여 자동으로 scaling을 수행하고</li>
+      <li>GPU/TPU와 같은 연산 가속기도 지원한다.
+        <ul>
+          <li>Google 외에도 MS, Amazon과 같은 기업들이 비슷한 서비스를 제공한다.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p><br /><br /></p>
+
+        </div>
+  
       <div class="post">
             <h1 class="post-title">
             <a href="/lecture/2022/07/29/Deploying-Machine-Learning-Models-in-Production-Introduction-to-Model-Serving-Infrastructure/">
