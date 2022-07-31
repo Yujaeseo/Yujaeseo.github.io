@@ -4,13 +4,202 @@
  <title>Yu's Tech 블로그</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2022-07-30T11:37:06+09:00</updated>
+ <updated>2022-07-31T13:18:00+09:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Jaeseo Yu</name>
    <email></email>
  </author>
 
+ 
+ <entry>
+   <title>Deploying Machine Learning Models in Production_Installing TensorFlow Serving</title>
+   <link href="http://localhost:4000/lecture/2022/07/31/Deploying-Machine-Learning-Models-in-Production-Installing-tensorflow-serving/"/>
+   <updated>2022-07-31T00:00:00+09:00</updated>
+   <id>http://localhost:4000/lecture/2022/07/31/[Deploying Machine Learning Models in Production] Installing tensorflow serving</id>
+   <content type="html">&lt;h2 id=&quot;install-tensorflow-serving-1&quot;&gt;&lt;strong&gt;Install Tensorflow Serving (1)&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731110109225.png&quot; alt=&quot;image-20220731110109225&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Tensorflow serving을 설치하는 가장 쉬운 방법은 docker image를 사용하는 것이다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;install-tensorflow-serving-2&quot;&gt;&lt;strong&gt;Install Tensorflow Serving (2)&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731110124591.png&quot; alt=&quot;image-20220731110124591&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Binaries를 이용해서 직접 다운로드 받는 방법은 다음과 같다.&lt;/li&gt;
+  &lt;li&gt;Tensorflow-model-server는 플랫폼에 종속된 optimization 방식이 적용된 반면,&lt;/li&gt;
+  &lt;li&gt;Tensorflow-model-server-universal은 플랫폼에 종속된 optimization 방식이 적용되지 않았다는 점이다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;install-tensorflow-serving-3&quot;&gt;&lt;strong&gt;Install Tensorflow Serving (3)&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731110132863.png&quot; alt=&quot;image-20220731110132863&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;직접 customize를 하길 원한다면 source로도 build를 할 수 있다.&lt;/p&gt;
+
+    &lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;install-tensorflow-serving-4&quot;&gt;&lt;strong&gt;Install Tensorflow Serving (4)&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731110141743.png&quot; alt=&quot;image-20220731110141743&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Tensorflow serving을 다운로드 받을 수 있는 archive 위치 정보를 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/etc/apt/sources.list.d&lt;/code&gt;에 등록한다.&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;인증을 위한 key를 불러오고, apt 업데이트 후 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;apt-get&lt;/code&gt;을 이용하여 tensorflow serving을 다운받는다.&lt;/p&gt;
+
+    &lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;import-the-mnist-dataset&quot;&gt;&lt;strong&gt;Import the MNIST Dataset&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731110150647.png&quot; alt=&quot;image-20220731110150647&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;MNIST 데이터셋을 이용하여 비전 모델을 학습시킨다.
+    &lt;ul&gt;
+      &lt;li&gt;70,000장 (train 60,000/ test 10,000)의 0-9 grayscale 이미지(28x28)로 이루어져있다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Numpy array 형식으로 데이터를 불러오고 0-1 scale 값으로 normalization을 수행한다.&lt;/p&gt;
+
+    &lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;import-the-mnist-dataset-1&quot;&gt;&lt;strong&gt;Import the MNIST Dataset&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731110209791.png&quot; alt=&quot;image-20220731110209791&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Train, test 각각을 (60,000 x 28 x 28 x 1), (10,000 x 28 x 28 x 1) 형식의 array로 변환한다.&lt;/p&gt;
+
+    &lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;look-at-a-sample-image&quot;&gt;&lt;strong&gt;Look at a Sample Image&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731110217800.png&quot; alt=&quot;image-20220731110217800&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Sample image를 확인한다.&lt;/p&gt;
+
+    &lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;build-a-model&quot;&gt;&lt;strong&gt;Build a Model&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731110226735.png&quot; alt=&quot;image-20220731110226735&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;간단한 CNN 모델을 구성한다.&lt;/p&gt;
+
+    &lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;train-the-model&quot;&gt;&lt;strong&gt;Train the Model&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731110234568.png&quot; alt=&quot;image-20220731110234568&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;모델 training에 사용할 optimizer, loss, metric을 세팅한다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Fit&lt;/code&gt;을 실행하면 모델 학습이 진행되고, history 변수에는 epoch by epoch accuracy가 저장된다.&lt;/p&gt;
+
+    &lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;evaluate-the-model&quot;&gt;&lt;strong&gt;Evaluate the Model&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731110241758.png&quot; alt=&quot;image-20220731110241758&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Testset에 대해 학습된 모델의 정확도를 평가한다.
+&lt;br /&gt;&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;save-the-model&quot;&gt;&lt;strong&gt;Save the Model&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731110250111.png&quot; alt=&quot;image-20220731110250111&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Tensorflow serving을 사용하기 위해서는 모델을 저장해야한다.&lt;/p&gt;
+
+    &lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;launch-your-saved-model&quot;&gt;&lt;strong&gt;Launch Your Saved Model&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731110257655.png&quot; alt=&quot;image-20220731110257655&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;bash script로 tensorflow model server를 세팅해준다. (port, 모델 이름, 모델 path)&lt;/p&gt;
+
+    &lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;send-an-inference-request&quot;&gt;&lt;strong&gt;Send an Inference Request&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731110306735.png&quot; alt=&quot;image-20220731110306735&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Test set에 속하는 몇개의 이미지를 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;json&lt;/code&gt; 형식으로 변환한후 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;POST&lt;/code&gt;로 서버에 request를 보낸다.&lt;/p&gt;
+
+    &lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;plot-predictions&quot;&gt;&lt;strong&gt;Plot Predictions&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731110314567.png&quot; alt=&quot;image-20220731110314567&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;결과를 시각화하는 코드를 작성한다.&lt;/p&gt;
+
+    &lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;results-demo&quot;&gt;&lt;strong&gt;Results Demo&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731110323919.png&quot; alt=&quot;image-20220731110323919&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;결과가 정확하게 나온 것을 확인할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Deploying Machine Learning Models in Production_Deployment Options</title>

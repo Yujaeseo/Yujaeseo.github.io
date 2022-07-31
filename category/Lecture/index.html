@@ -88,7 +88,7 @@
   </div>
 
   <nav class="sidebar-nav">
-    <a class="sidebar-nav-item" href="/">Home <small class="text-info">15</small></a>
+    <a class="sidebar-nav-item" href="/">Home <small class="text-info">16</small></a>
 
     
 
@@ -191,8 +191,8 @@
       <a class = "sidebar-nav-item " href="/category/Operating system/index.html">Operating system <small class="text-info">1</small></a>  
     <!--<a class="sidebar-nav-item" href="/category/Operating system/index.html">Operating system</a>  <small class="text-muted">1</small>-->
     
-      <a class = "sidebar-nav-item  active" href="/category/Lecture/index.html">Lecture <small class="text-info">3</small></a>  
-    <!--<a class="sidebar-nav-item" href="/category/Lecture/index.html">Lecture</a>  <small class="text-muted">3</small>-->
+      <a class = "sidebar-nav-item  active" href="/category/Lecture/index.html">Lecture <small class="text-info">4</small></a>  
+    <!--<a class="sidebar-nav-item" href="/category/Lecture/index.html">Lecture</a>  <small class="text-muted">4</small>-->
     
     
 <!--
@@ -227,6 +227,213 @@
         <div class="posts">
     
     
+      <div class="post">
+            <h1 class="post-title">
+            <a href="/lecture/2022/07/31/Deploying-Machine-Learning-Models-in-Production-Installing-tensorflow-serving/">
+                Deploying Machine Learning Models in Production_Installing TensorFlow Serving
+            </a>
+            </h1>
+
+            <span class="post-date">31 Jul 2022</span>
+            
+            
+              
+                <span class="badge badge-dark">MLops</span>
+              
+            
+              
+                <span class="badge badge-dark">Deep learning</span>
+              
+            
+              
+                <span class="badge badge-dark">Machine learning</span>
+              
+            
+            
+            <h2 id="install-tensorflow-serving-1"><strong>Install Tensorflow Serving (1)</strong></h2>
+
+<p><img src="/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731110109225.png" alt="image-20220731110109225" width="100%" height="100%" class="align-center" /></p>
+
+<ul>
+  <li>Tensorflow serving을 설치하는 가장 쉬운 방법은 docker image를 사용하는 것이다.</li>
+</ul>
+
+<p><br /><br /></p>
+
+<h2 id="install-tensorflow-serving-2"><strong>Install Tensorflow Serving (2)</strong></h2>
+
+<p><img src="/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731110124591.png" alt="image-20220731110124591" width="100%" height="100%" class="align-center" /></p>
+
+<ul>
+  <li>Binaries를 이용해서 직접 다운로드 받는 방법은 다음과 같다.</li>
+  <li>Tensorflow-model-server는 플랫폼에 종속된 optimization 방식이 적용된 반면,</li>
+  <li>Tensorflow-model-server-universal은 플랫폼에 종속된 optimization 방식이 적용되지 않았다는 점이다.</li>
+</ul>
+
+<p><br /><br /></p>
+
+<h2 id="install-tensorflow-serving-3"><strong>Install Tensorflow Serving (3)</strong></h2>
+
+<p><img src="/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731110132863.png" alt="image-20220731110132863" width="100%" height="100%" class="align-center" /></p>
+
+<ul>
+  <li>
+    <p>직접 customize를 하길 원한다면 source로도 build를 할 수 있다.</p>
+
+    <p><br /><br /></p>
+  </li>
+</ul>
+
+<h2 id="install-tensorflow-serving-4"><strong>Install Tensorflow Serving (4)</strong></h2>
+
+<p><img src="/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731110141743.png" alt="image-20220731110141743" width="100%" height="100%" class="align-center" /></p>
+
+<ul>
+  <li>Tensorflow serving을 다운로드 받을 수 있는 archive 위치 정보를 <code class="language-plaintext highlighter-rouge">/etc/apt/sources.list.d</code>에 등록한다.</li>
+  <li>
+    <p>인증을 위한 key를 불러오고, apt 업데이트 후 <code class="language-plaintext highlighter-rouge">apt-get</code>을 이용하여 tensorflow serving을 다운받는다.</p>
+
+    <p><br /><br /></p>
+  </li>
+</ul>
+
+<h2 id="import-the-mnist-dataset"><strong>Import the MNIST Dataset</strong></h2>
+
+<p><img src="/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731110150647.png" alt="image-20220731110150647" width="100%" height="100%" class="align-center" /></p>
+
+<ul>
+  <li>MNIST 데이터셋을 이용하여 비전 모델을 학습시킨다.
+    <ul>
+      <li>70,000장 (train 60,000/ test 10,000)의 0-9 grayscale 이미지(28x28)로 이루어져있다.</li>
+    </ul>
+  </li>
+  <li>
+    <p>Numpy array 형식으로 데이터를 불러오고 0-1 scale 값으로 normalization을 수행한다.</p>
+
+    <p><br /><br /></p>
+  </li>
+</ul>
+
+<h2 id="import-the-mnist-dataset-1"><strong>Import the MNIST Dataset</strong></h2>
+
+<p><img src="/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731110209791.png" alt="image-20220731110209791" width="100%" height="100%" class="align-center" /></p>
+
+<ul>
+  <li>
+    <p>Train, test 각각을 (60,000 x 28 x 28 x 1), (10,000 x 28 x 28 x 1) 형식의 array로 변환한다.</p>
+
+    <p><br /><br /></p>
+  </li>
+</ul>
+
+<h2 id="look-at-a-sample-image"><strong>Look at a Sample Image</strong></h2>
+
+<p><img src="/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731110217800.png" alt="image-20220731110217800" width="100%" height="100%" class="align-center" /></p>
+
+<ul>
+  <li>
+    <p>Sample image를 확인한다.</p>
+
+    <p><br /><br /></p>
+  </li>
+</ul>
+
+<h2 id="build-a-model"><strong>Build a Model</strong></h2>
+
+<p><img src="/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731110226735.png" alt="image-20220731110226735" width="100%" height="100%" class="align-center" /></p>
+
+<ul>
+  <li>
+    <p>간단한 CNN 모델을 구성한다.</p>
+
+    <p><br /><br /></p>
+  </li>
+</ul>
+
+<h2 id="train-the-model"><strong>Train the Model</strong></h2>
+
+<p><img src="/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731110234568.png" alt="image-20220731110234568" width="100%" height="100%" class="align-center" /></p>
+
+<ul>
+  <li>
+    <p>모델 training에 사용할 optimizer, loss, metric을 세팅한다.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Fit</code>을 실행하면 모델 학습이 진행되고, history 변수에는 epoch by epoch accuracy가 저장된다.</p>
+
+    <p><br /><br /></p>
+  </li>
+</ul>
+
+<h2 id="evaluate-the-model"><strong>Evaluate the Model</strong></h2>
+
+<p><img src="/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731110241758.png" alt="image-20220731110241758" width="100%" height="100%" class="align-center" /></p>
+
+<ul>
+  <li>Testset에 대해 학습된 모델의 정확도를 평가한다.
+<br /><br /></li>
+</ul>
+
+<h2 id="save-the-model"><strong>Save the Model</strong></h2>
+
+<p><img src="/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731110250111.png" alt="image-20220731110250111" width="100%" height="100%" class="align-center" /></p>
+
+<ul>
+  <li>
+    <p>Tensorflow serving을 사용하기 위해서는 모델을 저장해야한다.</p>
+
+    <p><br /><br /></p>
+  </li>
+</ul>
+
+<h2 id="launch-your-saved-model"><strong>Launch Your Saved Model</strong></h2>
+
+<p><img src="/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731110257655.png" alt="image-20220731110257655" width="100%" height="100%" class="align-center" /></p>
+
+<ul>
+  <li>
+    <p>bash script로 tensorflow model server를 세팅해준다. (port, 모델 이름, 모델 path)</p>
+
+    <p><br /><br /></p>
+  </li>
+</ul>
+
+<h2 id="send-an-inference-request"><strong>Send an Inference Request</strong></h2>
+
+<p><img src="/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731110306735.png" alt="image-20220731110306735" width="100%" height="100%" class="align-center" /></p>
+
+<ul>
+  <li>
+    <p>Test set에 속하는 몇개의 이미지를 <code class="language-plaintext highlighter-rouge">json</code> 형식으로 변환한후 <code class="language-plaintext highlighter-rouge">POST</code>로 서버에 request를 보낸다.</p>
+
+    <p><br /><br /></p>
+  </li>
+</ul>
+
+<h2 id="plot-predictions"><strong>Plot Predictions</strong></h2>
+
+<p><img src="/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731110314567.png" alt="image-20220731110314567" width="100%" height="100%" class="align-center" /></p>
+
+<ul>
+  <li>
+    <p>결과를 시각화하는 코드를 작성한다.</p>
+
+    <p><br /><br /></p>
+  </li>
+</ul>
+
+<h2 id="results-demo"><strong>Results Demo</strong></h2>
+
+<p><img src="/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731110323919.png" alt="image-20220731110323919" width="100%" height="100%" class="align-center" /></p>
+
+<ul>
+  <li>결과가 정확하게 나온 것을 확인할 수 있다.</li>
+</ul>
+
+<p><br /><br /></p>
+
+        </div>
+  
       <div class="post">
             <h1 class="post-title">
             <a href="/lecture/2022/07/30/Deploying-Machine-Learning-Models-in-Production-Deployment-Options/">
