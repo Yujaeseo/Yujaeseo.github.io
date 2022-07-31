@@ -4,7 +4,7 @@
  <title>Yu's Tech 블로그</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2022-07-31T13:18:00+09:00</updated>
+ <updated>2022-07-31T18:04:41+09:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Jaeseo Yu</name>
@@ -13,11 +13,146 @@
 
  
  <entry>
+   <title>Deploying Machine Learning Models in Production_Model Serving Architecture</title>
+   <link href="http://localhost:4000/lecture/2022/07/31/Deploying-Machine-Learning-Models-in-Production-Model-Serving-Architecture/"/>
+   <updated>2022-07-31T00:00:00+09:00</updated>
+   <id>http://localhost:4000/lecture/2022/07/31/[Deploying Machine Learning Models in Production] Model Serving Architecture</id>
+   <content type="html">&lt;hr /&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;ml-infrastructure-1&quot;&gt;&lt;strong&gt;ML Infrastructure (1)&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731165510452.png&quot; alt=&quot;image-20220731165510452&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Model serving을 위한 infrastructure에 대해 알아볼 것이다.&lt;/li&gt;
+  &lt;li&gt;크게 자체 구축한 on-premise 환경 또는 cloud 서비스를 이용하는 두가지 방법이 있다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;ml-infrastructure_on-premise-2&quot;&gt;&lt;strong&gt;ML Infrastructure_On-Premise (2)&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731165518094.png&quot; alt=&quot;image-20220731165518094&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;On-Premise는 소유한 회사가 하드웨어와 소프트웨어에 대한 전적인 통제 권한을 가질 수 있다.&lt;/li&gt;
+  &lt;li&gt;따라서, 시시각각 변하는 다양한 요구 조건에 빠르게 대처할 수 있다는 장점이 존재한다.&lt;/li&gt;
+  &lt;li&gt;하지만 하드웨어 인프라를 직접 구하고, 설치하고, 유지보수해야한다는 점에서 큰 비용이 생긴다.&lt;/li&gt;
+  &lt;li&gt;일반적으로 규모의 경제를 실현할 수 있는 큰 규모의 회사들이 on-premise 환경을 구축하고 운영한다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;ml-infrastructure_cloud-3&quot;&gt;&lt;strong&gt;ML Infrastructure_Cloud (3)&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731165526447.png&quot; alt=&quot;image-20220731165526447&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;규모가 작은 기업들은 이러한 인프라를 전문 기업에게 outsourcing 하는 방법이 있다.&lt;/li&gt;
+  &lt;li&gt;아마존, 구글, 마이크로소프트와 같은 기업들이 cloud 서비스를 제공한다.&lt;/li&gt;
+  &lt;li&gt;하드웨어를 직접 구축할 필요가 없고 해당 기업들이 하드웨어, 소프트웨어 전반을 관리 및 모니터링해준다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;model-serving-1&quot;&gt;&lt;strong&gt;Model Serving (1)&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731165534694.png&quot; alt=&quot;image-20220731165534694&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;인프라 선택뿐만 아니라 model serving 방법 또한 선택해야한다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;model-serving_on-premise-2&quot;&gt;&lt;strong&gt;Model Serving_On-Premise (2)&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731165542350.png&quot; alt=&quot;image-20220731165542350&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;On-premise에서는 원하는 model server를 선택하고 구축할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;model-serving_cloud3&quot;&gt;&lt;strong&gt;Model Serving_Cloud(3)&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731165549647.png&quot; alt=&quot;image-20220731165549647&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Cloud를 사용하는 경우 cloud vendor에서 제공하는 tool과 service를 사용할 수 있다.
+    &lt;ul&gt;
+      &lt;li&gt;Google의 경우 automl을 비롯한 다양한 서비스를, amazon의 경우 sagemaker와 같은 서비스를 사용할 수 있다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;아니면 cloud에 VM을 활용하여 on-premise와 동일하게 직접 원하는 환경과 서비스를 구축할수도 있다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;model-servers-1&quot;&gt;&lt;strong&gt;Model Servers (1)&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731165556703.png&quot; alt=&quot;image-20220731165556703&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Model server의 역할을 간단하게 알아보자.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;model-servers_model-file2&quot;&gt;&lt;strong&gt;Model Servers_Model file(2)&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731165604454.png&quot; alt=&quot;image-20220731165604454&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;모델은 여러 버전으로 file system에 저장이 된다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;model-servers_model-server3&quot;&gt;&lt;strong&gt;Model Servers_Model server(3)&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731165612567.png&quot; alt=&quot;image-20220731165612567&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Model server는 model을 file에서 읽고 인스턴스로 생성하여, client에게 제공하길 원하는 task에 대한 response를 한다.&lt;/li&gt;
+  &lt;li&gt;예를들어 Mobilenet을 이용한 classification을 수행한다고 했을 때, 모델 서버는 input으로 주어진 이미지를 tensor 형태로 변형하고 이를 model에 전달하여 inference 결과를 산출한다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;model-servers_api4&quot;&gt;&lt;strong&gt;Model Servers_API(4)&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731165624486.png&quot; alt=&quot;image-20220731165624486&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Model server는 client에게 REST 또는 gRPC 형태의 API를 제공하고 inference 결과를 client에게 return한다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;model-servers_popular-model-server5&quot;&gt;&lt;strong&gt;Model Servers_Popular model server(5)&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731165635639.png&quot; alt=&quot;image-20220731165635639&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;유명한 model server에는 Tensorflow serving, Torchserve, KF serving, Triton이 있다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
    <title>Deploying Machine Learning Models in Production_Installing TensorFlow Serving</title>
    <link href="http://localhost:4000/lecture/2022/07/31/Deploying-Machine-Learning-Models-in-Production-Installing-tensorflow-serving/"/>
    <updated>2022-07-31T00:00:00+09:00</updated>
    <id>http://localhost:4000/lecture/2022/07/31/[Deploying Machine Learning Models in Production] Installing tensorflow serving</id>
-   <content type="html">&lt;h2 id=&quot;install-tensorflow-serving-1&quot;&gt;&lt;strong&gt;Install Tensorflow Serving (1)&lt;/strong&gt;&lt;/h2&gt;
+   <content type="html">&lt;hr /&gt;
+
+&lt;h2 id=&quot;install-tensorflow-serving-1&quot;&gt;&lt;strong&gt;Install Tensorflow Serving (1)&lt;/strong&gt;&lt;/h2&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731110109225.png&quot; alt=&quot;image-20220731110109225&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
 
@@ -206,7 +341,9 @@
    <link href="http://localhost:4000/lecture/2022/07/30/Deploying-Machine-Learning-Models-in-Production-Deployment-Options/"/>
    <updated>2022-07-30T00:00:00+09:00</updated>
    <id>http://localhost:4000/lecture/2022/07/30/[Deploying Machine Learning Models in Production] Deployment Options</id>
-   <content type="html">&lt;h2 id=&quot;model-deployments&quot;&gt;&lt;strong&gt;Model Deployments&lt;/strong&gt;&lt;/h2&gt;
+   <content type="html">&lt;hr /&gt;
+
+&lt;h2 id=&quot;model-deployments&quot;&gt;&lt;strong&gt;Model Deployments&lt;/strong&gt;&lt;/h2&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220730095805422.png&quot; alt=&quot;image-20220730095805422&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
 
@@ -672,9 +809,9 @@
  
  <entry>
    <title>Multithreading vs. Multiprocessing</title>
-   <link href="http://localhost:4000/operating%20system/deep%20learning/2021/09/19/Multiprocess&multithread/"/>
+   <link href="http://localhost:4000/operating%20system/2021/09/19/Multiprocess&multithread/"/>
    <updated>2021-09-19T00:00:00+09:00</updated>
-   <id>http://localhost:4000/operating%20system/deep%20learning/2021/09/19/ Multiprocess&multithread</id>
+   <id>http://localhost:4000/operating%20system/2021/09/19/ Multiprocess&multithread</id>
    <content type="html">&lt;hr /&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;

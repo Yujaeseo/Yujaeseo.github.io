@@ -1,4 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-07-31T13:18:00+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Yu’s Tech 블로그</title><subtitle>You will never know until you try.</subtitle><author><name>Jaeseo Yu</name></author><entry><title type="html">Deploying Machine Learning Models in Production_Installing TensorFlow Serving</title><link href="http://localhost:4000/lecture/2022/07/31/Deploying-Machine-Learning-Models-in-Production-Installing-tensorflow-serving/" rel="alternate" type="text/html" title="Deploying Machine Learning Models in Production_Installing TensorFlow Serving" /><published>2022-07-31T00:00:00+09:00</published><updated>2022-07-31T00:00:00+09:00</updated><id>http://localhost:4000/lecture/2022/07/31/%5BDeploying%20Machine%20Learning%20Models%20in%20Production%5D%20Installing%20tensorflow%20serving</id><content type="html" xml:base="http://localhost:4000/lecture/2022/07/31/Deploying-Machine-Learning-Models-in-Production-Installing-tensorflow-serving/">&lt;h2 id=&quot;install-tensorflow-serving-1&quot;&gt;&lt;strong&gt;Install Tensorflow Serving (1)&lt;/strong&gt;&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-07-31T18:04:41+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Yu’s Tech 블로그</title><subtitle>You will never know until you try.</subtitle><author><name>Jaeseo Yu</name></author><entry><title type="html">Deploying Machine Learning Models in Production_Installing TensorFlow Serving</title><link href="http://localhost:4000/lecture/2022/07/31/Deploying-Machine-Learning-Models-in-Production-Installing-tensorflow-serving/" rel="alternate" type="text/html" title="Deploying Machine Learning Models in Production_Installing TensorFlow Serving" /><published>2022-07-31T00:00:00+09:00</published><updated>2022-07-31T00:00:00+09:00</updated><id>http://localhost:4000/lecture/2022/07/31/%5BDeploying%20Machine%20Learning%20Models%20in%20Production%5D%20Installing%20tensorflow%20serving</id><content type="html" xml:base="http://localhost:4000/lecture/2022/07/31/Deploying-Machine-Learning-Models-in-Production-Installing-tensorflow-serving/">&lt;hr /&gt;
+
+&lt;h2 id=&quot;install-tensorflow-serving-1&quot;&gt;&lt;strong&gt;Install Tensorflow Serving (1)&lt;/strong&gt;&lt;/h2&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731110109225.png&quot; alt=&quot;image-20220731110109225&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
 
@@ -178,7 +180,133 @@
   &lt;li&gt;결과가 정확하게 나온 것을 확인할 수 있다.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;</content><author><name>Jaeseo Yu</name></author><category term="Lecture" /><category term="mlops" /><category term="deep learning" /><category term="machine learning" /><summary type="html">Google colab을 이용하여 tensorflow serving을 install하고 간단한 CNN 모델을 통해 실습을 진행한다.</summary></entry><entry><title type="html">Deploying Machine Learning Models in Production_Deployment Options</title><link href="http://localhost:4000/lecture/2022/07/30/Deploying-Machine-Learning-Models-in-Production-Deployment-Options/" rel="alternate" type="text/html" title="Deploying Machine Learning Models in Production_Deployment Options" /><published>2022-07-30T00:00:00+09:00</published><updated>2022-07-30T00:00:00+09:00</updated><id>http://localhost:4000/lecture/2022/07/30/%5BDeploying%20Machine%20Learning%20Models%20in%20Production%5D%20Deployment%20Options</id><content type="html" xml:base="http://localhost:4000/lecture/2022/07/30/Deploying-Machine-Learning-Models-in-Production-Deployment-Options/">&lt;h2 id=&quot;model-deployments&quot;&gt;&lt;strong&gt;Model Deployments&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;</content><author><name>Jaeseo Yu</name></author><category term="Lecture" /><category term="mlops" /><category term="deep learning" /><category term="machine learning" /><category term="lecture summary" /><summary type="html">Google colab을 이용하여 tensorflow serving을 install하고 간단한 CNN 모델을 통해 실습을 진행한다.</summary></entry><entry><title type="html">Deploying Machine Learning Models in Production_Model Serving Architecture</title><link href="http://localhost:4000/lecture/2022/07/31/Deploying-Machine-Learning-Models-in-Production-Model-Serving-Architecture/" rel="alternate" type="text/html" title="Deploying Machine Learning Models in Production_Model Serving Architecture" /><published>2022-07-31T00:00:00+09:00</published><updated>2022-07-31T00:00:00+09:00</updated><id>http://localhost:4000/lecture/2022/07/31/%5BDeploying%20Machine%20Learning%20Models%20in%20Production%5D%20Model%20Serving%20Architecture</id><content type="html" xml:base="http://localhost:4000/lecture/2022/07/31/Deploying-Machine-Learning-Models-in-Production-Model-Serving-Architecture/">&lt;hr /&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;ml-infrastructure-1&quot;&gt;&lt;strong&gt;ML Infrastructure (1)&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731165510452.png&quot; alt=&quot;image-20220731165510452&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Model serving을 위한 infrastructure에 대해 알아볼 것이다.&lt;/li&gt;
+  &lt;li&gt;크게 자체 구축한 on-premise 환경 또는 cloud 서비스를 이용하는 두가지 방법이 있다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;ml-infrastructure_on-premise-2&quot;&gt;&lt;strong&gt;ML Infrastructure_On-Premise (2)&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731165518094.png&quot; alt=&quot;image-20220731165518094&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;On-Premise는 소유한 회사가 하드웨어와 소프트웨어에 대한 전적인 통제 권한을 가질 수 있다.&lt;/li&gt;
+  &lt;li&gt;따라서, 시시각각 변하는 다양한 요구 조건에 빠르게 대처할 수 있다는 장점이 존재한다.&lt;/li&gt;
+  &lt;li&gt;하지만 하드웨어 인프라를 직접 구하고, 설치하고, 유지보수해야한다는 점에서 큰 비용이 생긴다.&lt;/li&gt;
+  &lt;li&gt;일반적으로 규모의 경제를 실현할 수 있는 큰 규모의 회사들이 on-premise 환경을 구축하고 운영한다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;ml-infrastructure_cloud-3&quot;&gt;&lt;strong&gt;ML Infrastructure_Cloud (3)&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731165526447.png&quot; alt=&quot;image-20220731165526447&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;규모가 작은 기업들은 이러한 인프라를 전문 기업에게 outsourcing 하는 방법이 있다.&lt;/li&gt;
+  &lt;li&gt;아마존, 구글, 마이크로소프트와 같은 기업들이 cloud 서비스를 제공한다.&lt;/li&gt;
+  &lt;li&gt;하드웨어를 직접 구축할 필요가 없고 해당 기업들이 하드웨어, 소프트웨어 전반을 관리 및 모니터링해준다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;model-serving-1&quot;&gt;&lt;strong&gt;Model Serving (1)&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731165534694.png&quot; alt=&quot;image-20220731165534694&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;인프라 선택뿐만 아니라 model serving 방법 또한 선택해야한다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;model-serving_on-premise-2&quot;&gt;&lt;strong&gt;Model Serving_On-Premise (2)&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731165542350.png&quot; alt=&quot;image-20220731165542350&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;On-premise에서는 원하는 model server를 선택하고 구축할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;model-serving_cloud3&quot;&gt;&lt;strong&gt;Model Serving_Cloud(3)&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731165549647.png&quot; alt=&quot;image-20220731165549647&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Cloud를 사용하는 경우 cloud vendor에서 제공하는 tool과 service를 사용할 수 있다.
+    &lt;ul&gt;
+      &lt;li&gt;Google의 경우 automl을 비롯한 다양한 서비스를, amazon의 경우 sagemaker와 같은 서비스를 사용할 수 있다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;아니면 cloud에 VM을 활용하여 on-premise와 동일하게 직접 원하는 환경과 서비스를 구축할수도 있다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;model-servers-1&quot;&gt;&lt;strong&gt;Model Servers (1)&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731165556703.png&quot; alt=&quot;image-20220731165556703&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Model server의 역할을 간단하게 알아보자.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;model-servers_model-file2&quot;&gt;&lt;strong&gt;Model Servers_Model file(2)&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731165604454.png&quot; alt=&quot;image-20220731165604454&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;모델은 여러 버전으로 file system에 저장이 된다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;model-servers_model-server3&quot;&gt;&lt;strong&gt;Model Servers_Model server(3)&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731165612567.png&quot; alt=&quot;image-20220731165612567&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Model server는 model을 file에서 읽고 인스턴스로 생성하여, client에게 제공하길 원하는 task에 대한 response를 한다.&lt;/li&gt;
+  &lt;li&gt;예를들어 Mobilenet을 이용한 classification을 수행한다고 했을 때, 모델 서버는 input으로 주어진 이미지를 tensor 형태로 변형하고 이를 model에 전달하여 inference 결과를 산출한다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;model-servers_api4&quot;&gt;&lt;strong&gt;Model Servers_API(4)&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731165624486.png&quot; alt=&quot;image-20220731165624486&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Model server는 client에게 REST 또는 gRPC 형태의 API를 제공하고 inference 결과를 client에게 return한다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;model-servers_popular-model-server5&quot;&gt;&lt;strong&gt;Model Servers_Popular model server(5)&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731165635639.png&quot; alt=&quot;image-20220731165635639&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;유명한 model server에는 Tensorflow serving, Torchserve, KF serving, Triton이 있다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;</content><author><name>Jaeseo Yu</name></author><category term="Lecture" /><category term="mlops" /><category term="deep learning" /><category term="machine learning" /><category term="lecture summary" /><summary type="html">Model serving에 필요한 infrastructure의 종류와 model server에 대해 알아본다.</summary></entry><entry><title type="html">Deploying Machine Learning Models in Production_Deployment Options</title><link href="http://localhost:4000/lecture/2022/07/30/Deploying-Machine-Learning-Models-in-Production-Deployment-Options/" rel="alternate" type="text/html" title="Deploying Machine Learning Models in Production_Deployment Options" /><published>2022-07-30T00:00:00+09:00</published><updated>2022-07-30T00:00:00+09:00</updated><id>http://localhost:4000/lecture/2022/07/30/%5BDeploying%20Machine%20Learning%20Models%20in%20Production%5D%20Deployment%20Options</id><content type="html" xml:base="http://localhost:4000/lecture/2022/07/30/Deploying-Machine-Learning-Models-in-Production-Deployment-Options/">&lt;hr /&gt;
+
+&lt;h2 id=&quot;model-deployments&quot;&gt;&lt;strong&gt;Model Deployments&lt;/strong&gt;&lt;/h2&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220730095805422.png&quot; alt=&quot;image-20220730095805422&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
 
@@ -357,7 +485,7 @@
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;</content><author><name>Jaeseo Yu</name></author><category term="Lecture" /><category term="mlops" /><category term="deep learning" /><category term="machine learning" /><summary type="html">Model serving을 위한 다양한 option들에 대해 알아본다.</summary></entry><entry><title type="html">Deploying Machine Learning Models in Production_Introduction to Model Serving Infrastructure</title><link href="http://localhost:4000/lecture/2022/07/29/Deploying-Machine-Learning-Models-in-Production-Introduction-to-Model-Serving-Infrastructure/" rel="alternate" type="text/html" title="Deploying Machine Learning Models in Production_Introduction to Model Serving Infrastructure" /><published>2022-07-29T00:00:00+09:00</published><updated>2022-07-29T00:00:00+09:00</updated><id>http://localhost:4000/lecture/2022/07/29/%5BDeploying%20Machine%20Learning%20Models%20in%20Production%5D%20Introduction%20to%20Model%20Serving%20Infrastructure</id><content type="html" xml:base="http://localhost:4000/lecture/2022/07/29/Deploying-Machine-Learning-Models-in-Production-Introduction-to-Model-Serving-Infrastructure/">&lt;hr /&gt;
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;</content><author><name>Jaeseo Yu</name></author><category term="Lecture" /><category term="mlops" /><category term="deep learning" /><category term="machine learning" /><category term="lecture summary" /><summary type="html">Model serving을 위한 다양한 option들에 대해 알아본다.</summary></entry><entry><title type="html">Deploying Machine Learning Models in Production_Introduction to Model Serving Infrastructure</title><link href="http://localhost:4000/lecture/2022/07/29/Deploying-Machine-Learning-Models-in-Production-Introduction-to-Model-Serving-Infrastructure/" rel="alternate" type="text/html" title="Deploying Machine Learning Models in Production_Introduction to Model Serving Infrastructure" /><published>2022-07-29T00:00:00+09:00</published><updated>2022-07-29T00:00:00+09:00</updated><id>http://localhost:4000/lecture/2022/07/29/%5BDeploying%20Machine%20Learning%20Models%20in%20Production%5D%20Introduction%20to%20Model%20Serving%20Infrastructure</id><content type="html" xml:base="http://localhost:4000/lecture/2022/07/29/Deploying-Machine-Learning-Models-in-Production-Introduction-to-Model-Serving-Infrastructure/">&lt;hr /&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 
@@ -469,7 +597,7 @@
   &lt;li&gt;NoSQL은 caching과 feature look up을 구현하기에 좋으며, 위와 같이 다양한 옵션들이 존재한다.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;</content><author><name>Jaeseo Yu</name></author><category term="Lecture" /><category term="mlops" /><category term="deep learning" /><category term="machine learning" /><summary type="html">Model serving 인프라에서 고려해야할 점들에 대한 내용을 알아본다.</summary></entry><entry><title type="html">Deploying Machine Learning Models in Production_Introduction to Model Serving</title><link href="http://localhost:4000/lecture/2022/07/28/Deploying-Machine-Learning-Models-in-Production-Introduction-to-Model-Serving/" rel="alternate" type="text/html" title="Deploying Machine Learning Models in Production_Introduction to Model Serving" /><published>2022-07-28T00:00:00+09:00</published><updated>2022-07-28T00:00:00+09:00</updated><id>http://localhost:4000/lecture/2022/07/28/%5BDeploying%20Machine%20Learning%20Models%20in%20Production%5D%20Introduction%20to%20Model%20Serving</id><content type="html" xml:base="http://localhost:4000/lecture/2022/07/28/Deploying-Machine-Learning-Models-in-Production-Introduction-to-Model-Serving/">&lt;hr /&gt;
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;</content><author><name>Jaeseo Yu</name></author><category term="Lecture" /><category term="mlops" /><category term="deep learning" /><category term="machine learning" /><category term="lecture summary" /><summary type="html">Model serving 인프라에서 고려해야할 점들에 대한 내용을 알아본다.</summary></entry><entry><title type="html">Deploying Machine Learning Models in Production_Introduction to Model Serving</title><link href="http://localhost:4000/lecture/2022/07/28/Deploying-Machine-Learning-Models-in-Production-Introduction-to-Model-Serving/" rel="alternate" type="text/html" title="Deploying Machine Learning Models in Production_Introduction to Model Serving" /><published>2022-07-28T00:00:00+09:00</published><updated>2022-07-28T00:00:00+09:00</updated><id>http://localhost:4000/lecture/2022/07/28/%5BDeploying%20Machine%20Learning%20Models%20in%20Production%5D%20Introduction%20to%20Model%20Serving</id><content type="html" xml:base="http://localhost:4000/lecture/2022/07/28/Deploying-Machine-Learning-Models-in-Production-Introduction-to-Model-Serving/">&lt;hr /&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 
@@ -620,7 +748,7 @@
       &lt;li&gt;Model optimization&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Jaeseo Yu</name></author><category term="Lecture" /><category term="mlops" /><category term="deep learning" /><category term="machine learning" /><summary type="html">Model serving이란 무엇이며, 중요하게 고려해야할 metric에 대해 알아본다.</summary></entry><entry><title type="html">Multithreading vs. Multiprocessing</title><link href="http://localhost:4000/operating%20system/deep%20learning/2021/09/19/Multiprocess&multithread/" rel="alternate" type="text/html" title="Multithreading vs. Multiprocessing" /><published>2021-09-19T00:00:00+09:00</published><updated>2021-09-19T00:00:00+09:00</updated><id>http://localhost:4000/operating%20system/deep%20learning/2021/09/19/%20Multiprocess&amp;multithread</id><content type="html" xml:base="http://localhost:4000/operating%20system/deep%20learning/2021/09/19/Multiprocess&amp;multithread/">&lt;hr /&gt;
+&lt;/ul&gt;</content><author><name>Jaeseo Yu</name></author><category term="Lecture" /><category term="mlops" /><category term="deep learning" /><category term="machine learning" /><category term="lecture summary" /><summary type="html">Model serving이란 무엇이며, 중요하게 고려해야할 metric에 대해 알아본다.</summary></entry><entry><title type="html">Multithreading vs. Multiprocessing</title><link href="http://localhost:4000/operating%20system/2021/09/19/Multiprocess&multithread/" rel="alternate" type="text/html" title="Multithreading vs. Multiprocessing" /><published>2021-09-19T00:00:00+09:00</published><updated>2021-09-19T00:00:00+09:00</updated><id>http://localhost:4000/operating%20system/2021/09/19/%20Multiprocess&amp;multithread</id><content type="html" xml:base="http://localhost:4000/operating%20system/2021/09/19/Multiprocess&amp;multithread/">&lt;hr /&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 
@@ -709,7 +837,7 @@
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;</content><author><name>Jaeseo Yu</name></author><category term="Deep learning" /><category term="operating system" /><category term="parallel programming" /><summary type="html">Multithreading과 multiprocessing 장단점에 대한 간략한 정리</summary></entry><entry><title type="html">프로그래머스 - 기둥과 보 설치</title><link href="http://localhost:4000/algorithm/2021/09/18/programmers%EA%B8%B0%EB%91%A5%EA%B3%BC%EB%B3%B4%EC%84%A4%EC%B9%98/" rel="alternate" type="text/html" title="프로그래머스 - 기둥과 보 설치" /><published>2021-09-18T00:00:00+09:00</published><updated>2021-09-18T00:00:00+09:00</updated><id>http://localhost:4000/algorithm/2021/09/18/programmers%EA%B8%B0%EB%91%A5%EA%B3%BC%EB%B3%B4%EC%84%A4%EC%B9%98</id><content type="html" xml:base="http://localhost:4000/algorithm/2021/09/18/programmers%EA%B8%B0%EB%91%A5%EA%B3%BC%EB%B3%B4%EC%84%A4%EC%B9%98/">&lt;hr /&gt;
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;</content><author><name>Jaeseo Yu</name></author><category term="Operating system" /><category term="operating system" /><category term="parallel programming" /><summary type="html">Multithreading과 multiprocessing 장단점에 대한 간략한 정리</summary></entry><entry><title type="html">프로그래머스 - 기둥과 보 설치</title><link href="http://localhost:4000/algorithm/2021/09/18/programmers%EA%B8%B0%EB%91%A5%EA%B3%BC%EB%B3%B4%EC%84%A4%EC%B9%98/" rel="alternate" type="text/html" title="프로그래머스 - 기둥과 보 설치" /><published>2021-09-18T00:00:00+09:00</published><updated>2021-09-18T00:00:00+09:00</updated><id>http://localhost:4000/algorithm/2021/09/18/programmers%EA%B8%B0%EB%91%A5%EA%B3%BC%EB%B3%B4%EC%84%A4%EC%B9%98</id><content type="html" xml:base="http://localhost:4000/algorithm/2021/09/18/programmers%EA%B8%B0%EB%91%A5%EA%B3%BC%EB%B3%B4%EC%84%A4%EC%B9%98/">&lt;hr /&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 
@@ -1223,68 +1351,4 @@ post();
   &lt;li&gt;https://fullstackdeeplearning.com/spring2021/lecture-2a/&lt;/li&gt;
   &lt;li&gt;https://www.youtube.com/watch?v=AjtX1N_VT9E&amp;amp;list=PLtBw6njQRU-rwp5__7C0oIVt26ZgjG9NI&amp;amp;index=4&lt;/li&gt;
   &lt;li&gt;https://theaisummer.com/receptive-field/&lt;/li&gt;
-&lt;/ol&gt;</content><author><name>Jaeseo Yu</name></author><category term="Deep learning" /><category term="deep learning" /><category term="cnn" /><summary type="html">일반적인 CNN 모델의 구조와 convolution 연산을 비롯하여 CNN 모델을 구성하는 요소에 대해 알아본다.</summary></entry><entry><title type="html">백준(4811) 알약</title><link href="http://localhost:4000/algorithm/2021/07/28/%EB%B0%B1%EC%A4%804811/" rel="alternate" type="text/html" title="백준(4811) 알약" /><published>2021-07-28T00:00:00+09:00</published><updated>2021-07-28T00:00:00+09:00</updated><id>http://localhost:4000/algorithm/2021/07/28/%EB%B0%B1%EC%A4%804811</id><content type="html" xml:base="http://localhost:4000/algorithm/2021/07/28/%EB%B0%B1%EC%A4%804811/">&lt;hr /&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;문제&quot;&gt;&lt;strong&gt;문제&lt;/strong&gt;&lt;/h2&gt;
-&lt;p&gt;&lt;br /&gt;
-&lt;a href=&quot;https://www.acmicpc.net/problem/4811&quot;&gt;백준 알약 문제(4811)&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;문제를 요약하자면 먼저 병에는 N개의 알약이 존재한다. 하루에 반알씩 약을 복용해야 한다. 한 알 전체를 꺼낼 경우 반으로 쪼갠 후 나머지 조각을 병에 다시 넣고, 반 조각을 꺼낼 경우 그 약을 먹는다. 이때 한 조각을 꺼낼 경우 W, 반 조각을 꺼낼 경우 H를 종이에 기록한다. 2N일이 지났을 때 가능한 서로 다른 문자열의 개수를 구해야 한다.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;코드-python-3&quot;&gt;&lt;strong&gt;코드 (Python 3)&lt;/strong&gt;&lt;/h2&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;sys&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sys&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stdin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;readline&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;dp&lt;/span&gt;  &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;31&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;31&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;31&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;m&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;30&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;31&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-      &lt;span class=&quot;n&quot;&gt;dp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-      &lt;span class=&quot;n&quot;&gt;dp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; 
-  &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;input&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;  
-  &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;풀이&quot;&gt;&lt;strong&gt;풀이&lt;/strong&gt;&lt;/h2&gt;
-&lt;p&gt;&lt;br /&gt;
-문제가 재귀호출을 사용하는 문제로 분류되어 있어, 처음에는 단순 재귀호출을 사용하여 문제를 해결하고자 했다. 먼저 $F(N,M)$ 는 알약 N 조각과 2등분 된 알약 M 조각이 있을 때 만들어지는 서로 다른 문자열의 개수라고 하자. 만약 알약 통에 각각 N,M 개의 알약이 존재한다면, 등분 되지 않은 알약을 꺼내는 경우와 조각 난 알약을 꺼내는 경우로 나눌 수 있다. 따라서 아래와 같은 점화식을 세울 수 있다. 
-&lt;br /&gt;&lt;/p&gt;
-
-\[F(N,M) = F(N-1,M+1) + F(N,M-1)\]
-
-&lt;p&gt;&lt;br /&gt;
-처음에는 위 식에 따라 몇가지 조건식을 넣고 recursion 코드를 구현했더니, 중복되는 계산이 많아서 주어진 시간 안에 문제를 풀 수 없을 것 같았다. 따라서 DP를 사용했고 그 중에 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Bottom-up&lt;/code&gt; 방식으로 다시 문제를 풀게 되었다.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-\[F(N,M) =
-\begin{cases}
-F(N-1,M+1),  &amp;amp; \text{if $N &amp;gt; 0$ and $M = 0 $}\\
-1, &amp;amp; \text{if $N = 0$ and $M &amp;gt; 0$} \\
-F(N-1,M+1) + F(N,M-1), &amp;amp; \text{if $N &amp;gt; 0$ and $M &amp;gt; 0$}
-\end{cases}\]
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;위 식에 따라 2 X 2 배열을 생성하였고, 입력으로 N(30 이하 정수)이 주어질 때 마다 배열에서 해당 답인 DP[N][0] (나눠지지 않은 알약 N) 찾아서 출력하였다.&lt;br /&gt;
-&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;시간복잡도&quot;&gt;&lt;strong&gt;시간복잡도&lt;/strong&gt;&lt;/h2&gt;
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;테스트케이스 수와 상관 없이 2차원 배열을 생성해야 하기 때문에 시간복잡도는 $O(N^2)$이다.
-&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;</content><author><name>Jaeseo Yu</name></author><category term="Algorithm" /><category term="algorithm" /><category term="python" /><category term="online judge" /><category term="dynamic programming" /><category term="baekjoon" /><summary type="html">백준 알약 (4811번) 문제 풀이 및 시간 복잡도 분석</summary></entry></feed>
+&lt;/ol&gt;</content><author><name>Jaeseo Yu</name></author><category term="Deep learning" /><category term="deep learning" /><category term="cnn" /><summary type="html">일반적인 CNN 모델의 구조와 convolution 연산을 비롯하여 CNN 모델을 구성하는 요소에 대해 알아본다.</summary></entry></feed>

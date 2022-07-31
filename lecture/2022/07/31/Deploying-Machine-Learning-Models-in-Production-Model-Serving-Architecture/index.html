@@ -11,7 +11,7 @@
 
   <title>
     
-      Multithreading vs. Multiprocessing &middot; Yu's Tech 블로그
+      Deploying Machine Learning Models in Production_Model Serving Architecture &middot; Yu's Tech 블로그
     
   </title>
 
@@ -88,7 +88,7 @@
   </div>
 
   <nav class="sidebar-nav">
-    <a class="sidebar-nav-item" href="/">Home <small class="text-info">16</small></a>
+    <a class="sidebar-nav-item" href="/">Home <small class="text-info">17</small></a>
 
     
 
@@ -180,8 +180,8 @@
       <a class = "sidebar-nav-item " href="/category/Algorithm/index.html">Algorithm <small class="text-info">4</small></a>  
     <!--<a class="sidebar-nav-item" href="/category/Algorithm/index.html">Algorithm</a>  <small class="text-muted">4</small>-->
     
-      <a class = "sidebar-nav-item " href="/category/Deep learning/index.html">Deep learning <small class="text-info">2</small></a>  
-    <!--<a class="sidebar-nav-item active" href="/category/Deep learning/index.html">Deep learning</a>  <small class="text-muted">2</small>-->
+      <a class = "sidebar-nav-item " href="/category/Deep learning/index.html">Deep learning <small class="text-info">1</small></a>  
+    <!--<a class="sidebar-nav-item" href="/category/Deep learning/index.html">Deep learning</a>  <small class="text-muted">1</small>-->
     
       <a class = "sidebar-nav-item " href="/category/OpenCL/index.html">OpenCL <small class="text-info">1</small></a>  
     <!--<a class="sidebar-nav-item" href="/category/OpenCL/index.html">OpenCL</a>  <small class="text-muted">1</small>-->
@@ -189,8 +189,8 @@
       <a class = "sidebar-nav-item " href="/category/Operating system/index.html">Operating system <small class="text-info">1</small></a>  
     <!--<a class="sidebar-nav-item" href="/category/Operating system/index.html">Operating system</a>  <small class="text-muted">1</small>-->
     
-      <a class = "sidebar-nav-item " href="/category/Lecture/index.html">Lecture <small class="text-info">4</small></a>  
-    <!--<a class="sidebar-nav-item" href="/category/Lecture/index.html">Lecture</a>  <small class="text-muted">4</small>-->
+      <a class = "sidebar-nav-item " href="/category/Lecture/index.html">Lecture <small class="text-info">5</small></a>  
+    <!--<a class="sidebar-nav-item" href="/category/Lecture/index.html">Lecture</a>  <small class="text-muted">5</small>-->
     
     
 <!--
@@ -224,16 +224,24 @@
       <div class="container content">
         <div class="post">
 
-  <h1 class="post-title">Multithreading vs. Multiprocessing</h1>
-  <span class="post-date">19 Sep 2021</span>
+  <h1 class="post-title">Deploying Machine Learning Models in Production_Model Serving Architecture</h1>
+  <span class="post-date">31 Jul 2022</span>
   
     
       
-        <span class="badge badge-dark">Operating system</span>
+        <span class="badge badge-dark">MLops</span>
       
     
       
-        <span class="badge badge-dark">Parallel programming</span>
+        <span class="badge badge-dark">Deep learning</span>
+      
+    
+      
+        <span class="badge badge-dark">Machine learning</span>
+      
+    
+      
+        <span class="badge badge-dark">Lecture summary</span>
       
     
   
@@ -242,89 +250,124 @@
 
 <p><br /><br /></p>
 
-<h2 id="process"><strong>Process</strong></h2>
+<h2 id="ml-infrastructure-1"><strong>ML Infrastructure (1)</strong></h2>
 
-<p><strong>프로세스는 실행중인 프로그램이다.</strong> 즉 프로그램 자체는 프로세스가 아니라, 프로그램이 메모리에 올라가서 실행중일 때 프로세스가 되는 것이다. 프로세스는 크게 5가지 영역(text, stack, data, heap, program counter)로 나눌 수 있다.</p>
+<p><img src="/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731165510452.png" alt="image-20220731165510452" width="100%" height="100%" class="align-center" /></p>
 
 <ul>
-  <li>Text : Program code</li>
-  <li>Stack : Temporary data (function parameter, return addresses, local variables, etc)</li>
-  <li>Data : Static &amp; global variables</li>
-  <li>Heap : Dynamic allocation</li>
-  <li>Program counter &amp; registers : Current activity</li>
+  <li>Model serving을 위한 infrastructure에 대해 알아볼 것이다.</li>
+  <li>크게 자체 구축한 on-premise 환경 또는 cloud 서비스를 이용하는 두가지 방법이 있다.</li>
 </ul>
-
-<p><br />
-<img src="https://www.tutorialspoint.com/operating_system/images/process_components.jpg" alt="image" width="45%" height="45%" class="align-center" />
-<em>Figure 1. Process in memory (<a href="https://www.tutorialspoint.com/operating_system/os_processes.htm">source</a>)</em></p>
 
 <p><br /><br /></p>
 
-<h2 id="thread"><strong>Thread</strong></h2>
+<h2 id="ml-infrastructure_on-premise-2"><strong>ML Infrastructure_On-Premise (2)</strong></h2>
 
-<p><strong>Thread는 프로세스 내에서 실행되는 단위를 말한다.</strong> 일반적으로 한 프로세스는 하나의 스레드를 가지고 있지만, 프로그램 환경에 따라 둘 이상의 thread를 동시에 실행시킬 수 있다. 각 Thread는 program counter, register set, stack space를 별도로 지니고 있다. 반면, 각 thread는 프로세스 내 code, data, heap, file과 같은 operating system 자원을 공유하게 된다.</p>
+<p><img src="/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731165518094.png" alt="image-20220731165518094" width="100%" height="100%" class="align-center" /></p>
 
-<p><br />
-<img src="https://www.tutorialspoint.com/operating_system/images/thread_processes.jpg" alt="image" width="90%" height="90%" class="align-center" />
-<em>Figure 2. Single thread vs Multithreads (<a href="https://www.tutorialspoint.com/operating_system/os_multi_threading.htm">source</a>)</em></p>
+<ul>
+  <li>On-Premise는 소유한 회사가 하드웨어와 소프트웨어에 대한 전적인 통제 권한을 가질 수 있다.</li>
+  <li>따라서, 시시각각 변하는 다양한 요구 조건에 빠르게 대처할 수 있다는 장점이 존재한다.</li>
+  <li>하지만 하드웨어 인프라를 직접 구하고, 설치하고, 유지보수해야한다는 점에서 큰 비용이 생긴다.</li>
+  <li>일반적으로 규모의 경제를 실현할 수 있는 큰 규모의 회사들이 on-premise 환경을 구축하고 운영한다.</li>
+</ul>
 
 <p><br /><br /></p>
 
-<h2 id="multithreading-multiprocessing-비교"><strong>Multithreading, multiprocessing 비교</strong></h2>
-<h3 id="multithreading--장점"><strong>Multithreading : 장점</strong></h3>
+<h2 id="ml-infrastructure_cloud-3"><strong>ML Infrastructure_Cloud (3)</strong></h2>
+
+<p><img src="/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731165526447.png" alt="image-20220731165526447" width="100%" height="100%" class="align-center" /></p>
+
 <ul>
-  <li>Thread 간 Resource sharing이 가능하다.
-    <ul>
-      <li>동일 프로세스 내 thread 간 데이터를 공유할 수 있다. 만약 subset으로 나누기 어려운 대량의 데이터를 다뤄야 할 경우, 데이터를 복사하거나 shared memory 방식을 사용해서 프로세스 간 데이터를 전송 또는 공유해야 한다. 하지만 데이터 복사는 복사 시 추가 시간과 메모리를 소요하게 되며, shared memory의 경우에는 개발 시 고려해야 될 요소들이 많다.</li>
-    </ul>
-  </li>
-  <li>소요되는 자원이 더 적다.
-    <ul>
-      <li>Thread를 하나 생성하는 것 보다 process를 생성할 때 소요되는 시간과 자원이 훨씬 더 많이 들어간다.</li>
-    </ul>
-  </li>
+  <li>규모가 작은 기업들은 이러한 인프라를 전문 기업에게 outsourcing 하는 방법이 있다.</li>
+  <li>아마존, 구글, 마이크로소프트와 같은 기업들이 cloud 서비스를 제공한다.</li>
+  <li>하드웨어를 직접 구축할 필요가 없고 해당 기업들이 하드웨어, 소프트웨어 전반을 관리 및 모니터링해준다.</li>
 </ul>
 
-<h3 id="multithreading--단점"><strong>Multithreading : 단점</strong></h3>
+<p><br /><br /></p>
+
+<h2 id="model-serving-1"><strong>Model Serving (1)</strong></h2>
+
+<p><img src="/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731165534694.png" alt="image-20220731165534694" width="100%" height="100%" class="align-center" /></p>
+
 <ul>
-  <li>안정성이 떨어진다.
-    <ul>
-      <li>만약 여러 thread 들 중 단 하나의 thread라도 문제가 발생할 경우, application이 crash된다.</li>
-    </ul>
-  </li>
-  <li>디버깅 하기 어렵다.
-    <ul>
-      <li>Multithread 환경에서 디버거를 통해 버그의 원인을 발견하기 어렵다. 따라서 문제가 되는 thread를 발견하기 위해 보통 log를 찾아보며 추적하게 됨으로, 디버깅에 소요되는 시간이 많이 들어가게 된다.</li>
-    </ul>
-  </li>
+  <li>인프라 선택뿐만 아니라 model serving 방법 또한 선택해야한다.</li>
 </ul>
 
-<h3 id="multiprocessing--장점"><strong>Multiprocessing : 장점</strong></h3>
+<p><br /><br /></p>
+
+<h2 id="model-serving_on-premise-2"><strong>Model Serving_On-Premise (2)</strong></h2>
+
+<p><img src="/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731165542350.png" alt="image-20220731165542350" width="100%" height="100%" class="align-center" /></p>
+
 <ul>
-  <li>안정성이 높다.
-    <ul>
-      <li>여러 프로세스 실행 중 하나의 프로세스에 문제가 발생할 경우, 해당 프로세스만 종료시키면 된다.</li>
-    </ul>
-  </li>
-  <li>확장성이 크다.
-    <ul>
-      <li>프로세스는 다른 머신에 할당해서 실행할 수가 있다. 반면에 thread는 단일 프로세스 내에 존재해야 하므로 확장성이 떨어질 수밖에 없다.</li>
-    </ul>
-  </li>
+  <li>On-premise에서는 원하는 model server를 선택하고 구축할 수 있다.</li>
 </ul>
 
-<h3 id="multiprocessing--단점"><strong>Multiprocessing : 단점</strong></h3>
+<p><br /><br /></p>
+
+<h2 id="model-serving_cloud3"><strong>Model Serving_Cloud(3)</strong></h2>
+
+<p><img src="/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731165549647.png" alt="image-20220731165549647" width="100%" height="100%" class="align-center" /></p>
+
 <ul>
-  <li>프로세스 간 커뮤니케션이 복잡하다.
+  <li>Cloud를 사용하는 경우 cloud vendor에서 제공하는 tool과 service를 사용할 수 있다.
     <ul>
-      <li>프로세스 간 데이터를 공유할 때는 별도의 technique (shared memory 또는 inter process communication)을 사용해야 하기 때문이다.</li>
+      <li>Google의 경우 automl을 비롯한 다양한 서비스를, amazon의 경우 sagemaker와 같은 서비스를 사용할 수 있다.</li>
     </ul>
   </li>
-  <li>메모리 소요가 크다.
-    <ul>
-      <li>프로세스 간에는 별도의 독립된 메모리 영역을 갖는다.</li>
-    </ul>
-  </li>
+  <li>아니면 cloud에 VM을 활용하여 on-premise와 동일하게 직접 원하는 환경과 서비스를 구축할수도 있다.</li>
+</ul>
+
+<p><br /><br /></p>
+
+<h2 id="model-servers-1"><strong>Model Servers (1)</strong></h2>
+
+<p><img src="/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731165556703.png" alt="image-20220731165556703" width="100%" height="100%" class="align-center" /></p>
+
+<ul>
+  <li>Model server의 역할을 간단하게 알아보자.</li>
+</ul>
+
+<p><br /><br /></p>
+
+<h2 id="model-servers_model-file2"><strong>Model Servers_Model file(2)</strong></h2>
+
+<p><img src="/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731165604454.png" alt="image-20220731165604454" width="100%" height="100%" class="align-center" /></p>
+
+<ul>
+  <li>모델은 여러 버전으로 file system에 저장이 된다.</li>
+</ul>
+
+<p><br /><br /></p>
+
+<h2 id="model-servers_model-server3"><strong>Model Servers_Model server(3)</strong></h2>
+
+<p><img src="/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731165612567.png" alt="image-20220731165612567" width="100%" height="100%" class="align-center" /></p>
+
+<ul>
+  <li>Model server는 model을 file에서 읽고 인스턴스로 생성하여, client에게 제공하길 원하는 task에 대한 response를 한다.</li>
+  <li>예를들어 Mobilenet을 이용한 classification을 수행한다고 했을 때, 모델 서버는 input으로 주어진 이미지를 tensor 형태로 변형하고 이를 model에 전달하여 inference 결과를 산출한다.</li>
+</ul>
+
+<p><br /><br /></p>
+
+<h2 id="model-servers_api4"><strong>Model Servers_API(4)</strong></h2>
+
+<p><img src="/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731165624486.png" alt="image-20220731165624486" width="100%" height="100%" class="align-center" /></p>
+
+<ul>
+  <li>Model server는 client에게 REST 또는 gRPC 형태의 API를 제공하고 inference 결과를 client에게 return한다.</li>
+</ul>
+
+<p><br /><br /></p>
+
+<h2 id="model-servers_popular-model-server5"><strong>Model Servers_Popular model server(5)</strong></h2>
+
+<p><img src="/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731165635639.png" alt="image-20220731165635639" width="100%" height="100%" class="align-center" /></p>
+
+<ul>
+  <li>유명한 model server에는 Tensorflow serving, Torchserve, KF serving, Triton이 있다.</li>
 </ul>
 
 <p><br /><br /></p>
@@ -339,9 +382,18 @@
     
       <li>
         <h3>
-          <a href="/opencl/2021/08/30/OpenCL%EC%9D%B4%EB%9E%80/">
-            OpenCL과 4가지 모델
-            <small>30 Aug 2021</small>
+          <a href="/lecture/2022/07/29/Deploying-Machine-Learning-Models-in-Production-Introduction-to-Model-Serving-Infrastructure/">
+            Deploying Machine Learning Models in Production_Introduction to Model Serving Infrastructure
+            <small>29 Jul 2022</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/lecture/2022/07/31/Deploying-Machine-Learning-Models-in-Production-Installing-tensorflow-serving/">
+            Deploying Machine Learning Models in Production_Installing TensorFlow Serving
+            <small>31 Jul 2022</small>
           </a>
         </h3>
       </li>
@@ -351,15 +403,6 @@
           <a href="/lecture/2022/07/30/Deploying-Machine-Learning-Models-in-Production-Deployment-Options/">
             Deploying Machine Learning Models in Production_Deployment Options
             <small>30 Jul 2022</small>
-          </a>
-        </h3>
-      </li>
-    
-      <li>
-        <h3>
-          <a href="/lecture/2022/07/28/Deploying-Machine-Learning-Models-in-Production-Introduction-to-Model-Serving/">
-            Deploying Machine Learning Models in Production_Introduction to Model Serving
-            <small>28 Jul 2022</small>
           </a>
         </h3>
       </li>
