@@ -11,7 +11,7 @@
 
   <title>
     
-      Python 백준 코드순위 확인 프로그램 &middot; Yu's Tech 블로그
+      Deploying Machine Learning Models in Production_Model Servers-TensorFlow Serving &middot; Yu's Tech 블로그
     
   </title>
 
@@ -224,16 +224,24 @@
       <div class="container content">
         <div class="post">
 
-  <h1 class="post-title">Python 백준 코드순위 확인 프로그램</h1>
-  <span class="post-date">29 Jan 2021</span>
+  <h1 class="post-title">Deploying Machine Learning Models in Production_Model Servers-TensorFlow Serving</h1>
+  <span class="post-date">02 Aug 2022</span>
   
     
       
-        <span class="badge badge-dark">Programming language</span>
+        <span class="badge badge-dark">MLops</span>
       
     
       
-        <span class="badge badge-dark">Python</span>
+        <span class="badge badge-dark">Deep learning</span>
+      
+    
+      
+        <span class="badge badge-dark">Machine learning</span>
+      
+    
+      
+        <span class="badge badge-dark">Lecture summary</span>
       
     
   
@@ -242,76 +250,197 @@
 
 <p><br /><br /></p>
 
-<h2 id="코드">코드</h2>
+<h2 id="tensorflow-serving1"><strong>Tensorflow Serving(1)</strong></h2>
 
-<p><br /></p>
+<p><img src="/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220801230627297.png" alt="image-20220801230627297" width="100%" height="100%" class="align-center" /></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">requests</span>
-<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+<ul>
+  <li>Tensorflow serving은 tensorflow model을 바로 서빙할 수 있으며, Non TF model도 serving이 가능하다.</li>
+</ul>
 
-
-
-<span class="c1"># 전체 : -1, C : 0 ,C++14 : 88, C++11 : 75, Java : 3, Python 3 : 28 등등
-</span><span class="k">def</span> <span class="nf">getList</span><span class="p">(</span><span class="n">question_num</span><span class="p">,</span><span class="n">lan_code</span><span class="p">,</span><span class="n">my_id</span><span class="p">):</span>
-
-    <span class="n">url</span> <span class="o">=</span> <span class="s">'https://www.acmicpc.net/problem/status'</span>
-    <span class="n">page</span> <span class="o">=</span> <span class="mi">1</span>
-    
-    <span class="k">while</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="n">request</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span> <span class="n">url</span><span class="o">+</span><span class="s">'/'</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">question_num</span><span class="p">)</span> <span class="o">+</span> <span class="s">'/'</span> <span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">lan_code</span><span class="p">)</span> <span class="o">+</span> <span class="s">'/'</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">page</span><span class="p">))</span> 
-
-        <span class="c1"># 페이지가 존재하지 않는 경우    
-</span>        <span class="k">if</span> <span class="n">request</span><span class="p">.</span><span class="n">status_code</span> <span class="o">!=</span> <span class="mi">200</span><span class="p">:</span>
-            <span class="k">print</span> <span class="p">(</span><span class="s">"아이디가 존재하지 않습니다"</span><span class="p">)</span>
-            <span class="k">break</span>
-            
-        <span class="k">print</span> <span class="p">(</span><span class="s">"현재 페이지 : "</span> <span class="o">+</span> <span class="nb">str</span> <span class="p">(</span><span class="n">page</span><span class="p">))</span>    
-        
-        <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">request</span><span class="p">.</span><span class="n">text</span><span class="p">,</span><span class="s">'html.parser'</span><span class="p">)</span>
-        <span class="n">table_structure</span> <span class="o">=</span> <span class="n">soup</span><span class="p">.</span><span class="n">select</span><span class="p">(</span><span class="s">'body &gt; div.wrapper &gt; div.container.content &gt; div.row &gt; div.col-md-10 &gt; div.table-responsive &gt; table &gt; tbody'</span><span class="p">)</span>
-        <span class="n">lines</span> <span class="o">=</span> <span class="n">table_structure</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">find_all</span><span class="p">(</span><span class="s">'tr'</span><span class="p">)</span>
-
-        <span class="c1"># 점수 table의 row에서 자신의 ID를 찾고, 페이지와 순위를 반환
-</span>        <span class="k">for</span> <span class="n">each</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
-            <span class="n">elements</span> <span class="o">=</span> <span class="n">each</span><span class="p">.</span><span class="n">find_all</span><span class="p">(</span><span class="s">'td'</span><span class="p">)</span>
-            <span class="n">user</span> <span class="o">=</span> <span class="n">elements</span><span class="p">[</span><span class="mi">3</span><span class="p">].</span><span class="n">find</span><span class="p">(</span><span class="s">'a'</span><span class="p">).</span><span class="n">text</span>
-            <span class="k">if</span> <span class="n">user</span> <span class="o">==</span> <span class="n">my_id</span> <span class="p">:</span>
-                <span class="k">print</span> <span class="p">({</span><span class="s">'페이지'</span> <span class="p">:</span> <span class="n">page</span><span class="p">,</span> <span class="s">'순위'</span> <span class="p">:</span> <span class="n">elements</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">text</span><span class="p">})</span>
-                <span class="k">return</span> 
-                
-        <span class="n">page</span> <span class="o">+=</span> <span class="mi">1</span>
-</code></pre></div></div>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">getList</span><span class="p">(</span><span class="mi">10988</span><span class="p">,</span><span class="mi">28</span><span class="p">,</span><span class="s">'yjs08090'</span><span class="p">)</span>
-</code></pre></div></div>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">현재</span> <span class="n">페이지</span> <span class="p">:</span> <span class="mi">1</span>
-<span class="n">현재</span> <span class="n">페이지</span> <span class="p">:</span> <span class="mi">2</span>
-<span class="n">현재</span> <span class="n">페이지</span> <span class="p">:</span> <span class="mi">3</span>
-<span class="n">현재</span> <span class="n">페이지</span> <span class="p">:</span> <span class="mi">4</span>
-<span class="n">현재</span> <span class="n">페이지</span> <span class="p">:</span> <span class="mi">5</span>
-<span class="n">현재</span> <span class="n">페이지</span> <span class="p">:</span> <span class="mi">6</span>
-<span class="n">현재</span> <span class="n">페이지</span> <span class="p">:</span> <span class="mi">7</span>
-<span class="n">현재</span> <span class="n">페이지</span> <span class="p">:</span> <span class="mi">8</span>
-<span class="n">현재</span> <span class="n">페이지</span> <span class="p">:</span> <span class="mi">9</span>
-<span class="n">현재</span> <span class="n">페이지</span> <span class="p">:</span> <span class="mi">10</span>
-<span class="p">{</span><span class="s">'페이지'</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s">'순위'</span><span class="p">:</span> <span class="s">'195'</span><span class="p">}</span>
-</code></pre></div></div>
 <p><br /><br /></p>
 
-<h2 id="설명">설명</h2>
+<h2 id="tensorflow-serving2"><strong>Tensorflow Serving(2)</strong></h2>
 
-<p><br />
-온라인 저지 문제에 익숙하지 않았을 때는 단순히 문제를 푸는 것에 의미를 두었다. 어느 정도 문제를 푸는 것에 적응이 된 만큼, 이제 부터는 효율성을 고려한 코드를 작성하기 위해 노력해야 된다고 생각한다.온라인 저지에서 내 코드의 질을 판단하는 방법은 바로 순위를 확인하는 것이다. 실행 시간, 메모리의 효율적인 사용을 고민하며 순위를 높이는 것도 나름의 쾌감이 있다. 이 과정에서 다른 사람의 코드를 보면서 항상 새로운 방법의 풀이가 있음을 알게 된다. 다른 사람의 풀이를 참고하면서 다양하게 생각하는 방법과 어떤 경우에 어떤 라이브러리나 메소드를 쓰면 효과적인지 배울 수 있다.</p>
+<p><img src="/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220801230635154.png" alt="image-20220801230635154" width="100%" height="100%" class="align-center" /></p>
 
-<p><br />
-하지만 참여자가 많은 문제와 프로그래밍 언어의 경우에는 코드 순위가 몇번째 인지 알기가 어렵다. 검색 기능이 별도로 존재하지 않기 때문에 수시로 찾아야 하는 번거로움이 있다. 이러한 과정을 자꾸 반복하다 보니 슬슬 시간이 아깝다는 생각을 하게 됐고, 예전에 크롤링 관련 프로젝트를 진행해봤기 때문에 이를 활용해 간단한 프로그램을 만들어 보고자 했다. 특정 백준 문제에서 자신이 제출한 코드의 순위를 반환해주는 아주 간단한 프로그램이다.
-<br /></p>
+<ul>
+  <li>다량의 request를 동시에 처리하는 batch inference 기능을 제공한다.
+    <ul>
+      <li>Recommendation engine에서 주로 사용한다.</li>
+    </ul>
+  </li>
+  <li>단일 request에 대해 빠른 inference 결과를 제공하는 real-time inference 기능도 제공한다.
+    <ul>
+      <li>Image classification task에서 주로 사용한다.</li>
+    </ul>
+  </li>
+</ul>
 
-<p>웹 서버에 HTTP 요청을 하는 <code class="language-plaintext highlighter-rouge">requests</code>와 HTML 또는 XML 파일에서 파싱을 통해 정보를 추출하는 데 사용되는 <code class="language-plaintext highlighter-rouge">beautifulsoup</code>를 활용했다. <code class="language-plaintext highlighter-rouge">getList(question_num,lan_code,my_id)</code>에서 볼 수 있듯이 getList 함수에 확인하고자 하는 문제 번호, 프로그래밍 언어 코드, 자신의 아이디 이렇게 3가지를 전달해 주면 된다. 코드 주석에는 필자 기준 주로 사용하는 언어 몇 가지 언어에 대한 코드만을 적어놨다. 자신이 사용하는 언어가 없는 경우, 백준 사이트 ‘맞은 사람’ 탭에서 언어를 바꿔준 후 url에서 언어 코드를 확인하면 된다. https://www.acmicpc.net/problem/status/10988/3/1를 예로 들면, 맨 뒤는 현재 페이지, 바로 왼쪽 3은 JAVA를 나타낸다. 위에서 언급한 3가지 파라미터를 전달해주면 <code class="language-plaintext highlighter-rouge">getList</code>함수는 현재 페이지 수와 코드 순위를 반환하게 된다. 
-<br /></p>
+<p><br /><br /></p>
 
-<p><br /></p>
+<h2 id="tensorflow-serving3"><strong>Tensorflow Serving(3)</strong></h2>
+
+<p><img src="/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220801230643875.png" alt="image-20220801230643875" width="100%" height="100%" class="align-center" /></p>
+
+<ul>
+  <li>동일한 task에대해 여러 모델을 serving하는 것도 가능하다.
+    <ul>
+      <li>A/B test에 유용하다.</li>
+    </ul>
+  </li>
+</ul>
+
+<p><br /><br /></p>
+
+<h2 id="tensorflow-serving4"><strong>Tensorflow Serving(4)</strong></h2>
+
+<p><img src="/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220801230657706.png" alt="image-20220801230657706" width="100%" height="100%" class="align-center" /></p>
+
+<ul>
+  <li>Rest endpoint도 제공한다.</li>
+</ul>
+
+<p><br /><br /></p>
+
+<h2 id="tensorflow-serving-architecture1"><strong>TensorFlow Serving Architecture(1)</strong></h2>
+
+<p><img src="/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220801230706249.png" alt="image-20220801230706249" width="100%" height="100%" class="align-center" /></p>
+
+<ul>
+  <li>High level architecture는 이와 같다.</li>
+</ul>
+
+<p><br /><br /></p>
+
+<h2 id="tensorflow-serving-architecture2"><strong>TensorFlow Serving Architecture(2)</strong></h2>
+
+<p><img src="/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220801230714137.png" alt="image-20220801230714137" width="100%" height="100%" class="align-center" /></p>
+
+<ul>
+  <li>TF serving은 TF servable을 중심으로 만들어졌으며, TF servable은 추상화된 객체로서 client가 inference나 lookup과 같은 연산을 수행할 때 사용한다.</li>
+  <li>전형적인 servable은 model이나 lookup table이 될수도 있다.</li>
+</ul>
+
+<p><br /><br /></p>
+
+<h2 id="tensorflow-serving-architecture3"><strong>TensorFlow Serving Architecture(3)</strong></h2>
+
+<p><img src="/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220801230722617.png" alt="image-20220801230722617" width="100%" height="100%" class="align-center" /></p>
+
+<ul>
+  <li>Loader로 TF servable의 lifecycle을 관리한다.</li>
+  <li>Loader API는 일반적인 인프라와 머신러닝 알고리즘, 데이터를 비롯한 태스크와 independent하게 만들어 준다.</li>
+  <li>Loader API로 servable을 load, unload 할수 있다.</li>
+</ul>
+
+<p><br /><br /></p>
+
+<h2 id="tensorflow-serving-architecture4"><strong>TensorFlow Serving Architecture(4)</strong></h2>
+
+<p><img src="/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220801230729609.png" alt="image-20220801230729609" width="100%" height="100%" class="align-center" /></p>
+
+<ul>
+  <li>Source는 loader를 통해 여러 set으로 이루어진 서로 다른 version의 servable이 manager에게 전달한다.</li>
+  <li>새로운 servable이 전달되면 기존의 것은 unload한다.</li>
+</ul>
+
+<p><br /><br /></p>
+
+<h2 id="tensorflow-serving-architecture5"><strong>TensorFlow Serving Architecture(5)</strong></h2>
+
+<p><img src="/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220801230736712.png" alt="image-20220801230736712" width="100%" height="100%" class="align-center" /></p>
+
+<ul>
+  <li>이처럼 manager는 servable의 lifecycle을 통제하며, servable을 loading하거나 list에 없는 servable을 unload할 수 있다.</li>
+  <li>새로운 stream이 들어오면 version policy에 따라 load, unload한다.</li>
+</ul>
+
+<p><br /><br /></p>
+
+<h2 id="tensorflow-serving-architecture6"><strong>TensorFlow Serving Architecture(6)</strong></h2>
+
+<p><img src="/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220801230744753.png" alt="image-20220801230744753" width="100%" height="100%" class="align-center" /></p>
+
+<ul>
+  <li>Servable handler는 client가 servable을 이용할 수 있도록 interface를 제공한다.</li>
+</ul>
+
+<p><br /><br /></p>
+
+<h2 id="tensorflow-serving-architecture7"><strong>TensorFlow Serving Architecture(7)</strong></h2>
+
+<p><img src="/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220801230752000.png" alt="image-20220801230752000" width="100%" height="100%" class="align-center" /></p>
+
+<ul>
+  <li>전반적인 프로세스를 이해하기 위해 예시를 들어보자.</li>
+  <li>Source가 빈번하게 weight이 update되는 tensorflow graph라고 가정하자.</li>
+  <li>이러한 weight은 filesystem에 저장이된다.</li>
+</ul>
+
+<p><br /><br /></p>
+
+<h2 id="tensorflow-serving-architecture8"><strong>TensorFlow Serving Architecture(8)</strong></h2>
+
+<p><img src="/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220801230759184.png" alt="image-20220801230759184" width="100%" height="100%" class="align-center" /></p>
+
+<ul>
+  <li>Model의 weight가 바뀌었다고 할때, source는 새로운 버전의 모델을 감지한다.</li>
+  <li>디스크에 있는 모델 데이터의 pointer를 담은 loader를 만든다.</li>
+</ul>
+
+<p><br /><br /></p>
+
+<h2 id="tensorflow-serving-architecture9"><strong>TensorFlow Serving Architecture(9)</strong></h2>
+
+<p><img src="/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220801230805817.png" alt="image-20220801230805817" width="100%" height="100%" class="align-center" /></p>
+
+<ul>
+  <li>Source는 dynamic manager한테 이러한 version을 전달한다.</li>
+</ul>
+
+<p><br /><br /></p>
+
+<h2 id="tensorflow-serving-architecture10"><strong>TensorFlow Serving Architecture(10)</strong></h2>
+
+<p><img src="/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220801230818129.png" alt="image-20220801230818129" width="100%" height="100%" class="align-center" /></p>
+
+<ul>
+  <li>Dynamic manger는 version policy에 따라 새로운 version을 load한다.</li>
+</ul>
+
+<p><br /><br /></p>
+
+<h2 id="tensorflow-serving-architecture11"><strong>TensorFlow Serving Architecture(11)</strong></h2>
+
+<p><img src="/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220801230830401.png" alt="image-20220801230830401" width="100%" height="100%" class="align-center" /></p>
+
+<ul>
+  <li>메모리가 충분하면, loader는 manager의 요청에의해 변경된 weight이 반영된 tensorflow graph를 servable로 instance화한다.</li>
+</ul>
+
+<p><br /><br /></p>
+
+<h2 id="tensorflow-serving-architecture12"><strong>TensorFlow Serving Architecture(12)</strong></h2>
+
+<p><img src="/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220801230838113.png" alt="image-20220801230838113" width="100%" height="100%" class="align-center" /></p>
+
+<ul>
+  <li>Client는 새로운 버전에 대한 handle을 요청하면 manager는 servable에 대한 handle을 return한다.</li>
+  <li>Client는 해당 servable을 이용하여 inference를 수행한다.</li>
+</ul>
+
+<p><br /><br /></p>
+
+<h2 id="-참고자료"><strong># 참고자료</strong></h2>
+
+<ul>
+  <li>아키텍처 전반과 용어에 대한 설명이 적혀있는 참고자료
+    <ul>
+      <li>https://github.com/tensorflow/serving/blob/master/tensorflow_serving/g3doc/architecture.md</li>
+    </ul>
+  </li>
+</ul>
 
 
   </article>
@@ -324,27 +453,27 @@
     
       <li>
         <h3>
-          <a href="/algorithm/2021/07/28/%EB%B0%B1%EC%A4%804811/">
-            백준(4811) 알약
-            <small>28 Jul 2021</small>
+          <a href="/lecture/2022/07/31/Deploying-Machine-Learning-Models-in-Production-Installing-tensorflow-serving/">
+            Deploying Machine Learning Models in Production_Installing TensorFlow Serving
+            <small>31 Jul 2022</small>
           </a>
         </h3>
       </li>
     
       <li>
         <h3>
-          <a href="/algorithm/2021/07/18/%EB%B0%B1%EC%A4%801157/">
-            백준(1157) 단어공부
-            <small>18 Jul 2021</small>
+          <a href="/lecture/2022/07/31/Deploying-Machine-Learning-Models-in-Production-Model-Serving-Architecture/">
+            Deploying Machine Learning Models in Production_Model Serving Architecture
+            <small>31 Jul 2022</small>
           </a>
         </h3>
       </li>
     
       <li>
         <h3>
-          <a href="/python/2021/01/23/python2/">
-            Python call by reference, call by value에 대해
-            <small>23 Jan 2021</small>
+          <a href="/lecture/2022/07/30/Deploying-Machine-Learning-Models-in-Production-Deployment-Options/">
+            Deploying Machine Learning Models in Production_Deployment Options
+            <small>30 Jul 2022</small>
           </a>
         </h3>
       </li>

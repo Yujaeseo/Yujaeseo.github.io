@@ -88,7 +88,7 @@
   </div>
 
   <nav class="sidebar-nav">
-    <a class="sidebar-nav-item" href="/">Home <small class="text-info">17</small></a>
+    <a class="sidebar-nav-item" href="/">Home <small class="text-info">18</small></a>
 
     
 
@@ -189,8 +189,8 @@
       <a class = "sidebar-nav-item " href="/category/Operating system/index.html">Operating system <small class="text-info">1</small></a>  
     <!--<a class="sidebar-nav-item active" href="/category/Operating system/index.html">Operating system</a>  <small class="text-muted">1</small>-->
     
-      <a class = "sidebar-nav-item " href="/category/Lecture/index.html">Lecture <small class="text-info">5</small></a>  
-    <!--<a class="sidebar-nav-item" href="/category/Lecture/index.html">Lecture</a>  <small class="text-muted">5</small>-->
+      <a class = "sidebar-nav-item " href="/category/Lecture/index.html">Lecture <small class="text-info">6</small></a>  
+    <!--<a class="sidebar-nav-item" href="/category/Lecture/index.html">Lecture</a>  <small class="text-muted">6</small>-->
     
     
 <!--
@@ -357,9 +357,9 @@
     
       <li>
         <h3>
-          <a href="/lecture/2022/07/28/Deploying-Machine-Learning-Models-in-Production-Introduction-to-Model-Serving/">
-            Deploying Machine Learning Models in Production_Introduction to Model Serving
-            <small>28 Jul 2022</small>
+          <a href="/deep%20learning/2021/08/13/About-CNN/">
+            CNN (Convolutional Neural Networks)에 대한 기본적인 내용 정리
+            <small>13 Aug 2021</small>
           </a>
         </h3>
       </li>
@@ -387,22 +387,22 @@
       })();
 
 
-    const content = document.querySelector(".main-content");
+    // const content = document.querySelector(".main-content");
 
-    scrollnav.init(content,{
-      debug: false,
-      easingStyle: 'easeOutQuint',
-      sections: ($('.post-content > h1').length>0) ? 'h1' : 'h2',
-      subSections: ($('.post-content > h1').length>0) ? 'h2' : 'h3'
-    });
+    // scrollnav.init(content,{
+    //   debug: false,
+    //   easingStyle: 'easeOutQuint',
+    //   sections: ($('.post-content > h1').length>0) ? 'h1' : 'h2',
+    //   subSections: ($('.post-content > h1').length>0) ? 'h2' : 'h3'
+    // });
 
-    var sideNav = function(){
-      var mainRect = document.getElementById('main-content').getBoundingClientRect();
-      $('nav.scroll-nav').css('left', mainRect.right + 50 + 'px');
-    }
+    // var sideNav = function(){
+    //   var mainRect = document.getElementById('main-content').getBoundingClientRect();
+    //   $('nav.scroll-nav').css('left', mainRect.right + 50 + 'px');
+    // }
 
-    sideNav();
-    window.addEventListener("resize", sideNav);
+    // sideNav();
+    // window.addEventListener("resize", sideNav);
 
 </script>
   <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
@@ -414,4 +414,33 @@
     <label for="sidebar-checkbox" class="sidebar-toggle"></label>
 
   </body>
+  <script>
+    const content = document.querySelector(".main-content");
+    
+    scrollnav.init(content,{
+      debug: false,
+      updateHistory: false,
+      // easingStyle: 'easeOutQuint',
+      sections: ($('.post-content > h1').length>0) ? 'h1' : 'h2',
+      subSections: ($('.post-content > h1').length>0) ? 'h2' : 'h3'
+    });
+    
+    var sideNav = function(){
+      var mainRect = document.getElementById('main-content').getBoundingClientRect();
+      $('nav.scroll-nav').css('left', mainRect.right + 50 + 'px');
+    }
+    
+    sideNav();
+    window.addEventListener("resize", sideNav);
+    
+   
+
+    
+    // window.addEventListener('load', (event) => {
+    //   console.log('page is fully loaded');
+    //   scrollnav.updatePositions();
+  
+    // });
+
+  </script>
 </html>

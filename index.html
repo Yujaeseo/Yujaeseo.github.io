@@ -88,7 +88,7 @@
   </div>
 
   <nav class="sidebar-nav">
-    <a class="sidebar-nav-item active" href="/">Home <small class="text-info">17</small></a>
+    <a class="sidebar-nav-item active" href="/">Home <small class="text-info">18</small></a>
 
     
 
@@ -191,8 +191,8 @@
       <a class = "sidebar-nav-item " href="/category/Operating system/index.html">Operating system <small class="text-info">1</small></a>  
     <!--<a class="sidebar-nav-item" href="/category/Operating system/index.html">Operating system</a>  <small class="text-muted">1</small>-->
     
-      <a class = "sidebar-nav-item " href="/category/Lecture/index.html">Lecture <small class="text-info">5</small></a>  
-    <!--<a class="sidebar-nav-item" href="/category/Lecture/index.html">Lecture</a>  <small class="text-muted">5</small>-->
+      <a class = "sidebar-nav-item " href="/category/Lecture/index.html">Lecture <small class="text-info">6</small></a>  
+    <!--<a class="sidebar-nav-item" href="/category/Lecture/index.html">Lecture</a>  <small class="text-muted">6</small>-->
     
     
 <!--
@@ -226,6 +226,37 @@
       <div class="container content">
         <!-- <h1 style="margin-bottom:60px; border-bottom: 1px solid #d2d7da">게시물 목록</h1> -->
 <div class="posts">
+  
+  <div class="index-post">
+    <h2 class="post-title">
+      <a href="/lecture/2022/08/02/Deploying-Machine-Learning-Models-in-Production-Model-Servers-Tensorflow-Serving/">
+        Deploying Machine Learning Models in Production_Model Servers-TensorFlow Serving
+      </a>
+    </h2>
+    <span class="post-date">02 Aug 2022</span>
+    <div class="post-tag">    
+    
+      
+        
+          <span class="badge badge-dark">MLops</span>
+        
+      
+        
+          <span class="badge badge-dark">Deep learning</span>
+        
+      
+        
+          <span class="badge badge-dark">Machine learning</span>
+        
+      
+        
+          <span class="badge badge-dark">Lecture summary</span>
+        
+      
+    
+  </div>
+    <div class="text-muted post-excerpt">Model server 중 하나인 tensorflow serving에 대한 아키텍처를 살펴본다.</div>
+  </div>
   
   <div class="index-post">
     <h2 class="post-title">
@@ -498,29 +529,6 @@
     <div class="text-muted post-excerpt">OpenCL의 architecture를 구성하는 4가지 개념적 모델에 대해 알아본다.</div>
   </div>
   
-  <div class="index-post">
-    <h2 class="post-title">
-      <a href="/deep%20learning/2021/08/13/About-CNN/">
-        CNN (Convolutional Neural Networks)에 대한 기본적인 내용 정리
-      </a>
-    </h2>
-    <span class="post-date">13 Aug 2021</span>
-    <div class="post-tag">    
-    
-      
-        
-          <span class="badge badge-dark">Deep learning</span>
-        
-      
-        
-          <span class="badge badge-dark">Convolutional Neural Networks</span>
-        
-      
-    
-  </div>
-    <div class="text-muted post-excerpt">일반적인 CNN 모델의 구조와 convolution 연산을 비롯하여 CNN 모델을 구성하는 요소에 대해 알아본다.</div>
-  </div>
-  
 </div>
 
 <div class="pagination">
@@ -539,4 +547,33 @@
     <label for="sidebar-checkbox" class="sidebar-toggle"></label>
 
   </body>
+  <script>
+    const content = document.querySelector(".main-content");
+    
+    scrollnav.init(content,{
+      debug: false,
+      updateHistory: false,
+      // easingStyle: 'easeOutQuint',
+      sections: ($('.post-content > h1').length>0) ? 'h1' : 'h2',
+      subSections: ($('.post-content > h1').length>0) ? 'h2' : 'h3'
+    });
+    
+    var sideNav = function(){
+      var mainRect = document.getElementById('main-content').getBoundingClientRect();
+      $('nav.scroll-nav').css('left', mainRect.right + 50 + 'px');
+    }
+    
+    sideNav();
+    window.addEventListener("resize", sideNav);
+    
+   
+
+    
+    // window.addEventListener('load', (event) => {
+    //   console.log('page is fully loaded');
+    //   scrollnav.updatePositions();
+  
+    // });
+
+  </script>
 </html>

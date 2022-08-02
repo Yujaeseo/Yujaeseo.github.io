@@ -88,7 +88,7 @@
   </div>
 
   <nav class="sidebar-nav">
-    <a class="sidebar-nav-item" href="/">Home <small class="text-info">17</small></a>
+    <a class="sidebar-nav-item" href="/">Home <small class="text-info">18</small></a>
 
     
 
@@ -191,8 +191,8 @@
       <a class = "sidebar-nav-item " href="/category/Operating system/index.html">Operating system <small class="text-info">1</small></a>  
     <!--<a class="sidebar-nav-item" href="/category/Operating system/index.html">Operating system</a>  <small class="text-muted">1</small>-->
     
-      <a class = "sidebar-nav-item " href="/category/Lecture/index.html">Lecture <small class="text-info">5</small></a>  
-    <!--<a class="sidebar-nav-item" href="/category/Lecture/index.html">Lecture</a>  <small class="text-muted">5</small>-->
+      <a class = "sidebar-nav-item " href="/category/Lecture/index.html">Lecture <small class="text-info">6</small></a>  
+    <!--<a class="sidebar-nav-item" href="/category/Lecture/index.html">Lecture</a>  <small class="text-muted">6</small>-->
     
     
 <!--
@@ -227,7 +227,7 @@
         <div class="posts">
     
     
-      <div class="post">
+      <div class="index-post">
             <h1 class="post-title">
             <a href="/python/2021/01/29/baekjoonCrawling/">
                 Python 백준 코드순위 확인 프로그램
@@ -246,7 +246,104 @@
               
             
             
-            <hr />
+            <!-- <hr />
+
+<p><br /><br /></p>
+
+<h2 id="코드">코드</h2>
+
+<p><br /></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+
+
+
+<span class="c1"># 전체 : -1, C : 0 ,C++14 : 88, C++11 : 75, Java : 3, Python 3 : 28 등등
+</span><span class="k">def</span> <span class="nf">getList</span><span class="p">(</span><span class="n">question_num</span><span class="p">,</span><span class="n">lan_code</span><span class="p">,</span><span class="n">my_id</span><span class="p">):</span>
+
+    <span class="n">url</span> <span class="o">=</span> <span class="s">'https://www.acmicpc.net/problem/status'</span>
+    <span class="n">page</span> <span class="o">=</span> <span class="mi">1</span>
+    
+    <span class="k">while</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span> <span class="n">url</span><span class="o">+</span><span class="s">'/'</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">question_num</span><span class="p">)</span> <span class="o">+</span> <span class="s">'/'</span> <span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">lan_code</span><span class="p">)</span> <span class="o">+</span> <span class="s">'/'</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">page</span><span class="p">))</span> 
+
+        <span class="c1"># 페이지가 존재하지 않는 경우    
+</span>        <span class="k">if</span> <span class="n">request</span><span class="p">.</span><span class="n">status_code</span> <span class="o">!=</span> <span class="mi">200</span><span class="p">:</span>
+            <span class="k">print</span> <span class="p">(</span><span class="s">"아이디가 존재하지 않습니다"</span><span class="p">)</span>
+            <span class="k">break</span>
+            
+        <span class="k">print</span> <span class="p">(</span><span class="s">"현재 페이지 : "</span> <span class="o">+</span> <span class="nb">str</span> <span class="p">(</span><span class="n">page</span><span class="p">))</span>    
+        
+        <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">request</span><span class="p">.</span><span class="n">text</span><span class="p">,</span><span class="s">'html.parser'</span><span class="p">)</span>
+        <span class="n">table_structure</span> <span class="o">=</span> <span class="n">soup</span><span class="p">.</span><span class="n">select</span><span class="p">(</span><span class="s">'body &gt; div.wrapper &gt; div.container.content &gt; div.row &gt; div.col-md-10 &gt; div.table-responsive &gt; table &gt; tbody'</span><span class="p">)</span>
+        <span class="n">lines</span> <span class="o">=</span> <span class="n">table_structure</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">find_all</span><span class="p">(</span><span class="s">'tr'</span><span class="p">)</span>
+
+        <span class="c1"># 점수 table의 row에서 자신의 ID를 찾고, 페이지와 순위를 반환
+</span>        <span class="k">for</span> <span class="n">each</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
+            <span class="n">elements</span> <span class="o">=</span> <span class="n">each</span><span class="p">.</span><span class="n">find_all</span><span class="p">(</span><span class="s">'td'</span><span class="p">)</span>
+            <span class="n">user</span> <span class="o">=</span> <span class="n">elements</span><span class="p">[</span><span class="mi">3</span><span class="p">].</span><span class="n">find</span><span class="p">(</span><span class="s">'a'</span><span class="p">).</span><span class="n">text</span>
+            <span class="k">if</span> <span class="n">user</span> <span class="o">==</span> <span class="n">my_id</span> <span class="p">:</span>
+                <span class="k">print</span> <span class="p">({</span><span class="s">'페이지'</span> <span class="p">:</span> <span class="n">page</span><span class="p">,</span> <span class="s">'순위'</span> <span class="p">:</span> <span class="n">elements</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">text</span><span class="p">})</span>
+                <span class="k">return</span> 
+                
+        <span class="n">page</span> <span class="o">+=</span> <span class="mi">1</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">getList</span><span class="p">(</span><span class="mi">10988</span><span class="p">,</span><span class="mi">28</span><span class="p">,</span><span class="s">'yjs08090'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">현재</span> <span class="n">페이지</span> <span class="p">:</span> <span class="mi">1</span>
+<span class="n">현재</span> <span class="n">페이지</span> <span class="p">:</span> <span class="mi">2</span>
+<span class="n">현재</span> <span class="n">페이지</span> <span class="p">:</span> <span class="mi">3</span>
+<span class="n">현재</span> <span class="n">페이지</span> <span class="p">:</span> <span class="mi">4</span>
+<span class="n">현재</span> <span class="n">페이지</span> <span class="p">:</span> <span class="mi">5</span>
+<span class="n">현재</span> <span class="n">페이지</span> <span class="p">:</span> <span class="mi">6</span>
+<span class="n">현재</span> <span class="n">페이지</span> <span class="p">:</span> <span class="mi">7</span>
+<span class="n">현재</span> <span class="n">페이지</span> <span class="p">:</span> <span class="mi">8</span>
+<span class="n">현재</span> <span class="n">페이지</span> <span class="p">:</span> <span class="mi">9</span>
+<span class="n">현재</span> <span class="n">페이지</span> <span class="p">:</span> <span class="mi">10</span>
+<span class="p">{</span><span class="s">'페이지'</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s">'순위'</span><span class="p">:</span> <span class="s">'195'</span><span class="p">}</span>
+</code></pre></div></div>
+<p><br /><br /></p>
+
+<h2 id="설명">설명</h2>
+
+<p><br />
+온라인 저지 문제에 익숙하지 않았을 때는 단순히 문제를 푸는 것에 의미를 두었다. 어느 정도 문제를 푸는 것에 적응이 된 만큼, 이제 부터는 효율성을 고려한 코드를 작성하기 위해 노력해야 된다고 생각한다.온라인 저지에서 내 코드의 질을 판단하는 방법은 바로 순위를 확인하는 것이다. 실행 시간, 메모리의 효율적인 사용을 고민하며 순위를 높이는 것도 나름의 쾌감이 있다. 이 과정에서 다른 사람의 코드를 보면서 항상 새로운 방법의 풀이가 있음을 알게 된다. 다른 사람의 풀이를 참고하면서 다양하게 생각하는 방법과 어떤 경우에 어떤 라이브러리나 메소드를 쓰면 효과적인지 배울 수 있다.</p>
+
+<p><br />
+하지만 참여자가 많은 문제와 프로그래밍 언어의 경우에는 코드 순위가 몇번째 인지 알기가 어렵다. 검색 기능이 별도로 존재하지 않기 때문에 수시로 찾아야 하는 번거로움이 있다. 이러한 과정을 자꾸 반복하다 보니 슬슬 시간이 아깝다는 생각을 하게 됐고, 예전에 크롤링 관련 프로젝트를 진행해봤기 때문에 이를 활용해 간단한 프로그램을 만들어 보고자 했다. 특정 백준 문제에서 자신이 제출한 코드의 순위를 반환해주는 아주 간단한 프로그램이다.
+<br /></p>
+
+<p>웹 서버에 HTTP 요청을 하는 <code class="language-plaintext highlighter-rouge">requests</code>와 HTML 또는 XML 파일에서 파싱을 통해 정보를 추출하는 데 사용되는 <code class="language-plaintext highlighter-rouge">beautifulsoup</code>를 활용했다. <code class="language-plaintext highlighter-rouge">getList(question_num,lan_code,my_id)</code>에서 볼 수 있듯이 getList 함수에 확인하고자 하는 문제 번호, 프로그래밍 언어 코드, 자신의 아이디 이렇게 3가지를 전달해 주면 된다. 코드 주석에는 필자 기준 주로 사용하는 언어 몇 가지 언어에 대한 코드만을 적어놨다. 자신이 사용하는 언어가 없는 경우, 백준 사이트 ‘맞은 사람’ 탭에서 언어를 바꿔준 후 url에서 언어 코드를 확인하면 된다. https://www.acmicpc.net/problem/status/10988/3/1를 예로 들면, 맨 뒤는 현재 페이지, 바로 왼쪽 3은 JAVA를 나타낸다. 위에서 언급한 3가지 파라미터를 전달해주면 <code class="language-plaintext highlighter-rouge">getList</code>함수는 현재 페이지 수와 코드 순위를 반환하게 된다. 
+<br /></p>
+
+<p><br /></p>
+
+ -->
+            <div class="text-muted post-excerpt">BeatifulSoup을 이용한 백준 문제 풀이 등수 확인 프로그램</div>
+        </div>
+        <!-- <div class="post">
+          <h1 class="post-title">
+          <a href="/python/2021/01/29/baekjoonCrawling/">
+              Python 백준 코드순위 확인 프로그램
+          </a>
+          </h1>
+
+          <span class="post-date">29 Jan 2021</span>
+          
+          
+            
+              <span class="badge badge-dark">Programming language</span>
+            
+          
+            
+              <span class="badge badge-dark">Python</span>
+            
+          
+          
+          <hr />
 
 <p><br /><br /></p>
 
@@ -322,9 +419,9 @@
 <p><br /></p>
 
 
-        </div>
+      </div> -->
   
-      <div class="post">
+      <div class="index-post">
             <h1 class="post-title">
             <a href="/python/2021/01/23/python2/">
                 Python call by reference, call by value에 대해
@@ -343,7 +440,182 @@
               
             
             
-            <hr />
+            <!-- <hr />
+
+<h2 id="call-by-reference-call-by-value란"><strong>Call by reference, Call by value란</strong></h2>
+<p><br />
+함수의 호출 방법에는 크게 <strong>Call by reference</strong>와 <strong>Call by value</strong> 두 가지의 방식이 있습니다. Python의 경우를 살펴보기 전에 먼저 두가지 함수호출 방법 개념에 대해 간단히 살펴보겠습니다.  pointer의 개념을 처음 배울 때 주로 사용하는 c언어로 코드를 작성했습니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">void</span> <span class="n">fun</span> <span class="p">(</span><span class="nb">int</span> <span class="n">a</span><span class="p">){</span>
+  <span class="n">a</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">a</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nb">int</span> <span class="n">main</span> <span class="p">()</span> <span class="p">{</span>
+
+  <span class="nb">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+  <span class="n">printf</span> <span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">a</span><span class="p">);</span>
+  <span class="n">fun</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">a</span><span class="p">);</span>
+
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="o">-&gt;</span>
+<span class="mi">10</span>
+<span class="mi">0</span>
+<span class="mi">10</span>
+</code></pre></div></div>
+<p><br /></p>
+
+<p>main 함수에서 선언한 정수 a를 <code class="language-plaintext highlighter-rouge">fun()</code> 함수에 argument로 제공하였습니다. 하지만 출력 값을 확인해 보면 함수 내 변수 a와 함수 밖에 선언된 a의 값이 각각 0과 10으로 서로 다르다는 것을 확인할 수 있습니다. 이러한 차이는 Call by value방식의 특성에서 기인한 것인데, <strong>Call by value 는 함수를 호출할 때 argument의 복사된 값을 넘겨주는 것입니다.</strong> 즉 <code class="language-plaintext highlighter-rouge">fun()</code>함수 안의 a는 함수 밖의 a와 다른 메모리 공간을 점유하며, 단지 동일한 값만을 갖고 있습니다. 따라서 함수 안에서 <code class="language-plaintext highlighter-rouge">a = 0</code>을 실행 했을 때 함수 안에있는 별도의 변수 a에 0이라는 값이 대입됩니다.</p>
+
+<p><br /></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">void</span> <span class="n">fun</span> <span class="p">(</span><span class="nb">int</span> <span class="o">*</span><span class="n">a</span><span class="p">){</span>
+  <span class="o">*</span><span class="n">a</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nb">int</span> <span class="n">main</span> <span class="p">()</span> <span class="p">{</span>
+  
+  <span class="nb">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+  <span class="n">printf</span> <span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">a</span><span class="p">);</span>
+  <span class="n">fun</span><span class="p">(</span><span class="o">&amp;</span><span class="n">a</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">a</span><span class="p">);</span>
+
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="o">-&gt;</span>
+<span class="mi">10</span>
+<span class="mi">0</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<p>위의 예제는 Call by reference의 예시 코드입니다. 결론적으로,<strong>Call by reference는 함수를 호출할 때 argument의 location 즉 메모리 주소를 함수에 제공하는 것입니다.</strong> 따라서 parameter로 해당 값이 저장된 메모리 공간에 접근하여 직접 값을 참조하거나 변경할 수 있습니다. 위에서 main함수의 정수 a값이 <code class="language-plaintext highlighter-rouge">fun()</code> 실행 전후로 변경된 것을 통해 이러한 점을 쉽게 확인할 수 있습니다.</p>
+
+<p><br /><br /></p>
+
+<h2 id="python에서의-함수-호출"><strong>Python에서의 함수 호출</strong></h2>
+<p><br />
+먼저 이해하기 위해 가장 중요한 2가지 사실에 대해 정리해보자면,
+<br /><br /></p>
+<ol>
+  <li>Python 함수의 parameter는 object의 reference 복사값이다.(Call by value)) 
+<br /><br /></li>
+  <li>Python의 자료형은 Mutable, Immutable 두가지로 나뉜다. (두 속성에 대해서는 <a href="https://yujaeseo.github.io/python/2018/11/22/Python1/">이전 포스트</a>를 참조하시면 됩니다.)</li>
+</ol>
+
+<p>위의 사실에 따라 함수에 Mutable과 Immutable 자료형 중 어느 것을 넘겨주는지를 구분할 수 있어야 합니다. 먼저 Mutable object를 넘겨주는 경우에 대해서 살펴보겠습니다.</p>
+
+<h3 id="immutable"><strong>Immutable</strong></h3>
+
+<p><br /></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">fun</span> <span class="p">(</span><span class="n">a</span><span class="p">):</span>
+  <span class="k">print</span> <span class="p">(</span><span class="nb">id</span> <span class="p">(</span><span class="n">a</span><span class="p">))</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="mi">12</span>
+<span class="k">print</span> <span class="p">(</span><span class="nb">id</span> <span class="p">(</span><span class="n">a</span><span class="p">))</span>
+<span class="n">fun</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+
+<span class="o">-&gt;</span>
+<span class="mi">139845275445344</span>
+<span class="mi">139845275445344</span>
+</code></pre></div></div>
+<p><br />
+위 코드를 통해 함수 안의 변수 a와 함수 안의 a는 동일한 obejct를 가리키고 있다는 것을 확인할 수 있습니다.</p>
+
+<p><br /></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">fun</span> <span class="p">(</span><span class="n">a</span><span class="p">):</span>
+  <span class="n">a</span> <span class="o">=</span> <span class="mi">14</span>
+  <span class="k">print</span> <span class="p">(</span><span class="nb">id</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="mi">12</span>
+<span class="k">print</span> <span class="p">(</span><span class="nb">id</span> <span class="p">(</span><span class="n">a</span><span class="p">))</span>
+<span class="n">fun</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+
+<span class="o">-&gt;</span>
+<span class="mi">140341591808096</span>
+<span class="mi">140341591808160</span>
+</code></pre></div></div>
+
+<p><br />
+함수 안에서 parameter에 14라는 값을 할당했습니다. int는 Immutable 타입이기 때문에 a에 새롭게 생성된 객체 (14)의 reference값이 저장되었습니다. 그래서 함수 안에서 함수 밖에 있는 a Object의 값을 바꿀 수 없습니다. 다음은 Mutable의 경우에 대한 코드입니다.
+<br /><br /></p>
+
+<h3 id="mutable"><strong>Mutable</strong></h3>
+
+<p><br /></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">fun</span> <span class="p">(</span><span class="n">a</span><span class="p">):</span>
+  <span class="n">a</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s">'d'</span><span class="p">)</span>
+  <span class="k">print</span> <span class="p">(</span><span class="n">a</span><span class="p">)</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="s">'a'</span><span class="p">,</span><span class="s">'b'</span><span class="p">,</span><span class="s">'c'</span><span class="p">]</span>
+<span class="k">print</span> <span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="n">fun</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="k">print</span> <span class="p">(</span><span class="n">a</span><span class="p">)</span>
+
+<span class="o">-&gt;</span>
+<span class="p">[</span><span class="s">'a'</span><span class="p">,</span> <span class="s">'b'</span><span class="p">,</span> <span class="s">'c'</span><span class="p">]</span>
+<span class="p">[</span><span class="s">'a'</span><span class="p">,</span> <span class="s">'b'</span><span class="p">,</span> <span class="s">'c'</span><span class="p">,</span> <span class="s">'d'</span><span class="p">]</span>
+<span class="p">[</span><span class="s">'a'</span><span class="p">,</span> <span class="s">'b'</span><span class="p">,</span> <span class="s">'c'</span><span class="p">,</span> <span class="s">'d'</span><span class="p">]</span>
+</code></pre></div></div>
+
+<p><br />
+위의 코드에서 볼 수 있듯, 함수를 통해 함수 밖 a 변수 List에 새로운 요소를 추가했습니다. 이는 a 객체의 복사된 값이 전달된 것이 아니라, reference가 전달되었기 때문에 가능한 일입니다. 즉 Mutable의 경우는 함수 안에서 함수 밖 객체에 접근하여 값을 변경할 수 있습니다.<br />
+<br /><br /></p>
+
+<h3 id="reference-변경"><strong>Reference 변경</strong></h3>
+
+<p><br /></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">fun</span> <span class="p">(</span><span class="n">a</span><span class="p">):</span>
+  <span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="s">'a'</span><span class="p">,</span><span class="s">'b'</span><span class="p">,</span><span class="s">'c'</span><span class="p">,</span><span class="s">'d'</span><span class="p">]</span>
+  <span class="k">print</span> <span class="p">(</span><span class="n">a</span><span class="p">)</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="s">'a'</span><span class="p">,</span><span class="s">'b'</span><span class="p">,</span><span class="s">'c'</span><span class="p">]</span>
+<span class="k">print</span> <span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="n">fun</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="k">print</span> <span class="p">(</span><span class="n">a</span><span class="p">)</span>
+
+<span class="o">-&gt;</span>
+<span class="p">[</span><span class="s">'a'</span><span class="p">,</span> <span class="s">'b'</span><span class="p">,</span> <span class="s">'c'</span><span class="p">]</span>
+<span class="p">[</span><span class="s">'a'</span><span class="p">,</span> <span class="s">'b'</span><span class="p">,</span> <span class="s">'c'</span><span class="p">,</span> <span class="s">'d'</span><span class="p">]</span>
+<span class="p">[</span><span class="s">'a'</span><span class="p">,</span> <span class="s">'b'</span><span class="p">,</span> <span class="s">'c'</span><span class="p">]</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<p>이번에는 a 변수의 reference를 변경하는 경우 입니다. parameter a는 call by value이기 때문에, 즉 reference의 복사값이기 때문에 함수 밖 객체에 어떤 영향도 주지 않습니다. 함수 안 변수 a는 새로운 list의 reference를 담고 있는 것이며, 이 경우 함수 밖 변수 a를 변경할 수 없게 됩니다. 
+<br /><br /></p>
+
+ -->
+            <div class="text-muted post-excerpt">Python에서의 call by value, call by reference에 대해 알아본다.</div>
+        </div>
+        <!-- <div class="post">
+          <h1 class="post-title">
+          <a href="/python/2021/01/23/python2/">
+              Python call by reference, call by value에 대해
+          </a>
+          </h1>
+
+          <span class="post-date">23 Jan 2021</span>
+          
+          
+            
+              <span class="badge badge-dark">Programming language</span>
+            
+          
+            
+              <span class="badge badge-dark">Python</span>
+            
+          
+          
+          <hr />
 
 <h2 id="call-by-reference-call-by-value란"><strong>Call by reference, Call by value란</strong></h2>
 <p><br />
@@ -497,9 +769,9 @@
 <br /><br /></p>
 
 
-        </div>
+      </div> -->
   
-      <div class="post">
+      <div class="index-post">
             <h1 class="post-title">
             <a href="/python/2021/01/22/Python1/">
                 Python Mutable, Immutable 비교
@@ -518,7 +790,147 @@
               
             
             
-            <hr />
+            <!-- <hr />
+
+<h2 id="mutable-immutable-이란-">Mutable, Immutable 이란 ?</h2>
+
+<p><br /></p>
+
+<p>Python의 모든 것은 <strong>Object</strong>이다. 따라서 모든 변수는 생성된 Object의 reference를 담게 된다. 예를들어 <code class="language-plaintext highlighter-rouge">X = 2</code>라는 코드는 정수 2라는 값을 갖는 int class object의 reference를 변수 x에 넣는다는 의미이다.</p>
+
+<p><br /></p>
+
+<p><strong>Mutable object는 그 값을 변경할 수 있다는 의미이며</strong>, 반대로 <strong>Immutable object는 그 값을 바꿀 수 없다는 것을 의미한다</strong>. 프로그래머가 정의한 class의 object는 일반적으로 mutable이다. 하지만 대표적인 python built-in class 중 int,float,bool,str,tuple,unicode 객체는 Immutable이고, list,set,dict 객체는 Mutable이다.</p>
+
+<p><br />
+<br /></p>
+
+<h2 id="코드를-통한-차이-확인">코드를 통한 차이 확인</h2>
+<p><br /></p>
+
+<p>다음은 Mutable과 Immutable의 차이를 보여주는 Code이다.아래에서 사용된 <code class="language-plaintext highlighter-rouge">id()</code><strong>함수는 객체가 갖는 고유의 값(object가 저장된 메모리 값)을 반환한다.</strong> 파이썬의 모든 object는 value, type, identity(id)를 갖는다. 또한 Id는 객체가 생성될 때 부여되며 절대 변하지 않는 값이다.</p>
+
+<p><br /></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="k">print</span> <span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="k">print</span> <span class="p">(</span><span class="nb">id</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="n">x</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="k">print</span> <span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="k">print</span> <span class="p">(</span><span class="nb">id</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+
+
+<span class="o">-&gt;</span> 
+<span class="mi">10</span>
+<span class="mi">140242833553440</span>
+<span class="mi">11</span>
+<span class="mi">140242833553472</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<p>위에서 출력 값에서 x의 id 값이 변경된 것을 확인할 수 있다. int는 immutable 이기 때문에 값을 바꿀 수 없으므로 11이라는 값을 담은 새로운 int 형 object가 만들어 진다. 그리고 이 obejct의 reference가 x에 대입된 것이다.</p>
+
+<p><br /></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="s">'a'</span><span class="p">,</span><span class="s">'b'</span><span class="p">]</span>
+<span class="k">print</span> <span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="k">print</span> <span class="p">(</span><span class="nb">id</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
+<span class="n">y</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s">'c'</span><span class="p">)</span>
+<span class="k">print</span> <span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="k">print</span> <span class="p">(</span><span class="nb">id</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
+
+
+<span class="o">-&gt;</span>
+<span class="p">[</span><span class="s">'a'</span><span class="p">,</span> <span class="s">'b'</span><span class="p">]</span>
+<span class="mi">140242795187592</span>
+<span class="p">[</span><span class="s">'a'</span><span class="p">,</span> <span class="s">'b'</span><span class="p">,</span> <span class="s">'c'</span><span class="p">]</span>
+<span class="mi">140242795187592</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<p>List는 대표적인 mutable object이다. 따라서 list에 새로운 값(‘c’)을 넣어도 y에 기존의 reference가 유지되고, 출력 값을 확인해 보면 list에 ‘c’가 추가된 것을 확인할 수 있다.</p>
+
+<p><br />
+<br /></p>
+
+<h2 id="예외">예외</h2>
+<p><br /></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="s">'abc'</span><span class="p">,[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+<span class="k">print</span> <span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">append</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="k">print</span> <span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="o">-&gt;</span> 
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+</code></pre></div></div>
+<p><br /></p>
+
+<p>위의 코드를 보면 Tuple 자료형 안 List에 정수 4가 추가된 것을 확인할 수 있다. 하지만 초반에 Tuple은 Immutable 자료형으로, 그 값을 변경할 수 없다고 한 것과 모순되는 결과라고 생각할 수 있다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="s">'abc'</span><span class="p">,[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+<span class="k">print</span> <span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s">'xyz'</span>
+<span class="k">print</span> <span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="o">-&gt;</span> 
+<span class="nb">TypeError</span><span class="p">:</span> <span class="s">'tuple'</span> <span class="nb">object</span> <span class="n">does</span> <span class="ow">not</span> <span class="n">support</span> <span class="n">item</span> <span class="n">assignment</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<p>Tuple에 저장된 String 값의 변경을 시도했을 때 위와 같은 에러가 발생한다. <strong>Tuple은 Immutable하기 때문에 값을 변경할 수 없기 때문이다.</strong> 그러면 List 객체에 <code class="language-plaintext highlighter-rouge">append()</code>를 사용해서 정수 4를 추가한 것은 어떻게 설명할 수 있을까?</p>
+
+<p><br /></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="s">'ab'</span><span class="p">,</span><span class="s">'cd'</span><span class="p">,[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">id</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span><span class="nb">id</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span><span class="nb">id</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span><span class="n">sep</span><span class="o">=</span><span class="s">' '</span><span class="p">)</span>
+
+<span class="n">t</span><span class="p">[</span><span class="mi">2</span><span class="p">].</span><span class="n">append</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">id</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span><span class="nb">id</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span><span class="nb">id</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span><span class="n">sep</span><span class="o">=</span><span class="s">' '</span><span class="p">)</span>
+
+<span class="o">-&gt;</span>
+<span class="p">(</span><span class="s">'ab'</span><span class="p">,</span> <span class="s">'cd'</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="mi">139797887251320</span> <span class="mi">139797887251880</span> <span class="mi">139797883936392</span>
+<span class="p">(</span><span class="s">'ab'</span><span class="p">,</span> <span class="s">'cd'</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">100</span><span class="p">])</span>
+<span class="mi">139797887251320</span> <span class="mi">139797887251880</span> <span class="mi">139797883936392</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<p><strong>Tuple을 Immutable하다고 할 때 우리는 객체(tuple)에 binding된 객체(string 등)가 같은지를 판단해야 한다.</strong> 위의 코드에서 확인할 수 있듯 Tuple 객체 안에 있는 list 값을 변경했지만(100 추가) List object의 id값은 유지되고 있음을 알 수 있다. <strong>즉 Mutable object인 list는 이전과 동일한 객체이며, 단지 객체의 value만 바뀐 것이다.</strong> Tuple은 함수 실행 전과 동일한 객체(id)를 저장하고 있기 때문에 Immutable하다고 할 수 있는 것이다.</p>
+
+<p><br />
+<br /></p>
+ -->
+            <div class="text-muted post-excerpt">Python의 mutable, immutable 객체 타입에 대한 정의와 차이에 대해 알아본다.</div>
+        </div>
+        <!-- <div class="post">
+          <h1 class="post-title">
+          <a href="/python/2021/01/22/Python1/">
+              Python Mutable, Immutable 비교
+          </a>
+          </h1>
+
+          <span class="post-date">22 Jan 2021</span>
+          
+          
+            
+              <span class="badge badge-dark">Programming language</span>
+            
+          
+            
+              <span class="badge badge-dark">Python</span>
+            
+          
+          
+          <hr />
 
 <h2 id="mutable-immutable-이란-">Mutable, Immutable 이란 ?</h2>
 
@@ -637,7 +1049,7 @@
 <p><br />
 <br /></p>
 
-        </div>
+      </div> -->
   
 
 </div>
@@ -659,4 +1071,33 @@
     <label for="sidebar-checkbox" class="sidebar-toggle"></label>
 
   </body>
+  <script>
+    const content = document.querySelector(".main-content");
+    
+    scrollnav.init(content,{
+      debug: false,
+      updateHistory: false,
+      // easingStyle: 'easeOutQuint',
+      sections: ($('.post-content > h1').length>0) ? 'h1' : 'h2',
+      subSections: ($('.post-content > h1').length>0) ? 'h2' : 'h3'
+    });
+    
+    var sideNav = function(){
+      var mainRect = document.getElementById('main-content').getBoundingClientRect();
+      $('nav.scroll-nav').css('left', mainRect.right + 50 + 'px');
+    }
+    
+    sideNav();
+    window.addEventListener("resize", sideNav);
+    
+   
+
+    
+    // window.addEventListener('load', (event) => {
+    //   console.log('page is fully loaded');
+    //   scrollnav.updatePositions();
+  
+    // });
+
+  </script>
 </html>

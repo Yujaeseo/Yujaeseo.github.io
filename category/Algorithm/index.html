@@ -88,7 +88,7 @@
   </div>
 
   <nav class="sidebar-nav">
-    <a class="sidebar-nav-item" href="/">Home <small class="text-info">17</small></a>
+    <a class="sidebar-nav-item" href="/">Home <small class="text-info">18</small></a>
 
     
 
@@ -191,8 +191,8 @@
       <a class = "sidebar-nav-item " href="/category/Operating system/index.html">Operating system <small class="text-info">1</small></a>  
     <!--<a class="sidebar-nav-item" href="/category/Operating system/index.html">Operating system</a>  <small class="text-muted">1</small>-->
     
-      <a class = "sidebar-nav-item " href="/category/Lecture/index.html">Lecture <small class="text-info">5</small></a>  
-    <!--<a class="sidebar-nav-item" href="/category/Lecture/index.html">Lecture</a>  <small class="text-muted">5</small>-->
+      <a class = "sidebar-nav-item " href="/category/Lecture/index.html">Lecture <small class="text-info">6</small></a>  
+    <!--<a class="sidebar-nav-item" href="/category/Lecture/index.html">Lecture</a>  <small class="text-muted">6</small>-->
     
     
 <!--
@@ -227,7 +227,7 @@
         <div class="posts">
     
     
-      <div class="post">
+      <div class="index-post">
             <h1 class="post-title">
             <a href="/algorithm/2021/09/18/programmers%EA%B8%B0%EB%91%A5%EA%B3%BC%EB%B3%B4%EC%84%A4%EC%B9%98/">
                 프로그래머스 - 기둥과 보 설치
@@ -258,7 +258,202 @@
               
             
             
-            <hr />
+            <!-- <hr />
+
+<p><br /><br /></p>
+
+<h2 id="problem"><strong>Problem</strong></h2>
+<p><a href="https://programmers.co.kr/learn/courses/30/lessons/60061">2020 KAKAO BLIND RECRUITMENT 기둥과 보 설치</a>
+<br /><br />
+문제는 2차원 공간에 구조물 (기둥 or 보)를 설치/삭제 한 후 최종 구조물의 상태를 return 하는 것이다. 구조물의 정보<code class="language-plaintext highlighter-rouge">(x 좌표, y좌표, 구조물 종류, 설치/삭제)</code>들을 담은 2차원 배열이 입력되고, 최종 구조물의 상태<code class="language-plaintext highlighter-rouge">(x 좌표, y 좌표, 구조물 종류)</code>를 반환하면 된다. 단, 문제에 나온 <strong>특정 조건을 만족해야만 주어진 위치에 기둥과 보를 설치/삭제할 수 있다는 점에 유의</strong>해야 한다.</p>
+
+<p><br /></p>
+
+<h2 id="solution"><strong>Solution</strong></h2>
+<p>보와 기둥의 존재 여부를 나타내는 2차원 배열을 각각 만들고, 현재 특정 위치에 구조물이 존재하는 지를 표시한다. 구현할 때, 구조물 설치/삭제 입력에 대해 설치와 삭제 시에 만족해야 하는 특정 조건을 검사하는 것이 까다롭다. 기둥과 보가 존재하기 위해서는 각각의 조건을 만족해야 한다.</p>
+
+<ul>
+  <li>기둥
+    <ul>
+      <li>바닥 위에 존재</li>
+      <li>왼쪽/오른쪽 보의 끝 위에 존재</li>
+      <li>다른 기둥 위에 존재</li>
+    </ul>
+  </li>
+  <li>보
+    <ul>
+      <li>왼쪽/오른쪽 끝 부분이 기둥 위에 존재</li>
+      <li>양쪽 끝 부분이 다른 보와 동시에 연결</li>
+    </ul>
+  </li>
+</ul>
+
+<p>설치 시에는 위의 조건을 만족하는 지 확인하고, 만족할 경우 설치를 해주면 된다. 반면 삭제할 때는 삭제하려는 기둥, 보의 존재 여부에 영향을 받는 기둥, 보에 대해 위의 유효 조건을 검사해야 한다. 조건을 만족하지 않을 경우 삭제를 할 수 없으므로, 구조물 삭제를 취소해야 한다. <code class="language-plaintext highlighter-rouge">x,y</code> 좌표에 있는 기둥 또는 보 삭제 시 영향을 받는 구조물은 다음과 같다.</p>
+
+<ul>
+  <li>기둥 (x, y)
+    <ul>
+      <li>바로 위에 존재하는 기둥 (x, y+1)</li>
+      <li>오른쪽 끝이 기둥 위에 존재하는 보 (x-1, y+1)</li>
+      <li>왼쪽 끝이 기둥 위에 존재하는 보 (x, y+1)</li>
+    </ul>
+  </li>
+  <li>보 (x, y)
+    <ul>
+      <li>왼쪽 끝 위에 존재하는 기둥 (x, y)</li>
+      <li>오른쪽 끝 위에 존재하는 기둥 (x+1, y)</li>
+      <li>왼쪽 끝에 닿아있는 보 (x-1, y)</li>
+      <li>오른쪽 끝에 닿아있는 보 (x+1, y)</li>
+    </ul>
+  </li>
+</ul>
+
+<p>해당 위치에 있는 특정 기둥과 보만을 검사하면, 모든 구조물을 검사하지 않고 삭제가 가능한지 효과적으로 판단할 수 있다. 주의해야 할 점은, 검사해야 하는 위치에 구조물이 있을 경우에만 유효성 검사를 해야 하는 것이다. 이점을 신경쓰지 못해서 모든 케이스를 통과하는 데 많은 시간이 걸렸다.</p>
+
+<p><br /></p>
+
+<h2 id="code"><strong>Code</strong></h2>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;vector&gt;
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="kt">bool</span> <span class="n">map</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">101</span><span class="p">][</span><span class="mi">101</span><span class="p">];</span>
+
+<span class="c1">// 기둥 놓을 수 있는지 확인</span>
+<span class="kt">bool</span> <span class="nf">check_0</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">){</span>
+    <span class="k">if</span> <span class="p">((</span><span class="n">y</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="o">||</span>
+        <span class="p">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">map</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">||</span>
+        <span class="p">(</span><span class="n">map</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">])</span> <span class="o">||</span>
+        <span class="p">(</span><span class="n">y</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">map</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">y</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">x</span><span class="p">]))</span> <span class="p">{</span><span class="k">return</span> <span class="nb">true</span><span class="p">;}</span>
+    <span class="k">else</span> <span class="p">{</span><span class="k">return</span> <span class="nb">false</span><span class="p">;}</span>
+<span class="p">}</span>
+
+<span class="c1">// 보 놓을 수 있는지 확인</span>
+<span class="kt">bool</span> <span class="nf">check_1</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">){</span>
+    <span class="k">if</span> <span class="p">((</span><span class="n">y</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">map</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">y</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">x</span><span class="p">])</span> <span class="o">||</span>
+        <span class="p">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="o">&amp;&amp;</span> <span class="n">y</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">map</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">y</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span> <span class="o">||</span>
+        <span class="p">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="o">&amp;&amp;</span> <span class="n">map</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="n">map</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">])){</span><span class="k">return</span> <span class="nb">true</span><span class="p">;}</span>
+    <span class="k">else</span> <span class="p">{</span><span class="k">return</span> <span class="nb">false</span><span class="p">;}</span>
+<span class="p">}</span>
+
+<span class="c1">// 기둥 지울 수 있는지 확인</span>
+<span class="kt">bool</span> <span class="nf">check_d_0</span> <span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">){</span>
+    <span class="k">if</span> <span class="p">((</span><span class="o">!</span><span class="n">map</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">y</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">||</span> <span class="n">check_0</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span> <span class="o">&amp;&amp;</span>
+        <span class="p">(</span><span class="o">!</span><span class="n">map</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">y</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">||</span> <span class="n">check_1</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span> <span class="o">&amp;&amp;</span>
+        <span class="p">(</span><span class="o">!</span><span class="n">map</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">y</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">||</span> <span class="n">check_1</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))){</span>
+        <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+    <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+        <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// 보 지울 수 있는지 확인 </span>
+<span class="kt">bool</span> <span class="nf">check_d_1</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">){</span>
+    <span class="k">if</span> <span class="p">((</span><span class="o">!</span><span class="n">map</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">||</span> <span class="n">check_1</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">x</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span> <span class="o">&amp;&amp;</span>
+        <span class="p">(</span><span class="o">!</span><span class="n">map</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">||</span> <span class="n">check_1</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span> <span class="o">&amp;&amp;</span>
+        <span class="p">(</span><span class="o">!</span><span class="n">map</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">||</span> <span class="n">check_0</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span> <span class="o">&amp;&amp;</span>
+        <span class="p">(</span><span class="o">!</span><span class="n">map</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">||</span> <span class="n">check_0</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">y</span><span class="p">))){</span>
+        <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+    <span class="p">}</span><span class="k">else</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">construct</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">,</span> <span class="kt">int</span> <span class="n">a</span><span class="p">){</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">a</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">check_0</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)){</span>
+        <span class="n">map</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+    <span class="p">}</span><span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">a</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">check_1</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span> <span class="p">{</span>
+        <span class="n">map</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">deconstruct</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">,</span> <span class="kt">int</span> <span class="n">a</span><span class="p">){</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">a</span> <span class="o">==</span> <span class="mi">0</span><span class="p">){</span>
+        <span class="n">map</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">check_d_0</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">x</span> <span class="p">,</span><span class="n">y</span><span class="p">))</span> <span class="n">map</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+
+    <span class="p">}</span><span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">a</span> <span class="o">==</span> <span class="mi">1</span><span class="p">){</span>
+        <span class="n">map</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">check_d_1</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span> <span class="n">map</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">solution</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">build_frame</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">answer</span><span class="p">;</span>
+    
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">build_frame</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="n">build_frame</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">];</span>
+        <span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="n">build_frame</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">];</span>
+        <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="n">build_frame</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">];</span>
+        <span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="n">build_frame</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">3</span><span class="p">];</span>
+        
+        <span class="k">if</span> <span class="p">(</span><span class="n">b</span> <span class="o">==</span> <span class="mi">1</span><span class="p">){</span>
+            <span class="n">construct</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">a</span><span class="p">);</span>
+        <span class="p">}</span><span class="k">else</span> <span class="p">{</span>
+            <span class="n">deconstruct</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">a</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">){</span>
+            <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">each_0</span> <span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+            <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">each_1</span> <span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+            
+            <span class="k">if</span> <span class="p">(</span><span class="n">map</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="p">])</span> <span class="p">{</span>
+                <span class="n">each_0</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+                <span class="n">each_0</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span><span class="p">;</span>
+                <span class="n">each_0</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+                <span class="n">answer</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">each_0</span><span class="p">);</span>
+            <span class="p">}</span>
+            
+            <span class="k">if</span> <span class="p">(</span><span class="n">map</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="p">]){</span>
+                <span class="n">each_1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+                <span class="n">each_1</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span><span class="p">;</span>
+                <span class="n">each_1</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+                <span class="n">answer</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">each_1</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    
+    <span class="k">return</span> <span class="n">answer</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><br /><br /></p>
+ -->
+            <div class="text-muted post-excerpt">프로그래머스 구현 문제인 기둥과 보 설치 문제 풀이 및 코드에 대한 정리</div>
+        </div>
+        <!-- <div class="post">
+          <h1 class="post-title">
+          <a href="/algorithm/2021/09/18/programmers%EA%B8%B0%EB%91%A5%EA%B3%BC%EB%B3%B4%EC%84%A4%EC%B9%98/">
+              프로그래머스 - 기둥과 보 설치
+          </a>
+          </h1>
+
+          <span class="post-date">18 Sep 2021</span>
+          
+          
+            
+              <span class="badge badge-dark">Algorithm</span>
+            
+          
+            
+              <span class="badge badge-dark">C++</span>
+            
+          
+            
+              <span class="badge badge-dark">Online judge</span>
+            
+          
+            
+              <span class="badge badge-dark">구현/시뮬레이션</span>
+            
+          
+            
+              <span class="badge badge-dark">Programmers</span>
+            
+          
+          
+          <hr />
 
 <p><br /><br /></p>
 
@@ -420,9 +615,9 @@
 
 <p><br /><br /></p>
 
-        </div>
+      </div> -->
   
-      <div class="post">
+      <div class="index-post">
             <h1 class="post-title">
             <a href="/algorithm/2021/09/16/Baekjoon10816/">
                 백준(10816) - 숫자 카드2
@@ -453,7 +648,161 @@
               
             
             
-            <hr />
+            <!-- <hr />
+
+<p><br /><br /></p>
+
+<h2 id="problem"><strong>Problem</strong></h2>
+
+<p><img src="/assets/img/Baekjoon-10816.png" alt="image" width="100%" height="100%" class="align-center" />
+<em>Figure 1. 백준 10816 숫자 카드2 (<a href="https://www.acmicpc.net/problem/10816">source</a>)</em></p>
+
+<p><br /></p>
+
+<h2 id="solution"><strong>Solution</strong></h2>
+
+<p>문제는 <code class="language-plaintext highlighter-rouge">N</code>개의 정수 입력이 주어졌을 때, <code class="language-plaintext highlighter-rouge">M</code>개의 특정 숫자가 나온 빈도 수를 출력하는 것이다.
+숫자의 범위가 <code class="language-plaintext highlighter-rouge">(-10,000,000 &lt;= x &lt;= 10,000,000)</code> 밖에 안되기 때문에, 가장 간단한 풀이는 x에 최소값을 더해 양수로 변환한 후 배열에 각 숫자가 발생한 빈도를 count하는 것이다. 
+다른 방법은 binary search를 응용하는 방법인데, 입력 배열을 오름차순으로 정렬한 다음 아래와 같이 <strong>특정 숫자가 나타나는 범위(lower bound, upper bound)</strong>를 구해서 푸는 방법이다.
+첫번째 방법은 숫자의 범위가 수십억 등 더 큰 단위로 커질 경우 메모리를 많이 사용해야 되며, 대부분의 사람들이 스스로 잘 풀 것이라고 생각한다. 
+따라서, 개인적으로 정리도 하는 겸 두번째 방법으로 푸는 방법에 대해 소개하려고 한다.</p>
+
+<p><br /></p>
+
+<h3 id="lower-bound"><strong>Lower bound</strong></h3>
+<p>Lower bound는 특정 값(key)보다 크거나 같은 값의 첫번째 위치를 나타낸다. lower bound 값을 찾기 위해서 binary search와 같이 탐색 공간을 반복적으로 절반씩 줄여 나간다. 이때 주의해야 할 것은 탐색 공간을 줄일 때 right와 left의 값을 어떻게 설정하는 지이다. key 값보다 mid 위치의 값이 크거나 같은 경우 lower bound는 mid의 왼편에 존재하게 되는데, 이때 mid가 lower bound가 될 수 있기 때문에, <code class="language-plaintext highlighter-rouge">right = mid</code>로 설정해준다. 반면에 key 값이 mid 위치의 값 보다 큰 경우, mid가 lower bound가 될 가능성이 없기 때문에 <code class="language-plaintext highlighter-rouge">left = mid + 1</code>으로 설정한다. 이러한 과정을 lower &lt; right 조건이 만족하는 경우에 한해 반복하고, loop가 끝나면 left 값을 반환하게 된다.</p>
+
+<p><img src="/assets/img/Baekjoon-10816/Lower-bound1.PNG" alt="image" width="85%" height="70%" class="align-center" /></p>
+
+<p><img src="/assets/img/Baekjoon-10816/Lower-bound2.PNG" alt="image" width="85%" height="70%" class="align-center" /></p>
+
+<p><img src="/assets/img/Baekjoon-10816/Lower-bound3.PNG" alt="image" width="85%" height="70%" class="align-center" /></p>
+
+<p><img src="/assets/img/Baekjoon-10816/Lower-bound4.PNG" alt="image" width="85%" height="70%" class="align-center" /></p>
+
+<p><img src="/assets/img/Baekjoon-10816/Lower-bound5.PNG" alt="image" width="85%" height="70%" class="align-center" /></p>
+
+<p><br /></p>
+
+<h3 id="upper-bound"><strong>Upper bound</strong></h3>
+<p>Upper bound는 특정 값(key)보다 큰 값이 처음으로 나오는 위치를 나타낸다. 만약 key 값이 mid 위치의 값보다 작은 경우 mid가 upper bound가 될 수 있으므로, <code class="language-plaintext highlighter-rouge">right = mid</code>로 설정한다. 반면에 key 값이 mid 위치 값보다 크거나 같은 경우, mid가 upper bound가 될 수 없기 때문에 left를 <code class="language-plaintext highlighter-rouge">mid + 1</code>으로 설정한다.</p>
+
+<p><img src="/assets/img/Baekjoon-10816/Upper-bound1.PNG" alt="image" width="85%" height="70%" class="align-center" /></p>
+
+<p><img src="/assets/img/Baekjoon-10816/Upper-bound2.PNG" alt="image" width="85%" height="70%" class="align-center" /></p>
+
+<p><img src="/assets/img/Baekjoon-10816/Upper-bound3.PNG" alt="image" width="85%" height="70%" class="align-center" /></p>
+
+<p><img src="/assets/img/Baekjoon-10816/Upper-bound4.PNG" alt="image" width="85%" height="70%" class="align-center" /></p>
+
+<p><br /></p>
+
+<h2 id="code"><strong>Code</strong></h2>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="n">arr</span><span class="p">[</span><span class="mi">500001</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">N</span><span class="p">,</span> <span class="n">M</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">upperbound</span><span class="p">(</span><span class="kt">int</span> <span class="n">key</span><span class="p">)</span> <span class="p">{</span>
+	<span class="kt">int</span> <span class="n">left</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">right</span> <span class="o">=</span> <span class="n">N</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">mid</span><span class="p">;</span>
+	
+	<span class="k">while</span> <span class="p">(</span><span class="n">left</span> <span class="o">&lt;</span> <span class="n">right</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">left</span> <span class="o">+</span> <span class="n">right</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+		<span class="k">if</span> <span class="p">(</span><span class="n">key</span> <span class="o">&lt;</span> <span class="n">arr</span><span class="p">[</span><span class="n">mid</span><span class="p">])</span> <span class="n">right</span> <span class="o">=</span> <span class="n">mid</span><span class="p">;</span>
+		<span class="k">else</span> <span class="n">left</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+	<span class="p">}</span>
+
+	<span class="k">return</span> <span class="n">right</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">lowerbound</span><span class="p">(</span><span class="kt">int</span> <span class="n">key</span><span class="p">)</span> <span class="p">{</span>
+	<span class="kt">int</span> <span class="n">left</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">right</span> <span class="o">=</span> <span class="n">N</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">mid</span><span class="p">;</span>
+	
+	<span class="k">while</span> <span class="p">(</span><span class="n">left</span> <span class="o">&lt;</span> <span class="n">right</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">left</span> <span class="o">+</span> <span class="n">right</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+		<span class="k">if</span> <span class="p">(</span><span class="n">key</span> <span class="o">&lt;=</span> <span class="n">arr</span><span class="p">[</span><span class="n">mid</span><span class="p">])</span> <span class="n">right</span> <span class="o">=</span> <span class="n">mid</span><span class="p">;</span>
+		<span class="k">else</span> <span class="n">left</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+	<span class="p">}</span>
+
+	<span class="k">return</span> <span class="n">left</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="n">ios_base</span><span class="o">::</span><span class="n">sync_with_stdio</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
+	<span class="n">cin</span><span class="p">.</span><span class="n">tie</span><span class="p">(</span><span class="nb">NULL</span><span class="p">);</span>
+	<span class="n">cout</span><span class="p">.</span><span class="n">tie</span><span class="p">(</span><span class="nb">NULL</span><span class="p">);</span>
+
+	<span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">N</span><span class="p">;</span>
+
+	<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">N</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+	<span class="p">}</span>
+
+	<span class="n">sort</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">arr</span> <span class="o">+</span> <span class="n">N</span><span class="p">);</span>
+
+	<span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">M</span><span class="p">;</span>
+
+	<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">M</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+		<span class="kt">int</span> <span class="n">num</span><span class="p">;</span>
+		<span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">num</span><span class="p">;</span>
+		
+		<span class="kt">int</span> <span class="n">lower_idx</span> <span class="o">=</span> <span class="n">lowerbound</span><span class="p">(</span><span class="n">num</span><span class="p">);</span>
+		<span class="kt">int</span> <span class="n">upper_idx</span> <span class="o">=</span> <span class="n">upperbound</span><span class="p">(</span><span class="n">num</span><span class="p">);</span>
+
+		<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">upper_idx</span> <span class="o">-</span> <span class="n">lower_idx</span> <span class="o">&lt;&lt;</span> <span class="s">" "</span><span class="p">;</span>
+	<span class="p">}</span>
+
+	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h2 id="time-complexity"><strong>Time complexity</strong></h2>
+<p>Sorting과 <code class="language-plaintext highlighter-rouge">2M</code>번의 binary search 시간을 더하여 $O( (N+M)log{N} )$</p>
+
+<p><br /><br /></p>
+ -->
+            <div class="text-muted post-excerpt">Binary search를 응용한 lower bound, upper bound를 찾는 방법에 대해 알아본다.</div>
+        </div>
+        <!-- <div class="post">
+          <h1 class="post-title">
+          <a href="/algorithm/2021/09/16/Baekjoon10816/">
+              백준(10816) - 숫자 카드2
+          </a>
+          </h1>
+
+          <span class="post-date">16 Sep 2021</span>
+          
+          
+            
+              <span class="badge badge-dark">Algorithm</span>
+            
+          
+            
+              <span class="badge badge-dark">C++</span>
+            
+          
+            
+              <span class="badge badge-dark">Online judge</span>
+            
+          
+            
+              <span class="badge badge-dark">Binary search</span>
+            
+          
+            
+              <span class="badge badge-dark">Baekjoon</span>
+            
+          
+          
+          <hr />
 
 <p><br /><br /></p>
 
@@ -574,9 +923,9 @@
 
 <p><br /><br /></p>
 
-        </div>
+      </div> -->
   
-      <div class="post">
+      <div class="index-post">
             <h1 class="post-title">
             <a href="/algorithm/2021/07/28/%EB%B0%B1%EC%A4%804811/">
                 백준(4811) 알약
@@ -607,7 +956,107 @@
               
             
             
-            <hr />
+            <!-- <hr />
+
+<p><br /><br /></p>
+
+<h2 id="문제"><strong>문제</strong></h2>
+<p><br />
+<a href="https://www.acmicpc.net/problem/4811">백준 알약 문제(4811)</a></p>
+
+<p>문제를 요약하자면 먼저 병에는 N개의 알약이 존재한다. 하루에 반알씩 약을 복용해야 한다. 한 알 전체를 꺼낼 경우 반으로 쪼갠 후 나머지 조각을 병에 다시 넣고, 반 조각을 꺼낼 경우 그 약을 먹는다. 이때 한 조각을 꺼낼 경우 W, 반 조각을 꺼낼 경우 H를 종이에 기록한다. 2N일이 지났을 때 가능한 서로 다른 문자열의 개수를 구해야 한다.</p>
+
+<p><br /><br /></p>
+
+<h2 id="코드-python-3"><strong>코드 (Python 3)</strong></h2>
+<p><br /></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">sys</span>
+<span class="nb">input</span><span class="o">=</span><span class="n">sys</span><span class="p">.</span><span class="n">stdin</span><span class="p">.</span><span class="n">readline</span>
+<span class="n">dp</span>  <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="mi">31</span> <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="mi">31</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">31</span><span class="p">)]</span>
+<span class="n">m</span> <span class="o">=</span> <span class="mi">30</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">31</span><span class="p">):</span>
+  <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+      <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+      <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> 
+  <span class="n">m</span><span class="o">-=</span><span class="mi">1</span>
+
+<span class="n">n</span> <span class="o">=</span> <span class="nb">int</span> <span class="p">(</span><span class="nb">input</span> <span class="p">())</span>
+<span class="k">while</span> <span class="n">n</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>  
+  <span class="k">print</span> <span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">n</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+  <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span> <span class="p">(</span><span class="nb">input</span><span class="p">())</span>
+</code></pre></div></div>
+
+<p><br /><br /></p>
+
+<h2 id="풀이"><strong>풀이</strong></h2>
+<p><br />
+문제가 재귀호출을 사용하는 문제로 분류되어 있어, 처음에는 단순 재귀호출을 사용하여 문제를 해결하고자 했다. 먼저 $F(N,M)$ 는 알약 N 조각과 2등분 된 알약 M 조각이 있을 때 만들어지는 서로 다른 문자열의 개수라고 하자. 만약 알약 통에 각각 N,M 개의 알약이 존재한다면, 등분 되지 않은 알약을 꺼내는 경우와 조각 난 알약을 꺼내는 경우로 나눌 수 있다. 따라서 아래와 같은 점화식을 세울 수 있다. 
+<br /></p>
+
+\[F(N,M) = F(N-1,M+1) + F(N,M-1)\]
+
+<p><br />
+처음에는 위 식에 따라 몇가지 조건식을 넣고 recursion 코드를 구현했더니, 중복되는 계산이 많아서 주어진 시간 안에 문제를 풀 수 없을 것 같았다. 따라서 DP를 사용했고 그 중에 <code class="language-plaintext highlighter-rouge">Bottom-up</code> 방식으로 다시 문제를 풀게 되었다.</p>
+
+<p><br /></p>
+
+\[F(N,M) =
+\begin{cases}
+F(N-1,M+1),  &amp; \text{if $N &gt; 0$ and $M = 0 $}\\
+1, &amp; \text{if $N = 0$ and $M &gt; 0$} \\
+F(N-1,M+1) + F(N,M-1), &amp; \text{if $N &gt; 0$ and $M &gt; 0$}
+\end{cases}\]
+
+<p><br /></p>
+
+<p>위 식에 따라 2 X 2 배열을 생성하였고, 입력으로 N(30 이하 정수)이 주어질 때 마다 배열에서 해당 답인 DP[N][0] (나눠지지 않은 알약 N) 찾아서 출력하였다.<br />
+<br /></p>
+
+<h2 id="시간복잡도"><strong>시간복잡도</strong></h2>
+<p><br /></p>
+
+<p>테스트케이스 수와 상관 없이 2차원 배열을 생성해야 하기 때문에 시간복잡도는 $O(N^2)$이다.
+<br /><br /></p>
+
+ -->
+            <div class="text-muted post-excerpt">백준 알약  (4811번) 문제 풀이 및 시간 복잡도 분석</div>
+        </div>
+        <!-- <div class="post">
+          <h1 class="post-title">
+          <a href="/algorithm/2021/07/28/%EB%B0%B1%EC%A4%804811/">
+              백준(4811) 알약
+          </a>
+          </h1>
+
+          <span class="post-date">28 Jul 2021</span>
+          
+          
+            
+              <span class="badge badge-dark">Algorithm</span>
+            
+          
+            
+              <span class="badge badge-dark">Python</span>
+            
+          
+            
+              <span class="badge badge-dark">Online judge</span>
+            
+          
+            
+              <span class="badge badge-dark">Dynamic programming</span>
+            
+          
+            
+              <span class="badge badge-dark">Baekjoon</span>
+            
+          
+          
+          <hr />
 
 <p><br /><br /></p>
 
@@ -674,9 +1123,9 @@ F(N-1,M+1) + F(N,M-1), &amp; \text{if $N &gt; 0$ and $M &gt; 0$}
 <br /><br /></p>
 
 
-        </div>
+      </div> -->
   
-      <div class="post">
+      <div class="index-post">
             <h1 class="post-title">
             <a href="/algorithm/2021/07/18/%EB%B0%B1%EC%A4%801157/">
                 백준(1157) 단어공부
@@ -707,7 +1156,95 @@ F(N-1,M+1) + F(N,M-1), &amp; \text{if $N &gt; 0$ and $M &gt; 0$}
               
             
             
-            <hr />
+            <!-- <hr />
+
+<p><br /><br /></p>
+
+<h2 id="코드"><strong>코드</strong></h2>
+<p><br />
+python3 :</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
+
+<span class="k">def</span> <span class="nf">main</span> <span class="p">():</span>
+
+    <span class="n">inpStr</span> <span class="o">=</span> <span class="nb">input</span><span class="p">().</span><span class="n">upper</span><span class="p">()</span>    
+    <span class="n">c</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">inpStr</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">inpStr</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">inpStr</span><span class="p">)</span>
+        <span class="k">return</span> 
+    
+    <span class="c1"># O(n logk)
+</span>    <span class="n">res</span> <span class="o">=</span> <span class="n">c</span><span class="p">.</span><span class="n">most_common</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">res</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">res</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>  <span class="p">:</span> 
+        <span class="k">print</span> <span class="p">(</span><span class="s">'?'</span><span class="p">)</span>
+    <span class="k">else</span> <span class="p">:</span> 
+        <span class="k">print</span> <span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+    
+    <span class="k">return</span>
+
+<span class="n">main</span><span class="p">()</span>
+</code></pre></div></div>
+<p><br /><br /></p>
+
+<h2 id="풀이"><strong>풀이</strong></h2>
+<p><br />
+Collections 패키지의 <code class="language-plaintext highlighter-rouge">most_common()</code> 메소드를 사용하여 풀이하였다. <code class="language-plaintext highlighter-rouge">Counter()</code>를 이용해 문자열의 알파벳과 빈도에 관한 정보를 담은 dictionary 자료형을 만든다. <code class="language-plaintext highlighter-rouge">most_common()</code> 메소드에 파라미터로 2를 주면 가장 빈도가 높은 두 개의 알파벳과 그에 대응하는 빈도수 정보를 담은 tuple list가 주어진다. 1,2위 단어의 발생 빈도가 같은 경우 가장 많이 사용된 알파벳이 여러개 존재하는 경우이므로 ‘?’를 출력한다. 그렇지 않은 경우 가장 빈도수가 높은 알파벳 대문자를 출력한다. 주의할 점은 문자열이 알파벳 하나로 이루어졌을 경우인데, 이 경우 허용된 인덱스 값을 벗어나므로 별도로 처리해야된다. 
+<br /><br /></p>
+
+<h2 id="시간복잡도"><strong>시간복잡도</strong></h2>
+<p><br /> 
+-&gt; <code class="language-plaintext highlighter-rouge">most_common(k)</code>의 시간 복잡도가 O(n logk)이다.
+<br /><br /></p>
+
+<h2 id="참고자료"><strong>참고자료</strong></h2>
+<p><br />
+1) <code class="language-plaintext highlighter-rouge">most_common()</code> 시간복잡도
+<a href="https://stackoverflow.com/questions/29240807/python-collections-counter-most-common-complexity">https://stackoverflow.com/questions/29240807/python-collections-counter-most-common-complexity</a></p>
+
+<p>2) 위의 자료를 이해하기 위해선 <code class="language-plaintext highlighter-rouge">heapq</code>자료형의 구현 에 대해 알아야 한다.
+<a href="https://hg.python.org/cpython/file/2.7/Lib/heapq.py#l203">https://hg.python.org/cpython/file/2.7/Lib/heapq.py#l203</a></p>
+
+<p>3) <code class="language-plaintext highlighter-rouge">heapq.nlargest()</code>와 관련된 자료이다.
+<a href="https://stackoverflow.com/questions/38806202/whats-the-time-complexity-of-functions-in-heapq-library">https://stackoverflow.com/questions/38806202/whats-the-time-complexity-of-functions-in-heapq-library</a>
+<br /><br /></p>
+ -->
+            <div class="text-muted post-excerpt">백준 단어공부 (1157번) 문제 풀이 및 시간 복잡도 분석</div>
+        </div>
+        <!-- <div class="post">
+          <h1 class="post-title">
+          <a href="/algorithm/2021/07/18/%EB%B0%B1%EC%A4%801157/">
+              백준(1157) 단어공부
+          </a>
+          </h1>
+
+          <span class="post-date">18 Jul 2021</span>
+          
+          
+            
+              <span class="badge badge-dark">Algorithm</span>
+            
+          
+            
+              <span class="badge badge-dark">Python</span>
+            
+          
+            
+              <span class="badge badge-dark">Online judge</span>
+            
+          
+            
+              <span class="badge badge-dark">구현/시뮬레이션</span>
+            
+          
+            
+              <span class="badge badge-dark">Baekjoon</span>
+            
+          
+          
+          <hr />
 
 <p><br /><br /></p>
 
@@ -762,7 +1299,7 @@ Collections 패키지의 <code class="language-plaintext highlighter-rouge">most
 <a href="https://stackoverflow.com/questions/38806202/whats-the-time-complexity-of-functions-in-heapq-library">https://stackoverflow.com/questions/38806202/whats-the-time-complexity-of-functions-in-heapq-library</a>
 <br /><br /></p>
 
-        </div>
+      </div> -->
   
 
 </div>
@@ -784,4 +1321,33 @@ Collections 패키지의 <code class="language-plaintext highlighter-rouge">most
     <label for="sidebar-checkbox" class="sidebar-toggle"></label>
 
   </body>
+  <script>
+    const content = document.querySelector(".main-content");
+    
+    scrollnav.init(content,{
+      debug: false,
+      updateHistory: false,
+      // easingStyle: 'easeOutQuint',
+      sections: ($('.post-content > h1').length>0) ? 'h1' : 'h2',
+      subSections: ($('.post-content > h1').length>0) ? 'h2' : 'h3'
+    });
+    
+    var sideNav = function(){
+      var mainRect = document.getElementById('main-content').getBoundingClientRect();
+      $('nav.scroll-nav').css('left', mainRect.right + 50 + 'px');
+    }
+    
+    sideNav();
+    window.addEventListener("resize", sideNav);
+    
+   
+
+    
+    // window.addEventListener('load', (event) => {
+    //   console.log('page is fully loaded');
+    //   scrollnav.updatePositions();
+  
+    // });
+
+  </script>
 </html>
