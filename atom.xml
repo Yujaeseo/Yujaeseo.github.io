@@ -4,13 +4,75 @@
  <title>Yu's Tech 블로그</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2022-08-03T00:08:15+09:00</updated>
+ <updated>2022-08-07T23:15:43+09:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Jaeseo Yu</name>
    <email></email>
  </author>
 
+ 
+ <entry>
+   <title>NVIDIA GPUDirect storage에 대해</title>
+   <link href="http://localhost:4000/hpc/2022/08/07/NVIDIA-GPUDirect-storage/"/>
+   <updated>2022-08-07T00:00:00+09:00</updated>
+   <id>http://localhost:4000/hpc/2022/08/07/NVIDIA GPUDirect storage</id>
+   <content type="html">&lt;hr /&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;nvidia-gpudirect&quot;&gt;&lt;strong&gt;NVIDIA GPUDirect&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;NVIDIA GPUDirect란 NVIDIA data center GPU의 data movement와 access 속도를 높여주는 기술이다. AI를 위해 많은 기업들이 고성능 GPU 서버를 구축하고 있고, 높은 flops를 가지는 GPU의 성능을 활용하기 위해서는 높은 IO bandwidth가 뒷받침되어야 한다. 아래의 이미지는 NVIDIA 기술 세미나에서 인용한 HP의 슬라이드이다. Computer architecture 각 구성 요소들의 처리 속도를 사람의 걸음수로 환산하여 비교한 자료이다. CPU 프로세서의 처리 속도를 한 걸음이라고 했을 때, system memory (DRAM)와 SSD (Flash)의 IO 속도를 각각 100, 200,000 걸음으로 환산할 수 있다. CPU 처리 속도에 비해 주변 장치의 IO 속도가 훨씬 느리기 때문에 processor의 빠른 처리 속도를 십분 활용하기 위해서 IO 속도를 높이는 것이 무엇보다 중요하다고 할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220807223108967.png&quot; alt=&quot;image-20220807223108967&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;
+  &lt;em&gt;Figure 1. Computer architecture (&lt;a href=&quot;https://www.youtube.com/watch?v=ZMf64oB_arY&quot;&gt;source&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;NIVIDIA GPU의 빠른 처리 속도를 활용해 시스템 성능을 극대화하기 위해 GPUDirect라는 기술을 개발하였고, storage access 최적화를 위한 GPUDirect Storage, network adapter access 최적화를 위한 GPUdirect RDMA, GPU 간 통신 최적화를 위한 GPUDirect P2P를 비롯한 다양한 기술들이 포함되어 있다. 그중 스토리지와의 data movement 속도를 높여주는 NVIDIA GPUDirect Storage(GDS)에 대해 알아보고자 한다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;nvidia-gpudirect-storage-gds&quot;&gt;&lt;strong&gt;NVIDIA GPUDirect storage (GDS)&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;GDS는 local 또는 remote storage(e.g. NVMe or NVMe over Fabric)와 GPU 간 direct path를 이용하여 빠르게 통신할 수 있도록 해주는 기술이다. 이를 통해 IO 시 CPU에서 발생하는 bottleneck을 줄여줄 수 있게된다. GDS가 없을 때는 local 또는 remote storage에서 데이터를 불러올 때 CPU를 거쳐야만 했다. 즉 CPU의 low memory에 있는 bounce buffer에 storage에서 읽은 데이터가 쌓이고, 해당 데이터를 high memory에 copy한 후 해당 데이터가 GPU 메모리로 이동하는 방식이였다. 반면에 GDS를 사용하면 아래의 그림과 같이 CPU를 거치지 않고 storage와 GPU간에 direct하게 통신할 수 있게 된다. GPU와 storage 간의 DMA (Direct Memory Access)를 통해 CPU의 불필요한 memory copy를 줄일 수 있게 되며, 통신을 위해 거치는 data path가 짧아져 data transfer에 소요되는 시간이 줄게된다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/GPUDirect Storage data path.png&quot; alt=&quot;GPUDirect Storage data path&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;
+  &lt;em&gt;Fig 2. GPUDirect Storage data path (&lt;a href=&quot;https://nvdam.widen.net/s/k8vrp9xkft/tech-overview-magnum-io-1790750-r5-web&quot;&gt;source&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;performance&quot;&gt;&lt;strong&gt;Performance&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;아래의 그래프는 NVIDIA 자체 gdsio benchmarking tool을 이용해서 bandwidth와 cpu utilization을 측정한 자료이다. 자료에 따르면 GDS를 사용하지 않았을 때(CPU-GPU_READ)에 비해 bandwidth는 최대 1.5X 향상되었으며, CPU utilization의 경우 최대 2.8X 향상되었음을 확인할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/The benefits of using GDS with the gdsio benchmarking tool.png&quot; alt=&quot;The benefits of using GDS with the gdsio benchmarking tool&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;
+  &lt;em&gt;Fig 3. The benefits of using GDS with the gdsio benchmarking tool (&lt;a href=&quot;https://nvdam.widen.net/s/k8vrp9xkft/tech-overview-magnum-io-1790750-r5-web&quot;&gt;source&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Weather pattern을 확인하는 climate simulation deep learning 모델에 GDS, DALI (Nvidia data loading library), deepCAM를 적용하여 inference 성능을 측정했을 때 최대 6.6X의 성능 향상이 있었다. (GDS만 적용했을 때의 성능 개선치만 볼 수 있었다면 좋았을 것 같다).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/Performance benchmarking done for DeepCAM Inference.png&quot; alt=&quot;Performance benchmarking done for DeepCAM Inference&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;
+  &lt;em&gt;Fig 4. Performance benchmarking done for DeepCAM Inference using standard GDS configuration in DGX A100 (&lt;a href=&quot;https://nvdam.widen.net/s/k8vrp9xkft/tech-overview-magnum-io-1790750-r5-web&quot;&gt;source&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+</content>
+ </entry>
  
  <entry>
    <title>Deploying Machine Learning Models in Production_Model Servers-TensorFlow Serving</title>
