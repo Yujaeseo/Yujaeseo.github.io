@@ -88,7 +88,7 @@
   </div>
 
   <nav class="sidebar-nav">
-    <a class="sidebar-nav-item" href="/">Home <small class="text-info">19</small></a>
+    <a class="sidebar-nav-item" href="/">Home <small class="text-info">21</small></a>
 
     
 
@@ -119,6 +119,12 @@
       
         
           <a class="sidebar-nav-item" href="/category/Deep%20learning/index.html">Deep learning</a>
+        
+      
+    
+      
+        
+          <a class="sidebar-nav-item" href="/category/Docker/index.html">Docker</a>
         
       
     
@@ -173,6 +179,10 @@
       
     
       
+        
+      
+    
+      
     
  -->
     
@@ -197,11 +207,14 @@
       <a class = "sidebar-nav-item " href="/category/Operating system/index.html">Operating system <small class="text-info">1</small></a>  
     <!--<a class="sidebar-nav-item" href="/category/Operating system/index.html">Operating system</a>  <small class="text-muted">1</small>-->
     
-      <a class = "sidebar-nav-item  active" href="/category/Lecture/index.html">Lecture <small class="text-info">6</small></a>  
-    <!--<a class="sidebar-nav-item" href="/category/Lecture/index.html">Lecture</a>  <small class="text-muted">6</small>-->
+      <a class = "sidebar-nav-item  active" href="/category/Lecture/index.html">Lecture <small class="text-info">7</small></a>  
+    <!--<a class="sidebar-nav-item" href="/category/Lecture/index.html">Lecture</a>  <small class="text-muted">7</small>-->
     
       <a class = "sidebar-nav-item " href="/category/HPC/index.html">HPC <small class="text-info">1</small></a>  
     <!--<a class="sidebar-nav-item" href="/category/HPC/index.html">HPC</a>  <small class="text-muted">1</small>-->
+    
+      <a class = "sidebar-nav-item " href="/category/Docker/index.html">Docker <small class="text-info">1</small></a>  
+    <!--<a class="sidebar-nav-item" href="/category/Docker/index.html">Docker</a>  <small class="text-muted">1</small>-->
     
     
 <!--
@@ -236,6 +249,300 @@
         <div class="posts">
     
     
+      <div class="index-post">
+            <h1 class="post-title">
+            <a href="/lecture/2022/08/09/Deploying-Machine-Learning-Models-in-Production-Model-Servers-Model-Servers_Other-Providers/">
+                Deploying Machine Learning Models in Production_Model Servers-Model Servers_Other Providers
+            </a>
+            </h1>
+
+            <span class="post-date">09 Aug 2022</span>
+            
+            
+              
+                <span class="badge badge-dark">MLops</span>
+              
+            
+              
+                <span class="badge badge-dark">Deep learning</span>
+              
+            
+              
+                <span class="badge badge-dark">Machine learning</span>
+              
+            
+              
+                <span class="badge badge-dark">Lecture summary</span>
+              
+            
+            
+            <!-- <ol>
+  <li>
+    <p>NVIDIA Triton Inference Server</p>
+
+    <p><img src="../../assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220808202430432.png" alt="image-20220808202430432" /></p>
+
+    <ul>
+      <li>
+        <p>Triton Inference Server는 NVIDIA에서 제공하는 model server이다.</p>
+      </li>
+      <li>
+        <p>오픈소스 inference 서빙 플랫폼으로서 tensorflow, pytorch, ONNX 등 타 딥러닝 프레임워크에서 학습된 모델들도 deploy를 할수 있다.</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Architecture</p>
+
+    <p><img src="../../assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220808202555416.png" alt="image-20220808202555416" /></p>
+
+    <ul>
+      <li>서로 다른 framework에서 만들어진 모델을 single GPU에서 concurrently하게 실행할 수 있다.</li>
+      <li>Multi GPU 환경에서는 각 모델에 대한 instance가 생성되며 각 GPU에 할당된다.
+        <ul>
+          <li>User의 별도 coding 없이 GPU utilization을 높일 수 있다.</li>
+        </ul>
+      </li>
+      <li>Batch inference와 streaming input에 대한 inference도 지원한다.</li>
+      <li>Performance를 높이기 위해 inference input, output을 CUDA GPU shared memory에 적재할 수도 있다.
+        <ul>
+          <li>httpc, grpc overhead를 줄일 수 있다.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Designed for Scalability</p>
+
+    <p><img src="../../assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220808202603559.png" alt="image-20220808202603559" /></p>
+
+    <ul>
+      <li>Autoscaling, orchestration을 위해 K8s와 결합되었고, end-to-end ML workflow를 위해 Kubeflow와도 결합된다.</li>
+      <li>Http, grpc API를 지원하며 이를 통해 load balancer 통신할 수 있다.</li>
+      <li>수많은 모델들이 동시에 serving될 수 있으며, GPU 뿐만 아니라 model을 heterogeneous한 환경에서 돌릴 수 있다.
+        <ul>
+          <li>Peak load 시에는 여러 프로세서 자원에 load를 분산시켜 효율적으로 대응할 수 있다.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Torch Serve</p>
+
+    <p><img src="../../assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220808202611455.png" alt="image-20220808202611455" /></p>
+
+    <ul>
+      <li>Torchserve는 AWS와 Facebook이 함께 만들었으며, Pytorch model을 위한 serving framework이다.</li>
+      <li>여러 기능을 제공하며, 무엇보다 opensource여서 자신에게 fit하게 customize할 수 있다는 장점이 있다.</li>
+    </ul>
+  </li>
+  <li>
+    <p>TorchServe Architecture (1)</p>
+
+    <p><img src="../../assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220808202619768.png" alt="image-20220808202619768" /></p>
+
+    <ul>
+      <li>Torchserve의 아키텍쳐는 다음과 같습니다.</li>
+    </ul>
+  </li>
+  <li>
+    <p>TorchServe Architecture (2)</p>
+
+    <p><img src="../../assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220808202628376.png" alt="image-20220808202628376" /></p>
+
+    <ul>
+      <li>Frontend는 request와 response 처리와 model lifecycle을 관리한다.</li>
+    </ul>
+  </li>
+  <li>
+    <p>TorchServe Architecture (3)</p>
+
+    <p><img src="../../assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220808202636889.png" alt="image-20220808202636889" /></p>
+
+    <ul>
+      <li>Backend는  model store로 부터 load된 model instance를 실행하며, inference를 담당한다.</li>
+      <li>여러 model worker가 실행중인 것을 볼 수 있으며, 동일 model에 대한 여러 worker , 또는 서로 다른 model에 대한 여러 worker가 실행될 수 있다.</li>
+    </ul>
+  </li>
+  <li>
+    <p>TorchServe Architecture (4)</p>
+
+    <p><img src="../../assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220808202645785.png" alt="image-20220808202645785" /></p>
+
+    <ul>
+      <li>모델은 cloud 또는 local storage로 부터 읽을 수 있다.</li>
+    </ul>
+  </li>
+  <li>
+    <p>TorchServe Architecture (5)</p>
+
+    <p><img src="../../assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220808202654281.png" alt="image-20220808202654281" /></p>
+
+    <ul>
+      <li>Server는 management, inference를 위한 API 또한 제공한다.</li>
+    </ul>
+  </li>
+  <li>
+    <p>KFServing</p>
+
+    <p><img src="../../assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220808202703639.png" alt="image-20220808202703639" /></p>
+
+    <ul>
+      <li>Kubeflow 또난 KF serving을 통한 serving 서비스를 제공하며, 여러 framework에서 만들어진 모델 serving을 지원한다.</li>
+      <li></li>
+    </ul>
+  </li>
+</ol>
+ -->
+            <div class="text-muted post-excerpt">Tensorflow Serving외에 Triton Inference Server 등 다른 server에 대해 알아본다.</div>
+        </div>
+        <!-- <div class="post">
+          <h1 class="post-title">
+          <a href="/lecture/2022/08/09/Deploying-Machine-Learning-Models-in-Production-Model-Servers-Model-Servers_Other-Providers/">
+              Deploying Machine Learning Models in Production_Model Servers-Model Servers_Other Providers
+          </a>
+          </h1>
+
+          <span class="post-date">09 Aug 2022</span>
+          
+          
+            
+              <span class="badge badge-dark">MLops</span>
+            
+          
+            
+              <span class="badge badge-dark">Deep learning</span>
+            
+          
+            
+              <span class="badge badge-dark">Machine learning</span>
+            
+          
+            
+              <span class="badge badge-dark">Lecture summary</span>
+            
+          
+          
+          <ol>
+  <li>
+    <p>NVIDIA Triton Inference Server</p>
+
+    <p><img src="../../assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220808202430432.png" alt="image-20220808202430432" /></p>
+
+    <ul>
+      <li>
+        <p>Triton Inference Server는 NVIDIA에서 제공하는 model server이다.</p>
+      </li>
+      <li>
+        <p>오픈소스 inference 서빙 플랫폼으로서 tensorflow, pytorch, ONNX 등 타 딥러닝 프레임워크에서 학습된 모델들도 deploy를 할수 있다.</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Architecture</p>
+
+    <p><img src="../../assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220808202555416.png" alt="image-20220808202555416" /></p>
+
+    <ul>
+      <li>서로 다른 framework에서 만들어진 모델을 single GPU에서 concurrently하게 실행할 수 있다.</li>
+      <li>Multi GPU 환경에서는 각 모델에 대한 instance가 생성되며 각 GPU에 할당된다.
+        <ul>
+          <li>User의 별도 coding 없이 GPU utilization을 높일 수 있다.</li>
+        </ul>
+      </li>
+      <li>Batch inference와 streaming input에 대한 inference도 지원한다.</li>
+      <li>Performance를 높이기 위해 inference input, output을 CUDA GPU shared memory에 적재할 수도 있다.
+        <ul>
+          <li>httpc, grpc overhead를 줄일 수 있다.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Designed for Scalability</p>
+
+    <p><img src="../../assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220808202603559.png" alt="image-20220808202603559" /></p>
+
+    <ul>
+      <li>Autoscaling, orchestration을 위해 K8s와 결합되었고, end-to-end ML workflow를 위해 Kubeflow와도 결합된다.</li>
+      <li>Http, grpc API를 지원하며 이를 통해 load balancer 통신할 수 있다.</li>
+      <li>수많은 모델들이 동시에 serving될 수 있으며, GPU 뿐만 아니라 model을 heterogeneous한 환경에서 돌릴 수 있다.
+        <ul>
+          <li>Peak load 시에는 여러 프로세서 자원에 load를 분산시켜 효율적으로 대응할 수 있다.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Torch Serve</p>
+
+    <p><img src="../../assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220808202611455.png" alt="image-20220808202611455" /></p>
+
+    <ul>
+      <li>Torchserve는 AWS와 Facebook이 함께 만들었으며, Pytorch model을 위한 serving framework이다.</li>
+      <li>여러 기능을 제공하며, 무엇보다 opensource여서 자신에게 fit하게 customize할 수 있다는 장점이 있다.</li>
+    </ul>
+  </li>
+  <li>
+    <p>TorchServe Architecture (1)</p>
+
+    <p><img src="../../assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220808202619768.png" alt="image-20220808202619768" /></p>
+
+    <ul>
+      <li>Torchserve의 아키텍쳐는 다음과 같습니다.</li>
+    </ul>
+  </li>
+  <li>
+    <p>TorchServe Architecture (2)</p>
+
+    <p><img src="../../assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220808202628376.png" alt="image-20220808202628376" /></p>
+
+    <ul>
+      <li>Frontend는 request와 response 처리와 model lifecycle을 관리한다.</li>
+    </ul>
+  </li>
+  <li>
+    <p>TorchServe Architecture (3)</p>
+
+    <p><img src="../../assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220808202636889.png" alt="image-20220808202636889" /></p>
+
+    <ul>
+      <li>Backend는  model store로 부터 load된 model instance를 실행하며, inference를 담당한다.</li>
+      <li>여러 model worker가 실행중인 것을 볼 수 있으며, 동일 model에 대한 여러 worker , 또는 서로 다른 model에 대한 여러 worker가 실행될 수 있다.</li>
+    </ul>
+  </li>
+  <li>
+    <p>TorchServe Architecture (4)</p>
+
+    <p><img src="../../assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220808202645785.png" alt="image-20220808202645785" /></p>
+
+    <ul>
+      <li>모델은 cloud 또는 local storage로 부터 읽을 수 있다.</li>
+    </ul>
+  </li>
+  <li>
+    <p>TorchServe Architecture (5)</p>
+
+    <p><img src="../../assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220808202654281.png" alt="image-20220808202654281" /></p>
+
+    <ul>
+      <li>Server는 management, inference를 위한 API 또한 제공한다.</li>
+    </ul>
+  </li>
+  <li>
+    <p>KFServing</p>
+
+    <p><img src="../../assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220808202703639.png" alt="image-20220808202703639" /></p>
+
+    <ul>
+      <li>Kubeflow 또난 KF serving을 통한 serving 서비스를 제공하며, 여러 framework에서 만들어진 모델 serving을 지원한다.</li>
+      <li></li>
+    </ul>
+  </li>
+</ol>
+
+      </div> -->
+  
       <div class="index-post">
             <h1 class="post-title">
             <a href="/lecture/2022/08/02/Deploying-Machine-Learning-Models-in-Production-Model-Servers-Tensorflow-Serving/">
