@@ -1,10 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-09-06T17:19:25+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Yu’s Tech 블로그</title><subtitle>You will never know until you try.</subtitle><author><name>Jaeseo Yu</name></author><entry><title type="html">Docker를 이용한 deep learning 개발 환경 구축</title><link href="http://localhost:4000/docker/2022/09/04/Docker-deep-learning-dev-environment/" rel="alternate" type="text/html" title="Docker를 이용한 deep learning 개발 환경 구축" /><published>2022-09-04T00:00:00+09:00</published><updated>2022-09-04T00:00:00+09:00</updated><id>http://localhost:4000/docker/2022/09/04/Docker%20deep%20learning%20dev%20environment</id><content type="html" xml:base="http://localhost:4000/docker/2022/09/04/Docker-deep-learning-dev-environment/">&lt;hr /&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-09-06T17:28:39+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Yu’s Tech 블로그</title><subtitle>You will never know until you try.</subtitle><author><name>Jaeseo Yu</name></author><entry><title type="html">Docker를 이용한 deep learning 개발 환경 구축</title><link href="http://localhost:4000/docker/2022/09/04/Docker-deep-learning-dev-environment/" rel="alternate" type="text/html" title="Docker를 이용한 deep learning 개발 환경 구축" /><published>2022-09-04T00:00:00+09:00</published><updated>2022-09-04T00:00:00+09:00</updated><id>http://localhost:4000/docker/2022/09/04/Docker%20deep%20learning%20dev%20environment</id><content type="html" xml:base="http://localhost:4000/docker/2022/09/04/Docker-deep-learning-dev-environment/">&lt;hr /&gt;
 
-&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;개요&quot;&gt;&lt;strong&gt;개요&lt;/strong&gt;&lt;/h2&gt;
 
 &lt;p&gt;이번 글은 딥러닝을 위한 개발 환경을 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker&lt;/code&gt;를 이용해 구축하는 일부 과정을 담았다. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Ubuntu&lt;/code&gt;에 딥러닝 개발에 많이 사용하는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;anaconda&lt;/code&gt; 프레임워크를 포함하는 개발 환경을 구축하기 위한 dockerfile을 작성하고, 이를 토대로 docker image build, container 실행까지 해본다.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;dockerfile-작성&quot;&gt;&lt;strong&gt;Dockerfile 작성&lt;/strong&gt;&lt;/h2&gt;
 
@@ -122,6 +124,8 @@
   &lt;/li&gt;
 &lt;/ul&gt;
 
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
 &lt;h2 id=&quot;image-build-및-container-실행&quot;&gt;&lt;strong&gt;Image build 및 container 실행&lt;/strong&gt;&lt;/h2&gt;
 
 &lt;ul&gt;
@@ -145,7 +149,7 @@
 
     &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;run&lt;/code&gt; 명령어와 이미지 이름 및 태그 정보를 통해 생성한 docker 이미지를 container로 만들 수 있다. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-it&lt;/code&gt; 옵션은 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--interactive&lt;/code&gt; ,&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--tty&lt;/code&gt;가 결합된 것으로, 컨테이너가 바로 종료되지 않고 현재 작업하고 있는 terminal에서 CLI를 통해 컨테이너를 조작할 수 있도록 만들어준다.&lt;/p&gt;
 
-    &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+    &lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
@@ -153,7 +157,7 @@
 
 &lt;p&gt;container를 실행하면 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;anaconda&lt;/code&gt;가 설치된 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ubuntu&lt;/code&gt; 환경에 접속할 수 있게 되고, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;conda env list&lt;/code&gt; 와 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;conda activate&lt;/code&gt;를 통해 원하는 가상환경이 제대로 설치됐는지 확인하고 실행해볼 수 있다.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;../../assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220906162127088.png&quot; alt=&quot;image-20220906162127088&quot; /&gt;&lt;/p&gt;</content><author><name>Jaeseo Yu</name></author><category term="Docker" /><category term="mlops" /><category term="deep learning" /><category term="machine learning" /><category term="docker" /><summary type="html">Ubuntu, anaconda 기반 딥러닝 개발 환경을 docker를 이용해서 직접 구축해본다.</summary></entry><entry><title type="html">Deploying Machine Learning Models in Production_Model Servers-Model Servers_Other Providers</title><link href="http://localhost:4000/lecture/2022/08/09/Deploying-Machine-Learning-Models-in-Production-Model-Servers-Model-Servers_Other-Providers/" rel="alternate" type="text/html" title="Deploying Machine Learning Models in Production_Model Servers-Model Servers_Other Providers" /><published>2022-08-09T00:00:00+09:00</published><updated>2022-08-09T00:00:00+09:00</updated><id>http://localhost:4000/lecture/2022/08/09/%5BDeploying%20Machine%20Learning%20Models%20in%20Production%5D%20Model%20Servers-Model%20Servers_Other%20Providers</id><content type="html" xml:base="http://localhost:4000/lecture/2022/08/09/Deploying-Machine-Learning-Models-in-Production-Model-Servers-Model-Servers_Other-Providers/">&lt;ol&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220906162127088.png&quot; alt=&quot;image-20220906162127088&quot; /&gt;&lt;/p&gt;</content><author><name>Jaeseo Yu</name></author><category term="Docker" /><category term="mlops" /><category term="deep learning" /><category term="machine learning" /><category term="docker" /><summary type="html">Ubuntu, anaconda 기반 딥러닝 개발 환경을 docker를 이용해서 직접 구축해본다.</summary></entry><entry><title type="html">Deploying Machine Learning Models in Production_Model Servers-Model Servers_Other Providers</title><link href="http://localhost:4000/lecture/2022/08/09/Deploying-Machine-Learning-Models-in-Production-Model-Servers-Model-Servers_Other-Providers/" rel="alternate" type="text/html" title="Deploying Machine Learning Models in Production_Model Servers-Model Servers_Other Providers" /><published>2022-08-09T00:00:00+09:00</published><updated>2022-08-09T00:00:00+09:00</updated><id>http://localhost:4000/lecture/2022/08/09/%5BDeploying%20Machine%20Learning%20Models%20in%20Production%5D%20Model%20Servers-Model%20Servers_Other%20Providers</id><content type="html" xml:base="http://localhost:4000/lecture/2022/08/09/Deploying-Machine-Learning-Models-in-Production-Model-Servers-Model-Servers_Other-Providers/">&lt;ol&gt;
   &lt;li&gt;
     &lt;p&gt;NVIDIA Triton Inference Server&lt;/p&gt;
 

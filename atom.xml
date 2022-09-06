@@ -4,7 +4,7 @@
  <title>Yu's Tech 블로그</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2022-09-06T17:19:25+09:00</updated>
+ <updated>2022-09-06T17:28:39+09:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Jaeseo Yu</name>
@@ -19,11 +19,13 @@
    <id>http://localhost:4000/docker/2022/09/04/Docker deep learning dev environment</id>
    <content type="html">&lt;hr /&gt;
 
-&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;개요&quot;&gt;&lt;strong&gt;개요&lt;/strong&gt;&lt;/h2&gt;
 
 &lt;p&gt;이번 글은 딥러닝을 위한 개발 환경을 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker&lt;/code&gt;를 이용해 구축하는 일부 과정을 담았다. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Ubuntu&lt;/code&gt;에 딥러닝 개발에 많이 사용하는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;anaconda&lt;/code&gt; 프레임워크를 포함하는 개발 환경을 구축하기 위한 dockerfile을 작성하고, 이를 토대로 docker image build, container 실행까지 해본다.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;dockerfile-작성&quot;&gt;&lt;strong&gt;Dockerfile 작성&lt;/strong&gt;&lt;/h2&gt;
 
@@ -141,6 +143,8 @@
   &lt;/li&gt;
 &lt;/ul&gt;
 
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
 &lt;h2 id=&quot;image-build-및-container-실행&quot;&gt;&lt;strong&gt;Image build 및 container 실행&lt;/strong&gt;&lt;/h2&gt;
 
 &lt;ul&gt;
@@ -164,7 +168,7 @@
 
     &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;run&lt;/code&gt; 명령어와 이미지 이름 및 태그 정보를 통해 생성한 docker 이미지를 container로 만들 수 있다. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-it&lt;/code&gt; 옵션은 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--interactive&lt;/code&gt; ,&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--tty&lt;/code&gt;가 결합된 것으로, 컨테이너가 바로 종료되지 않고 현재 작업하고 있는 terminal에서 CLI를 통해 컨테이너를 조작할 수 있도록 만들어준다.&lt;/p&gt;
 
-    &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+    &lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
@@ -172,7 +176,7 @@
 
 &lt;p&gt;container를 실행하면 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;anaconda&lt;/code&gt;가 설치된 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ubuntu&lt;/code&gt; 환경에 접속할 수 있게 되고, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;conda env list&lt;/code&gt; 와 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;conda activate&lt;/code&gt;를 통해 원하는 가상환경이 제대로 설치됐는지 확인하고 실행해볼 수 있다.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;../../assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220906162127088.png&quot; alt=&quot;image-20220906162127088&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220906162127088.png&quot; alt=&quot;image-20220906162127088&quot; /&gt;&lt;/p&gt;
 </content>
  </entry>
  
