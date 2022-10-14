@@ -88,7 +88,7 @@
   </div>
 
   <nav class="sidebar-nav">
-    <a class="sidebar-nav-item" href="/">Home <small class="text-info">21</small></a>
+    <a class="sidebar-nav-item" href="/">Home <small class="text-info">23</small></a>
 
     
 
@@ -207,14 +207,14 @@
       <a class = "sidebar-nav-item " href="/category/Operating system/index.html">Operating system <small class="text-info">1</small></a>  
     <!--<a class="sidebar-nav-item" href="/category/Operating system/index.html">Operating system</a>  <small class="text-muted">1</small>-->
     
-      <a class = "sidebar-nav-item " href="/category/Lecture/index.html">Lecture <small class="text-info">7</small></a>  
-    <!--<a class="sidebar-nav-item" href="/category/Lecture/index.html">Lecture</a>  <small class="text-muted">7</small>-->
+      <a class = "sidebar-nav-item " href="/category/Lecture/index.html">Lecture <small class="text-info">8</small></a>  
+    <!--<a class="sidebar-nav-item" href="/category/Lecture/index.html">Lecture</a>  <small class="text-muted">8</small>-->
     
       <a class = "sidebar-nav-item " href="/category/HPC/index.html">HPC <small class="text-info">1</small></a>  
     <!--<a class="sidebar-nav-item" href="/category/HPC/index.html">HPC</a>  <small class="text-muted">1</small>-->
     
-      <a class = "sidebar-nav-item  active" href="/category/Docker/index.html">Docker <small class="text-info">1</small></a>  
-    <!--<a class="sidebar-nav-item" href="/category/Docker/index.html">Docker</a>  <small class="text-muted">1</small>-->
+      <a class = "sidebar-nav-item  active" href="/category/Docker/index.html">Docker <small class="text-info">2</small></a>  
+    <!--<a class="sidebar-nav-item" href="/category/Docker/index.html">Docker</a>  <small class="text-muted">2</small>-->
     
     
 <!--
@@ -251,8 +251,226 @@
     
       <div class="index-post">
             <h1 class="post-title">
+            <a href="/docker/2022/10/06/Docker-deep-learning-dev-environment2/">
+                Docker를 이용한 deep learning 개발 환경 구축 (2)
+            </a>
+            </h1>
+
+            <span class="post-date">06 Oct 2022</span>
+            
+            
+              
+                <span class="badge badge-dark">MLops</span>
+              
+            
+              
+                <span class="badge badge-dark">Deep learning</span>
+              
+            
+              
+                <span class="badge badge-dark">Machine learning</span>
+              
+            
+              
+                <span class="badge badge-dark">Docker</span>
+              
+            
+            
+            <!-- <hr />
+
+<p><br /><br /><br /></p>
+
+<h2 id="volume-생성"><strong>Volume 생성</strong></h2>
+
+<p>컨테이너 안의 데이터를 보존하기 위해서는 <code class="language-plaintext highlighter-rouge">volume</code>을 생성해야 한다.  만약 volume을 생성하지 않고 컨테이너 안에서 텍스트 파일(e.g. <code class="language-plaintext highlighter-rouge">test.txt</code>)을 저장 후 실행 중인 컨테이너를 종료시켰다고 해보자. 이후 동일한 image를 사용하여 컨테이너를 재실행 했을 때, 해당  파일을 저장한 path로 가서 파일을 찾아보아도 <code class="language-plaintext highlighter-rouge">test.txt</code> 를 발견할 수 없다. 즉, 컨테이너에 mount한 volume 밖에 있는 data는 persistent한 성질을 갖지 않게 되고, 컨테이너 종료와 함께 사라지게 된다. 따라서 컨테이너의 lifecycle과 독립적으로 data를 저장하고 관리하기 위해서는 volume을 생성하고 해당 volume에 data를 저장해야한다.</p>
+
+<p>컨테이너 실행 시 아래의 command로 volume을 생성할 수 있다.  <code class="language-plaintext highlighter-rouge">--volume host path:container path</code> 로 host의 directory (<code class="language-plaintext highlighter-rouge">./data</code>) 와 container의 directory (<code class="language-plaintext highlighter-rouge">home/jaeseo/app</code>)을 매핑하였다. 이를 통해 컨테이너는 host 내의 디렉토리를 컨테이너의 디렉토리로 사용할 수 있게 된다. 이미 존재하는 volume과 매핑할 경우에는 <code class="language-plaintext highlighter-rouge">host path</code>에 존재하는 volume의 이름을 적으면 된다. 존재하지 않는 volume의 경우에는 자동으로 생성이 된다.  특정 volume을 여러 컨테이너가 공유할 수 있는데, 해당 host의 디렉토리를 다른 컨테이너에 동일하게 매핑하면 된다.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   docker container run <span class="sb">`</span>
+   <span class="nt">-it</span> <span class="sb">`</span>
+   <span class="nt">--name</span> development_env_cont <span class="sb">`</span>
+   <span class="nt">--volume</span> ./data:/home/jaeseo/app <span class="sb">`</span>
+   development_env:1
+</code></pre></div></div>
+
+<p><br /><br /></p>
+
+<h2 id="컨테이너를-외부와-연결"><strong>컨테이너를 외부와 연결</strong></h2>
+
+<p>컨테이너를 외부와 연결해주기 위하서는 도커와 호스트의 IP와 포트를 바인딩해야 한다. 만약 바인딩을 하지 않고서는 컨테이너를 외부에서 접근할 수 없으며, 컨테이너에 구성한 개발 환경도 호스트에서 사용할 수 없게된다. 그래서 호스트에서 컨테이너의 어플리케이션에 접근할 수 있도록 포트 바인딩을 한다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">-p</code> 옵션을 추가하고 <code class="language-plaintext highlighter-rouge">호스트 포트:컨테이너 어플리케이션 포트</code> 의 형식으로 <code class="language-plaintext highlighter-rouge">run</code> command에 추가하면 된다. 여러개의 포트를 개방하고싶다면, <code class="language-plaintext highlighter-rouge">-p</code> 옵션을 여러 번 써서 설정한다. 필자는 jupyter notebook을 사용할 것이기 때문에, jupyter notebook이 기본적으로 사용하는 <code class="language-plaintext highlighter-rouge">8888</code> 포트를  호스트와 연결한다.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   docker container run <span class="sb">`</span>
+   <span class="nt">-it</span> <span class="sb">`</span>
+   <span class="nt">--name</span> development_env_cont <span class="sb">`</span>
+   <span class="nt">--volume</span> ./data:/home/jaeseo/app <span class="sb">`</span>
+   <span class="nt">-p</span> 8888:8888 <span class="sb">`</span>
+   development_env:1
+</code></pre></div></div>
+
+<p><br /><br /></p>
+
+<h2 id="pytorch-jupyterlab-다운로드"><strong>Pytorch, Jupyterlab 다운로드</strong></h2>
+
+<p>머신러닝 프레임워크로 <code class="language-plaintext highlighter-rouge">Pytorch</code>를 사용할 것이기 때문에, <code class="language-plaintext highlighter-rouge">pytorch</code>와 이를 사용하기 위한 연관 패키지를 다운받는다. 컴퓨터비전과 음성처리와 관련된 데이터, 모델 및 필요한 요소들을 포함하는 <code class="language-plaintext highlighter-rouge">torchvision</code>, <code class="language-plaintext highlighter-rouge">torchaudio</code>와 함께 다운로드한다. <code class="language-plaintext highlighter-rouge">conda activate</code>를 통해 사전에 <code class="language-plaintext highlighter-rouge">dockerfile</code>에서 생성한 가상환경 (<code class="language-plaintext highlighter-rouge">test</code>)를 활성화하고 <code class="language-plaintext highlighter-rouge">conda install</code>을 해야한다는 점에 유의하자. 이후 다운로드가 완료되면 <code class="language-plaintext highlighter-rouge">conda list</code>를 통해관련 package가 다운됐는지 확인해보자.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   conda activate <span class="nb">test
+   </span>conda <span class="nb">install </span><span class="nv">pytorch</span><span class="o">==</span>1.12.0 <span class="nv">torchvision</span><span class="o">==</span>0.13.0 <span class="nv">torchaudio</span><span class="o">==</span>0.12.0 <span class="nt">-c</span> pytorch
+   
+   conda list
+</code></pre></div></div>
+
+<p><img src="/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20221014100600904.png" alt="image-20221014100600904" /></p>
+
+<p><code class="language-plaintext highlighter-rouge">Pytorch</code>가 정상적으로 다운로드된 것을 확인한 후에, 머신러닝 개발 환경에 특화된 웹 형태의 개발 환경으로 유명한 <code class="language-plaintext highlighter-rouge">Jupyterlab</code>을 install한다. <code class="language-plaintext highlighter-rouge">Jupyterlab</code>은 기존 <code class="language-plaintext highlighter-rouge">Jupyter notebook</code>에 다중 탭 등 다양한 확장 기능을 추가해 만든 어플리케이션이다.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   conda <span class="nb">install</span> <span class="nt">-c</span> conda-forge jupyterlab
+</code></pre></div></div>
+
+<p><br /><br /></p>
+
+<h2 id="작업-container-image로-저장"><strong>작업 container image로 저장</strong></h2>
+
+<p>현재까지 처음에 <code class="language-plaintext highlighter-rouge">dockerfile</code>로 만들었던 이미지를 컨테이너로 생성하고 <code class="language-plaintext highlighter-rouge">Pytorch</code>와 연관 패키지와 <code class="language-plaintext highlighter-rouge">Jupyterlab</code>을 설치했다. 그리고 앞으로 머신러닝 및 딥러닝 모델 개발을 하면서 필요한 패키지가 그때그때 생길 것이고 설치하게 될것이다. 하지만, 이렇게 공들여 업데이트하고 만들어놓은 컨테이너는 컨테이너가 종료된 순간 모든 업데이트 정보가 사라지게 된다. 컨테이너에서 작업한 내용들은 컨테이너 상태로 저장되게 되고, 컨테이너를 생성한 이미지에 업데이트 되지 않기 때문이다. 다음날 다시 컨테이너를 생성하고 작업을 시작할 때마다 복잡한 설정을 일일이 해줄수도 없고 그렇다고 <code class="language-plaintext highlighter-rouge">dockerfile</code> 에 작업한 내용을 매번 다시 써서 파일을 업데이트하기도 귀찮다. Docker에서는 <code class="language-plaintext highlighter-rouge">docker commit</code> 명령어를 통해 현재 특정 container를 이미지로 다시 저장할 수 있다. 저장된 이미지는 container에서 작업했던 내용을 포함하고 있고, <code class="language-plaintext highlighter-rouge">commit</code>한 이미지를 실행시켜 작업을 편리하게 이어갈 수 있다. 호스트에서  <code class="language-plaintext highlighter-rouge">docker commit [컨테이너명] [이미지명]</code>의 형식으로 쉽게 컨테이너를 저장할 수 있다.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   docker commit development_env_cont commit_pytorch_image
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">docker images</code> 명령어를 통해 새로운 이미지가 생성된 것을 확인할 수 있다.</p>
+
+<p><img src="/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20221014162718322.png" alt="image-20221014162718322" /></p>
+
+<p><br /><br /></p>
+
+<h2 id="jupyterlab-실행"><strong>Jupyterlab 실행</strong></h2>
+
+<p>호스트에서 <code class="language-plaintext highlighter-rouge">jupyterlab</code> 비밀번호를 설정하고, notebook directory를 생성한다. 아래의 명령어를 통해 <code class="language-plaintext highlighter-rouge">jupyterlab</code> 을 실행할 수 있다. 실행 포트는 이전 컨테이너 실행시에 매핑했던 <code class="language-plaintext highlighter-rouge">8888</code>을 적는다.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   jupyter lab password
+   <span class="nb">mkdir </span>jupyterlab
+   jupyter lab <span class="nt">--notebook-dir</span><span class="o">=</span>~/app/jupyterlab <span class="nt">--ip</span><span class="o">=</span><span class="s1">'*'</span> <span class="nt">--port</span><span class="o">=</span>8888 <span class="nt">--no-browser</span> <span class="nt">--allow-root</span>
+</code></pre></div></div>
+
+<p>호스트에서 브라우저 창을 열고 <code class="language-plaintext highlighter-rouge">http://localhost:8888</code>로 접속하면 <code class="language-plaintext highlighter-rouge">jupyterlab</code> 창이 뜨게되고, 설정한 password를 입력해 노트북을 사용할 수 있다.</p>
+
+<p><img src="/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20221014164956399.png" alt="image-20221014164956399" width="100%" height="100%" class="align-center" /></p>
+ -->
+            <div class="text-muted post-excerpt">컨테이너 port, volume 설정 후 jupyterlab에서 pytorch를 실행시켜본다.</div>
+        </div>
+        <!-- <div class="post">
+          <h1 class="post-title">
+          <a href="/docker/2022/10/06/Docker-deep-learning-dev-environment2/">
+              Docker를 이용한 deep learning 개발 환경 구축 (2)
+          </a>
+          </h1>
+
+          <span class="post-date">06 Oct 2022</span>
+          
+          
+            
+              <span class="badge badge-dark">MLops</span>
+            
+          
+            
+              <span class="badge badge-dark">Deep learning</span>
+            
+          
+            
+              <span class="badge badge-dark">Machine learning</span>
+            
+          
+            
+              <span class="badge badge-dark">Docker</span>
+            
+          
+          
+          <hr />
+
+<p><br /><br /><br /></p>
+
+<h2 id="volume-생성"><strong>Volume 생성</strong></h2>
+
+<p>컨테이너 안의 데이터를 보존하기 위해서는 <code class="language-plaintext highlighter-rouge">volume</code>을 생성해야 한다.  만약 volume을 생성하지 않고 컨테이너 안에서 텍스트 파일(e.g. <code class="language-plaintext highlighter-rouge">test.txt</code>)을 저장 후 실행 중인 컨테이너를 종료시켰다고 해보자. 이후 동일한 image를 사용하여 컨테이너를 재실행 했을 때, 해당  파일을 저장한 path로 가서 파일을 찾아보아도 <code class="language-plaintext highlighter-rouge">test.txt</code> 를 발견할 수 없다. 즉, 컨테이너에 mount한 volume 밖에 있는 data는 persistent한 성질을 갖지 않게 되고, 컨테이너 종료와 함께 사라지게 된다. 따라서 컨테이너의 lifecycle과 독립적으로 data를 저장하고 관리하기 위해서는 volume을 생성하고 해당 volume에 data를 저장해야한다.</p>
+
+<p>컨테이너 실행 시 아래의 command로 volume을 생성할 수 있다.  <code class="language-plaintext highlighter-rouge">--volume host path:container path</code> 로 host의 directory (<code class="language-plaintext highlighter-rouge">./data</code>) 와 container의 directory (<code class="language-plaintext highlighter-rouge">home/jaeseo/app</code>)을 매핑하였다. 이를 통해 컨테이너는 host 내의 디렉토리를 컨테이너의 디렉토리로 사용할 수 있게 된다. 이미 존재하는 volume과 매핑할 경우에는 <code class="language-plaintext highlighter-rouge">host path</code>에 존재하는 volume의 이름을 적으면 된다. 존재하지 않는 volume의 경우에는 자동으로 생성이 된다.  특정 volume을 여러 컨테이너가 공유할 수 있는데, 해당 host의 디렉토리를 다른 컨테이너에 동일하게 매핑하면 된다.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   docker container run <span class="sb">`</span>
+   <span class="nt">-it</span> <span class="sb">`</span>
+   <span class="nt">--name</span> development_env_cont <span class="sb">`</span>
+   <span class="nt">--volume</span> ./data:/home/jaeseo/app <span class="sb">`</span>
+   development_env:1
+</code></pre></div></div>
+
+<p><br /><br /></p>
+
+<h2 id="컨테이너를-외부와-연결"><strong>컨테이너를 외부와 연결</strong></h2>
+
+<p>컨테이너를 외부와 연결해주기 위하서는 도커와 호스트의 IP와 포트를 바인딩해야 한다. 만약 바인딩을 하지 않고서는 컨테이너를 외부에서 접근할 수 없으며, 컨테이너에 구성한 개발 환경도 호스트에서 사용할 수 없게된다. 그래서 호스트에서 컨테이너의 어플리케이션에 접근할 수 있도록 포트 바인딩을 한다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">-p</code> 옵션을 추가하고 <code class="language-plaintext highlighter-rouge">호스트 포트:컨테이너 어플리케이션 포트</code> 의 형식으로 <code class="language-plaintext highlighter-rouge">run</code> command에 추가하면 된다. 여러개의 포트를 개방하고싶다면, <code class="language-plaintext highlighter-rouge">-p</code> 옵션을 여러 번 써서 설정한다. 필자는 jupyter notebook을 사용할 것이기 때문에, jupyter notebook이 기본적으로 사용하는 <code class="language-plaintext highlighter-rouge">8888</code> 포트를  호스트와 연결한다.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   docker container run <span class="sb">`</span>
+   <span class="nt">-it</span> <span class="sb">`</span>
+   <span class="nt">--name</span> development_env_cont <span class="sb">`</span>
+   <span class="nt">--volume</span> ./data:/home/jaeseo/app <span class="sb">`</span>
+   <span class="nt">-p</span> 8888:8888 <span class="sb">`</span>
+   development_env:1
+</code></pre></div></div>
+
+<p><br /><br /></p>
+
+<h2 id="pytorch-jupyterlab-다운로드"><strong>Pytorch, Jupyterlab 다운로드</strong></h2>
+
+<p>머신러닝 프레임워크로 <code class="language-plaintext highlighter-rouge">Pytorch</code>를 사용할 것이기 때문에, <code class="language-plaintext highlighter-rouge">pytorch</code>와 이를 사용하기 위한 연관 패키지를 다운받는다. 컴퓨터비전과 음성처리와 관련된 데이터, 모델 및 필요한 요소들을 포함하는 <code class="language-plaintext highlighter-rouge">torchvision</code>, <code class="language-plaintext highlighter-rouge">torchaudio</code>와 함께 다운로드한다. <code class="language-plaintext highlighter-rouge">conda activate</code>를 통해 사전에 <code class="language-plaintext highlighter-rouge">dockerfile</code>에서 생성한 가상환경 (<code class="language-plaintext highlighter-rouge">test</code>)를 활성화하고 <code class="language-plaintext highlighter-rouge">conda install</code>을 해야한다는 점에 유의하자. 이후 다운로드가 완료되면 <code class="language-plaintext highlighter-rouge">conda list</code>를 통해관련 package가 다운됐는지 확인해보자.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   conda activate <span class="nb">test
+   </span>conda <span class="nb">install </span><span class="nv">pytorch</span><span class="o">==</span>1.12.0 <span class="nv">torchvision</span><span class="o">==</span>0.13.0 <span class="nv">torchaudio</span><span class="o">==</span>0.12.0 <span class="nt">-c</span> pytorch
+   
+   conda list
+</code></pre></div></div>
+
+<p><img src="/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20221014100600904.png" alt="image-20221014100600904" /></p>
+
+<p><code class="language-plaintext highlighter-rouge">Pytorch</code>가 정상적으로 다운로드된 것을 확인한 후에, 머신러닝 개발 환경에 특화된 웹 형태의 개발 환경으로 유명한 <code class="language-plaintext highlighter-rouge">Jupyterlab</code>을 install한다. <code class="language-plaintext highlighter-rouge">Jupyterlab</code>은 기존 <code class="language-plaintext highlighter-rouge">Jupyter notebook</code>에 다중 탭 등 다양한 확장 기능을 추가해 만든 어플리케이션이다.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   conda <span class="nb">install</span> <span class="nt">-c</span> conda-forge jupyterlab
+</code></pre></div></div>
+
+<p><br /><br /></p>
+
+<h2 id="작업-container-image로-저장"><strong>작업 container image로 저장</strong></h2>
+
+<p>현재까지 처음에 <code class="language-plaintext highlighter-rouge">dockerfile</code>로 만들었던 이미지를 컨테이너로 생성하고 <code class="language-plaintext highlighter-rouge">Pytorch</code>와 연관 패키지와 <code class="language-plaintext highlighter-rouge">Jupyterlab</code>을 설치했다. 그리고 앞으로 머신러닝 및 딥러닝 모델 개발을 하면서 필요한 패키지가 그때그때 생길 것이고 설치하게 될것이다. 하지만, 이렇게 공들여 업데이트하고 만들어놓은 컨테이너는 컨테이너가 종료된 순간 모든 업데이트 정보가 사라지게 된다. 컨테이너에서 작업한 내용들은 컨테이너 상태로 저장되게 되고, 컨테이너를 생성한 이미지에 업데이트 되지 않기 때문이다. 다음날 다시 컨테이너를 생성하고 작업을 시작할 때마다 복잡한 설정을 일일이 해줄수도 없고 그렇다고 <code class="language-plaintext highlighter-rouge">dockerfile</code> 에 작업한 내용을 매번 다시 써서 파일을 업데이트하기도 귀찮다. Docker에서는 <code class="language-plaintext highlighter-rouge">docker commit</code> 명령어를 통해 현재 특정 container를 이미지로 다시 저장할 수 있다. 저장된 이미지는 container에서 작업했던 내용을 포함하고 있고, <code class="language-plaintext highlighter-rouge">commit</code>한 이미지를 실행시켜 작업을 편리하게 이어갈 수 있다. 호스트에서  <code class="language-plaintext highlighter-rouge">docker commit [컨테이너명] [이미지명]</code>의 형식으로 쉽게 컨테이너를 저장할 수 있다.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   docker commit development_env_cont commit_pytorch_image
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">docker images</code> 명령어를 통해 새로운 이미지가 생성된 것을 확인할 수 있다.</p>
+
+<p><img src="/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20221014162718322.png" alt="image-20221014162718322" /></p>
+
+<p><br /><br /></p>
+
+<h2 id="jupyterlab-실행"><strong>Jupyterlab 실행</strong></h2>
+
+<p>호스트에서 <code class="language-plaintext highlighter-rouge">jupyterlab</code> 비밀번호를 설정하고, notebook directory를 생성한다. 아래의 명령어를 통해 <code class="language-plaintext highlighter-rouge">jupyterlab</code> 을 실행할 수 있다. 실행 포트는 이전 컨테이너 실행시에 매핑했던 <code class="language-plaintext highlighter-rouge">8888</code>을 적는다.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   jupyter lab password
+   <span class="nb">mkdir </span>jupyterlab
+   jupyter lab <span class="nt">--notebook-dir</span><span class="o">=</span>~/app/jupyterlab <span class="nt">--ip</span><span class="o">=</span><span class="s1">'*'</span> <span class="nt">--port</span><span class="o">=</span>8888 <span class="nt">--no-browser</span> <span class="nt">--allow-root</span>
+</code></pre></div></div>
+
+<p>호스트에서 브라우저 창을 열고 <code class="language-plaintext highlighter-rouge">http://localhost:8888</code>로 접속하면 <code class="language-plaintext highlighter-rouge">jupyterlab</code> 창이 뜨게되고, 설정한 password를 입력해 노트북을 사용할 수 있다.</p>
+
+<p><img src="/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20221014164956399.png" alt="image-20221014164956399" width="100%" height="100%" class="align-center" /></p>
+
+      </div> -->
+  
+      <div class="index-post">
+            <h1 class="post-title">
             <a href="/docker/2022/09/04/Docker-deep-learning-dev-environment/">
-                Docker를 이용한 deep learning 개발 환경 구축
+                Docker를 이용한 deep learning 개발 환경 구축 (1)
             </a>
             </h1>
 
@@ -346,7 +564,9 @@
   <li>
     <p><strong>Anaconda 설치</strong></p>
 
-    <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">ENV</span><span class="s"> URL_PREFIX=https://repo.anaconda.com/miniconda \</span>
+    <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">USER</span><span class="s"> $USER</span>
+
+<span class="k">ENV</span><span class="s"> URL_PREFIX=https://repo.anaconda.com/miniconda \</span>
 	INSTALLER_URL=$URL_PREFIX/Miniconda3-latest-Linux-x86_64.sh \
 	CONDA_DIR=~/miniconda3
      	
@@ -356,7 +576,7 @@
 </span>	<span class="nb">rm</span> ~/miniconda.sh
 </code></pre></div>    </div>
 
-    <p>전 과정에서 설치한 <code class="language-plaintext highlighter-rouge">wget</code>으로 <code class="language-plaintext highlighter-rouge">miniconda</code>를 설치한다. <code class="language-plaintext highlighter-rouge">miniconda</code>는 <code class="language-plaintext highlighter-rouge">anaconda</code>와 다르게 최소한의 패키지만을 포함하는 압축된 버전이다. 기본적인 요구 사항들만을 포함하고 있기 때문에 원하는 패키지를 그때그때 다운받아야하지만, 가볍고 빠르다는 장점이 있다.</p>
+    <p><code class="language-plaintext highlighter-rouge">USER $USER</code>를 통해 root가 아닌 생성한 user로 이미지 생성 및 컨테이너를 사용할수 있도록 세팅한다. 이후 전 과정에서 설치한 <code class="language-plaintext highlighter-rouge">wget</code>으로 <code class="language-plaintext highlighter-rouge">miniconda</code>를 설치한다. <code class="language-plaintext highlighter-rouge">miniconda</code>는 <code class="language-plaintext highlighter-rouge">anaconda</code>와 다르게 최소한의 패키지만을 포함하는 압축된 버전이다. 기본적인 요구 사항들만을 포함하고 있기 때문에 원하는 패키지를 그때그때 다운받아야하지만, 가볍고 빠르다는 장점이 있다.</p>
   </li>
   <li>
     <p><strong>Conda 기본 설정</strong></p>
@@ -398,7 +618,7 @@
 <span class="k">USER</span><span class="s"> $USER</span>
 </code></pre></div>    </div>
 
-    <p><code class="language-plaintext highlighter-rouge">Entrypoint</code> 명령어를 이용하여 컨테이너 시작시 실행할 명령을 지정할 수 있다.  <code class="language-plaintext highlighter-rouge">bash</code>를 login shell로 실행하도록 설정하며,  <code class="language-plaintext highlighter-rouge">USER $USER</code>를 통해 root가 아닌 생성한 user로 컨테이너를 사용할수 있도록 세팅한다.</p>
+    <p><code class="language-plaintext highlighter-rouge">Entrypoint</code> 명령어를 이용하여 컨테이너 시작시 실행할 명령을 지정할 수 있다.  <code class="language-plaintext highlighter-rouge">bash</code>를 login shell로 실행하도록 설정한다.</p>
   </li>
 </ul>
 
@@ -437,12 +657,12 @@
 
 <p><img src="/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220906162127088.png" alt="image-20220906162127088" /></p>
  -->
-            <div class="text-muted post-excerpt">Ubuntu, anaconda 기반 딥러닝 개발 환경을 docker를 이용해서 직접 구축해본다.</div>
+            <div class="text-muted post-excerpt">Ubuntu, anaconda 기반 딥러닝 개발 환경을 docker를 이용해서 직접 구축해본다. 이미지 생성을 위한 Dockerfile 작성에 대해 알아본다.</div>
         </div>
         <!-- <div class="post">
           <h1 class="post-title">
           <a href="/docker/2022/09/04/Docker-deep-learning-dev-environment/">
-              Docker를 이용한 deep learning 개발 환경 구축
+              Docker를 이용한 deep learning 개발 환경 구축 (1)
           </a>
           </h1>
 
@@ -536,7 +756,9 @@
   <li>
     <p><strong>Anaconda 설치</strong></p>
 
-    <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">ENV</span><span class="s"> URL_PREFIX=https://repo.anaconda.com/miniconda \</span>
+    <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">USER</span><span class="s"> $USER</span>
+
+<span class="k">ENV</span><span class="s"> URL_PREFIX=https://repo.anaconda.com/miniconda \</span>
 	INSTALLER_URL=$URL_PREFIX/Miniconda3-latest-Linux-x86_64.sh \
 	CONDA_DIR=~/miniconda3
      	
@@ -546,7 +768,7 @@
 </span>	<span class="nb">rm</span> ~/miniconda.sh
 </code></pre></div>    </div>
 
-    <p>전 과정에서 설치한 <code class="language-plaintext highlighter-rouge">wget</code>으로 <code class="language-plaintext highlighter-rouge">miniconda</code>를 설치한다. <code class="language-plaintext highlighter-rouge">miniconda</code>는 <code class="language-plaintext highlighter-rouge">anaconda</code>와 다르게 최소한의 패키지만을 포함하는 압축된 버전이다. 기본적인 요구 사항들만을 포함하고 있기 때문에 원하는 패키지를 그때그때 다운받아야하지만, 가볍고 빠르다는 장점이 있다.</p>
+    <p><code class="language-plaintext highlighter-rouge">USER $USER</code>를 통해 root가 아닌 생성한 user로 이미지 생성 및 컨테이너를 사용할수 있도록 세팅한다. 이후 전 과정에서 설치한 <code class="language-plaintext highlighter-rouge">wget</code>으로 <code class="language-plaintext highlighter-rouge">miniconda</code>를 설치한다. <code class="language-plaintext highlighter-rouge">miniconda</code>는 <code class="language-plaintext highlighter-rouge">anaconda</code>와 다르게 최소한의 패키지만을 포함하는 압축된 버전이다. 기본적인 요구 사항들만을 포함하고 있기 때문에 원하는 패키지를 그때그때 다운받아야하지만, 가볍고 빠르다는 장점이 있다.</p>
   </li>
   <li>
     <p><strong>Conda 기본 설정</strong></p>
@@ -588,7 +810,7 @@
 <span class="k">USER</span><span class="s"> $USER</span>
 </code></pre></div>    </div>
 
-    <p><code class="language-plaintext highlighter-rouge">Entrypoint</code> 명령어를 이용하여 컨테이너 시작시 실행할 명령을 지정할 수 있다.  <code class="language-plaintext highlighter-rouge">bash</code>를 login shell로 실행하도록 설정하며,  <code class="language-plaintext highlighter-rouge">USER $USER</code>를 통해 root가 아닌 생성한 user로 컨테이너를 사용할수 있도록 세팅한다.</p>
+    <p><code class="language-plaintext highlighter-rouge">Entrypoint</code> 명령어를 이용하여 컨테이너 시작시 실행할 명령을 지정할 수 있다.  <code class="language-plaintext highlighter-rouge">bash</code>를 login shell로 실행하도록 설정한다.</p>
   </li>
 </ul>
 

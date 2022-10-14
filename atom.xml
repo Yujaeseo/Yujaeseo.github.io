@@ -4,7 +4,7 @@
  <title>Yu's Tech 블로그</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2022-09-06T17:28:39+09:00</updated>
+ <updated>2022-10-14T18:47:50+09:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Jaeseo Yu</name>
@@ -13,7 +13,94 @@
 
  
  <entry>
-   <title>Docker를 이용한 deep learning 개발 환경 구축</title>
+   <title>Docker를 이용한 deep learning 개발 환경 구축 (2)</title>
+   <link href="http://localhost:4000/docker/2022/10/06/Docker-deep-learning-dev-environment2/"/>
+   <updated>2022-10-06T00:00:00+09:00</updated>
+   <id>http://localhost:4000/docker/2022/10/06/Docker deep learning dev environment2</id>
+   <content type="html">&lt;hr /&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;volume-생성&quot;&gt;&lt;strong&gt;Volume 생성&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;컨테이너 안의 데이터를 보존하기 위해서는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;volume&lt;/code&gt;을 생성해야 한다.  만약 volume을 생성하지 않고 컨테이너 안에서 텍스트 파일(e.g. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;test.txt&lt;/code&gt;)을 저장 후 실행 중인 컨테이너를 종료시켰다고 해보자. 이후 동일한 image를 사용하여 컨테이너를 재실행 했을 때, 해당  파일을 저장한 path로 가서 파일을 찾아보아도 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;test.txt&lt;/code&gt; 를 발견할 수 없다. 즉, 컨테이너에 mount한 volume 밖에 있는 data는 persistent한 성질을 갖지 않게 되고, 컨테이너 종료와 함께 사라지게 된다. 따라서 컨테이너의 lifecycle과 독립적으로 data를 저장하고 관리하기 위해서는 volume을 생성하고 해당 volume에 data를 저장해야한다.&lt;/p&gt;
+
+&lt;p&gt;컨테이너 실행 시 아래의 command로 volume을 생성할 수 있다.  &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--volume host path:container path&lt;/code&gt; 로 host의 directory (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;./data&lt;/code&gt;) 와 container의 directory (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;home/jaeseo/app&lt;/code&gt;)을 매핑하였다. 이를 통해 컨테이너는 host 내의 디렉토리를 컨테이너의 디렉토리로 사용할 수 있게 된다. 이미 존재하는 volume과 매핑할 경우에는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;host path&lt;/code&gt;에 존재하는 volume의 이름을 적으면 된다. 존재하지 않는 volume의 경우에는 자동으로 생성이 된다.  특정 volume을 여러 컨테이너가 공유할 수 있는데, 해당 host의 디렉토리를 다른 컨테이너에 동일하게 매핑하면 된다.&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;   docker container run &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;
+   &lt;span class=&quot;nt&quot;&gt;-it&lt;/span&gt; &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;
+   &lt;span class=&quot;nt&quot;&gt;--name&lt;/span&gt; development_env_cont &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;
+   &lt;span class=&quot;nt&quot;&gt;--volume&lt;/span&gt; ./data:/home/jaeseo/app &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;
+   development_env:1
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;컨테이너를-외부와-연결&quot;&gt;&lt;strong&gt;컨테이너를 외부와 연결&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;컨테이너를 외부와 연결해주기 위하서는 도커와 호스트의 IP와 포트를 바인딩해야 한다. 만약 바인딩을 하지 않고서는 컨테이너를 외부에서 접근할 수 없으며, 컨테이너에 구성한 개발 환경도 호스트에서 사용할 수 없게된다. 그래서 호스트에서 컨테이너의 어플리케이션에 접근할 수 있도록 포트 바인딩을 한다.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-p&lt;/code&gt; 옵션을 추가하고 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;호스트 포트:컨테이너 어플리케이션 포트&lt;/code&gt; 의 형식으로 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;run&lt;/code&gt; command에 추가하면 된다. 여러개의 포트를 개방하고싶다면, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-p&lt;/code&gt; 옵션을 여러 번 써서 설정한다. 필자는 jupyter notebook을 사용할 것이기 때문에, jupyter notebook이 기본적으로 사용하는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;8888&lt;/code&gt; 포트를  호스트와 연결한다.&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;   docker container run &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;
+   &lt;span class=&quot;nt&quot;&gt;-it&lt;/span&gt; &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;
+   &lt;span class=&quot;nt&quot;&gt;--name&lt;/span&gt; development_env_cont &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;
+   &lt;span class=&quot;nt&quot;&gt;--volume&lt;/span&gt; ./data:/home/jaeseo/app &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;
+   &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; 8888:8888 &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;
+   development_env:1
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;pytorch-jupyterlab-다운로드&quot;&gt;&lt;strong&gt;Pytorch, Jupyterlab 다운로드&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;머신러닝 프레임워크로 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Pytorch&lt;/code&gt;를 사용할 것이기 때문에, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pytorch&lt;/code&gt;와 이를 사용하기 위한 연관 패키지를 다운받는다. 컴퓨터비전과 음성처리와 관련된 데이터, 모델 및 필요한 요소들을 포함하는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;torchvision&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;torchaudio&lt;/code&gt;와 함께 다운로드한다. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;conda activate&lt;/code&gt;를 통해 사전에 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dockerfile&lt;/code&gt;에서 생성한 가상환경 (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;test&lt;/code&gt;)를 활성화하고 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;conda install&lt;/code&gt;을 해야한다는 점에 유의하자. 이후 다운로드가 완료되면 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;conda list&lt;/code&gt;를 통해관련 package가 다운됐는지 확인해보자.&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;   conda activate &lt;span class=&quot;nb&quot;&gt;test
+   &lt;/span&gt;conda &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;pytorch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;1.12.0 &lt;span class=&quot;nv&quot;&gt;torchvision&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;0.13.0 &lt;span class=&quot;nv&quot;&gt;torchaudio&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;0.12.0 &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; pytorch
+   
+   conda list
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20221014100600904.png&quot; alt=&quot;image-20221014100600904&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Pytorch&lt;/code&gt;가 정상적으로 다운로드된 것을 확인한 후에, 머신러닝 개발 환경에 특화된 웹 형태의 개발 환경으로 유명한 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Jupyterlab&lt;/code&gt;을 install한다. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Jupyterlab&lt;/code&gt;은 기존 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Jupyter notebook&lt;/code&gt;에 다중 탭 등 다양한 확장 기능을 추가해 만든 어플리케이션이다.&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;   conda &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; conda-forge jupyterlab
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;작업-container-image로-저장&quot;&gt;&lt;strong&gt;작업 container image로 저장&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;현재까지 처음에 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dockerfile&lt;/code&gt;로 만들었던 이미지를 컨테이너로 생성하고 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Pytorch&lt;/code&gt;와 연관 패키지와 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Jupyterlab&lt;/code&gt;을 설치했다. 그리고 앞으로 머신러닝 및 딥러닝 모델 개발을 하면서 필요한 패키지가 그때그때 생길 것이고 설치하게 될것이다. 하지만, 이렇게 공들여 업데이트하고 만들어놓은 컨테이너는 컨테이너가 종료된 순간 모든 업데이트 정보가 사라지게 된다. 컨테이너에서 작업한 내용들은 컨테이너 상태로 저장되게 되고, 컨테이너를 생성한 이미지에 업데이트 되지 않기 때문이다. 다음날 다시 컨테이너를 생성하고 작업을 시작할 때마다 복잡한 설정을 일일이 해줄수도 없고 그렇다고 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dockerfile&lt;/code&gt; 에 작업한 내용을 매번 다시 써서 파일을 업데이트하기도 귀찮다. Docker에서는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker commit&lt;/code&gt; 명령어를 통해 현재 특정 container를 이미지로 다시 저장할 수 있다. 저장된 이미지는 container에서 작업했던 내용을 포함하고 있고, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;commit&lt;/code&gt;한 이미지를 실행시켜 작업을 편리하게 이어갈 수 있다. 호스트에서  &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker commit [컨테이너명] [이미지명]&lt;/code&gt;의 형식으로 쉽게 컨테이너를 저장할 수 있다.&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;   docker commit development_env_cont commit_pytorch_image
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker images&lt;/code&gt; 명령어를 통해 새로운 이미지가 생성된 것을 확인할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20221014162718322.png&quot; alt=&quot;image-20221014162718322&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;jupyterlab-실행&quot;&gt;&lt;strong&gt;Jupyterlab 실행&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;호스트에서 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;jupyterlab&lt;/code&gt; 비밀번호를 설정하고, notebook directory를 생성한다. 아래의 명령어를 통해 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;jupyterlab&lt;/code&gt; 을 실행할 수 있다. 실행 포트는 이전 컨테이너 실행시에 매핑했던 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;8888&lt;/code&gt;을 적는다.&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;   jupyter lab password
+   &lt;span class=&quot;nb&quot;&gt;mkdir &lt;/span&gt;jupyterlab
+   jupyter lab &lt;span class=&quot;nt&quot;&gt;--notebook-dir&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;~/app/jupyterlab &lt;span class=&quot;nt&quot;&gt;--ip&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'*'&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--port&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;8888 &lt;span class=&quot;nt&quot;&gt;--no-browser&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--allow-root&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;호스트에서 브라우저 창을 열고 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;http://localhost:8888&lt;/code&gt;로 접속하면 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;jupyterlab&lt;/code&gt; 창이 뜨게되고, 설정한 password를 입력해 노트북을 사용할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20221014164956399.png&quot; alt=&quot;image-20221014164956399&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Docker를 이용한 deep learning 개발 환경 구축 (1)</title>
    <link href="http://localhost:4000/docker/2022/09/04/Docker-deep-learning-dev-environment/"/>
    <updated>2022-09-04T00:00:00+09:00</updated>
    <id>http://localhost:4000/docker/2022/09/04/Docker deep learning dev environment</id>
@@ -87,7 +174,9 @@
   &lt;li&gt;
     &lt;p&gt;&lt;strong&gt;Anaconda 설치&lt;/strong&gt;&lt;/p&gt;
 
-    &lt;div class=&quot;language-dockerfile highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;ENV&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; URL_PREFIX=https://repo.anaconda.com/miniconda \&lt;/span&gt;
+    &lt;div class=&quot;language-dockerfile highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;USER&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; $USER&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;ENV&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; URL_PREFIX=https://repo.anaconda.com/miniconda \&lt;/span&gt;
 	INSTALLER_URL=$URL_PREFIX/Miniconda3-latest-Linux-x86_64.sh \
 	CONDA_DIR=~/miniconda3
      	
@@ -97,7 +186,7 @@
 &lt;/span&gt;	&lt;span class=&quot;nb&quot;&gt;rm&lt;/span&gt; ~/miniconda.sh
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
 
-    &lt;p&gt;전 과정에서 설치한 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;wget&lt;/code&gt;으로 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;miniconda&lt;/code&gt;를 설치한다. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;miniconda&lt;/code&gt;는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;anaconda&lt;/code&gt;와 다르게 최소한의 패키지만을 포함하는 압축된 버전이다. 기본적인 요구 사항들만을 포함하고 있기 때문에 원하는 패키지를 그때그때 다운받아야하지만, 가볍고 빠르다는 장점이 있다.&lt;/p&gt;
+    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;USER $USER&lt;/code&gt;를 통해 root가 아닌 생성한 user로 이미지 생성 및 컨테이너를 사용할수 있도록 세팅한다. 이후 전 과정에서 설치한 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;wget&lt;/code&gt;으로 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;miniconda&lt;/code&gt;를 설치한다. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;miniconda&lt;/code&gt;는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;anaconda&lt;/code&gt;와 다르게 최소한의 패키지만을 포함하는 압축된 버전이다. 기본적인 요구 사항들만을 포함하고 있기 때문에 원하는 패키지를 그때그때 다운받아야하지만, 가볍고 빠르다는 장점이 있다.&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;&lt;strong&gt;Conda 기본 설정&lt;/strong&gt;&lt;/p&gt;
@@ -139,7 +228,7 @@
 &lt;span class=&quot;k&quot;&gt;USER&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; $USER&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
 
-    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Entrypoint&lt;/code&gt; 명령어를 이용하여 컨테이너 시작시 실행할 명령을 지정할 수 있다.  &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;bash&lt;/code&gt;를 login shell로 실행하도록 설정하며,  &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;USER $USER&lt;/code&gt;를 통해 root가 아닌 생성한 user로 컨테이너를 사용할수 있도록 세팅한다.&lt;/p&gt;
+    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Entrypoint&lt;/code&gt; 명령어를 이용하여 컨테이너 시작시 실행할 명령을 지정할 수 있다.  &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;bash&lt;/code&gt;를 login shell로 실행하도록 설정한다.&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
@@ -177,6 +266,67 @@
 &lt;p&gt;container를 실행하면 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;anaconda&lt;/code&gt;가 설치된 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ubuntu&lt;/code&gt; 환경에 접속할 수 있게 되고, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;conda env list&lt;/code&gt; 와 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;conda activate&lt;/code&gt;를 통해 원하는 가상환경이 제대로 설치됐는지 확인하고 실행해볼 수 있다.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220906162127088.png&quot; alt=&quot;image-20220906162127088&quot; /&gt;&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Deploying Machine Learning Models in Production_Model Servers-Model Servers_Other Providers</title>
+   <link href="http://localhost:4000/lecture/2022/08/09/Deploying-Machine-Learning-Models-in-Production-Scaling-Infrastructure/"/>
+   <updated>2022-08-09T00:00:00+09:00</updated>
+   <id>http://localhost:4000/lecture/2022/08/09/[Deploying Machine Learning Models in Production] Scaling Infrastructure</id>
+   <content type="html">&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;Why is Scaling Important&lt;/strong&gt;		&lt;img src=&quot;../../assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220809161933007.png&quot; alt=&quot;image-20220809161933007&quot; /&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;​     &lt;img src=&quot;../../assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220809161953189.png&quot; alt=&quot;image-20220809161953189&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220809162006307.png&quot; alt=&quot;image-20220809162006307&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220809162018137.png&quot; alt=&quot;image-20220809162018137&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220809162028979.png&quot; alt=&quot;image-20220809162028979&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220809162039881.png&quot; alt=&quot;image-20220809162039881&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220809162051590.png&quot; alt=&quot;image-20220809162051590&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220809162105711.png&quot; alt=&quot;image-20220809162105711&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220809162121276.png&quot; alt=&quot;image-20220809162121276&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220809162149185.png&quot; alt=&quot;image-20220809162149185&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220809162159768.png&quot; alt=&quot;image-20220809162159768&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220809162209597.png&quot; alt=&quot;image-20220809162209597&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220809162219697.png&quot; alt=&quot;image-20220809162219697&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220809162229719.png&quot; alt=&quot;image-20220809162229719&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220809162240937.png&quot; alt=&quot;image-20220809162240937&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220809162254767.png&quot; alt=&quot;image-20220809162254767&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220809162304208.png&quot; alt=&quot;image-20220809162304208&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220809162323215.png&quot; alt=&quot;image-20220809162323215&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220809162617491.png&quot; alt=&quot;image-20220809162617491&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220809162632268.png&quot; alt=&quot;image-20220809162632268&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220809162653274.png&quot; alt=&quot;image-20220809162653274&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220809162707899.png&quot; alt=&quot;image-20220809162707899&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220809162720536.png&quot; alt=&quot;image-20220809162720536&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220809162742775.png&quot; alt=&quot;image-20220809162742775&quot; /&gt;&lt;/p&gt;
 </content>
  </entry>
  

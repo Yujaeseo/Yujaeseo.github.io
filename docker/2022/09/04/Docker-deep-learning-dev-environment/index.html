@@ -11,7 +11,7 @@
 
   <title>
     
-      Docker를 이용한 deep learning 개발 환경 구축 &middot; Yu's Tech 블로그
+      Docker를 이용한 deep learning 개발 환경 구축 (1) &middot; Yu's Tech 블로그
     
   </title>
 
@@ -88,7 +88,7 @@
   </div>
 
   <nav class="sidebar-nav">
-    <a class="sidebar-nav-item" href="/">Home <small class="text-info">21</small></a>
+    <a class="sidebar-nav-item" href="/">Home <small class="text-info">23</small></a>
 
     
 
@@ -205,14 +205,14 @@
       <a class = "sidebar-nav-item " href="/category/Operating system/index.html">Operating system <small class="text-info">1</small></a>  
     <!--<a class="sidebar-nav-item" href="/category/Operating system/index.html">Operating system</a>  <small class="text-muted">1</small>-->
     
-      <a class = "sidebar-nav-item " href="/category/Lecture/index.html">Lecture <small class="text-info">7</small></a>  
-    <!--<a class="sidebar-nav-item" href="/category/Lecture/index.html">Lecture</a>  <small class="text-muted">7</small>-->
+      <a class = "sidebar-nav-item " href="/category/Lecture/index.html">Lecture <small class="text-info">8</small></a>  
+    <!--<a class="sidebar-nav-item" href="/category/Lecture/index.html">Lecture</a>  <small class="text-muted">8</small>-->
     
       <a class = "sidebar-nav-item " href="/category/HPC/index.html">HPC <small class="text-info">1</small></a>  
     <!--<a class="sidebar-nav-item" href="/category/HPC/index.html">HPC</a>  <small class="text-muted">1</small>-->
     
-      <a class = "sidebar-nav-item " href="/category/Docker/index.html">Docker <small class="text-info">1</small></a>  
-    <!--<a class="sidebar-nav-item" href="/category/Docker/index.html">Docker</a>  <small class="text-muted">1</small>-->
+      <a class = "sidebar-nav-item " href="/category/Docker/index.html">Docker <small class="text-info">2</small></a>  
+    <!--<a class="sidebar-nav-item" href="/category/Docker/index.html">Docker</a>  <small class="text-muted">2</small>-->
     
     
 <!--
@@ -246,7 +246,7 @@
       <div class="container content">
         <div class="post">
 
-  <h1 class="post-title">Docker를 이용한 deep learning 개발 환경 구축</h1>
+  <h1 class="post-title">Docker를 이용한 deep learning 개발 환경 구축 (1)</h1>
   <span class="post-date">04 Sep 2022</span>
   
     
@@ -338,7 +338,9 @@
   <li>
     <p><strong>Anaconda 설치</strong></p>
 
-    <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">ENV</span><span class="s"> URL_PREFIX=https://repo.anaconda.com/miniconda \</span>
+    <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">USER</span><span class="s"> $USER</span>
+
+<span class="k">ENV</span><span class="s"> URL_PREFIX=https://repo.anaconda.com/miniconda \</span>
 	INSTALLER_URL=$URL_PREFIX/Miniconda3-latest-Linux-x86_64.sh \
 	CONDA_DIR=~/miniconda3
      	
@@ -348,7 +350,7 @@
 </span>	<span class="nb">rm</span> ~/miniconda.sh
 </code></pre></div>    </div>
 
-    <p>전 과정에서 설치한 <code class="language-plaintext highlighter-rouge">wget</code>으로 <code class="language-plaintext highlighter-rouge">miniconda</code>를 설치한다. <code class="language-plaintext highlighter-rouge">miniconda</code>는 <code class="language-plaintext highlighter-rouge">anaconda</code>와 다르게 최소한의 패키지만을 포함하는 압축된 버전이다. 기본적인 요구 사항들만을 포함하고 있기 때문에 원하는 패키지를 그때그때 다운받아야하지만, 가볍고 빠르다는 장점이 있다.</p>
+    <p><code class="language-plaintext highlighter-rouge">USER $USER</code>를 통해 root가 아닌 생성한 user로 이미지 생성 및 컨테이너를 사용할수 있도록 세팅한다. 이후 전 과정에서 설치한 <code class="language-plaintext highlighter-rouge">wget</code>으로 <code class="language-plaintext highlighter-rouge">miniconda</code>를 설치한다. <code class="language-plaintext highlighter-rouge">miniconda</code>는 <code class="language-plaintext highlighter-rouge">anaconda</code>와 다르게 최소한의 패키지만을 포함하는 압축된 버전이다. 기본적인 요구 사항들만을 포함하고 있기 때문에 원하는 패키지를 그때그때 다운받아야하지만, 가볍고 빠르다는 장점이 있다.</p>
   </li>
   <li>
     <p><strong>Conda 기본 설정</strong></p>
@@ -390,7 +392,7 @@
 <span class="k">USER</span><span class="s"> $USER</span>
 </code></pre></div>    </div>
 
-    <p><code class="language-plaintext highlighter-rouge">Entrypoint</code> 명령어를 이용하여 컨테이너 시작시 실행할 명령을 지정할 수 있다.  <code class="language-plaintext highlighter-rouge">bash</code>를 login shell로 실행하도록 설정하며,  <code class="language-plaintext highlighter-rouge">USER $USER</code>를 통해 root가 아닌 생성한 user로 컨테이너를 사용할수 있도록 세팅한다.</p>
+    <p><code class="language-plaintext highlighter-rouge">Entrypoint</code> 명령어를 이용하여 컨테이너 시작시 실행할 명령을 지정할 수 있다.  <code class="language-plaintext highlighter-rouge">bash</code>를 login shell로 실행하도록 설정한다.</p>
   </li>
 </ul>
 
@@ -439,27 +441,27 @@
     
       <li>
         <h3>
-          <a href="/lecture/2022/07/31/Deploying-Machine-Learning-Models-in-Production-Installing-tensorflow-serving/">
-            Deploying Machine Learning Models in Production_Installing TensorFlow Serving
-            <small>31 Jul 2022</small>
+          <a href="/docker/2022/09/04/Docker-deep-learning-dev-environment/">
+            Docker를 이용한 deep learning 개발 환경 구축 (2)
+            <small>04 Sep 2022</small>
           </a>
         </h3>
       </li>
     
       <li>
         <h3>
-          <a href="/mongodb/2021/02/21/MongoDB-replset%EC%9C%BC%EB%A1%9C-%EB%B3%80%ED%99%98/">
-            MongoDB replset으로 변환
-            <small>21 Feb 2021</small>
+          <a href="/python/2021/01/22/Python1/">
+            Python Mutable, Immutable 비교
+            <small>22 Jan 2021</small>
           </a>
         </h3>
       </li>
     
       <li>
         <h3>
-          <a href="/deep%20learning/2021/08/13/About-CNN/">
-            CNN (Convolutional Neural Networks)에 대한 기본적인 내용 정리
-            <small>13 Aug 2021</small>
+          <a href="/docker/2022/10/06/Docker-deep-learning-dev-environment2/">
+            Docker를 이용한 deep learning 개발 환경 구축 (2)
+            <small>06 Oct 2022</small>
           </a>
         </h3>
       </li>

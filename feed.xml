@@ -1,4 +1,82 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-09-06T17:28:39+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Yu’s Tech 블로그</title><subtitle>You will never know until you try.</subtitle><author><name>Jaeseo Yu</name></author><entry><title type="html">Docker를 이용한 deep learning 개발 환경 구축</title><link href="http://localhost:4000/docker/2022/09/04/Docker-deep-learning-dev-environment/" rel="alternate" type="text/html" title="Docker를 이용한 deep learning 개발 환경 구축" /><published>2022-09-04T00:00:00+09:00</published><updated>2022-09-04T00:00:00+09:00</updated><id>http://localhost:4000/docker/2022/09/04/Docker%20deep%20learning%20dev%20environment</id><content type="html" xml:base="http://localhost:4000/docker/2022/09/04/Docker-deep-learning-dev-environment/">&lt;hr /&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2022-10-14T18:47:50+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Yu’s Tech 블로그</title><subtitle>You will never know until you try.</subtitle><author><name>Jaeseo Yu</name></author><entry><title type="html">Docker를 이용한 deep learning 개발 환경 구축 (2)</title><link href="http://localhost:4000/docker/2022/10/06/Docker-deep-learning-dev-environment2/" rel="alternate" type="text/html" title="Docker를 이용한 deep learning 개발 환경 구축 (2)" /><published>2022-10-06T00:00:00+09:00</published><updated>2022-10-06T00:00:00+09:00</updated><id>http://localhost:4000/docker/2022/10/06/Docker%20deep%20learning%20dev%20environment2</id><content type="html" xml:base="http://localhost:4000/docker/2022/10/06/Docker-deep-learning-dev-environment2/">&lt;hr /&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;volume-생성&quot;&gt;&lt;strong&gt;Volume 생성&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;컨테이너 안의 데이터를 보존하기 위해서는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;volume&lt;/code&gt;을 생성해야 한다.  만약 volume을 생성하지 않고 컨테이너 안에서 텍스트 파일(e.g. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;test.txt&lt;/code&gt;)을 저장 후 실행 중인 컨테이너를 종료시켰다고 해보자. 이후 동일한 image를 사용하여 컨테이너를 재실행 했을 때, 해당  파일을 저장한 path로 가서 파일을 찾아보아도 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;test.txt&lt;/code&gt; 를 발견할 수 없다. 즉, 컨테이너에 mount한 volume 밖에 있는 data는 persistent한 성질을 갖지 않게 되고, 컨테이너 종료와 함께 사라지게 된다. 따라서 컨테이너의 lifecycle과 독립적으로 data를 저장하고 관리하기 위해서는 volume을 생성하고 해당 volume에 data를 저장해야한다.&lt;/p&gt;
+
+&lt;p&gt;컨테이너 실행 시 아래의 command로 volume을 생성할 수 있다.  &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--volume host path:container path&lt;/code&gt; 로 host의 directory (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;./data&lt;/code&gt;) 와 container의 directory (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;home/jaeseo/app&lt;/code&gt;)을 매핑하였다. 이를 통해 컨테이너는 host 내의 디렉토리를 컨테이너의 디렉토리로 사용할 수 있게 된다. 이미 존재하는 volume과 매핑할 경우에는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;host path&lt;/code&gt;에 존재하는 volume의 이름을 적으면 된다. 존재하지 않는 volume의 경우에는 자동으로 생성이 된다.  특정 volume을 여러 컨테이너가 공유할 수 있는데, 해당 host의 디렉토리를 다른 컨테이너에 동일하게 매핑하면 된다.&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;   docker container run &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;
+   &lt;span class=&quot;nt&quot;&gt;-it&lt;/span&gt; &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;
+   &lt;span class=&quot;nt&quot;&gt;--name&lt;/span&gt; development_env_cont &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;
+   &lt;span class=&quot;nt&quot;&gt;--volume&lt;/span&gt; ./data:/home/jaeseo/app &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;
+   development_env:1
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;컨테이너를-외부와-연결&quot;&gt;&lt;strong&gt;컨테이너를 외부와 연결&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;컨테이너를 외부와 연결해주기 위하서는 도커와 호스트의 IP와 포트를 바인딩해야 한다. 만약 바인딩을 하지 않고서는 컨테이너를 외부에서 접근할 수 없으며, 컨테이너에 구성한 개발 환경도 호스트에서 사용할 수 없게된다. 그래서 호스트에서 컨테이너의 어플리케이션에 접근할 수 있도록 포트 바인딩을 한다.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-p&lt;/code&gt; 옵션을 추가하고 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;호스트 포트:컨테이너 어플리케이션 포트&lt;/code&gt; 의 형식으로 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;run&lt;/code&gt; command에 추가하면 된다. 여러개의 포트를 개방하고싶다면, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-p&lt;/code&gt; 옵션을 여러 번 써서 설정한다. 필자는 jupyter notebook을 사용할 것이기 때문에, jupyter notebook이 기본적으로 사용하는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;8888&lt;/code&gt; 포트를  호스트와 연결한다.&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;   docker container run &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;
+   &lt;span class=&quot;nt&quot;&gt;-it&lt;/span&gt; &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;
+   &lt;span class=&quot;nt&quot;&gt;--name&lt;/span&gt; development_env_cont &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;
+   &lt;span class=&quot;nt&quot;&gt;--volume&lt;/span&gt; ./data:/home/jaeseo/app &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;
+   &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; 8888:8888 &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;
+   development_env:1
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;pytorch-jupyterlab-다운로드&quot;&gt;&lt;strong&gt;Pytorch, Jupyterlab 다운로드&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;머신러닝 프레임워크로 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Pytorch&lt;/code&gt;를 사용할 것이기 때문에, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pytorch&lt;/code&gt;와 이를 사용하기 위한 연관 패키지를 다운받는다. 컴퓨터비전과 음성처리와 관련된 데이터, 모델 및 필요한 요소들을 포함하는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;torchvision&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;torchaudio&lt;/code&gt;와 함께 다운로드한다. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;conda activate&lt;/code&gt;를 통해 사전에 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dockerfile&lt;/code&gt;에서 생성한 가상환경 (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;test&lt;/code&gt;)를 활성화하고 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;conda install&lt;/code&gt;을 해야한다는 점에 유의하자. 이후 다운로드가 완료되면 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;conda list&lt;/code&gt;를 통해관련 package가 다운됐는지 확인해보자.&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;   conda activate &lt;span class=&quot;nb&quot;&gt;test
+   &lt;/span&gt;conda &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;pytorch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;1.12.0 &lt;span class=&quot;nv&quot;&gt;torchvision&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;0.13.0 &lt;span class=&quot;nv&quot;&gt;torchaudio&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;0.12.0 &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; pytorch
+   
+   conda list
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20221014100600904.png&quot; alt=&quot;image-20221014100600904&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Pytorch&lt;/code&gt;가 정상적으로 다운로드된 것을 확인한 후에, 머신러닝 개발 환경에 특화된 웹 형태의 개발 환경으로 유명한 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Jupyterlab&lt;/code&gt;을 install한다. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Jupyterlab&lt;/code&gt;은 기존 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Jupyter notebook&lt;/code&gt;에 다중 탭 등 다양한 확장 기능을 추가해 만든 어플리케이션이다.&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;   conda &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; conda-forge jupyterlab
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;작업-container-image로-저장&quot;&gt;&lt;strong&gt;작업 container image로 저장&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;현재까지 처음에 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dockerfile&lt;/code&gt;로 만들었던 이미지를 컨테이너로 생성하고 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Pytorch&lt;/code&gt;와 연관 패키지와 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Jupyterlab&lt;/code&gt;을 설치했다. 그리고 앞으로 머신러닝 및 딥러닝 모델 개발을 하면서 필요한 패키지가 그때그때 생길 것이고 설치하게 될것이다. 하지만, 이렇게 공들여 업데이트하고 만들어놓은 컨테이너는 컨테이너가 종료된 순간 모든 업데이트 정보가 사라지게 된다. 컨테이너에서 작업한 내용들은 컨테이너 상태로 저장되게 되고, 컨테이너를 생성한 이미지에 업데이트 되지 않기 때문이다. 다음날 다시 컨테이너를 생성하고 작업을 시작할 때마다 복잡한 설정을 일일이 해줄수도 없고 그렇다고 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dockerfile&lt;/code&gt; 에 작업한 내용을 매번 다시 써서 파일을 업데이트하기도 귀찮다. Docker에서는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker commit&lt;/code&gt; 명령어를 통해 현재 특정 container를 이미지로 다시 저장할 수 있다. 저장된 이미지는 container에서 작업했던 내용을 포함하고 있고, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;commit&lt;/code&gt;한 이미지를 실행시켜 작업을 편리하게 이어갈 수 있다. 호스트에서  &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker commit [컨테이너명] [이미지명]&lt;/code&gt;의 형식으로 쉽게 컨테이너를 저장할 수 있다.&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;   docker commit development_env_cont commit_pytorch_image
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker images&lt;/code&gt; 명령어를 통해 새로운 이미지가 생성된 것을 확인할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20221014162718322.png&quot; alt=&quot;image-20221014162718322&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;jupyterlab-실행&quot;&gt;&lt;strong&gt;Jupyterlab 실행&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;호스트에서 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;jupyterlab&lt;/code&gt; 비밀번호를 설정하고, notebook directory를 생성한다. 아래의 명령어를 통해 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;jupyterlab&lt;/code&gt; 을 실행할 수 있다. 실행 포트는 이전 컨테이너 실행시에 매핑했던 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;8888&lt;/code&gt;을 적는다.&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;   jupyter lab password
+   &lt;span class=&quot;nb&quot;&gt;mkdir &lt;/span&gt;jupyterlab
+   jupyter lab &lt;span class=&quot;nt&quot;&gt;--notebook-dir&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;~/app/jupyterlab &lt;span class=&quot;nt&quot;&gt;--ip&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'*'&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--port&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;8888 &lt;span class=&quot;nt&quot;&gt;--no-browser&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--allow-root&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;호스트에서 브라우저 창을 열고 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;http://localhost:8888&lt;/code&gt;로 접속하면 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;jupyterlab&lt;/code&gt; 창이 뜨게되고, 설정한 password를 입력해 노트북을 사용할 수 있다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20221014164956399.png&quot; alt=&quot;image-20221014164956399&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;</content><author><name>Jaeseo Yu</name></author><category term="Docker" /><category term="mlops" /><category term="deep learning" /><category term="machine learning" /><category term="docker" /><summary type="html">컨테이너 port, volume 설정 후 jupyterlab에서 pytorch를 실행시켜본다.</summary></entry><entry><title type="html">Docker를 이용한 deep learning 개발 환경 구축 (1)</title><link href="http://localhost:4000/docker/2022/09/04/Docker-deep-learning-dev-environment/" rel="alternate" type="text/html" title="Docker를 이용한 deep learning 개발 환경 구축 (1)" /><published>2022-09-04T00:00:00+09:00</published><updated>2022-09-04T00:00:00+09:00</updated><id>http://localhost:4000/docker/2022/09/04/Docker%20deep%20learning%20dev%20environment</id><content type="html" xml:base="http://localhost:4000/docker/2022/09/04/Docker-deep-learning-dev-environment/">&lt;hr /&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 
@@ -68,7 +146,9 @@
   &lt;li&gt;
     &lt;p&gt;&lt;strong&gt;Anaconda 설치&lt;/strong&gt;&lt;/p&gt;
 
-    &lt;div class=&quot;language-dockerfile highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;ENV&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; URL_PREFIX=https://repo.anaconda.com/miniconda \&lt;/span&gt;
+    &lt;div class=&quot;language-dockerfile highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;USER&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; $USER&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;ENV&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; URL_PREFIX=https://repo.anaconda.com/miniconda \&lt;/span&gt;
 	INSTALLER_URL=$URL_PREFIX/Miniconda3-latest-Linux-x86_64.sh \
 	CONDA_DIR=~/miniconda3
      	
@@ -78,7 +158,7 @@
 &lt;/span&gt;	&lt;span class=&quot;nb&quot;&gt;rm&lt;/span&gt; ~/miniconda.sh
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
 
-    &lt;p&gt;전 과정에서 설치한 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;wget&lt;/code&gt;으로 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;miniconda&lt;/code&gt;를 설치한다. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;miniconda&lt;/code&gt;는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;anaconda&lt;/code&gt;와 다르게 최소한의 패키지만을 포함하는 압축된 버전이다. 기본적인 요구 사항들만을 포함하고 있기 때문에 원하는 패키지를 그때그때 다운받아야하지만, 가볍고 빠르다는 장점이 있다.&lt;/p&gt;
+    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;USER $USER&lt;/code&gt;를 통해 root가 아닌 생성한 user로 이미지 생성 및 컨테이너를 사용할수 있도록 세팅한다. 이후 전 과정에서 설치한 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;wget&lt;/code&gt;으로 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;miniconda&lt;/code&gt;를 설치한다. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;miniconda&lt;/code&gt;는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;anaconda&lt;/code&gt;와 다르게 최소한의 패키지만을 포함하는 압축된 버전이다. 기본적인 요구 사항들만을 포함하고 있기 때문에 원하는 패키지를 그때그때 다운받아야하지만, 가볍고 빠르다는 장점이 있다.&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;&lt;strong&gt;Conda 기본 설정&lt;/strong&gt;&lt;/p&gt;
@@ -120,7 +200,7 @@
 &lt;span class=&quot;k&quot;&gt;USER&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; $USER&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
 
-    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Entrypoint&lt;/code&gt; 명령어를 이용하여 컨테이너 시작시 실행할 명령을 지정할 수 있다.  &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;bash&lt;/code&gt;를 login shell로 실행하도록 설정하며,  &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;USER $USER&lt;/code&gt;를 통해 root가 아닌 생성한 user로 컨테이너를 사용할수 있도록 세팅한다.&lt;/p&gt;
+    &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Entrypoint&lt;/code&gt; 명령어를 이용하여 컨테이너 시작시 실행할 명령을 지정할 수 있다.  &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;bash&lt;/code&gt;를 login shell로 실행하도록 설정한다.&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
@@ -157,7 +237,7 @@
 
 &lt;p&gt;container를 실행하면 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;anaconda&lt;/code&gt;가 설치된 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ubuntu&lt;/code&gt; 환경에 접속할 수 있게 되고, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;conda env list&lt;/code&gt; 와 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;conda activate&lt;/code&gt;를 통해 원하는 가상환경이 제대로 설치됐는지 확인하고 실행해볼 수 있다.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220906162127088.png&quot; alt=&quot;image-20220906162127088&quot; /&gt;&lt;/p&gt;</content><author><name>Jaeseo Yu</name></author><category term="Docker" /><category term="mlops" /><category term="deep learning" /><category term="machine learning" /><category term="docker" /><summary type="html">Ubuntu, anaconda 기반 딥러닝 개발 환경을 docker를 이용해서 직접 구축해본다.</summary></entry><entry><title type="html">Deploying Machine Learning Models in Production_Model Servers-Model Servers_Other Providers</title><link href="http://localhost:4000/lecture/2022/08/09/Deploying-Machine-Learning-Models-in-Production-Model-Servers-Model-Servers_Other-Providers/" rel="alternate" type="text/html" title="Deploying Machine Learning Models in Production_Model Servers-Model Servers_Other Providers" /><published>2022-08-09T00:00:00+09:00</published><updated>2022-08-09T00:00:00+09:00</updated><id>http://localhost:4000/lecture/2022/08/09/%5BDeploying%20Machine%20Learning%20Models%20in%20Production%5D%20Model%20Servers-Model%20Servers_Other%20Providers</id><content type="html" xml:base="http://localhost:4000/lecture/2022/08/09/Deploying-Machine-Learning-Models-in-Production-Model-Servers-Model-Servers_Other-Providers/">&lt;ol&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220906162127088.png&quot; alt=&quot;image-20220906162127088&quot; /&gt;&lt;/p&gt;</content><author><name>Jaeseo Yu</name></author><category term="Docker" /><category term="mlops" /><category term="deep learning" /><category term="machine learning" /><category term="docker" /><summary type="html">Ubuntu, anaconda 기반 딥러닝 개발 환경을 docker를 이용해서 직접 구축해본다. 이미지 생성을 위한 Dockerfile 작성에 대해 알아본다.</summary></entry><entry><title type="html">Deploying Machine Learning Models in Production_Model Servers-Model Servers_Other Providers</title><link href="http://localhost:4000/lecture/2022/08/09/Deploying-Machine-Learning-Models-in-Production-Model-Servers-Model-Servers_Other-Providers/" rel="alternate" type="text/html" title="Deploying Machine Learning Models in Production_Model Servers-Model Servers_Other Providers" /><published>2022-08-09T00:00:00+09:00</published><updated>2022-08-09T00:00:00+09:00</updated><id>http://localhost:4000/lecture/2022/08/09/%5BDeploying%20Machine%20Learning%20Models%20in%20Production%5D%20Model%20Servers-Model%20Servers_Other%20Providers</id><content type="html" xml:base="http://localhost:4000/lecture/2022/08/09/Deploying-Machine-Learning-Models-in-Production-Model-Servers-Model-Servers_Other-Providers/">&lt;ol&gt;
   &lt;li&gt;
     &lt;p&gt;NVIDIA Triton Inference Server&lt;/p&gt;
 
@@ -273,7 +353,59 @@
       &lt;li&gt;&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
-&lt;/ol&gt;</content><author><name>Jaeseo Yu</name></author><category term="Lecture" /><category term="mlops" /><category term="deep learning" /><category term="machine learning" /><category term="lecture summary" /><summary type="html">Tensorflow Serving외에 Triton Inference Server 등 다른 server에 대해 알아본다.</summary></entry><entry><title type="html">NVIDIA GPUDirect storage에 대해</title><link href="http://localhost:4000/hpc/2022/08/07/NVIDIA-GPUDirect-storage/" rel="alternate" type="text/html" title="NVIDIA GPUDirect storage에 대해" /><published>2022-08-07T00:00:00+09:00</published><updated>2022-08-07T00:00:00+09:00</updated><id>http://localhost:4000/hpc/2022/08/07/NVIDIA%20GPUDirect%20storage</id><content type="html" xml:base="http://localhost:4000/hpc/2022/08/07/NVIDIA-GPUDirect-storage/">&lt;hr /&gt;
+&lt;/ol&gt;</content><author><name>Jaeseo Yu</name></author><category term="Lecture" /><category term="mlops" /><category term="deep learning" /><category term="machine learning" /><category term="lecture summary" /><summary type="html">Tensorflow Serving외에 Triton Inference Server 등 다른 server에 대해 알아본다.</summary></entry><entry><title type="html">Deploying Machine Learning Models in Production_Model Servers-Model Servers_Other Providers</title><link href="http://localhost:4000/lecture/2022/08/09/Deploying-Machine-Learning-Models-in-Production-Scaling-Infrastructure/" rel="alternate" type="text/html" title="Deploying Machine Learning Models in Production_Model Servers-Model Servers_Other Providers" /><published>2022-08-09T00:00:00+09:00</published><updated>2022-08-09T00:00:00+09:00</updated><id>http://localhost:4000/lecture/2022/08/09/%5BDeploying%20Machine%20Learning%20Models%20in%20Production%5D%20Scaling%20Infrastructure</id><content type="html" xml:base="http://localhost:4000/lecture/2022/08/09/Deploying-Machine-Learning-Models-in-Production-Scaling-Infrastructure/">&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;Why is Scaling Important&lt;/strong&gt;		&lt;img src=&quot;../../assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220809161933007.png&quot; alt=&quot;image-20220809161933007&quot; /&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;​     &lt;img src=&quot;../../assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220809161953189.png&quot; alt=&quot;image-20220809161953189&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220809162006307.png&quot; alt=&quot;image-20220809162006307&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220809162018137.png&quot; alt=&quot;image-20220809162018137&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220809162028979.png&quot; alt=&quot;image-20220809162028979&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220809162039881.png&quot; alt=&quot;image-20220809162039881&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220809162051590.png&quot; alt=&quot;image-20220809162051590&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220809162105711.png&quot; alt=&quot;image-20220809162105711&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220809162121276.png&quot; alt=&quot;image-20220809162121276&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220809162149185.png&quot; alt=&quot;image-20220809162149185&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220809162159768.png&quot; alt=&quot;image-20220809162159768&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220809162209597.png&quot; alt=&quot;image-20220809162209597&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220809162219697.png&quot; alt=&quot;image-20220809162219697&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220809162229719.png&quot; alt=&quot;image-20220809162229719&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220809162240937.png&quot; alt=&quot;image-20220809162240937&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220809162254767.png&quot; alt=&quot;image-20220809162254767&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220809162304208.png&quot; alt=&quot;image-20220809162304208&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220809162323215.png&quot; alt=&quot;image-20220809162323215&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220809162617491.png&quot; alt=&quot;image-20220809162617491&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220809162632268.png&quot; alt=&quot;image-20220809162632268&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220809162653274.png&quot; alt=&quot;image-20220809162653274&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220809162707899.png&quot; alt=&quot;image-20220809162707899&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220809162720536.png&quot; alt=&quot;image-20220809162720536&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;../../assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220809162742775.png&quot; alt=&quot;image-20220809162742775&quot; /&gt;&lt;/p&gt;</content><author><name>Jaeseo Yu</name></author><category term="Lecture" /><category term="mlops" /><category term="deep learning" /><category term="machine learning" /><category term="lecture summary" /><summary type="html">Tensorflow Serving외에 Triton Inference Server 등 다른 server에 대해 알아본다.</summary></entry><entry><title type="html">NVIDIA GPUDirect storage에 대해</title><link href="http://localhost:4000/hpc/2022/08/07/NVIDIA-GPUDirect-storage/" rel="alternate" type="text/html" title="NVIDIA GPUDirect storage에 대해" /><published>2022-08-07T00:00:00+09:00</published><updated>2022-08-07T00:00:00+09:00</updated><id>http://localhost:4000/hpc/2022/08/07/NVIDIA%20GPUDirect%20storage</id><content type="html" xml:base="http://localhost:4000/hpc/2022/08/07/NVIDIA-GPUDirect-storage/">&lt;hr /&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 
@@ -519,131 +651,7 @@
       &lt;li&gt;https://github.com/tensorflow/serving/blob/master/tensorflow_serving/g3doc/architecture.md&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Jaeseo Yu</name></author><category term="Lecture" /><category term="mlops" /><category term="deep learning" /><category term="machine learning" /><category term="lecture summary" /><summary type="html">Model server 중 하나인 tensorflow serving에 대한 아키텍처를 살펴본다.</summary></entry><entry><title type="html">Deploying Machine Learning Models in Production_Model Serving Architecture</title><link href="http://localhost:4000/lecture/2022/07/31/Deploying-Machine-Learning-Models-in-Production-Model-Serving-Architecture/" rel="alternate" type="text/html" title="Deploying Machine Learning Models in Production_Model Serving Architecture" /><published>2022-07-31T00:00:00+09:00</published><updated>2022-07-31T00:00:00+09:00</updated><id>http://localhost:4000/lecture/2022/07/31/%5BDeploying%20Machine%20Learning%20Models%20in%20Production%5D%20Model%20Serving%20Architecture</id><content type="html" xml:base="http://localhost:4000/lecture/2022/07/31/Deploying-Machine-Learning-Models-in-Production-Model-Serving-Architecture/">&lt;hr /&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;ml-infrastructure-1&quot;&gt;&lt;strong&gt;ML Infrastructure (1)&lt;/strong&gt;&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731165510452.png&quot; alt=&quot;image-20220731165510452&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Model serving을 위한 infrastructure에 대해 알아볼 것이다.&lt;/li&gt;
-  &lt;li&gt;크게 자체 구축한 on-premise 환경 또는 cloud 서비스를 이용하는 두가지 방법이 있다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;ml-infrastructure_on-premise-2&quot;&gt;&lt;strong&gt;ML Infrastructure_On-Premise (2)&lt;/strong&gt;&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731165518094.png&quot; alt=&quot;image-20220731165518094&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;On-Premise는 소유한 회사가 하드웨어와 소프트웨어에 대한 전적인 통제 권한을 가질 수 있다.&lt;/li&gt;
-  &lt;li&gt;따라서, 시시각각 변하는 다양한 요구 조건에 빠르게 대처할 수 있다는 장점이 존재한다.&lt;/li&gt;
-  &lt;li&gt;하지만 하드웨어 인프라를 직접 구하고, 설치하고, 유지보수해야한다는 점에서 큰 비용이 생긴다.&lt;/li&gt;
-  &lt;li&gt;일반적으로 규모의 경제를 실현할 수 있는 큰 규모의 회사들이 on-premise 환경을 구축하고 운영한다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;ml-infrastructure_cloud-3&quot;&gt;&lt;strong&gt;ML Infrastructure_Cloud (3)&lt;/strong&gt;&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731165526447.png&quot; alt=&quot;image-20220731165526447&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;규모가 작은 기업들은 이러한 인프라를 전문 기업에게 outsourcing 하는 방법이 있다.&lt;/li&gt;
-  &lt;li&gt;아마존, 구글, 마이크로소프트와 같은 기업들이 cloud 서비스를 제공한다.&lt;/li&gt;
-  &lt;li&gt;하드웨어를 직접 구축할 필요가 없고 해당 기업들이 하드웨어, 소프트웨어 전반을 관리 및 모니터링해준다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;model-serving-1&quot;&gt;&lt;strong&gt;Model Serving (1)&lt;/strong&gt;&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731165534694.png&quot; alt=&quot;image-20220731165534694&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;인프라 선택뿐만 아니라 model serving 방법 또한 선택해야한다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;model-serving_on-premise-2&quot;&gt;&lt;strong&gt;Model Serving_On-Premise (2)&lt;/strong&gt;&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731165542350.png&quot; alt=&quot;image-20220731165542350&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;On-premise에서는 원하는 model server를 선택하고 구축할 수 있다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;model-serving_cloud3&quot;&gt;&lt;strong&gt;Model Serving_Cloud(3)&lt;/strong&gt;&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731165549647.png&quot; alt=&quot;image-20220731165549647&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Cloud를 사용하는 경우 cloud vendor에서 제공하는 tool과 service를 사용할 수 있다.
-    &lt;ul&gt;
-      &lt;li&gt;Google의 경우 automl을 비롯한 다양한 서비스를, amazon의 경우 sagemaker와 같은 서비스를 사용할 수 있다.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;아니면 cloud에 VM을 활용하여 on-premise와 동일하게 직접 원하는 환경과 서비스를 구축할수도 있다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;model-servers-1&quot;&gt;&lt;strong&gt;Model Servers (1)&lt;/strong&gt;&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731165556703.png&quot; alt=&quot;image-20220731165556703&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Model server의 역할을 간단하게 알아보자.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;model-servers_model-file2&quot;&gt;&lt;strong&gt;Model Servers_Model file(2)&lt;/strong&gt;&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731165604454.png&quot; alt=&quot;image-20220731165604454&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;모델은 여러 버전으로 file system에 저장이 된다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;model-servers_model-server3&quot;&gt;&lt;strong&gt;Model Servers_Model server(3)&lt;/strong&gt;&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731165612567.png&quot; alt=&quot;image-20220731165612567&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Model server는 model을 file에서 읽고 인스턴스로 생성하여, client에게 제공하길 원하는 task에 대한 response를 한다.&lt;/li&gt;
-  &lt;li&gt;예를들어 Mobilenet을 이용한 classification을 수행한다고 했을 때, 모델 서버는 input으로 주어진 이미지를 tensor 형태로 변형하고 이를 model에 전달하여 inference 결과를 산출한다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;model-servers_api4&quot;&gt;&lt;strong&gt;Model Servers_API(4)&lt;/strong&gt;&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731165624486.png&quot; alt=&quot;image-20220731165624486&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Model server는 client에게 REST 또는 gRPC 형태의 API를 제공하고 inference 결과를 client에게 return한다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;model-servers_popular-model-server5&quot;&gt;&lt;strong&gt;Model Servers_Popular model server(5)&lt;/strong&gt;&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731165635639.png&quot; alt=&quot;image-20220731165635639&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;유명한 model server에는 Tensorflow serving, Torchserve, KF serving, Triton이 있다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;</content><author><name>Jaeseo Yu</name></author><category term="Lecture" /><category term="mlops" /><category term="deep learning" /><category term="machine learning" /><category term="lecture summary" /><summary type="html">Model serving에 필요한 infrastructure의 종류와 model server에 대해 알아본다.</summary></entry><entry><title type="html">Deploying Machine Learning Models in Production_Installing TensorFlow Serving</title><link href="http://localhost:4000/lecture/2022/07/31/Deploying-Machine-Learning-Models-in-Production-Installing-tensorflow-serving/" rel="alternate" type="text/html" title="Deploying Machine Learning Models in Production_Installing TensorFlow Serving" /><published>2022-07-31T00:00:00+09:00</published><updated>2022-07-31T00:00:00+09:00</updated><id>http://localhost:4000/lecture/2022/07/31/%5BDeploying%20Machine%20Learning%20Models%20in%20Production%5D%20Installing%20tensorflow%20serving</id><content type="html" xml:base="http://localhost:4000/lecture/2022/07/31/Deploying-Machine-Learning-Models-in-Production-Installing-tensorflow-serving/">&lt;hr /&gt;
+&lt;/ul&gt;</content><author><name>Jaeseo Yu</name></author><category term="Lecture" /><category term="mlops" /><category term="deep learning" /><category term="machine learning" /><category term="lecture summary" /><summary type="html">Model server 중 하나인 tensorflow serving에 대한 아키텍처를 살펴본다.</summary></entry><entry><title type="html">Deploying Machine Learning Models in Production_Installing TensorFlow Serving</title><link href="http://localhost:4000/lecture/2022/07/31/Deploying-Machine-Learning-Models-in-Production-Installing-tensorflow-serving/" rel="alternate" type="text/html" title="Deploying Machine Learning Models in Production_Installing TensorFlow Serving" /><published>2022-07-31T00:00:00+09:00</published><updated>2022-07-31T00:00:00+09:00</updated><id>http://localhost:4000/lecture/2022/07/31/%5BDeploying%20Machine%20Learning%20Models%20in%20Production%5D%20Installing%20tensorflow%20serving</id><content type="html" xml:base="http://localhost:4000/lecture/2022/07/31/Deploying-Machine-Learning-Models-in-Production-Installing-tensorflow-serving/">&lt;hr /&gt;
 
 &lt;h2 id=&quot;install-tensorflow-serving-1&quot;&gt;&lt;strong&gt;Install Tensorflow Serving (1)&lt;/strong&gt;&lt;/h2&gt;
 
@@ -825,7 +833,131 @@
   &lt;li&gt;결과가 정확하게 나온 것을 확인할 수 있다.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;</content><author><name>Jaeseo Yu</name></author><category term="Lecture" /><category term="mlops" /><category term="deep learning" /><category term="machine learning" /><category term="lecture summary" /><summary type="html">Google colab을 이용하여 tensorflow serving을 install하고 간단한 CNN 모델을 통해 실습을 진행한다.</summary></entry><entry><title type="html">Deploying Machine Learning Models in Production_Deployment Options</title><link href="http://localhost:4000/lecture/2022/07/30/Deploying-Machine-Learning-Models-in-Production-Deployment-Options/" rel="alternate" type="text/html" title="Deploying Machine Learning Models in Production_Deployment Options" /><published>2022-07-30T00:00:00+09:00</published><updated>2022-07-30T00:00:00+09:00</updated><id>http://localhost:4000/lecture/2022/07/30/%5BDeploying%20Machine%20Learning%20Models%20in%20Production%5D%20Deployment%20Options</id><content type="html" xml:base="http://localhost:4000/lecture/2022/07/30/Deploying-Machine-Learning-Models-in-Production-Deployment-Options/">&lt;hr /&gt;
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;</content><author><name>Jaeseo Yu</name></author><category term="Lecture" /><category term="mlops" /><category term="deep learning" /><category term="machine learning" /><category term="lecture summary" /><summary type="html">Google colab을 이용하여 tensorflow serving을 install하고 간단한 CNN 모델을 통해 실습을 진행한다.</summary></entry><entry><title type="html">Deploying Machine Learning Models in Production_Model Serving Architecture</title><link href="http://localhost:4000/lecture/2022/07/31/Deploying-Machine-Learning-Models-in-Production-Model-Serving-Architecture/" rel="alternate" type="text/html" title="Deploying Machine Learning Models in Production_Model Serving Architecture" /><published>2022-07-31T00:00:00+09:00</published><updated>2022-07-31T00:00:00+09:00</updated><id>http://localhost:4000/lecture/2022/07/31/%5BDeploying%20Machine%20Learning%20Models%20in%20Production%5D%20Model%20Serving%20Architecture</id><content type="html" xml:base="http://localhost:4000/lecture/2022/07/31/Deploying-Machine-Learning-Models-in-Production-Model-Serving-Architecture/">&lt;hr /&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;ml-infrastructure-1&quot;&gt;&lt;strong&gt;ML Infrastructure (1)&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731165510452.png&quot; alt=&quot;image-20220731165510452&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Model serving을 위한 infrastructure에 대해 알아볼 것이다.&lt;/li&gt;
+  &lt;li&gt;크게 자체 구축한 on-premise 환경 또는 cloud 서비스를 이용하는 두가지 방법이 있다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;ml-infrastructure_on-premise-2&quot;&gt;&lt;strong&gt;ML Infrastructure_On-Premise (2)&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731165518094.png&quot; alt=&quot;image-20220731165518094&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;On-Premise는 소유한 회사가 하드웨어와 소프트웨어에 대한 전적인 통제 권한을 가질 수 있다.&lt;/li&gt;
+  &lt;li&gt;따라서, 시시각각 변하는 다양한 요구 조건에 빠르게 대처할 수 있다는 장점이 존재한다.&lt;/li&gt;
+  &lt;li&gt;하지만 하드웨어 인프라를 직접 구하고, 설치하고, 유지보수해야한다는 점에서 큰 비용이 생긴다.&lt;/li&gt;
+  &lt;li&gt;일반적으로 규모의 경제를 실현할 수 있는 큰 규모의 회사들이 on-premise 환경을 구축하고 운영한다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;ml-infrastructure_cloud-3&quot;&gt;&lt;strong&gt;ML Infrastructure_Cloud (3)&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731165526447.png&quot; alt=&quot;image-20220731165526447&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;규모가 작은 기업들은 이러한 인프라를 전문 기업에게 outsourcing 하는 방법이 있다.&lt;/li&gt;
+  &lt;li&gt;아마존, 구글, 마이크로소프트와 같은 기업들이 cloud 서비스를 제공한다.&lt;/li&gt;
+  &lt;li&gt;하드웨어를 직접 구축할 필요가 없고 해당 기업들이 하드웨어, 소프트웨어 전반을 관리 및 모니터링해준다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;model-serving-1&quot;&gt;&lt;strong&gt;Model Serving (1)&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731165534694.png&quot; alt=&quot;image-20220731165534694&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;인프라 선택뿐만 아니라 model serving 방법 또한 선택해야한다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;model-serving_on-premise-2&quot;&gt;&lt;strong&gt;Model Serving_On-Premise (2)&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731165542350.png&quot; alt=&quot;image-20220731165542350&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;On-premise에서는 원하는 model server를 선택하고 구축할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;model-serving_cloud3&quot;&gt;&lt;strong&gt;Model Serving_Cloud(3)&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731165549647.png&quot; alt=&quot;image-20220731165549647&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Cloud를 사용하는 경우 cloud vendor에서 제공하는 tool과 service를 사용할 수 있다.
+    &lt;ul&gt;
+      &lt;li&gt;Google의 경우 automl을 비롯한 다양한 서비스를, amazon의 경우 sagemaker와 같은 서비스를 사용할 수 있다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;아니면 cloud에 VM을 활용하여 on-premise와 동일하게 직접 원하는 환경과 서비스를 구축할수도 있다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;model-servers-1&quot;&gt;&lt;strong&gt;Model Servers (1)&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731165556703.png&quot; alt=&quot;image-20220731165556703&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Model server의 역할을 간단하게 알아보자.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;model-servers_model-file2&quot;&gt;&lt;strong&gt;Model Servers_Model file(2)&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731165604454.png&quot; alt=&quot;image-20220731165604454&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;모델은 여러 버전으로 file system에 저장이 된다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;model-servers_model-server3&quot;&gt;&lt;strong&gt;Model Servers_Model server(3)&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731165612567.png&quot; alt=&quot;image-20220731165612567&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Model server는 model을 file에서 읽고 인스턴스로 생성하여, client에게 제공하길 원하는 task에 대한 response를 한다.&lt;/li&gt;
+  &lt;li&gt;예를들어 Mobilenet을 이용한 classification을 수행한다고 했을 때, 모델 서버는 input으로 주어진 이미지를 tensor 형태로 변형하고 이를 model에 전달하여 inference 결과를 산출한다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;model-servers_api4&quot;&gt;&lt;strong&gt;Model Servers_API(4)&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731165624486.png&quot; alt=&quot;image-20220731165624486&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Model server는 client에게 REST 또는 gRPC 형태의 API를 제공하고 inference 결과를 client에게 return한다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;model-servers_popular-model-server5&quot;&gt;&lt;strong&gt;Model Servers_Popular model server(5)&lt;/strong&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction to Model Serving/Introduction to Model Serving Infrastructure/image-20220731165635639.png&quot; alt=&quot;image-20220731165635639&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;유명한 model server에는 Tensorflow serving, Torchserve, KF serving, Triton이 있다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;</content><author><name>Jaeseo Yu</name></author><category term="Lecture" /><category term="mlops" /><category term="deep learning" /><category term="machine learning" /><category term="lecture summary" /><summary type="html">Model serving에 필요한 infrastructure의 종류와 model server에 대해 알아본다.</summary></entry><entry><title type="html">Deploying Machine Learning Models in Production_Deployment Options</title><link href="http://localhost:4000/lecture/2022/07/30/Deploying-Machine-Learning-Models-in-Production-Deployment-Options/" rel="alternate" type="text/html" title="Deploying Machine Learning Models in Production_Deployment Options" /><published>2022-07-30T00:00:00+09:00</published><updated>2022-07-30T00:00:00+09:00</updated><id>http://localhost:4000/lecture/2022/07/30/%5BDeploying%20Machine%20Learning%20Models%20in%20Production%5D%20Deployment%20Options</id><content type="html" xml:base="http://localhost:4000/lecture/2022/07/30/Deploying-Machine-Learning-Models-in-Production-Deployment-Options/">&lt;hr /&gt;
 
 &lt;h2 id=&quot;model-deployments&quot;&gt;&lt;strong&gt;Model Deployments&lt;/strong&gt;&lt;/h2&gt;
 
@@ -1118,244 +1250,4 @@
   &lt;li&gt;NoSQL은 caching과 feature look up을 구현하기에 좋으며, 위와 같이 다양한 옵션들이 존재한다.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;</content><author><name>Jaeseo Yu</name></author><category term="Lecture" /><category term="mlops" /><category term="deep learning" /><category term="machine learning" /><category term="lecture summary" /><summary type="html">Model serving 인프라에서 고려해야할 점들에 대한 내용을 알아본다.</summary></entry><entry><title type="html">Deploying Machine Learning Models in Production_Introduction to Model Serving</title><link href="http://localhost:4000/lecture/2022/07/28/Deploying-Machine-Learning-Models-in-Production-Introduction-to-Model-Serving/" rel="alternate" type="text/html" title="Deploying Machine Learning Models in Production_Introduction to Model Serving" /><published>2022-07-28T00:00:00+09:00</published><updated>2022-07-28T00:00:00+09:00</updated><id>http://localhost:4000/lecture/2022/07/28/%5BDeploying%20Machine%20Learning%20Models%20in%20Production%5D%20Introduction%20to%20Model%20Serving</id><content type="html" xml:base="http://localhost:4000/lecture/2022/07/28/Deploying-Machine-Learning-Models-in-Production-Introduction-to-Model-Serving/">&lt;hr /&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;what-exactly-is-serving-a-model&quot;&gt;&lt;strong&gt;What exactly is Serving a Model?&lt;/strong&gt;&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction%20to%20Model%20Serving/what%20exactly%20is%20Serving%20a%20Model.png&quot; alt=&quot;image&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;전체 ML 프로젝트에서 model training은 우리가 아는 굉장히 일부분이다.&lt;/li&gt;
-  &lt;li&gt;그중 model serving은 학습시킨 model을 end user가 사용할 수 있도록 하는 것이며,&lt;/li&gt;
-  &lt;li&gt;이를 위해서는 end user가 interaction할 수 있는 app 또는 서비스가 필요하다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;model-serving-patterns&quot;&gt;&lt;strong&gt;Model Serving patterns&lt;/strong&gt;&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction%20to%20Model%20Serving/Model%20Serving%20patterns.png&quot; alt=&quot;image&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;Inference는 모델에 입력 값을 넣고 예측을 하는 과정이며,&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;크게 세가지 (model, interpreter, input data)가 필요하다.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;ml-workflows&quot;&gt;&lt;strong&gt;ML workflows&lt;/strong&gt;&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction%20to%20Model%20Serving/ML%20workflows.png&quot; alt=&quot;image&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;ML workflow는 크게 &lt;strong&gt;model training&lt;/strong&gt;, &lt;strong&gt;model prediction&lt;/strong&gt; 두 가지로 나뉜다.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;이때, model training은 &lt;strong&gt;offline learning(batch learning, static learning)&lt;/strong&gt;과 &lt;strong&gt;online learning(dynamic learning)&lt;/strong&gt;으로 나눌 수 있다.&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;&lt;strong&gt;Offline learning&lt;/strong&gt;
-        &lt;ul&gt;
-          &lt;li&gt;Offline learning은 일정 기간 동안 이미 수집된 데이터를 바탕으로 특정 시기에 모델 학습을 시키는 것이다.&lt;/li&gt;
-          &lt;li&gt;즉 기존 data와 새로 들어온 data를 함께 학습시키게 되며 대량의 데이터를 한번에 처리하기 때문에 학습시 많은 시간과 자원이 소요된다.&lt;/li&gt;
-          &lt;li&gt;모델을 배포하면 재학습시까지 모델은 고정된 상태가 되며, 오랜 시간이 지나면 새로운 pattern에 대응하지 못하며 &lt;strong&gt;model decay&lt;/strong&gt;가 발생한다.&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;Online learning&lt;/strong&gt;
-        &lt;ul&gt;
-          &lt;li&gt;Online learning 은 실시간으로 스트림 데이터가 들어올 때 마다 주기적으로 모델을 학습시키는 것이다.&lt;/li&gt;
-          &lt;li&gt;주로 sensor, stock 데이터와 같은 time-series data을 토대로 학습을 할때 많이 활용한다.
-&lt;br /&gt;&lt;br /&gt;&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Model prediction도 &lt;strong&gt;Batch prediction, Realtime prediction&lt;/strong&gt; 두 타입이 존재한다.&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;&lt;strong&gt;Batch prediction&lt;/strong&gt;
-        &lt;ul&gt;
-          &lt;li&gt;Batch prediction은 과거에 모인 다량의 데이터를 기반으로 예측을 하는것이다.&lt;/li&gt;
-          &lt;li&gt;즉 한번의 예측에서 많은 수의 인스턴스를 처리하게 된다.&lt;/li&gt;
-          &lt;li&gt;데이터가 time dependent하지 않고, realtime으로 예측을 하는 것이 중요하지 않은 상황에 적절하다.&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;Realtime prediction&lt;/strong&gt;
-        &lt;ul&gt;
-          &lt;li&gt;Real time prediction은 inference 요청이 온 시점에 들어온 데이터를 기반으로 실시간으로 prediction을 하는 것이다.&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;important-metrics&quot;&gt;&lt;strong&gt;Important metrics&lt;/strong&gt;&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction%20to%20Model%20Serving/Important%20metrics.png&quot; alt=&quot;image&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Online inference에서 중요하게 살펴보는 metric으로는 latency, throughput, cost가 있다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;lantency&quot;&gt;&lt;strong&gt;Lantency&lt;/strong&gt;&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction%20to%20Model%20Serving/Lantency.png&quot; alt=&quot;image&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Latency는 user의 요청과 이에대한 application의 응답까지의 시간을 의미한다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;throughput&quot;&gt;&lt;strong&gt;Throughput&lt;/strong&gt;&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction%20to%20Model%20Serving/Throughput.png&quot; alt=&quot;image&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Throughput은 단위 시간동안 처리한 요청의 수를 의미한다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;cost&quot;&gt;&lt;strong&gt;Cost&lt;/strong&gt;&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction%20to%20Model%20Serving/Cost.png&quot; alt=&quot;image&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Serving infrastructure는 반드시 cost를 수반하게 된다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;minimizing-latency-maximizing-throughput&quot;&gt;&lt;strong&gt;Minimizing Latency, Maximizing Throughput&lt;/strong&gt;&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction%20to%20Model%20Serving/Minimizing%20Latency,%20Maximizing%20Throughput.png&quot; alt=&quot;image&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;많은 기업들은 latency를 최소화하며, throughput을 최대화하길 원한다.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;예를들어 항공사 추천 서비스가 있다고 할때, 유저의 요청에 빠르게 응답할 수 있어야하며, 공휴일과 같이 유저가 몰리는 시간에는 많은 요청을 빠르게 처리할 수 있어야 한다.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;이러한 요건을 충족시키기 위해서는 infrastructure를 확장해야 하는데, 이때 큰 비용이 발생한다.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;balance-cost-latency-and-throughput&quot;&gt;&lt;strong&gt;Balance Cost, Latency and Throughput&lt;/strong&gt;&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/img/Lecture/Introduction%20to%20Model%20Serving/Balance%20Cost,%20Latency%20and%20Throughput.png&quot; alt=&quot;image&quot; width=&quot;100%&quot; height=&quot;100%&quot; class=&quot;align-center&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Infrastructure 확장에 많은 비용을 투자하지 않고 이러한 비용을 낮추기 위한 방법이 있다.
-    &lt;ul&gt;
-      &lt;li&gt;GPU 자원 공유&lt;/li&gt;
-      &lt;li&gt;Multi model serving&lt;/li&gt;
-      &lt;li&gt;Model optimization&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Jaeseo Yu</name></author><category term="Lecture" /><category term="mlops" /><category term="deep learning" /><category term="machine learning" /><category term="lecture summary" /><summary type="html">Model serving이란 무엇이며, 중요하게 고려해야할 metric에 대해 알아본다.</summary></entry><entry><title type="html">Multithreading vs. Multiprocessing</title><link href="http://localhost:4000/operating%20system/2021/09/19/Multiprocess&multithread/" rel="alternate" type="text/html" title="Multithreading vs. Multiprocessing" /><published>2021-09-19T00:00:00+09:00</published><updated>2021-09-19T00:00:00+09:00</updated><id>http://localhost:4000/operating%20system/2021/09/19/%20Multiprocess&amp;multithread</id><content type="html" xml:base="http://localhost:4000/operating%20system/2021/09/19/Multiprocess&amp;multithread/">&lt;hr /&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;process&quot;&gt;&lt;strong&gt;Process&lt;/strong&gt;&lt;/h2&gt;
-
-&lt;p&gt;&lt;strong&gt;프로세스는 실행중인 프로그램이다.&lt;/strong&gt; 즉 프로그램 자체는 프로세스가 아니라, 프로그램이 메모리에 올라가서 실행중일 때 프로세스가 되는 것이다. 프로세스는 크게 5가지 영역(text, stack, data, heap, program counter)로 나눌 수 있다.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Text : Program code&lt;/li&gt;
-  &lt;li&gt;Stack : Temporary data (function parameter, return addresses, local variables, etc)&lt;/li&gt;
-  &lt;li&gt;Data : Static &amp;amp; global variables&lt;/li&gt;
-  &lt;li&gt;Heap : Dynamic allocation&lt;/li&gt;
-  &lt;li&gt;Program counter &amp;amp; registers : Current activity&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;br /&gt;
-&lt;img src=&quot;https://www.tutorialspoint.com/operating_system/images/process_components.jpg&quot; alt=&quot;image&quot; width=&quot;45%&quot; height=&quot;45%&quot; class=&quot;align-center&quot; /&gt;
-&lt;em&gt;Figure 1. Process in memory (&lt;a href=&quot;https://www.tutorialspoint.com/operating_system/os_processes.htm&quot;&gt;source&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;thread&quot;&gt;&lt;strong&gt;Thread&lt;/strong&gt;&lt;/h2&gt;
-
-&lt;p&gt;&lt;strong&gt;Thread는 프로세스 내에서 실행되는 단위를 말한다.&lt;/strong&gt; 일반적으로 한 프로세스는 하나의 스레드를 가지고 있지만, 프로그램 환경에 따라 둘 이상의 thread를 동시에 실행시킬 수 있다. 각 Thread는 program counter, register set, stack space를 별도로 지니고 있다. 반면, 각 thread는 프로세스 내 code, data, heap, file과 같은 operating system 자원을 공유하게 된다.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;
-&lt;img src=&quot;https://www.tutorialspoint.com/operating_system/images/thread_processes.jpg&quot; alt=&quot;image&quot; width=&quot;90%&quot; height=&quot;90%&quot; class=&quot;align-center&quot; /&gt;
-&lt;em&gt;Figure 2. Single thread vs Multithreads (&lt;a href=&quot;https://www.tutorialspoint.com/operating_system/os_multi_threading.htm&quot;&gt;source&lt;/a&gt;)&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;multithreading-multiprocessing-비교&quot;&gt;&lt;strong&gt;Multithreading, multiprocessing 비교&lt;/strong&gt;&lt;/h2&gt;
-&lt;h3 id=&quot;multithreading--장점&quot;&gt;&lt;strong&gt;Multithreading : 장점&lt;/strong&gt;&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Thread 간 Resource sharing이 가능하다.
-    &lt;ul&gt;
-      &lt;li&gt;동일 프로세스 내 thread 간 데이터를 공유할 수 있다. 만약 subset으로 나누기 어려운 대량의 데이터를 다뤄야 할 경우, 데이터를 복사하거나 shared memory 방식을 사용해서 프로세스 간 데이터를 전송 또는 공유해야 한다. 하지만 데이터 복사는 복사 시 추가 시간과 메모리를 소요하게 되며, shared memory의 경우에는 개발 시 고려해야 될 요소들이 많다.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;소요되는 자원이 더 적다.
-    &lt;ul&gt;
-      &lt;li&gt;Thread를 하나 생성하는 것 보다 process를 생성할 때 소요되는 시간과 자원이 훨씬 더 많이 들어간다.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;multithreading--단점&quot;&gt;&lt;strong&gt;Multithreading : 단점&lt;/strong&gt;&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;안정성이 떨어진다.
-    &lt;ul&gt;
-      &lt;li&gt;만약 여러 thread 들 중 단 하나의 thread라도 문제가 발생할 경우, application이 crash된다.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;디버깅 하기 어렵다.
-    &lt;ul&gt;
-      &lt;li&gt;Multithread 환경에서 디버거를 통해 버그의 원인을 발견하기 어렵다. 따라서 문제가 되는 thread를 발견하기 위해 보통 log를 찾아보며 추적하게 됨으로, 디버깅에 소요되는 시간이 많이 들어가게 된다.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;multiprocessing--장점&quot;&gt;&lt;strong&gt;Multiprocessing : 장점&lt;/strong&gt;&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;안정성이 높다.
-    &lt;ul&gt;
-      &lt;li&gt;여러 프로세스 실행 중 하나의 프로세스에 문제가 발생할 경우, 해당 프로세스만 종료시키면 된다.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;확장성이 크다.
-    &lt;ul&gt;
-      &lt;li&gt;프로세스는 다른 머신에 할당해서 실행할 수가 있다. 반면에 thread는 단일 프로세스 내에 존재해야 하므로 확장성이 떨어질 수밖에 없다.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;multiprocessing--단점&quot;&gt;&lt;strong&gt;Multiprocessing : 단점&lt;/strong&gt;&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;프로세스 간 커뮤니케션이 복잡하다.
-    &lt;ul&gt;
-      &lt;li&gt;프로세스 간 데이터를 공유할 때는 별도의 technique (shared memory 또는 inter process communication)을 사용해야 하기 때문이다.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;메모리 소요가 크다.
-    &lt;ul&gt;
-      &lt;li&gt;프로세스 간에는 별도의 독립된 메모리 영역을 갖는다.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;</content><author><name>Jaeseo Yu</name></author><category term="Operating system" /><category term="operating system" /><category term="parallel programming" /><summary type="html">Multithreading과 multiprocessing 장단점에 대한 간략한 정리</summary></entry></feed>
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;</content><author><name>Jaeseo Yu</name></author><category term="Lecture" /><category term="mlops" /><category term="deep learning" /><category term="machine learning" /><category term="lecture summary" /><summary type="html">Model serving 인프라에서 고려해야할 점들에 대한 내용을 알아본다.</summary></entry></feed>
